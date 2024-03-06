@@ -1,36 +1,37 @@
 # Introdução
 
-Texto descritivo com a visão geral do projeto abordado. Inclui o contexto, o problema, os objetivos, a justificativa e o público-alvo do projeto.
+A Amariv, em sua missão de inclusão e sustentabilidade, está desenvolvendo um sistema inovador para a coleta de materiais recicláveis. Essa ferramenta digital transformará o processo de coleta, otimizando-o, fortalecendo a comunidade e ampliando o impacto social da empresa.
 
 ## Problema
-Nesse momento você deve apresentar o problema que a sua aplicação deve  resolver. No entanto, não é a hora de comentar sobre a aplicação.
+Atualmente, o processo de coleta de materiais recicláveis enfrenta diversos desafios:
+
+   * Falta de organização e eficiência: O agendamento de coletas é muitas vezes manual e ineficiente, levando a atrasos e perda de tempo.
+   * Dificuldade de comunicação: A comunicação entre catadores, empresa e clientes pode ser precária, gerando problemas de logística e insatisfação.
+   * Baixas taxas de reciclagem: A falta de informação e infraestrutura dificulta o descarte correto de materiais recicláveis, impactando negativamente o meio ambiente.
+
 
 Descreva também o contexto em que essa aplicação será usada, se  houver: empresa, tecnologias, etc. Novamente, descreva apenas o que de  fato existir, pois ainda não é a hora de apresentar requisitos  detalhados ou projetos.
 
 Nesse momento, o grupo pode optar por fazer uso  de ferramentas como Design Thinking, que permite um olhar de ponta a ponta para o problema.
 
-> **Links Úteis**:
-> - [Objetivos, Problema de pesquisa e Justificativa](https://medium.com/@versioparole/objetivos-problema-de-pesquisa-e-justificativa-c98c8233b9c3)
-> - [Matriz Certezas, Suposições e Dúvidas](https://medium.com/educa%C3%A7%C3%A3o-fora-da-caixa/matriz-certezas-suposi%C3%A7%C3%B5es-e-d%C3%BAvidas-fa2263633655)
-> - [Brainstorming](https://www.euax.com.br/2018/09/brainstorming/)
 
 ## Objetivos
 
-Aqui você deve descrever os objetivos do trabalho indicando que o objetivo geral é desenvolver um software para solucionar o problema apresentado acima. 
+Desenvolver um sistema web/mobile que otimize o processo de coleta de materiais recicláveis, conectando catadores, empresa e clientes de forma eficiente e sustentável.
 
-Apresente também alguns (pelo menos 2) objetivos específicos dependendo de onde você vai querer concentrar a sua prática investigativa, ou como você vai aprofundar no seu trabalho.
- 
-> **Links Úteis**:
-> - [Objetivo geral e objetivo específico: como fazer e quais verbos utilizar](https://blog.mettzer.com/diferenca-entre-objetivo-geral-e-objetivo-especifico/)
+   * Organizar e agendar coletas: O sistema permitirá o agendamento rápido e fácil de coletas, com acompanhamento em tempo real e histórico completo.
+   * Melhorar a comunicação: A plataforma facilitará a comunicação entre catadores, empresas e clientes, garantindo maior transparência e eficiência.
+   * Aumentar as taxas de reciclagem: O sistema fornecerá informações para facilitar o descarte correto, promovendo a sustentabilidade.
+
 
 ## Justificativa
 
-Descreva a importância ou a motivação para trabalhar com esta aplicação que você escolheu. Indique as razões pelas quais você escolheu seus objetivos específicos ou as razões para aprofundar em certos aspectos do software.
+O desenvolvimento do aplicativo para coleta de materiais recicláveis se justifica por diversos motivos:
 
-O grupo de trabalho pode fazer uso de questionários, entrevistas e dados estatísticos, que podem ser apresentados, com o objetivo de esclarecer detalhes do problema que será abordado pelo grupo.
+   * Impacto social: A iniciativa fortalecerá a comunidade de catadores de materiais recicláveis, gerando mais renda e oportunidades.
+   * Benefícios ambientais: O aumento das taxas de reciclagem contribuirá para a redução do impacto ambiental e a preservação dos recursos naturais.
+   * Inovação tecnológica: O sistema "Modernizará" a coleta de materiais recicláveis, utilizando tecnologia para facilitar o descarte e a gestão de materiais.
 
-> **Links Úteis**:
-> - [Como montar a justificativa](https://guiadamonografia.com.br/como-montar-justificativa-do-tcc/)
 
 ## Relação com a Extensão Universitária
 
@@ -38,4 +39,4 @@ Relacionar a situação-problema da organização com o impacto social esperado 
 
 ## Descrição do Parceiro
 
-Apresente uma descrição resumida sobre a organização onde o projeto será desenvolvido para que possa ser compreendido o cenário sistema sociotécnico.
+A Amariv é uma empresa brasileira que atua na área de coleta e reciclagem de materiais. A empresa possui uma ampla experiência no mercado e está comprometida com a sustentabilidade e a inclusão social.
