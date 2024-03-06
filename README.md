@@ -1,4 +1,4 @@
-# TÍTULO DO PROJETO
+# AMARIV
 
 `TECNOLOGIA EM ANÁLISE E DESENVOLVIMENTO DE SISTEMAS`
 
@@ -10,7 +10,7 @@ A AMARIV, em sua missão de inclusão e sustentabilidade, está pronta para dar 
 
 Facilite o descarte de materiais recicláveis e reutilizáveis!
 
-O aplicativo conecta você a empresas de coleta, permitindo que você agende coletas, acompanhe em tempo real, visualize histórico e gerencie seus materiais.
+O sistema conecta você a empresas de coleta, permitindo que você agende coletas, acompanhe em tempo real, visualize histórico e gerencie seus materiais.
 
 Benefícios para todos:
 
