@@ -9,12 +9,6 @@ Atualmente, o processo de coleta de materiais recicláveis enfrenta diversos des
    * Dificuldade de comunicação: A comunicação entre catadores, empresa e clientes pode ser precária, gerando problemas de logística e insatisfação.
    * Baixas taxas de reciclagem: A falta de informação e infraestrutura dificulta o descarte correto de materiais recicláveis, impactando negativamente o meio ambiente.
 
-
-Descreva também o contexto em que essa aplicação será usada, se  houver: empresa, tecnologias, etc. Novamente, descreva apenas o que de  fato existir, pois ainda não é a hora de apresentar requisitos  detalhados ou projetos.
-
-Nesse momento, o grupo pode optar por fazer uso  de ferramentas como Design Thinking, que permite um olhar de ponta a ponta para o problema.
-
-
 ## Objetivos
 
 Desenvolver um sistema web/mobile que otimize o processo de coleta de materiais recicláveis, conectando catadores, empresa e clientes de forma eficiente e sustentável.
