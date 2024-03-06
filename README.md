@@ -26,7 +26,7 @@ Benefícios para todos:
 
 Em breve!
 
-O aplicativo está em fase de desenvolvimento, testes e ajustes. Aguarde o lançamento e faça parte dessa mudança!
+O sistema está em fase de desenvolvimento, testes e ajustes. Aguarde o lançamento e faça parte dessa mudança!
 
 
 
