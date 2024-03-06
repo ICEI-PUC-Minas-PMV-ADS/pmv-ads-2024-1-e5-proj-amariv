@@ -14,10 +14,13 @@ O aplicativo conecta você a empresas de coleta, permitindo que você agende col
 
 Benefícios para todos:
 
-    Praticidade e comodidade: Agendamento rápido e fácil de coletas.
-    Organização e controle: Acompanhamento em tempo real e histórico completo de coletas.
-    Menor impacto ambiental: Redução do descarte inadequado e aumento da reciclagem.
-    Inclusão social: Fortalecimento da comunidade de catadores de materiais recicláveis.
+
+   * Praticidade e comodidade: Agendamento rápido e fácil de coletas.
+   * Organização e controle: Acompanhamento em tempo real e histórico completo de coletas.
+   * Menor impacto ambiental: Redução do descarte inadequado e aumento da reciclagem.
+   * Inclusão social: Fortalecimento da comunidade de catadores de materiais recicláveis.
+
+
 
 Em breve!
 
