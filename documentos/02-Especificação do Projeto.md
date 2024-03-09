@@ -23,7 +23,19 @@
 | Motivações                                                                                                               | Acredita que a preservação do meio-ambiente é imprescindível para a construção de um futuro saudável                                                                                                                                                   |
 | Frustrações                                                                                                             | Pensa que poderia contribuir mais com a preservação do meio-ambiente                                                   |
 
-<span style="color:red">Pré-requisitos: <a href="1-Documentação de Contexto.md"> Documentação de Contexto</a></span>
+
+## Histórias de Usuários
+
+| Eu como...`PERSONA`      | ...quero/desejo...`FUNCIONALIDADE`                                                                                              | ... para...`MOTIVO/VALOR`                                                                                |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| Lúcio Heleno Barbosa | Cadastrar contas para os funcionários usarem o sistema  | Gerenciar o uso da ferramenta                         |
+| Lúcio Heleno Barbosa | Alterar os dados cadastrados nas contas dos usuarios para corrigir algumas informações incorretas                 | Manter a usabilidade da aplicação                                       |
+| Lúcio Heleno Barbosa | Excluir as contas dos usuários inativos                 | Manter o sistema enxuto                                       |
+| Leonardo Jacques         | Verificar as criptomoedas que estão valorizadas no momento de maneira rápida                                                    | Necessita de agilidade, visto que não tem muito tempo para se dedicar ao estudo mais avançado do mercado |
+| Rafael Luis              | Uma ferramenta de fácil visualização da cotação das criptomoedas                                                                | Agilizar a tomada de decisão de qual moeda investir                                                      |
+| Rafael Luis              | Realizar a pesquisa do valor de uma criptomoeda específica                                                                      | Localizar rapidamente uma moeda que já é de seu interesse ou de sua carteira                             |
+| Rafael Luis              | Utilizar a ferramenta também pelo celular                                                                                       | Se manter informado em momentos que não tiver acesso ao desktop                                          |
+| Rafael Luis              | Cadastrar sua carteira composta por criptoativos e moedas fiduciárias e comparar valores fazendo conversões de forma rápida     | cotar o valor de sua carteira em uma moeda ou criptoativo de sua escolha                                 |
 
 Definição do problema e ideia de solução a partir da perspectiva do usuário. É composta pela definição do  diagrama de personas, histórias de usuários, requisitos funcionais e não funcionais além das restrições do projeto.
 
