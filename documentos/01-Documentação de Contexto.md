@@ -45,4 +45,11 @@ A implementação do sistema de solicitação de coleta de material reciclável 
 
 ## Descrição do Parceiro
 
-A Amariv é uma empresa brasileira que atua na área de coleta e reciclagem de materiais. A empresa possui uma ampla experiência no mercado e está comprometida com a sustentabilidade e a inclusão social.
+A Associação dos Catadores de Materiais Recicláveis da Ilha de Vitória (AMARIV) é uma organização que desempenha um papel crucial na promoção da reciclagem e na redução do impacto ambiental concentrando seus esforços na coleta seletiva de materiais recicláveis no município de Vitória e região metropolitana. Os catadores da AMARIV trabalham incansavelmente para separar e reciclar materiais, contribuindo para a preservação do meio ambiente e a conscientização sobre a importância da reciclagem.
+
+A AMARIV não apenas desempenha um papel fundamental na gestão de resíduos, mas também demonstra que as associações de catadores têm o potencial de assumir a coleta seletiva. Durante uma greve de motoristas de transporte de lixo, a AMARIV obteve permissão da Prefeitura Municipal de Vitória para recolher materiais recicláveis com seus próprios veículos, mostrando que essas organizações podem ser agentes ativos na promoção da sustentabilidade e na redução do desperdício. A AMARIV é um exemplo inspirador de como a dedicação e o compromisso dos catadores podem fazer a diferença na construção de um mundo mais sustentável.
+
+Sua missão é promover a coleta seletiva e a reciclagem de materiais na Ilha de Vitória, contribuindo para a preservação do meio ambiente e a conscientização da comunidade. Além disso, a associação desempenha um papel fundamental na educação ambiental, sensibilizando a população sobre a importância da reciclagem e do descarte correto.
+
+Além de contribuir para a preservação ambiental, a AMARIV gera impacto social e econômico. Os catadores são remunerados pelo material coletado, o que representa uma fonte de renda para muitas famílias. Além disso, a associação promove a inclusão social, oferecendo capacitação e oportunidades de trabalho para pessoas em situação de vulnerabilidade. A AMARIV é um exemplo inspirador de como a economia circular pode beneficiar tanto o meio ambiente quanto as comunidades locais.
+
