@@ -40,7 +40,7 @@ O sistema está em fase de desenvolvimento, testes e ajustes. Aguarde o lançame
 
 ## Orientador
 
-* Nome completo do professor 1
+* João Carlos Oliveira Caetano
 
 ## Instruções de utilização
 
