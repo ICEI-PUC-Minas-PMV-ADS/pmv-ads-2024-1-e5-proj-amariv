@@ -1,5 +1,15 @@
 # Especificações do Projeto
 
+## Personas
+
+|Lúcio Heleno Barbosa|![alt text](/docs/img/Personas/marcos_souza.png) |
+|-----------------------|-|
+|Idade:|32|
+|Ocupação:| Diretor Financeiro da AMARIV |
+|Aplicativos:| WhatsApp, Google Maps|
+|Motivações | A importância social e ecológica do seu trabalho |
+|Frustrações | Deficiências no planejamento impedem que o trabalho alcance máxima eficiência |
+
 <span style="color:red">Pré-requisitos: <a href="1-Documentação de Contexto.md"> Documentação de Contexto</a></span>
 
 Definição do problema e ideia de solução a partir da perspectiva do usuário. É composta pela definição do  diagrama de personas, histórias de usuários, requisitos funcionais e não funcionais além das restrições do projeto.
