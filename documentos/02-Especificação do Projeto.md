@@ -9,7 +9,12 @@
 | Motivações                                                                                                               | A importância social e ecológica do seu trabalho               |
 | Frustrações                                                                                                             | Deficiências no planejamento impedem que o trabalho alcance máxima eficiência |
 
-
+| ![persona 1-edit](/documentos/img/delair.jpg) | Lúcio Heleno Barbosa, 32 anos                                                                                      |
+| ------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------- |
+| Ocupação                                                                                                                 | Catador de materiais recicláveis                                                                                           |
+| Aplicativos                                                                                                   | WhatsApp, Instagram                                                                   |
+| Motivações                                                                                                               | Buscar o retorno financeiro através do seu trabalho                                                                                                                                                   |
+| Frustrações                                                                                                             | Por vezes não consegue o retorno financeiro esperado por não conseguir realizar a máxima quantidade de coletas por falta de planejamento adequado                                                   |
 
 <span style="color:red">Pré-requisitos: <a href="1-Documentação de Contexto.md"> Documentação de Contexto</a></span>
 
