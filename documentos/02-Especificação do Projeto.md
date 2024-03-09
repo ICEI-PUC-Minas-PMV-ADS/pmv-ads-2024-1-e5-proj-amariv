@@ -16,7 +16,7 @@
 | Motivações                                                                                                               | Buscar o retorno financeiro através do seu trabalho                                                                                                                                                   |
 | Frustrações                                                                                                             | Por vezes não consegue o retorno financeiro esperado por não conseguir realizar a máxima quantidade de coletas por falta de planejamento adequado                                                   |
 
-| ![persona 1-edit](/documentos/img/klaus.jpg) | Klaus Ernst Müller, 47 anos                                                                                      |
+| ![persona 1-edit](/documentos/img/klaus.jpg) | Klaus Ernst Müller, 28 anos                                                                                      |
 | ------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------- |
 | Ocupação                                                                                                                 | Cientista de dados                                                                                           |
 | Aplicativos                                                                                                   | Instagram, Power BI, Spotify                                                                   |
