@@ -57,7 +57,7 @@ Segue abaixa a tabela com as tecnologia utilizadas.
 
 Para o desenvolvimento do sistema usaremos a arquitetura MVC para a backend e para o frontend iremos usar uma arquitetura baseada na arquitetura flux.
 
-![arquitetura aplicação](/documentos/img/Arquitetura_da_aplicacao.png)
+![arquitetura aplicação](/documentos/img/Arquitetura_da_aplicacao2.png)
 
 ![arquitetura backend](/documentos/img/Arquitetura_do_backend.png)
 
