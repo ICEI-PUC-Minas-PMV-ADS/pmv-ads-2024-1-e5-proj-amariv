@@ -46,15 +46,15 @@ Apresente uma visão geral do que será abordado nesta parte do documento, enume
 
 Segue abaixa a tabela com as tecnologia utilizadas.
 
-|Função						| Ferramenta
-|-----------------------------------------------------------------------------------|
-|IDE						| Visual Studio Code(Frontend), Eclipse PHP(Backend)	|
-|Linguagem Frontend			| Typescript											|
-|Linguagem Backend			| PHP													|
-|Framework Frontend			| React													|
-|Framework Backend			| Laravel												|
-|Banco de dados				| MySQL													|
--------------------------------------------------------------------------------------
+|Função						         | Ferramenta                                                           |
+|---------------------|----------------------------------------------------------------------|
+|IDE						            | Visual Studio Code(Frontend), Eclipse PHP(Backend)	                  |
+|Linguagem Frontend			| Typescript											                                                |
+|Linguagem Backend			 | PHP													                                                     |
+|Framework Frontend			| React													                                                   |
+|Framework Backend			 | Laravel												                                                  |
+|Banco de dados				   | MySQL													                                                   |
+|---------------------|----------------------------------------------------------------------|
 
 Para o desenvolvimento do sistema usaremos a arquitetura MVC para a backend e para o frontend iremos usar a arquitetura flux.
 
