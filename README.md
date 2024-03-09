@@ -35,7 +35,7 @@ O sistema está em fase de desenvolvimento, testes e ajustes. Aguarde o lançame
 * João Lucas Pinheiro Torres
 * Henrique Alexandre Gomes Pinto
 * Vitor Alexandre Gomes Pinto
-* Gabriel Silveira
+* Gabriel Vinícius Silveira e Silva Ildefonso
 * Carlos Eduardo Favilla Lobo
 
 ## Orientador
