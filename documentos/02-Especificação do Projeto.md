@@ -54,7 +54,6 @@ Segue abaixa a tabela com as tecnologia utilizadas.
 |Framework Frontend			| React													                                                   |
 |Framework Backend			 | Laravel												                                                  |
 |Banco de dados				   | MySQL													                                                   |
-|---------------------|----------------------------------------------------------------------|
 
 Para o desenvolvimento do sistema usaremos a arquitetura MVC para a backend e para o frontend iremos usar a arquitetura flux.
 
