@@ -41,9 +41,28 @@ Definição do problema e ideia de solução a partir da perspectiva do usuário
 
 Apresente uma visão geral do que será abordado nesta parte do documento, enumerando as técnicas e/ou ferramentas utilizadas para realizar a especificações do projeto
 /documentos/img/lucio-amariv.jpg
+
 ## Arquitetura e Tecnologias
 
-o	Descreva brevemente a arquitetura definida para o projeto e as tecnologias a serem utilizadas. Sugere-se a criação de um diagrama de componentes da solução.
+Segue abaixa a tabela com as tecnologia utilizadas.
+
+|Função						| Ferramenta
+|-----------------------------------------------------------------------------------|
+|IDE						| Visual Studio Code(Frontend), Eclipse PHP(Backend)	|
+|Linguagem Frontend			| Typescript											|
+|Linguagem Backend			| PHP													|
+|Framework Frontend			| React													|
+|Framework Backend			| Laravel												|
+|Banco de dados				| MySQL													|
+-------------------------------------------------------------------------------------
+
+Para o desenvolvimento do sistema usaremos a arquitetura MVC para a backend e para o frontend iremos usar a arquitetura flux.
+
+![arquitetura aplicação](/documentos/img/Arquitetura_da_aplicacao.png)
+
+![arquitetura backend](/documentos/img/Arquitetura_do_backend.png)
+
+![arquitetura frontend](/documentos/img/Arquitetura_do_frontend.png)
 
 ## Project Model Canvas
 
