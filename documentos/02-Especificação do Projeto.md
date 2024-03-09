@@ -9,12 +9,19 @@
 | Motivações                                                                                                               | A importância social e ecológica do seu trabalho               |
 | Frustrações                                                                                                             | Deficiências no planejamento impedem que o trabalho alcance máxima eficiência |
 
-| ![persona 1-edit](/documentos/img/delair.jpg) | Lúcio Heleno Barbosa, 32 anos                                                                                      |
+| ![persona 1-edit](/documentos/img/delair.jpg) | Delair Pereira de Freitas, 47 anos                                                                                      |
 | ------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------- |
 | Ocupação                                                                                                                 | Catador de materiais recicláveis                                                                                           |
 | Aplicativos                                                                                                   | WhatsApp, Instagram                                                                   |
 | Motivações                                                                                                               | Buscar o retorno financeiro através do seu trabalho                                                                                                                                                   |
 | Frustrações                                                                                                             | Por vezes não consegue o retorno financeiro esperado por não conseguir realizar a máxima quantidade de coletas por falta de planejamento adequado                                                   |
+
+| ![persona 1-edit](/documentos/img/klaus.jpg) | Klaus Ernst Müller, 47 anos                                                                                      |
+| ------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------- |
+| Ocupação                                                                                                                 | Cientista de dados                                                                                           |
+| Aplicativos                                                                                                   | Instagram, Power BI, Spotify                                                                   |
+| Motivações                                                                                                               | Acredita que a preservação do meio-ambiente é imprescindível para a construção de um futuro saudável                                                                                                                                                   |
+| Frustrações                                                                                                             | Pensa que poderia contribuir mais com a preservação do meio-ambiente                                                   |
 
 <span style="color:red">Pré-requisitos: <a href="1-Documentação de Contexto.md"> Documentação de Contexto</a></span>
 
