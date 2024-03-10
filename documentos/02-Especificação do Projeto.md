@@ -81,11 +81,11 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 |RF-01| Permitir que o administrador cadastre contas de Funcionários| Alta | 
 |RF-02|	Permitir que o Administrador altere os dados cadastrados das contas dos funcionários | Alta |
 |RF-03|	Permitir que o Administrador exclua usuários cadastrados |	Alta |
-|RF-04|	Permitir que o usuário cadastre sua propria conta de Cliente usando sua conta do Google |	Baixa |
-|RF-05|	Permitir que o usuário cadastre sua propria conta de Cliente | Alta | 
+|RF-04|	Permitir que o usuário cadastre sua própria conta de Cliente usando sua conta do Google |	Baixa |
+|RF-05|	Permitir que o usuário cadastre sua própria conta de Cliente | Alta | 
 |RF-06|	Permitir que o usuário realize login através de seu e-mail e senha |	Alta |
-|RF-07|	Permitir que o usuário cliente  o cadastro de coletas de Materiais Reciclaveis	| Alta | 
-|RF-08|	Permitir o cadastro de coletas de Materiais Reciclaveis, sem a necessidade de criação de conta |	Alta | 
+|RF-07|	Permitir que o usuário Cliente faça o cadastro de coletas de materiais recicláveis	| Alta | 
+|RF-08|	Permitir o cadastro de coletas de Materiais Recicláveis, sem a necessidade de criação de conta |	Alta | 
 |RF-09|	Permitir o administrador aprovar uma coleta cadastrada |	Alta | 
 |RF-10|	Permitir o administrador cadastrar, alterar ou cancelar uma coleta |	Alta | 
 |RF-11|	Permitir o administrador a criar uma rota de coletas para uma data especifica |	Alta | 
@@ -93,13 +93,13 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 |RF-13|	Permitir o usuário funcionário a alteração da rota cadastrada |	Alta | 
 |RF-14|	Permitir o usuário funcionário a alteração do status das coletas |	Alta |
 |RF-15|	Permitir que o administrador defina um limite de coletas em uma data especifica | Média |
-|RF-16|	Permitir o administrador a visualização do historico de coletas |	Média |
-|RF-17|	Filtro do historico de coletas por data, material, status ou funcionario |	Alta | 
+|RF-16|	Permitir o administrador a visualização do histórico de coletas |	Média |
+|RF-17|	Filtro do histórico de coletas por data, material, status ou funcionário |	Alta | 
 |RF-18|	Permitir o usuário administrador ou funcionário o cadastro de materiais na base de dados |	Alta | 
 |RF-19|	Permitir que os usuários cadastrem materiais que estarão em uma coleta especifica |	Alta | 
 |RF-20|	O sistema deverá gerar alerta e enviar notificação para os usuários em qualquer alteração feita no cadastro de coletas |	Média |
 |RF-21|	O sistema deverá gerar alerta e enviar notificação para os usuários em qualquer alteração feita na rota de coletas |	Média |
-|RF-22|	Gerar relatório com os materiais coletados, filtrando por data, tipo e funcionario |	Baixa |
+|RF-22|	Gerar relatório com os materiais coletados, filtrando por data, tipo e funcionário |	Baixa |
 |RF-23|	Gerar relatório com a quantidade de entregas , filtrando por data, status e funcionário e material |	Baixa |
 
 ### Requisitos não Funcionais
