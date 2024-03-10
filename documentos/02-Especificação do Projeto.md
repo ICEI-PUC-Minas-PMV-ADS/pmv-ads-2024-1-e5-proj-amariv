@@ -9,17 +9,59 @@
 | Motivações                                                                                                               | A importância social e ecológica do seu trabalho               |
 | Frustrações                                                                                                             | Deficiências no planejamento impedem que o trabalho alcance máxima eficiência |
 
+| ![persona 1-edit](/documentos/img/delair.jpg) | Delair Pereira de Freitas, 47 anos                                                                                      |
+| ------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------- |
+| Ocupação                                                                                                                 | Catador de materiais recicláveis                                                                                           |
+| Aplicativos                                                                                                   | WhatsApp, Instagram                                                                   |
+| Motivações                                                                                                               | Buscar o retorno financeiro através do seu trabalho                                                                                                                                                   |
+| Frustrações                                                                                                             | Por vezes não consegue o retorno financeiro esperado por não conseguir realizar a máxima quantidade de coletas por falta de planejamento adequado                                                   |
+
+| ![persona 1-edit](/documentos/img/klaus.jpg) | Klaus Ernst Müller, 28 anos                                                                                      |
+| ------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------- |
+| Ocupação                                                                                                                 | Cientista de dados                                                                                           |
+| Aplicativos                                                                                                   | Instagram, Power BI, Spotify                                                                   |
+| Motivações                                                                                                               | Acredita que a preservação do meio-ambiente é imprescindível para a construção de um futuro saudável                                                                                                                                                   |
+| Frustrações                                                                                                             | Pensa que poderia contribuir mais com a preservação do meio-ambiente                                                   |
 
 
-<span style="color:red">Pré-requisitos: <a href="1-Documentação de Contexto.md"> Documentação de Contexto</a></span>
+## Histórias de Usuários
+
+| Eu como...`PERSONA`      | ...quero/desejo...`FUNCIONALIDADE`                                                                                              | ... para...`MOTIVO/VALOR`                                                                                |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| Lúcio Heleno Barbosa | Cadastrar contas para os funcionários usarem o sistema  | Gerenciar o uso da ferramenta                         |
+| Lúcio Heleno Barbosa | Alterar os dados cadastrados nas contas dos usuarios para corrigir algumas informações incorretas                 | Manter a usabilidade da aplicação                                       |
+| Lúcio Heleno Barbosa | Excluir as contas dos usuários inativos                 | Manter o sistema enxuto                                       |
+| Leonardo Jacques         | Verificar as criptomoedas que estão valorizadas no momento de maneira rápida                                                    | Necessita de agilidade, visto que não tem muito tempo para se dedicar ao estudo mais avançado do mercado |
+| Rafael Luis              | Uma ferramenta de fácil visualização da cotação das criptomoedas                                                                | Agilizar a tomada de decisão de qual moeda investir                                                      |
+| Rafael Luis              | Realizar a pesquisa do valor de uma criptomoeda específica                                                                      | Localizar rapidamente uma moeda que já é de seu interesse ou de sua carteira                             |
+| Rafael Luis              | Utilizar a ferramenta também pelo celular                                                                                       | Se manter informado em momentos que não tiver acesso ao desktop                                          |
+| Rafael Luis              | Cadastrar sua carteira composta por criptoativos e moedas fiduciárias e comparar valores fazendo conversões de forma rápida     | cotar o valor de sua carteira em uma moeda ou criptoativo de sua escolha                                 |
 
 Definição do problema e ideia de solução a partir da perspectiva do usuário. É composta pela definição do  diagrama de personas, histórias de usuários, requisitos funcionais e não funcionais além das restrições do projeto.
 
 Apresente uma visão geral do que será abordado nesta parte do documento, enumerando as técnicas e/ou ferramentas utilizadas para realizar a especificações do projeto
 /documentos/img/lucio-amariv.jpg
+
 ## Arquitetura e Tecnologias
 
-o	Descreva brevemente a arquitetura definida para o projeto e as tecnologias a serem utilizadas. Sugere-se a criação de um diagrama de componentes da solução.
+Segue abaixa a tabela com as tecnologia utilizadas.
+
+|Função						         | Ferramenta                                                           |
+|---------------------|----------------------------------------------------------------------|
+|IDE						            | Visual Studio Code(Frontend), Eclipse PHP(Backend)	                  |
+|Linguagem Frontend			| Typescript											                                                |
+|Linguagem Backend			 | PHP													                                                     |
+|Framework Frontend			| React													                                                   |
+|Framework Backend			 | Laravel												                                                  |
+|Banco de dados				   | MySQL													                                                   |
+
+Para o desenvolvimento do sistema usaremos a arquitetura MVC para a backend e para o frontend iremos usar uma arquitetura baseada na arquitetura flux.
+
+![arquitetura aplicação](/documentos/img/Arquitetura_da_aplicacao2.png)
+
+![arquitetura backend](/documentos/img/Arquitetura_do_backend.png)
+
+![arquitetura frontend](/documentos/img/Arquitetura_do_frontend.png)
 
 ## Project Model Canvas
 
@@ -34,17 +76,37 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 
 ### Requisitos Funcionais
 
-|ID    | Descrição do Requisito  | Prioridade |
-|------|-----------------------------------------|----|
-|RF-001| Permitir que o usuário cadastre tarefas | ALTA | 
-|RF-002| Emitir um relatório de tarefas no mês   | MÉDIA |
+|ID           | Descrição do Requisito  | Prioridade |
+|:---:|---|:---:|
+|RF-01| Permitir que o administrador cadastre contas de Funcionários| Alta | 
+|RF-02|	Permitir que o Administrador altere os dados cadastrados das contas dos funcionários | Alta |
+|RF-03|	Permitir que o Administrador exclua usuários cadastrados |	Alta |
+|RF-04|	Permitir que o usuário cadastre sua própria conta de Cliente usando sua conta do Google |	Baixa |
+|RF-05|	Permitir que o usuário cadastre sua própria conta de Cliente | Alta | 
+|RF-06|	Permitir que o usuário realize login através de seu e-mail e senha |	Alta |
+|RF-07|	Permitir que o usuário Cliente faça o cadastro de coletas de materiais recicláveis	| Alta | 
+|RF-08|	Permitir o cadastro de coletas de Materiais Recicláveis, sem a necessidade de criação de conta |	Alta | 
+|RF-09|	Permitir o administrador aprovar uma coleta cadastrada |	Alta | 
+|RF-10|	Permitir o administrador cadastrar, alterar ou cancelar uma coleta |	Alta | 
+|RF-11|	Permitir o administrador a criar uma rota de coletas para uma data especifica |	Alta | 
+|RF-12|	Permitir o usuário funcionário e Administrador a visualização da rota cadastrada |	Alta | 
+|RF-13|	Permitir o usuário funcionário a alteração da rota cadastrada |	Alta | 
+|RF-14|	Permitir o usuário funcionário a alteração do status das coletas |	Alta |
+|RF-15|	Permitir que o administrador defina um limite de coletas em uma data especifica | Média |
+|RF-16|	Permitir o administrador a visualização do histórico de coletas |	Média |
+|RF-17|	Filtro do histórico de coletas por data, material, status ou funcionário |	Alta | 
+|RF-18|	Permitir o usuário administrador ou funcionário o cadastro de materiais na base de dados |	Alta | 
+|RF-19|	Permitir que os usuários cadastrem materiais que estarão em uma coleta especifica |	Alta | 
+|RF-20|	O sistema deverá gerar alerta e enviar notificação para os usuários em qualquer alteração feita no cadastro de coletas |	Média |
+|RF-21|	O sistema deverá gerar alerta e enviar notificação para os usuários em qualquer alteração feita na rota de coletas |	Média |
+|RF-22|	Gerar relatório com os materiais coletados, filtrando por data, tipo e funcionário |	Baixa |
+|RF-23|	Gerar relatório com a quantidade de entregas , filtrando por data, status e funcionário e material |	Baixa |
 
 ### Requisitos não Funcionais
 
 |ID     | Descrição do Requisito  |Prioridade |
 |-------|-------------------------|----|
-|RNF-001| O sistema deve ser responsivo para rodar em um dispositivos móvel | MÉDIA | 
-|RNF-002| Deve processar requisições do usuário em no máximo 3s |  BAIXA | 
+|RNF - 01| O sistema deverá criar a rota mais rápida ao selecionar os endereços cadastrados na rota | Alta |
 
 Com base nas Histórias de Usuário, enumere os requisitos da sua solução. Classifique esses requisitos em dois grupos:
 
@@ -65,10 +127,11 @@ todos os aspectos capturados nas Histórias de Usuário foram cobertos.
 
 O projeto está restrito pelos itens apresentados na tabela a seguir.
 
-|ID| Restrição                                             |
-|--|-------------------------------------------------------|
-|01| O projeto deverá ser entregue até o final do semestre |
-|02| Não pode ser desenvolvido um módulo de backend        |
+|ID| Restrição |
+|---|---|
+|01| O projeto deverá ser entregue até o fim do primeiro semestre de 2024 |
+|02| A equipe não poderá terceirizar o desenvolvimento para terceiros |
+|03| O desenvolvimento deverá respeitar o orçamento acordado com o cliente |
 
 Enumere as restrições à sua solução. Lembre-se de que as restrições geralmente limitam a solução candidata.
 
