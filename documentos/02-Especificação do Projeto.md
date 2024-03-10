@@ -154,7 +154,7 @@ As referências abaixo irão auxiliá-lo na geração do artefato “Diagrama de
 
 ## Modelo ER (Projeto Conceitual)
 
-![Modelo ER](/documentos/img/Modelo_er.png)
+![Modelo ER](/documentos/img/modelo_er.png)
 
 ## Diagrama de classes
 
@@ -164,6 +164,3 @@ As referências abaixo irão auxiliá-lo na geração do artefato “Diagrama de
 
 ![Projeto da Base de Dados](/documentos/img/Diagrama_de_dados.png)
 
-## Projeto da Base de Dados
-
-O projeto da base de dados corresponde à representação das entidades e relacionamentos identificadas no Modelo ER, no formato de tabelas, com colunas e chaves primárias/estrangeiras necessárias para representar corretamente as restrições de integridade.
