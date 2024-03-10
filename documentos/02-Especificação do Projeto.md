@@ -81,7 +81,7 @@ Para o desenvolvimento do sistema usaremos a arquitetura MVC para a backend e pa
 
 ## Project Model Canvas
 
-![persona 1-edit](/Presentation/Project Model Canvas.png)
+![canvas](/Presentation/Project Model Canvas.png).
 
 > **Links Úteis**:
 > Disponíveis em material de apoio do projeto
