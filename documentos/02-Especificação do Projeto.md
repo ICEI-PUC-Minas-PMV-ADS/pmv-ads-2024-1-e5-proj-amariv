@@ -81,10 +81,7 @@ Para o desenvolvimento do sistema usaremos a arquitetura MVC para a backend e pa
 
 ## Project Model Canvas
 
-<img src="https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e5-proj-amariv/blob/5e5d6f3b27152400a62ee005e7ac25c2944cb208/Presentation/Project%20Model%20Canvas.png" alt="personas">
-
-> **Links Úteis**:
-> Disponíveis em material de apoio do projeto
+<img src="https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e5-proj-amariv/blob/5e5d6f3b27152400a62ee005e7ac25c2944cb208/Presentation/Project%20Model%20Canvas.png" alt="canvas">
 
 ## Requisitos
 
