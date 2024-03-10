@@ -28,14 +28,30 @@
 
 | Eu como...`PERSONA`      | ...quero/desejo...`FUNCIONALIDADE`                                                                                              | ... para...`MOTIVO/VALOR`                                                                                |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| Lúcio Heleno Barbosa | Cadastrar contas para os funcionários usarem o sistema  | Gerenciar o uso da ferramenta                         |
-| Lúcio Heleno Barbosa | Alterar os dados cadastrados nas contas dos usuarios para corrigir algumas informações incorretas                 | Manter a usabilidade da aplicação                                       |
+| Lúcio Heleno Barbosa | Cadastrar contas para os funcionários usarem o sistema | Gerenciar o uso da ferramenta                         |
+| Lúcio Heleno Barbosa | Alterar os dados cadastrados nas contas dos usuários para corrigir algumas informações incorretas| Manter a usabilidade da aplicação                               |
 | Lúcio Heleno Barbosa | Excluir as contas dos usuários inativos                 | Manter o sistema enxuto                                       |
-| Leonardo Jacques         | Verificar as criptomoedas que estão valorizadas no momento de maneira rápida                                                    | Necessita de agilidade, visto que não tem muito tempo para se dedicar ao estudo mais avançado do mercado |
-| Rafael Luis              | Uma ferramenta de fácil visualização da cotação das criptomoedas                                                                | Agilizar a tomada de decisão de qual moeda investir                                                      |
-| Rafael Luis              | Realizar a pesquisa do valor de uma criptomoeda específica                                                                      | Localizar rapidamente uma moeda que já é de seu interesse ou de sua carteira                             |
-| Rafael Luis              | Utilizar a ferramenta também pelo celular                                                                                       | Se manter informado em momentos que não tiver acesso ao desktop                                          |
-| Rafael Luis              | Cadastrar sua carteira composta por criptoativos e moedas fiduciárias e comparar valores fazendo conversões de forma rápida     | cotar o valor de sua carteira em uma moeda ou criptoativo de sua escolha                                 |
+|Klaus Ernst Müller | Entrar no sistema usando sua conta do Google | Cadastrar coletas de forma mais prática |
+| Todas as personas | Cadastrar minha conta utilizando e-mail | Garantir que minhas ações são contabilizadas | 
+| Todas as personas | Entrar no sistema usando e-mail e senha cadastrado | Garantir o acesso às funcionalidades adequadas |
+| Klaus Ernst Müller | Cadastrar um pedido de coleta de materiais recicláveis | Descartar de forma adequada meus resíduos | 
+| Lúcio Heleno Barbosa | Planejar as rotas mais eficientes para a coleta | Otimizar o uso dos recursos da associação | 
+| Klaus Ernst Müller | Cancelar minha solicitação de coleta | Caso haja algum imprevisto | 
+| Klaus Ernst Müller | Cadastrar uma coleta de materiais sem a necessidade de criar uma conta | Descartar de forma adequada meus resíduos e preservar minhas informações e privacidade |
+| Lúcio Heleno Barbosa | Criar a rota de coleta de um dia específico | Deixar o cronograma organizado para o motorista executar a rota | 
+| Delair Pereira de Freitas | Visualizar a rota | Me organizar e planejar o dia | 
+| Delair Pereira de Freitas | Alterar a rota definida | Me adaptar às condições adversas, como o trânsito, por exemplo |
+| Delair Pereira de Freitas | Alterar o estado das coletas | Identificar se a coleta foi feita, ou se foi cancelada, ou se ainda está pendente |
+| Lúcio Heleno Barbosa | Especificar o limite de coleta para determinado dia | Não exceder a capacidade da equipe |
+| Lúcio Heleno Barbosa | Visualizar o histórico de coleta | Gerenciar o desempenho da associação |
+| Lúcio Heleno Barbosa | Filtrar o histórico de coletas por data, material, status ou funcionário | Administrar as atividades da associação e planejar o emprego da equipe |
+| Lúcio Heleno Barbosa | Cadastrar materiais na base de dados | Gerar relatórios sobre o que foi coletado e auxiliar na tomada de decisões |
+| Klaus Ernst Müller | Cadastrar materiais que estarão em uma coleta específica | Auxiliar no planejamento das operações da associação |
+| Todas as personas | Receber notificações sobre alterações durante as coletas | Tomar ciência das alterações e tomar decisões corretivas | 
+| Todas as personas | Receber aletas e notificações sobre alterações nas rotas de coleta | Auxiliar na tomada de decisões frente a obstáculos não previstos| 
+| Lúcio Heleno Barbosa | Gerar relatórios com filtros de informações | Auxiliar na organização e tomada de decisões de planejamento|
+| Lúcio Heleno Barbosa | Gerar relatórios sobre a quantidade de entregas, filtrando por data, status, funcionário e material | Acompanhar o desempenho da equipe e planejar a coleta de material de modo que forneça o maior retorno financeiro possível |
+
 
 Definição do problema e ideia de solução a partir da perspectiva do usuário. É composta pela definição do  diagrama de personas, histórias de usuários, requisitos funcionais e não funcionais além das restrições do projeto.
 
