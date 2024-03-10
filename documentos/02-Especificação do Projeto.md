@@ -130,7 +130,7 @@ O projeto está restrito pelos itens apresentados na tabela a seguir.
 |ID| Restrição |
 |---|---|
 |01| O projeto deverá ser entregue até o fim do primeiro semestre de 2024 |
-|02| A equipe não poderá terceirizar o desenvolvimento para terceiros |
+|02| A equipe não poderá terceirizar o desenvolvimento |
 |03| O desenvolvimento deverá respeitar o orçamento acordado com o cliente |
 
 Enumere as restrições à sua solução. Lembre-se de que as restrições geralmente limitam a solução candidata.
