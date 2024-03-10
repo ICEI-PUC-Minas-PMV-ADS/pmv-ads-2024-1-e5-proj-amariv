@@ -81,7 +81,7 @@ Para o desenvolvimento do sistema usaremos a arquitetura MVC para a backend e pa
 
 ## Project Model Canvas
 
-Colocar a imagem do modelo construído apresentando a proposta de solução.
+![persona 1-edit](/Presentation/Project Model Canvas.png)
 
 > **Links Úteis**:
 > Disponíveis em material de apoio do projeto
