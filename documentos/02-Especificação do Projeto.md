@@ -99,7 +99,7 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 |RF-06|	Permitir que o usuário realize login através de seu e-mail e senha |	Alta |
 |RF-07|	Permitir que o usuário Cliente faça o cadastro de coletas de materiais recicláveis	| Alta | 
 |RF-08|	Permitir o cadastro de coletas de Materiais Recicláveis, sem a necessidade de criação de conta |	Alta | 
-|RF-09|	Permitir o administrador aprovar uma coleta cadastrada |	Alta | 
+|RF-09|	Permitir o administrador aprovar ou cancelar uma coleta cadastrada |	Alta | 
 |RF-10|	Permitir o administrador cadastrar, alterar ou cancelar uma coleta |	Alta | 
 |RF-11|	Permitir o administrador a criar uma rota de coletas para uma data especifica |	Alta | 
 |RF-12|	Permitir o usuário funcionário e Administrador a visualização da rota cadastrada |	Alta | 
