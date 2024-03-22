@@ -92,5 +92,13 @@ Página com tabela contendo uma lista de rotas cadastradas.
 
 ---
 
+# Cronograma de Desenvolvimento
 
-
+|Etapa    | Descrição da sprint  | Prazo |
+|------|-----------------------------------------|----|
+| 1 | Diagnosticar o problema, levantamento de requisitos, projeto da solução, definição da arquitetura da solução  | 03/03/2024 |
+| 2 | Desenvolvimento do template padrão da aplicação, início do desenvolvimento front-end, validação com o cliente | 07/04/2024 |
+| 3 | Ajuste do front-end com os insights do cliente, desenvolvimento do back-end  | 12/05/2024 |
+| 4 | Implementação da solução e testes de software com validação com cliente | 09/06/2024 |
+| 5 | Ajustes da solução de acordo com cliente e correção de bugs | 23/06/2024 |
+| 6 | Avaliação pelo professor, ajustes finais e Mostra de Projetos  | 04/07/2024 |
