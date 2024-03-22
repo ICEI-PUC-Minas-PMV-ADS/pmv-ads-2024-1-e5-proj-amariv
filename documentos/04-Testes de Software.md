@@ -2,6 +2,7 @@
 
 
 <h2>Requisitos Funcionais</h2>
+O plano de testes foi desenvolvido utilizando uma metodologia que abrange todos os requisitos funcionais e não funcionais do sistema  é um técnica utilizada para o desenvolvimento rápido de software.
 
  Requisito Funcional  | Cenário | Pré-Condição | Dado | Quando | Então |
 | -   |   -     |      -       |  -   |  -     |  -    |
@@ -29,7 +30,7 @@
 |RF-022 | Exibir um relatório com os dados dos materiais coletados em formato de lista na página de relatório de coletas. | For selecionado filtros da pesquisa | os filtros desejados forem escolhidos | o botão de pesquisar foi acionado. | Deve ser exibido um relatório com os dados correspondentes aos filtros selecionados.|
 |RF-023 | Exibir um relatório com os dados das entregas das coletas cadastradas em formato de lista na página de relatório de coletas. | For selecionado filtros da pesquisa | os filtros desejados forem escolhidos | o botão de pesquisar foi acionado. | Deve ser exibido um relatório com os datos correspondentes aos filtros selecionados.|
         
-<h2>Requisitos Não-Funcionais do sistema </h2>
+<h2>Plano de teste Requisitos Não-Funcionais do sistema </h2>
 
 | RF  | Cenário | Pré-Condição | Dado | Quando | Então |
 | -   |   -     |      -       |  -   |  -     |  -    |
