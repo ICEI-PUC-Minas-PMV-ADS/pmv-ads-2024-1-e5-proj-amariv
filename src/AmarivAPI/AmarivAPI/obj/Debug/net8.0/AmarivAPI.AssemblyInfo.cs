@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AmarivAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+29fdebd42a2837b84d9c75242638929518608fca")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9ca3b07bbfd159763928def75c9620ce4830fdf0")]
 [assembly: System.Reflection.AssemblyProductAttribute("AmarivAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AmarivAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
