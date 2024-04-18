@@ -167,6 +167,25 @@ namespace AmarivAPI.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "adm",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "3a2e812e-920c-4e75-ad97-805c6f5e5dfc",
+                            Email = "amarivadm@gmail.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            Nome = "Administrador",
+                            NormalizedEmail = "AMARIVADM@GMAIL.COM",
+                            NormalizedUserName = "AMARIVADM@GMAIL.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEIvQKJIk0OOa40DYMmJ4bJF9AwnXtA21r7JqySqGh8XAZL6/EBhmYdRwMQBHRJ2jdQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "39701d1a-e986-49f4-a2ac-ae713c1e31a8",
+                            TwoFactorEnabled = false,
+                            UserName = "amarivadm@gmail.com"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -193,6 +212,26 @@ namespace AmarivAPI.Migrations
                         .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "adm",
+                            Name = "admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "fun",
+                            Name = "funcionario",
+                            NormalizedName = "FUNCIONARIO"
+                        },
+                        new
+                        {
+                            Id = "clt",
+                            Name = "cliente",
+                            NormalizedName = "CLIENTE"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -280,6 +319,13 @@ namespace AmarivAPI.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "adm",
+                            RoleId = "adm"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
