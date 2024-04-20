@@ -4,3 +4,27 @@ GET {{AmarivAPI_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
+
+POST {{AmarivAPI_HostAddress}}/signin
+Content-Type: application/json
+Accept: application/json
+
+{
+   "Nome": "Mike",
+   "Email": "mike@email.com",
+   "Password": "Test@123",
+   "RePassword": "Test@123"
+}
+
+###
+
+POST {{AmarivAPI_HostAddress}}/login
+Content-Type: application/json
+Accept: application/json
+
+{
+  "Email": "mike@email.com",
+  "Password": "Test@123"
+}
+
+###

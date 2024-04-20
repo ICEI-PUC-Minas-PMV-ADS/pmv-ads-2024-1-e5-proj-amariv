@@ -6,6 +6,15 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors(options => {
+    options.AddPolicy(name: "_allowDevelopmentDomain",
+        policy => {
+            policy.WithOrigins("http://localhost:3000");
+            policy.WithHeaders(["Access-Control-Allow-Headers", "*"]);
+        }
+    );
+});
+
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("AmarivConnection");
 
@@ -24,6 +33,8 @@ builder.Services.AddScoped<UsuarioService, UsuarioService>();
 builder.Services.AddScoped<TokenService, TokenService>();
 
 var app = builder.Build();
+
+app.UseCors("_allowDevelopmentDomain");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

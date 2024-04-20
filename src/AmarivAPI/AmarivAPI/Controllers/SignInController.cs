@@ -1,4 +1,5 @@
 ﻿using AmarivAPI.Data.Dtos;
+using AmarivAPI.Models;
 using AmarivAPI.Services;
 using FluentResults;
 using Microsoft.AspNetCore.Mvc;
@@ -19,12 +20,12 @@ namespace AmarivAPI.Controllers
         [HttpPost]
         public IActionResult CadastraUsuario (CreateUsuarioDto createDto)
         {
-            Result resultado = _usuarioService.CadastraUsuario(createDto);
+            Result<Usuario> resultado = _usuarioService.CadastraUsuario(createDto);
             if(resultado.IsFailed)
             {
                 return StatusCode(500);
             }
-            return Ok();
+            return Ok(resultado.Value);
         }
     }
 }

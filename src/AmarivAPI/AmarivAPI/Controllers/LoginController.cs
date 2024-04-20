@@ -20,11 +20,10 @@ namespace AmarivAPI.Controllers
         public IActionResult LogaUsuario (LoginRequest request)
         {
             Result resultado = _usuarioService.LogaUsuario(request);
-            if (resultado.IsFailed) 
+            if (resultado.IsFailed)
             {
-            return Unauthorized(resultado.Errors);
+                return Unauthorized(resultado.Errors);
             }
-
             return Ok(resultado.Successes);
         }
     }

@@ -22,13 +22,13 @@ namespace AmarivAPI.Services
             _tokenService = tokenService;
         }
 
-        public Result CadastraUsuario(CreateUsuarioDto createDto)
+        public Result<Usuario> CadastraUsuario(CreateUsuarioDto createDto)
         {
             Usuario usuario = _mapper.Map<Usuario>(createDto);
             Task<IdentityResult> resultado = _userManager.CreateAsync(usuario, createDto.Password);
             if(resultado.Result.Succeeded) 
             {
-                return Result.Ok();
+                return Result.Ok(usuario);
             }
             return Result.Fail("Falha ao cadastrar usuário");
         }
