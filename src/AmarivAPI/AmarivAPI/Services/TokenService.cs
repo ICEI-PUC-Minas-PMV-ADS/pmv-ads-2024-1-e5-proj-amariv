@@ -9,13 +9,12 @@ namespace AmarivAPI.Services
 {
     public class TokenService
     {
-        public Token CreateToken(IdentityUser<string> usuario, string role)
+        public Token CreateToken(IdentityUser<string> usuario)
         {
             Claim[] direitosUsuario =
             [
                 new Claim("username", usuario.UserName),
-                new Claim("id", usuario.Id.ToString()),
-                new Claim(ClaimTypes.Role, role)
+                new Claim("id", usuario.Id.ToString())
             ];
 
             var chave = new SymmetricSecurityKey(

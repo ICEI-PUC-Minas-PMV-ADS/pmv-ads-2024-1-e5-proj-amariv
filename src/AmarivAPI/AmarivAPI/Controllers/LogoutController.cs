@@ -1,6 +1,5 @@
 ﻿using AmarivAPI.Services;
 using FluentResults;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AmarivAPI.Controllers
@@ -24,8 +23,5 @@ namespace AmarivAPI.Controllers
             }
             return Ok(resultado.Successes);
         }
-
     }
-
-    
 }

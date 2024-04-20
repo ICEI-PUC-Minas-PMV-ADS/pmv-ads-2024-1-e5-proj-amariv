@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\jluca\\OneDrive\\Documents\\GitHub\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\AmarivAPI.csproj": {}
+    "D:\\Programacao\\PUC\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\AmarivAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\jluca\\OneDrive\\Documents\\GitHub\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\AmarivAPI.csproj": {
+    "D:\\Programacao\\PUC\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\AmarivAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jluca\\OneDrive\\Documents\\GitHub\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\AmarivAPI.csproj",
+        "projectUniqueName": "D:\\Programacao\\PUC\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\AmarivAPI.csproj",
         "projectName": "AmarivAPI",
-        "projectPath": "C:\\Users\\jluca\\OneDrive\\Documents\\GitHub\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\AmarivAPI.csproj",
-        "packagesPath": "C:\\Users\\jluca\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jluca\\OneDrive\\Documents\\GitHub\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\obj\\",
+        "projectPath": "D:\\Programacao\\PUC\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\AmarivAPI.csproj",
+        "packagesPath": "C:\\Users\\Vitor Alexandre\\.nuget\\packages\\",
+        "outputPath": "D:\\Programacao\\PUC\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\jluca\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Vitor Alexandre\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -34,6 +34,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -47,18 +52,6 @@
             "FluentResults": {
               "target": "Package",
               "version": "[3.15.2, )"
-            },
-            "MailKit": {
-              "target": "Package",
-              "version": "[4.5.0, )"
-            },
-            "Microsoft.AspNetCore.Authentication.JwtBearer": {
-              "target": "Package",
-              "version": "[8.0.4, )"
-            },
-            "Microsoft.AspNetCore.Authorization": {
-              "target": "Package",
-              "version": "[8.0.4, )"
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
@@ -85,10 +78,6 @@
             "Microsoft.Extensions.Identity.Stores": {
               "target": "Package",
               "version": "[8.0.4, )"
-            },
-            "MimeKit": {
-              "target": "Package",
-              "version": "[4.5.0, )"
             },
             "Pomelo.EntityFrameworkCore.MySql": {
               "target": "Package",
@@ -122,7 +111,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
