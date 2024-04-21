@@ -10,6 +10,7 @@ builder.Services.AddCors(options => {
     options.AddPolicy(name: "_allowDevelopmentDomain",
         policy => {
             policy.WithOrigins("http://localhost:3000");
+            policy.WithOrigins("http://10.0.2.2:3000");
             policy.WithHeaders(["Access-Control-Allow-Headers", "*"]);
         }
     );

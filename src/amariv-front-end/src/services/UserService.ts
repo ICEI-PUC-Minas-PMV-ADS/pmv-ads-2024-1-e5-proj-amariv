@@ -1,5 +1,5 @@
-import { Constants } from "../Constants";
-import { UserFactory } from "../factories/UserFactory";
+import { getApiUrl } from "../AppConstants";
+import { UserMapper } from "../mappers/UserMapper";
 import { User } from "../models/User";
 
 /**
@@ -19,13 +19,14 @@ export class UserService {
     confPassword: string,
     phone: string,
   }): Promise<User> {
-    const response = await fetch(Constants.ApiHost + "signin", {
+    const response = await fetch(getApiUrl() + "signin", {
       method: 'POST',
       body: JSON.stringify({ 
         Nome: name,
         Email: email,
         Password: password,
         RePassword: confPassword,
+        Phone: phone,
       }),
       headers: {
         "Content-Type": "application/json",
@@ -34,7 +35,12 @@ export class UserService {
     });
 
     if (response.ok) {
-      return UserFactory.toJson(await response.json());
+      return UserMapper.fromJson(await response.json());
+    } else {
+      const error = await response.json();
+      if (error && error.title) {
+        throw new Error(error.title);
+      }
     }
     throw new Error('Falha em nossos servidores, tente novamente mais tarde!');
   }
