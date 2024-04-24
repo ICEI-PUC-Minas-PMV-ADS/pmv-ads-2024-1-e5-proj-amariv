@@ -3789,19 +3789,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\HenriqueAGP\\.nuget\\packages\\": {}
+    "C:\\Users\\jluca\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\HenriqueAGP\\Documents\\GitHub\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\AmarivAPI.csproj",
+      "projectUniqueName": "C:\\Users\\jluca\\OneDrive\\Documents\\GitHub\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\AmarivAPI.csproj",
       "projectName": "AmarivAPI",
-      "projectPath": "C:\\Users\\HenriqueAGP\\Documents\\GitHub\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\AmarivAPI.csproj",
-      "packagesPath": "C:\\Users\\HenriqueAGP\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\HenriqueAGP\\Documents\\GitHub\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\obj\\",
+      "projectPath": "C:\\Users\\jluca\\OneDrive\\Documents\\GitHub\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\AmarivAPI.csproj",
+      "packagesPath": "C:\\Users\\jluca\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\jluca\\OneDrive\\Documents\\GitHub\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\HenriqueAGP\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\jluca\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3821,11 +3821,6 @@
         "warnAsError": [
           "NU1605"
         ]
-      },
-      "restoreAuditProperties": {
-        "enableAudit": "true",
-        "auditLevel": "low",
-        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -3914,7 +3909,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

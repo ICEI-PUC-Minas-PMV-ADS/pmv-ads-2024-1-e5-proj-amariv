@@ -238,3 +238,13 @@ D:\Programacao\PUC\pmv-ads-2024-1-e5-proj-amariv\src\AmarivAPI\AmarivAPI\obj\Deb
 D:\Programacao\PUC\pmv-ads-2024-1-e5-proj-amariv\src\AmarivAPI\AmarivAPI\obj\Debug\net8.0\AmarivAPI.pdb
 D:\Programacao\PUC\pmv-ads-2024-1-e5-proj-amariv\src\AmarivAPI\AmarivAPI\obj\Debug\net8.0\AmarivAPI.genruntimeconfig.cache
 D:\Programacao\PUC\pmv-ads-2024-1-e5-proj-amariv\src\AmarivAPI\AmarivAPI\obj\Debug\net8.0\ref\AmarivAPI.dll
+C:\Users\jluca\OneDrive\Documents\GitHub\pmv-ads-2024-1-e5-proj-amariv\src\AmarivAPI\AmarivAPI\bin\Debug\net8.0\BouncyCastle.Cryptography.dll
+C:\Users\jluca\OneDrive\Documents\GitHub\pmv-ads-2024-1-e5-proj-amariv\src\AmarivAPI\AmarivAPI\bin\Debug\net8.0\MailKit.dll
+C:\Users\jluca\OneDrive\Documents\GitHub\pmv-ads-2024-1-e5-proj-amariv\src\AmarivAPI\AmarivAPI\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\jluca\OneDrive\Documents\GitHub\pmv-ads-2024-1-e5-proj-amariv\src\AmarivAPI\AmarivAPI\bin\Debug\net8.0\Microsoft.AspNetCore.Authorization.dll
+C:\Users\jluca\OneDrive\Documents\GitHub\pmv-ads-2024-1-e5-proj-amariv\src\AmarivAPI\AmarivAPI\bin\Debug\net8.0\Microsoft.AspNetCore.Metadata.dll
+C:\Users\jluca\OneDrive\Documents\GitHub\pmv-ads-2024-1-e5-proj-amariv\src\AmarivAPI\AmarivAPI\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\jluca\OneDrive\Documents\GitHub\pmv-ads-2024-1-e5-proj-amariv\src\AmarivAPI\AmarivAPI\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\jluca\OneDrive\Documents\GitHub\pmv-ads-2024-1-e5-proj-amariv\src\AmarivAPI\AmarivAPI\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\jluca\OneDrive\Documents\GitHub\pmv-ads-2024-1-e5-proj-amariv\src\AmarivAPI\AmarivAPI\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\jluca\OneDrive\Documents\GitHub\pmv-ads-2024-1-e5-proj-amariv\src\AmarivAPI\AmarivAPI\bin\Debug\net8.0\MimeKit.dll
