@@ -1,0 +1,37 @@
+# Arquivos de compilação
+bin/
+obj/
+
+# Arquivos temporários
+.vs/
+
+# Arquivos de configuração do Visual Studio
+*.user
+*.suo
+*.cache
+
+# Arquivos de dependências do NuGet
+packages/
+
+# Arquivos de build do MSBuild
+*.dll
+*.pdb
+*.exe
+*.xml
+*.csv
+*.json
+
+# Arquivos de log e outros arquivos gerados durante a execução
+*.log
+*.log.*
+*.pidb
+*.userprefs
+*.sqlite
+
+# Arquivos de ferramentas
+_ReSharper*/
+*.resharper*
+*.DotSettings.user
+
+# Visual Studio Code
+.vscode/
