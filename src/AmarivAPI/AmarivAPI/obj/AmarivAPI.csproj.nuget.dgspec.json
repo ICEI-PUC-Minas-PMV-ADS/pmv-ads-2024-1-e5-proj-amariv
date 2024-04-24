@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Programacao\\PUC\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\AmarivAPI.csproj": {}
+    "C:\\Users\\HenriqueAGP\\Documents\\GitHub\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\AmarivAPI.csproj": {}
   },
   "projects": {
-    "D:\\Programacao\\PUC\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\AmarivAPI.csproj": {
+    "C:\\Users\\HenriqueAGP\\Documents\\GitHub\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\AmarivAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Programacao\\PUC\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\AmarivAPI.csproj",
+        "projectUniqueName": "C:\\Users\\HenriqueAGP\\Documents\\GitHub\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\AmarivAPI.csproj",
         "projectName": "AmarivAPI",
-        "projectPath": "D:\\Programacao\\PUC\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\AmarivAPI.csproj",
-        "packagesPath": "C:\\Users\\Vitor Alexandre\\.nuget\\packages\\",
-        "outputPath": "D:\\Programacao\\PUC\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\obj\\",
+        "projectPath": "C:\\Users\\HenriqueAGP\\Documents\\GitHub\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\AmarivAPI.csproj",
+        "packagesPath": "C:\\Users\\HenriqueAGP\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\HenriqueAGP\\Documents\\GitHub\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Vitor Alexandre\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\HenriqueAGP\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -85,7 +85,7 @@
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[6.4.0, )"
+              "version": "[6.5.0, )"
             },
             "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",
