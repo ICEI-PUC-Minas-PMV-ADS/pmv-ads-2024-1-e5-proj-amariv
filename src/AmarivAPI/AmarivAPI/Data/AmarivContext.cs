@@ -36,5 +36,8 @@ namespace AmarivAPI.Data
             builder.Entity<IdentityRole>().HasData(new IdentityRole { Id = "clt", Name = "cliente", NormalizedName = "CLIENTE" });
             builder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string> { RoleId = "adm", UserId = "adm" });
         }
+        public DbSet<Material> Materiais { get; set; }
+        public DbSet<RoteiroDeColetas> RoteiroDeColetas { get; set; }
+        public DbSet<ItemRoteiroDeColeta> ItensRoteiroDeColetas { get; set; }
     }
 }

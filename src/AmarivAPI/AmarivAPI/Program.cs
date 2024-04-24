@@ -8,6 +8,15 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddCors(options => {
+    options.AddPolicy(name: "_allowDevelopmentDomain",
+        policy => {
+            policy.WithOrigins("http://localhost:3000");
+            policy.WithOrigins("http://10.0.2.2:3000");
+            policy.WithHeaders(["Access-Control-Allow-Headers", "*"]);
+        }
+    );
+});
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("AmarivConnection");
@@ -46,10 +55,14 @@ ClockSkew = TimeSpan.Zero
 });
 
 builder.Services.AddScoped<UsuarioService, UsuarioService>();
+builder.Services.AddScoped<MaterialService, MaterialService>();
 builder.Services.AddScoped<TokenService, TokenService>();
+builder.Services.AddScoped<ItensRoteiroDeColetasService, ItensRoteiroDeColetasService>();
+builder.Services.AddScoped<RoteiroDeColetasService, RoteiroDeColetasService>();
 builder.Services.AddScoped<EmailService, EmailService>();
 
 var app = builder.Build();
+app.UseCors("_allowDevelopmentDomain");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
