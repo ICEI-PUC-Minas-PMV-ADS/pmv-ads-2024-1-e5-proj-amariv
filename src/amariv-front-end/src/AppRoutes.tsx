@@ -1,8 +1,12 @@
 import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
-import { RegisterPage } from "./pages/register";
+import { RegisterPage } from "./pages/Register";
 import { AuthUtils } from "./utils/AuthUtils";
 import { AppContext } from "./AppContext";
+import { LogoutPage } from "./pages/Logout";
+import { isDesktop } from "react-device-detect";
+import { StartPage } from "./pages/Start";
+import { LoginPage } from "./pages/Login";
 
 /**
  * AuthAppRoutes
@@ -11,9 +15,11 @@ export const AuthAppRoutes = () => {
   const appContext = React.useContext(AppContext);
   return (
     !AuthUtils.isAuth(appContext)
-      ? <Navigate to="/login" replace={true} />
+      ? <Navigate to="/" replace={true} />
       : <Routes>
           <Route path="/home" element={<div>Home</div>} />
+          <Route path="/logout" element={<LogoutPage />} />
+          <Route path="/*" element={<div>Erro 404</div>} />
         </Routes>
   );
 };
@@ -24,9 +30,9 @@ export const AuthAppRoutes = () => {
 export const AppRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<div>Start Page</div>} />
+      <Route path="/" element={!isDesktop ? <StartPage /> : <LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
-      <Route path="/login" element={<div>Login</div>} />
+      <Route path="/login" element={<LoginPage />} />
       <Route path="/*" element={<AuthAppRoutes />} />
     </Routes>
   );

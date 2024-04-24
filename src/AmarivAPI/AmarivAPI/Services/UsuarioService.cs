@@ -1,4 +1,5 @@
-﻿using AmarivAPI.Data.Dtos;
+﻿using AmarivAPI.Data;
+using AmarivAPI.Data.Dtos;
 using AmarivAPI.Models;
 using AutoMapper;
 using FluentResults;
@@ -14,12 +15,21 @@ namespace AmarivAPI.Services
         public UserManager<Usuario> _userManager;
         public SignInManager<Usuario> _signInManager;
         public TokenService _tokenService;
-        public UsuarioService(IMapper mapper, UserManager<Usuario> userManager, SignInManager<Usuario> signInManager, TokenService tokenService) 
+        public AmarivContext _amarivContext;
+
+        public UsuarioService(IMapper mapper, UserManager<Usuario> userManager, SignInManager<Usuario> signInManager, TokenService tokenService, AmarivContext amarivContext) 
         {
             _mapper = mapper;
             _userManager = userManager;
             _signInManager = signInManager;
             _tokenService = tokenService;
+            _amarivContext = amarivContext;
+        }
+
+        public Result<Boolean> hasEmail(string email)
+        {
+            var usersCountWithEmail = _amarivContext.Users.Where(u => u.Email == email).Count();
+            return usersCountWithEmail > 0;
         }
 
         public Result<Usuario> CadastraUsuario(CreateUsuarioDto createDto)

@@ -20,6 +20,13 @@ namespace AmarivAPI.Controllers
         [HttpPost]
         public IActionResult CadastraUsuario (CreateUsuarioDto createDto)
         {
+            var hasUserWithEmail = _usuarioService.hasEmail(createDto.Email);
+            if (hasUserWithEmail.Value)
+            {
+                return StatusCode(500, new {
+                    Title = "Este email ja esta em uso!",
+                });
+            }
             Result<Usuario> resultado = _usuarioService.CadastraUsuario(createDto);
             if(resultado.IsFailed)
             {
