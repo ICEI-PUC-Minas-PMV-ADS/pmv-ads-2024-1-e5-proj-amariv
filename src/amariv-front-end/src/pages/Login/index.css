@@ -1,0 +1,74 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  padding: 0 20px;
+}
+.login-box {
+  flex: 1;
+  max-width: 400px;
+  background-color: #53735b;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  height: 100vh;
+}
+
+.centered-div {
+  text-align: center;
+  width: 100%;
+}
+
+.logo {
+  width: 80%;
+  max-width: 200px;
+  margin-bottom: 15px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.message {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: white;
+}
+
+.login-form {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.entrar-message {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 20px;
+  color: white;
+}
+
+.input {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 10px;
+}
+
+.button {
+  width: 100%;
+  max-width: 200px;
+  margin-top: 20px;
+}

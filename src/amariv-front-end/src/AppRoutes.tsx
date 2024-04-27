@@ -1,20 +1,21 @@
 import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { RegisterPage } from "./pages/register";
+import { LoginPage } from "./pages/login";
 import { AuthUtils } from "./utils/AuthUtils";
 import { AppContext } from "./AppContext";
 
 /**
  * AuthAppRoutes
  */
-export const AuthAppRoutes = () => {  
+export const AuthAppRoutes = () => {
   const appContext = React.useContext(AppContext);
-  return (
-    !AuthUtils.isAuth(appContext)
-      ? <Navigate to="/login" replace={true} />
-      : <Routes>
-          <Route path="/home" element={<div>Home</div>} />
-        </Routes>
+  return !AuthUtils.isAuth(appContext) ? (
+    <Navigate to="/login" replace={true} />
+  ) : (
+    <Routes>
+      <Route path="/home" element={<div>Home</div>} />
+    </Routes>
   );
 };
 
@@ -26,7 +27,7 @@ export const AppRoutes = () => {
     <Routes>
       <Route path="/" element={<div>Start Page</div>} />
       <Route path="/register" element={<RegisterPage />} />
-      <Route path="/login" element={<div>Login</div>} />
+      <Route path="/login" element={<LoginPage />} />
       <Route path="/*" element={<AuthAppRoutes />} />
     </Routes>
   );
