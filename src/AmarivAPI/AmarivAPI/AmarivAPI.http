@@ -49,3 +49,33 @@ Accept: application/json
 }
 
 ###
+
+POST {{AmarivAPI_HostAddress}}/api/notificacao
+Content-Type: application/json
+Accept: application/json
+
+{
+   "UserId": "30ad6015-d6c6-495f-a57c-d205267d77c9",
+   "Titulo": "ff22fft",
+   "Corpo": "fffftification."
+}
+
+###
+
+GET {{AmarivAPI_HostAddress}}/api/notificacao?userId=30ad6015-d6c6-495f-a57c-d205267d77c9
+Accept: application/json
+
+###
+
+PUT {{AmarivAPI_HostAddress}}/api/notificacao/2
+Content-Type: application/json
+Accept: application/json
+
+{
+   "Titulo": "3 Notification",
+   "Corpo": "This notification has been updated."
+}
+
+###
+DELETE {{AmarivAPI_HostAddress}}/api/notificacao/2
+Accept: application/json

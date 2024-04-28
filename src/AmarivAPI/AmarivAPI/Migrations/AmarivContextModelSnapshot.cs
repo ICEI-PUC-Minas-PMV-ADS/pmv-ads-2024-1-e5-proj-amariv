@@ -74,6 +74,31 @@ namespace AmarivAPI.Migrations
                     b.ToTable("Materiais");
                 });
 
+            modelBuilder.Entity("AmarivAPI.Models.Notificacao", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Corpo")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Titulo")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Notificacao");
+                });
+
             modelBuilder.Entity("AmarivAPI.Models.RoteiroDeColetas", b =>
                 {
                     b.Property<int>("Id")
@@ -173,16 +198,16 @@ namespace AmarivAPI.Migrations
                         {
                             Id = "adm",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a5e7cbc8-a2ed-462f-ad6c-bf0fa0fa0df1",
+                            ConcurrencyStamp = "17eb2539-a071-4e66-bb1b-b62fe368b620",
                             Email = "amarivadm@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             Nome = "Administrador",
                             NormalizedEmail = "AMARIVADM@GMAIL.COM",
                             NormalizedUserName = "AMARIVADM@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEElr+28CQnR2YHj5GzC85Acb94FViDInudxcyEzeTuzm6i7XwbOcKijM9LoOhGvgDA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEFQ+14NjPKWhPdalI0Lpt7mLsJzC3UDTTdaWylKpoaVN/1782y7N8F8r1p7zG+7VTw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "42032ea2-9e96-46e5-b079-6719e3409cf6",
+                            SecurityStamp = "5feeeea8-4800-4b2a-8492-29a1059407c7",
                             TwoFactorEnabled = false,
                             UserName = "amarivadm@gmail.com"
                         });

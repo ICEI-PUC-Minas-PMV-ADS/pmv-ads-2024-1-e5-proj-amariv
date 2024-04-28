@@ -264,8 +264,10 @@ namespace AmarivAPI.Migrations
                     { "fun", null, "funcionario", "FUNCIONARIO" }
                 });
 
+           
+
             migrationBuilder.InsertData(
-                table: "AspNetUsers",
+                table: "AspNetUseras",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "Nome", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[] { "adm", 0, "a5e7cbc8-a2ed-462f-ad6c-bf0fa0fa0df1", "amarivadm@gmail.com", true, false, null, "Administrador", "AMARIVADM@GMAIL.COM", "AMARIVADM@GMAIL.COM", "AQAAAAIAAYagAAAAEElr+28CQnR2YHj5GzC85Acb94FViDInudxcyEzeTuzm6i7XwbOcKijM9LoOhGvgDA==", null, false, "42032ea2-9e96-46e5-b079-6719e3409cf6", false, "amarivadm@gmail.com" });
 
@@ -310,6 +312,8 @@ namespace AmarivAPI.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
+
+          
         }
 
         /// <inheritdoc />

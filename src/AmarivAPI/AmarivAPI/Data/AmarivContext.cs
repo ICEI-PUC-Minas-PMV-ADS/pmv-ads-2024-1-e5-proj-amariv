@@ -39,5 +39,6 @@ namespace AmarivAPI.Data
         public DbSet<Material> Materiais { get; set; }
         public DbSet<RoteiroDeColetas> RoteiroDeColetas { get; set; }
         public DbSet<ItemRoteiroDeColeta> ItensRoteiroDeColetas { get; set; }
+        public DbSet<Notificacao> Notificacao { get; set; }
     }
 }

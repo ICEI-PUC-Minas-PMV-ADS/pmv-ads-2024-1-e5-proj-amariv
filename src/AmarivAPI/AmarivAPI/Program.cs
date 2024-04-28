@@ -1,5 +1,6 @@
 using AmarivAPI.Data;
 using AmarivAPI.Models;
+using AmarivAPI.Profiles;
 using AmarivAPI.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -51,7 +52,6 @@ ValidateIssuer = false,
 ValidateAudience = false,
 ClockSkew = TimeSpan.Zero
 };
-
 });
 
 builder.Services.AddScoped<UsuarioService, UsuarioService>();
@@ -60,7 +60,8 @@ builder.Services.AddScoped<TokenService, TokenService>();
 builder.Services.AddScoped<ItensRoteiroDeColetasService, ItensRoteiroDeColetasService>();
 builder.Services.AddScoped<RoteiroDeColetasService, RoteiroDeColetasService>();
 builder.Services.AddScoped<EmailService, EmailService>();
-
+builder.Services.AddScoped<NotificacaoService, NotificacaoService>();
+builder.Services.AddAutoMapper(typeof(NotificacaoProfile).Assembly);
 var app = builder.Build();
 app.UseCors("_allowDevelopmentDomain");
 
