@@ -7,9 +7,10 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   title?: string
   color?: "primary" | "secondary"
   value?: string | undefined | number
+  titleColor?: "dark" | "light"
 }
 
-const PasswordInput: React.FC<Props> = ({ title, error, errorMessage, ...props }) => {
+const PasswordInput: React.FC<Props> = ({ title, error, errorMessage, titleColor, ...props }) => {
   const [EyeOpen, SetEyeOpen] = useState(true)
 
   const handleEyeClick = () => {
@@ -17,7 +18,7 @@ const PasswordInput: React.FC<Props> = ({ title, error, errorMessage, ...props }
   }
 
   return (
-    <Input title={title} rightIcon={!EyeOpen ? "IconEye" : "IconEyeOff"} onClickRightIcon={handleEyeClick} type={!EyeOpen ? "text" : "password"} {...props} error={error} errorMessage={errorMessage} />
+    <Input title={title} rightIcon={!EyeOpen ? "IconEye" : "IconEyeOff"} onClickRightIcon={handleEyeClick} type={!EyeOpen ? "text" : "password"} {...props} error={error} errorMessage={errorMessage} titleColor={titleColor} />
   )
 }
 export default PasswordInput

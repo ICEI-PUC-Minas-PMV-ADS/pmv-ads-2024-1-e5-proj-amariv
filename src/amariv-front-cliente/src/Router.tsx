@@ -1,20 +1,26 @@
 import { createBrowserRouter } from "react-router-dom";
-import Home from "./pages/Home";
+import Landing from "./pages/LandingPage";
 import Login from "./pages/Login";
+import SignIn from "./pages/SignIn";
+import SchedulingLoggedOut from "./pages/SchedulingLoggedOut";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: (<Home />),
+    element: (<Landing />),
   },
   {
-    path: "/home",
-    element: (<Home />),
+    path: "/signin",
+    element: (< SignIn />),
   },
   {
     path: "/login",
     element: <Login />,
   },
+  {
+    path: "/agendamento",
+    element: <SchedulingLoggedOut />
+  }
 ]);
 
 export default router

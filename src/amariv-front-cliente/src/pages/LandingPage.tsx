@@ -5,15 +5,18 @@ import PrimaryButton from "../components/PrimaryButton";
 import location from "../assets/amariv-location.png"
 import { useNavigate } from "react-router-dom";
 
-function Home() {
+function Landing() {
   const navigate = useNavigate()
+
   return (
     <div className="flex flex-col bg-light-green w-full min-h-screen justify-between">
       <div className="flex flex-col gap-4 p-4 lg:p-6 text-primary-green w-full items-center mb-4">
         <div className="w-full flex justify-between">
           <img src={logo} className="w-20" />
           <div className="w-1/2 flex justify-center items-center max-w-[250px]">
-            <PrimaryButton title="Agendar coleta" />
+            <PrimaryButton title="Agendar coleta" onClick={() => {
+              navigate("/login")
+            }} />
           </div>
         </div>
         <div className="flex flex-col items-center w-full lg:flex-row lg:h-[90vh] justify-center lg:gap-32 pb-20">
@@ -40,7 +43,9 @@ function Home() {
           <h1 className="text-2xl font-bold lg:text-5xl lg:text-center">Agende uma coleta</h1>
           <div className="flex w-full justify-center mt-4 lg:mt-8">
             <div className="w-2/3 max-w-[250px]">
-              <PrimaryButton title="Agendar coleta" />
+              <PrimaryButton title="Agendar coleta" onClick={() => {
+                navigate("/login")
+              }} />
             </div>
           </div>
         </div>
@@ -52,4 +57,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Landing;

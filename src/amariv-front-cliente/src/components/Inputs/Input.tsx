@@ -73,7 +73,7 @@ const input = tv({
   }
 })
 
-const Input: React.FC<InputProps> = ({ title, leftIcon, rightIcon, onClickLeftIcon, onClickRightIcon, error, errorMessage, internalSelectable, valueInternalSelectable, onClickInternalSelectable, selectableInput = false, color = "primary", value, internalTitle = false, selectableInputIconOpen = false, disabled = false, requiredField = false, externalCheckbox = false, onClickExternalCheckbox, titleExternalCheckbox, valueExternalCheckbox = false, onClickSelectableInput, titleColor = "dark", ...props }) => {
+const Input: React.FC<InputProps> = ({ title, leftIcon, rightIcon, onClickLeftIcon, onClickRightIcon, error, errorMessage, internalSelectable, valueInternalSelectable, onClickInternalSelectable, selectableInput = false, color = "primary", value, internalTitle = false, selectableInputIconOpen = false, disabled = false, requiredField = false, externalCheckbox = false, onClickExternalCheckbox, titleExternalCheckbox, valueExternalCheckbox = false, onClickSelectableInput, titleColor = "light", ...props }) => {
 
   const { background, internalSelectableStyle, selectableStyle, text, icon } = input()
 
@@ -83,8 +83,8 @@ const Input: React.FC<InputProps> = ({ title, leftIcon, rightIcon, onClickLeftIc
       {
         internalTitle == false &&
         <div className="w-full flex justify-between mb-2">
-          <p className={titleColor == "dark" ? "text-white text-sm ml-2" : "text-dark-green text-sm ml-2"}>{title}</p>
-          <p className="text-red-500">{requiredField ? " *" : ""}</p>
+          <span className={titleColor == "dark" ? "text-dark-green text-sm ml-2" : "text-white text-sm ml-2"}>{title}<span className="text-red-500">{requiredField ? " *" : ""}</span></span>
+
           {
             externalCheckbox &&
             <div className="flex flex-row items-center" onClick={() => {
@@ -133,11 +133,11 @@ const Input: React.FC<InputProps> = ({ title, leftIcon, rightIcon, onClickLeftIc
                 <div className="w-full ml-4 min-h-10 flex flex-col justify-center leading-[15px] text-nowrap overflow-hidden">
                   {
                     disabled == false &&
-                    <p className=" text-[11px] text-dark-green text-nowrap">{title}<p className="text-red-500">{requiredField ? " *" : ""}</p></p>
+                    <span className=" text-[11px] text-dark-green text-nowrap">{title}<span className="text-red-500">{requiredField ? " *" : ""}</span></span>
                   }
                   {
                     disabled == true &&
-                    <p className=" text-[11px] text-neutral-500  text-nowrap ">{title}<p className="text-red-500">{requiredField ? " *" : ""}</p></p>
+                    <span className=" text-[11px] text-neutral-500  text-nowrap ">{title}<span className="text-red-500">{requiredField ? " *" : ""}</span></span>
                   }
 
 
