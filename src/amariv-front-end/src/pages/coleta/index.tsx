@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Input } from "../../components/Input";
-import { Button } from "../../components/Button";
+import { Button2 } from "../../components/Button2";
 import { Form } from "../../components/Form";
 import "./index.css";
 import { Link } from "react-router-dom";
@@ -44,14 +44,79 @@ export function ColetaPage() {
             </Link>
           </div>
         </div>
+
         <div className="content">
-          <h2 className="text-[#53735B] text-[1.75rem]">
+          <h2 className="mt-[30px] text-[#53735B] text-[1.75rem]">
             Novo agendamento de coleta
           </h2>
-          <p className="text-[#666666] text-s my-4">Dados do cliente</p>
-          <div className="dados-cliente">
-            <form></form>
+          <div className="title">
+            <p className="text-[#666666] text-m my-1">Dados do cliente</p>
           </div>
+
+          <Form>
+            <div className="dados-cliente">
+              <div>
+                <Input type="text" label="Nome" required />
+              </div>
+              <div>
+                <Input type="tel" label="Celular" required />
+              </div>
+              <div>
+                <Input type="tel" label="Telefone Fixo" required />
+              </div>
+            </div>
+
+            <div className="title">
+              <p className="text-[#666666] text-m my-1">Endereço do cliente</p>
+            </div>
+            <div className="endereco-cliente">
+              <div>
+                <Input type="text" label="CEP" required />
+              </div>
+              <div>
+                <Input type="text" label="Logradouro" required />
+              </div>
+              <div>
+                <Input type="text" label="Número" required />
+              </div>
+            </div>
+            <div className="endereco-cliente">
+              <div>
+                <Input type="text" label="Bairro" required />
+              </div>
+              <div>
+                <Input type="text" label="Cidade" required />
+              </div>
+              <div>
+                <Input type="text" label="Complemento" required />
+              </div>
+            </div>
+            <div className="title">
+              <p className="text-[#666666] text-m my-1">Materiais da coleta</p>
+            </div>
+            <div className="dados-cliente">
+              <div>
+                <Input
+                  type="text"
+                  label="Descrição do material"
+                  placeholder="latas, garrafas, etc."
+                  required
+                />
+              </div>
+              <div>
+                <Button2
+                  type="submit"
+                  label="Adicionar material"
+                  className="w-[80%] mt-[15px]"
+                />
+              </div>
+            </div>
+            <Button2
+              type="submit"
+              label="Criar agendamento"
+              className="w-[40%] "
+            />
+          </Form>
         </div>
       </div>
     </>
