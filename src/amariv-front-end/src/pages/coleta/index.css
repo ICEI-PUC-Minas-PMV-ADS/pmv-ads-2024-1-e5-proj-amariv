@@ -121,18 +121,16 @@
   justify-content: flex-start;
 }
 .dados-cliente {
-  margin-bottom: 20px;
   background: #e8f4eb;
-  width: 80vw;
-  padding: 15px;
   border-radius: 4px;
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-between;
+  width: 80vw;
+  justify-content: space-around;
 }
 .endereco-cliente {
   background: #e8f4eb;
-  padding: 10px;
   border-radius: 4px;
   display: flex;
   flex-direction: row;
@@ -144,9 +142,34 @@
 @media (max-width: 768px) {
   .dados-cliente,
   .endereco-cliente,
-  .title {
+  .title,
+  .material-panel {
     flex-direction: column;
     align-items: center;
-    width: 70vw;
+    max-width: 70vw;
+    padding: 10px;
   }
+}
+
+.material-panel {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 450px;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.materal-buttons {
+  display: flex;
+  justify-content: space-evenly;
+}
+.addmaterial {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

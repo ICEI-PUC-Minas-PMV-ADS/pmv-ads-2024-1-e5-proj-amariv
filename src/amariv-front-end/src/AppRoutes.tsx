@@ -2,6 +2,8 @@ import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { RegisterPage } from "./pages/register";
 import { LoginPage } from "./pages/login";
+import { PasswordRecoveryPage } from "./pages/password-recovery";
+import { ColetaPage } from "./pages/coleta";
 import { AuthUtils } from "./utils/AuthUtils";
 import { AppContext } from "./AppContext";
 
@@ -28,6 +30,8 @@ export const AppRoutes = () => {
       <Route path="/" element={<div>Start Page</div>} />
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/recovery" element={<PasswordRecoveryPage />} />
+      <Route path="/coleta" element={<ColetaPage />} />
       <Route path="/*" element={<AuthAppRoutes />} />
     </Routes>
   );

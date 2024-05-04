@@ -31,21 +31,25 @@ export function LoginPage() {
             <div className="login-form">
               <div className="entrar-message">Entrar</div>
               <Form>
-                <Input
-                  type="text"
-                  label=""
-                  placeholder="Usuário"
-                  required
-                  className="input"
-                />
-                <Input
-                  type="password"
-                  label=""
-                  placeholder="Senha"
-                  required
-                  minLength={6}
-                  className="input"
-                />
+                <div>
+                  <Input
+                    type="text"
+                    label=""
+                    placeholder="Usuário"
+                    required
+                    className="input"
+                  />
+                </div>
+                <div>
+                  <Input
+                    type="password"
+                    label=""
+                    placeholder="Senha"
+                    required
+                    minLength={6}
+                    className="input"
+                  />
+                </div>
                 <Button type="submit" label="Login" className="button" />
               </Form>
             </div>
