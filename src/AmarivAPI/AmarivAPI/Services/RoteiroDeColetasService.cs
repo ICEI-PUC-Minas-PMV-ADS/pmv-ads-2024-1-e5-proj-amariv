@@ -73,6 +73,12 @@ namespace AmarivAPI.Services
             }
         }
 
+         /// <summary>
+         ///  Função para substituir o número maximo de coletas do roteiro.
+         /// </summary>
+         /// <param name="numeroDeColetas"></param>
+         /// <param name="id"></param>
+         /// <returns></returns>
         public Result UpdateRoteiroDeColeta(int numeroDeColetas, int id)
         {
             try
@@ -106,9 +112,16 @@ namespace AmarivAPI.Services
             {
                 RoteiroDeColetas roteiroDeColeta = _context.RoteiroDeColetas.FirstOrDefault(r => r.Id == id);
                 if (roteiroDeColeta != null)
-                    roteiroDeColeta.NumeroDeColetas += 1;
+                {
+                    if (roteiroDeColeta.NumeroMaxColetas <= roteiroDeColeta.NumeroDeColetas)
+                        return Result.Fail("O numero máximo de coletas para a data já foi atingido!!");
+                    else
+                        roteiroDeColeta.NumeroDeColetas += 1;
+                }
                 else
+                {
                     return Result.Fail("Não foi possivel encontrar o Roteiro de coleta");
+                }
 
                 _context.Update<RoteiroDeColetas>(roteiroDeColeta);
                 _context.SaveChanges();

@@ -69,9 +69,9 @@ namespace AmarivAPI.Controllers
 
         [HttpPost]
         [Route("/UpdateNumMaxRoteiroDeColetas")]
-        public IActionResult UpdateRoteiroDeColetas([FromBody]  int numero, int id)
+        public IActionResult UpdateRoteiroDeColetas([FromBody]  int numeroMaxColetas, int id)
         {
-            var result = _roteiroService.UpdateRoteiroDeColeta(numero, id);
+            var result = _roteiroService.UpdateRoteiroDeColeta(numeroMaxColetas , id);
             if (result.IsSuccess)
                 return Ok(result);
             else
@@ -88,6 +88,7 @@ namespace AmarivAPI.Controllers
             else
                 return NotFound();
         }
+
 
         [HttpPost]
         [Route("/DeletaRoteiroDeColetas")]
