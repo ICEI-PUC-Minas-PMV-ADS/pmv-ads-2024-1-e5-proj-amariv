@@ -4,6 +4,8 @@ import { RegisterPage } from "./pages/register";
 import { LoginPage } from "./pages/login";
 import { PasswordRecoveryPage } from "./pages/password-recovery";
 import { ColetaPage } from "./pages/coleta";
+import { MaterialPage } from "./pages/materiais";
+import { FuncionarioPage } from "./pages/funcionarios";
 import { AuthUtils } from "./utils/AuthUtils";
 import { AppContext } from "./AppContext";
 
@@ -32,6 +34,8 @@ export const AppRoutes = () => {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/recovery" element={<PasswordRecoveryPage />} />
       <Route path="/coleta" element={<ColetaPage />} />
+      <Route path="/materiais" element={<MaterialPage />} />
+      <Route path="/funcionarios" element={<FuncionarioPage />} />
       <Route path="/*" element={<AuthAppRoutes />} />
     </Routes>
   );

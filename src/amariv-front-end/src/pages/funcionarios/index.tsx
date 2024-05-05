@@ -1,7 +1,5 @@
 import React, { useState, useRef } from "react";
 import { Input } from "../../components/Input";
-import { InputDate } from "../../components/InputDate";
-import { InputTime } from "../../components/InputTime";
 import { Button2 } from "../../components/Button2";
 import { Button3 } from "../../components/Button3";
 import { DropdownInput } from "../../components/DropdownInput";
@@ -14,7 +12,7 @@ interface Material {
   quantity: string;
 }
 
-export function ColetaPage() {
+export function FuncionarioPage() {
   const [active, setMode] = useState(false);
   const [materials, setMaterials] = useState<Material[]>([]);
   const [showMaterialPanel, setShowMaterialPanel] = useState(false);
@@ -32,22 +30,6 @@ export function ColetaPage() {
   };
   const handleCancelClick = () => {
     setShowMaterialPanel(!showMaterialPanel);
-  };
-  const dateInputRef = useRef<HTMLInputElement>(null);
-
-  const handleDateChange = () => {
-    if (dateInputRef.current) {
-      const selectedDate = dateInputRef.current.value;
-      console.log("Data selecionada:", selectedDate);
-    }
-  };
-  const timeInputRef = useRef<HTMLInputElement>(null);
-
-  const handleTimeChange = () => {
-    if (timeInputRef.current) {
-      const selectedTime = timeInputRef.current.value;
-      console.log("Hora selecionada:", selectedTime);
-    }
   };
 
   const handleMaterialInfoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -84,15 +66,6 @@ export function ColetaPage() {
     "Vidro",
   ];
 
-  const pesoRef = useRef<HTMLSelectElement>(null);
-  const handlePesoChange = () => {
-    if (pesoRef.current) {
-      const selectedPeso = pesoRef.current.value;
-      console.log("Peso informado: ", selectedPeso);
-    }
-  };
-  const pesoOptions = ["Informe o peso...", "Leve", "Médio", "Pesado"];
-
   return (
     <>
       <div className="App">
@@ -126,94 +99,19 @@ export function ColetaPage() {
         </div>
 
         <div className="content">
-          <h2 className="mt-[30px] text-[#53735B] text-[1.75rem]">
-            Novo agendamento de coleta
-          </h2>
           <div className="title">
-            <p className="text-[#666666] text-m my-1">Dados do cliente</p>
-          </div>
-
-          <Form>
-            <div className="dados-cliente">
-              <div>
-                <Input type="text" label="Nome" required />
-              </div>
-              <div>
-                <Input type="tel" label="Celular" required />
-              </div>
-              <div>
-                <Input type="tel" label="Telefone Fixo" required />
-              </div>
+            <div>
+              <h2 className="mt-[30px] text-[#53735B] text-[1.75rem]">
+                Materiais
+              </h2>
             </div>
-
-            <div className="title">
-              <p className="text-[#666666] text-m my-1">Endereço do cliente</p>
-            </div>
-            <div className="endereco-cliente">
-              <div>
-                <Input type="text" label="CEP" required />
-              </div>
-              <div>
-                <Input type="text" label="Logradouro" required />
-              </div>
-              <div>
-                <Input type="text" label="Número" required />
-              </div>
-            </div>
-            <div className="endereco-cliente">
-              <div>
-                <Input type="text" label="Bairro" required />
-              </div>
-              <div>
-                <Input type="text" label="Cidade" required />
-              </div>
-              <div>
-                <Input type="text" label="Complemento" required />
-              </div>
-            </div>
-            <div className="endereco-cliente">
-              <div>
-                <InputDate
-                  label="Data da coleta"
-                  type="date"
-                  ref={dateInputRef}
-                  onChange={handleDateChange}
-                />
-              </div>
-              <div>
-                <InputTime
-                  label="Horário de Coleta"
-                  type="time"
-                  ref={timeInputRef}
-                  onChange={handleTimeChange}
-                />
-              </div>
-              <div>
-                <Button2
-                  type="button"
-                  label="Verificar disponibilidade"
-                  className="w-[90%] mt-[15px]"
-                />
-              </div>
-            </div>
-            <div className="title">
-              <p className="text-[#666666] text-m my-1">Materiais da coleta</p>
-            </div>
-            <div className="dados-cliente">
-              <div>
-                <Input
-                  type="text"
-                  label="Descrição do material"
-                  placeholder="latas, garrafas, etc."
-                  required
-                />
-              </div>
+            <div>
               <div>
                 <Button2
                   type="button"
                   label="Adicionar material"
                   onClick={toggleMaterialPanel}
-                  className="w-[80%] mt-[15px]"
+                  className="w-[150px] mt-[15px]"
                 />
                 {showMaterialPanel && (
                   <div className="material-panel">
@@ -224,6 +122,9 @@ export function ColetaPage() {
                     </div>
                     <div className="addmaterial">
                       <div>
+                        <Input type="text" label="Descrição" required />
+                      </div>
+                      <div>
                         <DropdownInput
                           label="Selecione um material"
                           options={materialOptions}
@@ -233,18 +134,8 @@ export function ColetaPage() {
                           required
                         />
                       </div>
-                      <div>
-                        <DropdownInput
-                          label="Informe o peso"
-                          options={pesoOptions}
-                          placeholder="Selecione um material..."
-                          ref={pesoRef}
-                          onChange={handleMaterialChange}
-                          required
-                        />
-                      </div>
                     </div>
-                    <div className="materal-buttons">
+                    <div className="material-buttons">
                       <div>
                         <Button3
                           type="button"
@@ -266,11 +157,27 @@ export function ColetaPage() {
                 )}
               </div>
             </div>
-            <Button2
-              type="submit"
-              label="Criar agendamento"
-              className="w-[40%] mt-[15px]"
-            />
+          </div>
+
+          <Form>
+            <div className="title">
+              <p className="text-[#666666] text-m my-1">Filtros</p>
+            </div>
+            <div className="dados-cliente">
+              <div>
+                <Input type="text" label="Pesquisar por descrição" required />
+              </div>
+              <div>
+                <DropdownInput
+                  label="Pesquisar por tipo"
+                  options={materialOptions}
+                  placeholder="Selecione um material..."
+                  ref={materialRef}
+                  onChange={handleMaterialChange}
+                  required
+                />
+              </div>
+            </div>
           </Form>
         </div>
       </div>
@@ -278,4 +185,4 @@ export function ColetaPage() {
   );
 }
 
-export default ColetaPage;
+export default FuncionarioPage;

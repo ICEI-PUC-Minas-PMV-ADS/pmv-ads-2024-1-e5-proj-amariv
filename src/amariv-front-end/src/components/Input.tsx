@@ -15,14 +15,14 @@ export type InputProps = React.ComponentProps<"input"> & {
 export const Input = React.forwardRef(
   ({ label, ...props }: InputProps, ref: React.LegacyRef<HTMLInputElement>) => {
     return (
-      <div className="flex flex-col w-full my-2">
-        <label className="mb-[.5rem] ml-[.75rem] text-[#666666] text-xs">
+      <div className="flex flex-col w-full my-2 ">
+        <label className=" mb-[.5rem] ml-[.75rem] text-[#666666] text-xs">
           {label}
         </label>
         <input
           {...props}
           ref={ref}
-          className="max-w-[250px] m-[15px] py-2 px-4 rounded-full bg-[#FBFFF3] border-[1px] border-[#004646]"
+          className="w-[220px] m-[15px] py-2 px-4 rounded-full bg-[#FBFFF3] border-[1px] border-[#004646]"
         />
       </div>
     );
