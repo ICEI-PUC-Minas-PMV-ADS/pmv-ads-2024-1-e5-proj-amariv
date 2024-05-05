@@ -8,6 +8,10 @@ namespace AmarivAPI.Models
         [Key]
         [Required]
         public int Id { get; set; }
+        [Required]
+        public int FuncionarioId { get; set; }
+        [Required]
+        public DateTime DataRoteiro { get; set; } // Data em que o roteiro sera executado.
         public DateTime DataCadastro { get; set; } = DateTime.Now;
         [Required]
         public Boolean Status { get; set; }

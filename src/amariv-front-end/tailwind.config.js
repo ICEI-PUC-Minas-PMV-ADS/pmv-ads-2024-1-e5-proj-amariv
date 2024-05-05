@@ -5,7 +5,6 @@ module.exports = {
     extend: {
       colors: {
         'amariv': '#F4FAF6',
-        "primary-backgroud": "#53735B"
       }
     },
   },
