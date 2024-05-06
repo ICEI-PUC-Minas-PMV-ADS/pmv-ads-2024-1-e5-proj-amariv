@@ -1,6 +1,6 @@
 import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
-import { RegisterPage } from "./pages/Register";
+import { RegisterPage } from "./pages/register";
 import { AuthUtils } from "./utils/AuthUtils";
 import { AppContext } from "./AppContext";
 import { LogoutPage } from "./pages/Logout";

@@ -19,14 +19,13 @@ builder.Services.AddCors(options => {
     );
 });
 
-// Add services to the container.
+
 var connectionString = builder.Configuration.GetConnectionString("AmarivConnection");
 
 builder.Services.AddDbContext<AmarivContext>(opts =>
 opts.UseLazyLoadingProxies().UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -45,14 +44,15 @@ builder.Services.AddAuthentication(auth =>
     token.SaveToken = true;
     token.TokenValidationParameters = new TokenValidationParameters
     {
-ValidateIssuerSigningKey = true,
-IssuerSigningKey = new SymmetricSecurityKey(
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(
                 Encoding.UTF8.GetBytes("fglzdrUAYU2S1wL2G4jXbtlXhVa2AG35")),
-ValidateIssuer = false,
-ValidateAudience = false,
-ClockSkew = TimeSpan.Zero
-};
+        ValidateIssuer = false,
+        ValidateAudience = false,
+        ClockSkew = TimeSpan.Zero
+    };
 });
+
 
 builder.Services.AddScoped<UsuarioService, UsuarioService>();
 builder.Services.AddScoped<MaterialService, MaterialService>();
@@ -61,11 +61,13 @@ builder.Services.AddScoped<ItensRoteiroDeColetasService, ItensRoteiroDeColetasSe
 builder.Services.AddScoped<RoteiroDeColetasService, RoteiroDeColetasService>();
 builder.Services.AddScoped<EmailService, EmailService>();
 builder.Services.AddScoped<NotificacaoService, NotificacaoService>();
+builder.Services.AddScoped<FuncionarioService>(); 
 builder.Services.AddAutoMapper(typeof(NotificacaoProfile).Assembly);
+builder.Services.AddAutoMapper(typeof(FuncionarioProfile).Assembly);
+
 var app = builder.Build();
 app.UseCors("_allowDevelopmentDomain");
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
