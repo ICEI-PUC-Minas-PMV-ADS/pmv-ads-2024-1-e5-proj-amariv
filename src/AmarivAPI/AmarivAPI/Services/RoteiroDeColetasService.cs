@@ -49,8 +49,24 @@ namespace AmarivAPI.Services
             return lista.Any(r => r.DataCadastro.Date == roteiro.DataCadastro.Date && r.Delete == false);
         }
 
+         public static int ConsultaDisponibilidadeRoteiroDeColeta(DateTime data, AmarivContext context)
+        {
+            List<RoteiroDeColetas> lista = context.RoteiroDeColetas.ToList();
+            var roteiro = lista.Find(r => r.DataCadastro.Date == data && r.Delete == false);
+            if (roteiro != null)
+                return roteiro.Id;
+            else
+                return 0;
+        }
+
         #region Updates_RoteiroDeColetas
 
+        /// <summary>
+        /// Update padrão do roteiro de coletas.
+        /// </summary>
+        /// <param name="RoteiroDto"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Result UpdateRoteiroDeColeta(UpdateRoteiroDeColetasDto RoteiroDto, int id)
         {
             try
@@ -59,7 +75,7 @@ namespace AmarivAPI.Services
                 if (RoteiroDeColeta != null)
                     _mapper.Map(RoteiroDeColeta, RoteiroDto);
                 else
-                    return Result.Fail("Não foi possivel encntrar o Roteiro de coleta");
+                    return Result.Fail("Não foi possivel encontrar o Roteiro de coleta");
 
                 _context.Update<RoteiroDeColetas>(RoteiroDeColeta);
                 _context.SaveChanges();
@@ -74,7 +90,7 @@ namespace AmarivAPI.Services
         }
 
          /// <summary>
-         ///  Função para substituir o número maximo de coletas do roteiro.
+         ///  Função para substituir o número máximo de coletas do roteiro.
          /// </summary>
          /// <param name="numeroDeColetas"></param>
          /// <param name="id"></param>
@@ -136,7 +152,6 @@ namespace AmarivAPI.Services
 
         #endregion
 
-
         public ReadRoteiroDeColetasDto RecuperaRoteiroDeColetas(int id)
         {
             return _mapper.Map<ReadRoteiroDeColetasDto>(_context.RoteiroDeColetas.FirstOrDefault(r => r.Id == id));
@@ -169,6 +184,21 @@ namespace AmarivAPI.Services
                 return Result.Fail("Não foi possivel localizar o Roteiro de coletas");
             }
         }
+        /// <summary>
+        /// Função para conferir se o roteiro está disponivel para 
+        /// </summary>
+        /// <param name="dataRoteiro"></param>
+        /// <returns></returns>
+        public bool ChecaDisponibilidadeDoRoteiro(DateTime dataRoteiro)
+        {
+            var roteiro = _context.RoteiroDeColetas.FirstOrDefault(c => c.DataRoteiro == dataRoteiro && c.Delete == false);
+            if (roteiro != null)
+                return roteiro.NumeroMaxColetas > roteiro.NumeroDeColetas;
+            else
+                return true;                         
+        }
+
+    
 
 
 

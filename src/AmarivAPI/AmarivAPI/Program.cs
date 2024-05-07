@@ -56,8 +56,8 @@ ClockSkew = TimeSpan.Zero
 
 builder.Services.AddScoped<UsuarioService, UsuarioService>();
 builder.Services.AddScoped<MaterialService, MaterialService>();
+builder.Services.AddScoped<ColetaService, ColetaService>();
 builder.Services.AddScoped<TokenService, TokenService>();
-builder.Services.AddScoped<ItensRoteiroDeColetasService, ItensRoteiroDeColetasService>();
 builder.Services.AddScoped<RoteiroDeColetasService, RoteiroDeColetasService>();
 builder.Services.AddScoped<EmailService, EmailService>();
 

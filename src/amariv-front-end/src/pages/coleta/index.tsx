@@ -8,41 +8,29 @@ import { DropdownInput } from "../../components/DropdownInput";
 import { Form } from "../../components/Form";
 import "./index.css";
 import { Link } from "react-router-dom";
+import { FormAddMateriais } from "./components/FormAddMateriais";
 
-interface Material {
-  description: string;
-  quantity: string;
-}
+
 
 export function ColetaPage() {
   const [active, setMode] = useState(false);
-  const [materials, setMaterials] = useState<Material[]>([]);
-  const [showMaterialPanel, setShowMaterialPanel] = useState(false);
-  const [materialInfo, setMaterialInfo] = useState<Material>({
-    description: "",
-    quantity: "",
-  });
+  
+ 
 
   const toggleMode = () => {
     setMode(!active);
   };
 
-  const toggleMaterialPanel = () => {
-    setShowMaterialPanel(!showMaterialPanel);
-  };
-  const handleCancelClick = () => {
-    setShowMaterialPanel(!showMaterialPanel);
-  };
   const dateInputRef = useRef<HTMLInputElement>(null);
-
   const handleDateChange = () => {
     if (dateInputRef.current) {
       const selectedDate = dateInputRef.current.value;
       console.log("Data selecionada:", selectedDate);
     }
   };
-  const timeInputRef = useRef<HTMLInputElement>(null);
 
+
+  const timeInputRef = useRef<HTMLInputElement>(null);
   const handleTimeChange = () => {
     if (timeInputRef.current) {
       const selectedTime = timeInputRef.current.value;
@@ -50,48 +38,9 @@ export function ColetaPage() {
     }
   };
 
-  const handleMaterialInfoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setMaterialInfo({
-      ...materialInfo,
-      [name]: value,
-    });
-  };
+ 
 
-  const addMaterial = () => {
-    setMaterials((prevMaterials) => [...prevMaterials, materialInfo]);
-    setMaterialInfo({
-      description: "",
-      quantity: "",
-    });
-    toggleMaterialPanel();
-  };
 
-  const materialRef = useRef<HTMLSelectElement>(null);
-
-  const handleMaterialChange = () => {
-    if (materialRef.current) {
-      const selectedMaterial = materialRef.current.value;
-      console.log("Material selecionado:", selectedMaterial);
-    }
-  };
-  const materialOptions = [
-    "Selecione...",
-    "Metal",
-    "Plástico",
-    "Papel",
-    "Papelão",
-    "Vidro",
-  ];
-
-  const pesoRef = useRef<HTMLSelectElement>(null);
-  const handlePesoChange = () => {
-    if (pesoRef.current) {
-      const selectedPeso = pesoRef.current.value;
-      console.log("Peso informado: ", selectedPeso);
-    }
-  };
-  const pesoOptions = ["Informe o peso...", "Leve", "Médio", "Pesado"];
 
   return (
     <>
@@ -136,13 +85,13 @@ export function ColetaPage() {
           <Form>
             <div className="dados-cliente">
               <div>
-                <Input type="text" label="Nome" required />
+                <Input type="text" label="Nome" id="txtNome" required />
               </div>
               <div>
-                <Input type="tel" label="Celular" required />
+                <Input type="tel" label="Celular" id="txtCel" required />
               </div>
               <div>
-                <Input type="tel" label="Telefone Fixo" required />
+                <Input type="tel" label="Telefone Fixo"  id="txtTel" required />
               </div>
             </div>
 
@@ -196,76 +145,10 @@ export function ColetaPage() {
                 />
               </div>
             </div>
-            <div className="title">
-              <p className="text-[#666666] text-m my-1">Materiais da coleta</p>
-            </div>
-            <div className="dados-cliente">
-              <div>
-                <Input
-                  type="text"
-                  label="Descrição do material"
-                  placeholder="latas, garrafas, etc."
-                  required
-                />
-              </div>
-              <div>
-                <Button2
-                  type="button"
-                  label="Adicionar material"
-                  onClick={toggleMaterialPanel}
-                  className="w-[80%] mt-[15px]"
-                />
-                {showMaterialPanel && (
-                  <div className="material-panel">
-                    <div className="title">
-                      <p className="text-[#666666] text-m my-1">
-                        Adicionar material
-                      </p>
-                    </div>
-                    <div className="addmaterial">
-                      <div>
-                        <DropdownInput
-                          label="Selecione um material"
-                          options={materialOptions}
-                          placeholder="Selecione um material..."
-                          ref={materialRef}
-                          onChange={handleMaterialChange}
-                          required
-                        />
-                      </div>
-                      <div>
-                        <DropdownInput
-                          label="Informe o peso"
-                          options={pesoOptions}
-                          placeholder="Selecione um material..."
-                          ref={pesoRef}
-                          onChange={handleMaterialChange}
-                          required
-                        />
-                      </div>
-                    </div>
-                    <div className="materal-buttons">
-                      <div>
-                        <Button3
-                          type="button"
-                          label="Cancelar"
-                          onClick={handleCancelClick}
-                          className="w-[140px]"
-                        />
-                      </div>
-                      <div>
-                        <Button2
-                          type="button"
-                          label="Adicionar"
-                          onClick={addMaterial}
-                          className="w-[140px]"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
+            
+            <FormAddMateriais 
+            />
+
             <Button2
               type="submit"
               label="Criar agendamento"

@@ -12,12 +12,10 @@ namespace AmarivAPI.Controllers
     {
 
         private RoteiroDeColetasService _roteiroService;
-        private ItensRoteiroDeColetasService _itensService;
 
-        public RoteiroDeColetasController(RoteiroDeColetasService roteiroService, ItensRoteiroDeColetasService itensService)
+        public RoteiroDeColetasController(RoteiroDeColetasService roteiroService )
         {
-            _roteiroService = roteiroService;
-            _itensService = itensService;
+            _roteiroService = roteiroService;         
         }
 
 
@@ -78,6 +76,7 @@ namespace AmarivAPI.Controllers
                 return NotFound();
         }
 
+
         [HttpPost]
         [Route("/AdicionaColetaRoteiroDeColetas")]
         public IActionResult UpdateRoteiroDeColetas(int id)
@@ -100,8 +99,6 @@ namespace AmarivAPI.Controllers
             else
                 return NotFound();
         }
-
-
 
     }
 }

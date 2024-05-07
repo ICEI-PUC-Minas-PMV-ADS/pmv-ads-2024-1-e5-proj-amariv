@@ -13,6 +13,5 @@ namespace AmarivAPI.Models
         public double Lat { get; set; }
         public double Lon { get; set; }
         public DateTime DataDeColeta { get; set; }
-        public ICollection<ColetaItem> ColetaItems { get; set; }
     }
 }

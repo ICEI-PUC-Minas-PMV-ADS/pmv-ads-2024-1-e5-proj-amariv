@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 
 namespace AmarivAPI.Models
 {
@@ -8,12 +9,18 @@ namespace AmarivAPI.Models
         [Key]
         [Required]
         public int Id { get; set; }
-
-        public string Logradouro { get; set; }
-        public string Numero { get; set; }
-        public string Bairro { get; set; }
-        public string Cep { get; set; }
-        public string Referencia { get; set; }
+        [AllowNull]
+        public string? Logradouro { get; set; }
+        [AllowNull]
+        public string? Numero { get; set; }
+        [AllowNull]
+        public string? Bairro { get; set; }
+        [AllowNull]
+        public string? Cep { get; set; }
+        [AllowNull]
+        public string? Cidade { get; set; }
+        [AllowNull]
+        public string? Referencia { get; set; }
 
 
     }
