@@ -29,7 +29,7 @@ namespace AmarivAPI.Controllers
 
         [HttpGet]
         [Route("/RecuperaTodasColetas")]
-        public IActionResult RecuperaTodasDeColetas()
+        public IActionResult RecuperaTodasColetas()
         {
             var result = _coletaService.RecuperaTodasColetas();
             if (result != null)

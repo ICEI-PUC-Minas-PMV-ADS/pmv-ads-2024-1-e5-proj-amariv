@@ -3,8 +3,6 @@ import { Input } from "../../components/Input";
 import { InputDate } from "../../components/InputDate";
 import { InputTime } from "../../components/InputTime";
 import { Button2 } from "../../components/Button2";
-import { Button3 } from "../../components/Button3";
-import { DropdownInput } from "../../components/DropdownInput";
 import { Form } from "../../components/Form";
 import "./index.css";
 import { Link } from "react-router-dom";
@@ -39,6 +37,7 @@ export function ColetaPage() {
   };
 
  
+
 
 
 
