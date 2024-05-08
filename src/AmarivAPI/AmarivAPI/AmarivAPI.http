@@ -5,19 +5,40 @@ Accept: application/json
 
 ###
 
+POST {{AmarivAPI_HostAddress}}/RecuperaMaterial
+Content-Type: application/json
+Accept: application/json
+
+{
+   "id": "1"
+}
+
+###
+
 POST {{AmarivAPI_HostAddress}}/signin
 Content-Type: application/json
 Accept: application/json
 
 {
-   "Nome": "Mike",
-   "Email": "mike@email.com",
+   "Nome": "John",
+   "Email": "john@email.com",
    "Password": "Test@123",
    "RePassword": "Test@123"
 }
 
 ###
 
+POST {{AmarivAPI_HostAddress}}/SalvarMaterial
+Content-Type: application/json
+Accept: application/json
+
+{
+   "Descricao": "Ferro",
+   "Tipo": "Metal",
+   "Peso": "Pesado"
+}
+
+###
 POST {{AmarivAPI_HostAddress}}/login
 Content-Type: application/json
 Accept: application/json

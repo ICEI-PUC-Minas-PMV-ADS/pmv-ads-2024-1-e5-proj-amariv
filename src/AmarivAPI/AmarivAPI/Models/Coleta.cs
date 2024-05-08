@@ -1,7 +1,12 @@
-﻿namespace AmarivAPI.Models
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace AmarivAPI.Models
 {
     public class Coleta
     {
+        [Key]
+        [Required]
         public int Id { get; set; }
         public int UserId { get; set; }
         public string Status { get; set; } /* Pendent, Completed, Canceled */

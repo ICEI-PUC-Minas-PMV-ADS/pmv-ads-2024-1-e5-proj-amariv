@@ -8,3 +8,8 @@ export const Constants = {
 export const getApiUrl = (): string => {
   return isDesktop ? Constants.ApiHost : Constants.ApiHostMobile;
 }
+
+/**
+ * Local constants
+ */
+export const TOKEN_KEY = 't_sys_auth';

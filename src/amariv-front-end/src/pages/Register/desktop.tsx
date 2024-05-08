@@ -25,11 +25,11 @@ export function RegisterPageDesktop() {
   const form = React.useRef<HTMLFormElement>(null);
   const phoneInput = React.useRef<HTMLInputElement>(null);
   const confPasswordInput = React.useRef<HTMLInputElement>(null);
-  const [name, setName] = React.useState("John");
-  const [email, setEmail] = React.useState("john@email.com");
-  const [phone, setPhone] = React.useState("(31) 5555-5555");
-  const [password, setPassword] = React.useState("@Test123");
-  const [confPassword, setConfPassword] = React.useState("@Test123");
+  const [name, setName] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [phone, setPhone] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [confPassword, setConfPassword] = React.useState("");
   const [error, setError] = React.useState<string|undefined>();
 
   /**

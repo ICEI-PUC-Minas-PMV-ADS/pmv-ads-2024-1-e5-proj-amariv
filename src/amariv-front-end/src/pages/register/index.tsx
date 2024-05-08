@@ -1,10 +1,10 @@
 import React from 'react';
 import { AuthUtils } from '../../utils/AuthUtils';
 import { AppContext } from '../../AppContext';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { isDesktop } from 'react-device-detect';
 import { RegisterPageDesktop } from './desktop';
-import { RegisterPageMobile } from './mobile';
+import { RegisterPageMobile } from "./mobile";
 import './index.css';
 
 /**

@@ -1,5 +1,4 @@
 import React from "react";
-import { User } from "./models/User";
 import { AuthUtils } from "./utils/AuthUtils";
 
 /**
@@ -22,7 +21,7 @@ export const AppContext = React.createContext<AppContextState>({
  * AppState
  */
 export type AppState = {
-  user?: User,
+  token?: string,
 };
 
 /**
@@ -30,7 +29,7 @@ export type AppState = {
  */
 export type AppAction = {
   type: 'login' | 'logout',
-  payload?: User,
+  payload?: any,
 };
 
 /**
@@ -42,10 +41,10 @@ const AppReducer = (
 ): AppState => {
   switch (action.type) {
     case 'login': {
-      return { ...state, user: action.payload };
+      return { ...state, token: action.payload };
     }
     case 'logout': {
-      return { ...state, user: undefined };
+      return { ...state, token: undefined };
     }
   }
 };
@@ -54,14 +53,14 @@ const AppReducer = (
  * AppContextProvider
  */
 export const AppContextProvider = (props: React.PropsWithChildren) => {
-  let localUserData: User | undefined;
+  let localUserData: string | undefined;
   if (AuthUtils.hasLocalUserData()) {
     localUserData = AuthUtils.getLocalUserData();
   }
 
   const [state, dispatch] = React.useReducer<
     React.Reducer<AppState, AppAction>
-  >(AppReducer, { user: localUserData });
+  >(AppReducer, { token: localUserData });
 
   return (
     <AppContext.Provider value={{ state, dispatch }}>

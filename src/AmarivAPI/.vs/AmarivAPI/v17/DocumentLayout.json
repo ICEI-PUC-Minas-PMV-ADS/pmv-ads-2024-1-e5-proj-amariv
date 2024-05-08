@@ -3,19 +3,27 @@
   "WorkspaceRootPath": "D:\\Programacao\\PUC\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\programacao\\puc\\pmv-ads-2024-1-e5-proj-amariv\\src\\amarivapi\\amarivapi\\controllers\\signincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\controllers\\signincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\programacao\\puc\\pmv-ads-2024-1-e5-proj-amariv\\src\\amarivapi\\amarivapi\\employeeapi\\controllers\\gatheringitinerary.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\employeeapi\\controllers\\gatheringitinerary.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\programacao\\puc\\pmv-ads-2024-1-e5-proj-amariv\\src\\amarivapi\\amarivapi\\services\\usuarioservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\services\\usuarioservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|D:\\Programacao\\PUC\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\amarivapi\\employeeapi\\controllers\\employeegathering.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\employeeapi\\controllers\\employeegathering.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\programacao\\puc\\pmv-ads-2024-1-e5-proj-amariv\\src\\amarivapi\\amarivapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|D:\\Programacao\\PUC\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\amarivapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\programacao\\puc\\pmv-ads-2024-1-e5-proj-amariv\\src\\amarivapi\\amarivapi\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|D:\\Programacao\\PUC\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\amarivapi\\employeeapi\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\employeeapi\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|D:\\Programacao\\PUC\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\amarivapi\\employeeapi\\controllers\\employeesignin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\employeeapi\\controllers\\employeesignin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|D:\\Programacao\\PUC\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\amarivapi\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -26,19 +34,27 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 2,
           "Children": [
             {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "UsuarioService.cs",
-              "DocumentMoniker": "D:\\Programacao\\PUC\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\Services\\UsuarioService.cs",
-              "RelativeDocumentMoniker": "AmarivAPI\\Services\\UsuarioService.cs",
-              "ToolTip": "D:\\Programacao\\PUC\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\Services\\UsuarioService.cs",
-              "RelativeToolTip": "AmarivAPI\\Services\\UsuarioService.cs",
-              "ViewState": "AQIAAAgAAAAAAAAAAAAUwBgAAAAeAAAA",
+              "DocumentIndex": 0,
+              "Title": "GatheringItinerary.cs",
+              "DocumentMoniker": "D:\\Programacao\\PUC\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\EmployeeAPI\\Controllers\\GatheringItinerary.cs",
+              "RelativeDocumentMoniker": "AmarivAPI\\EmployeeAPI\\Controllers\\GatheringItinerary.cs",
+              "ToolTip": "D:\\Programacao\\PUC\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\EmployeeAPI\\Controllers\\GatheringItinerary.cs",
+              "RelativeToolTip": "AmarivAPI\\EmployeeAPI\\Controllers\\GatheringItinerary.cs",
+              "ViewState": "AQIAAAoAAAAAAAAAAAAgwEkAAAA2AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-20T00:27:27.855Z",
+              "WhenOpened": "2024-05-07T23:53:53.494Z",
               "EditorCaption": ""
             },
             {
@@ -49,36 +65,57 @@
               "RelativeDocumentMoniker": "AmarivAPI\\Program.cs",
               "ToolTip": "D:\\Programacao\\PUC\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\Program.cs",
               "RelativeToolTip": "AmarivAPI\\Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAAAAAA",
+              "ViewState": "AQIAABUAAAAAAAAAAAAAABIAAAAGAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-19T23:47:52.161Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-07T00:00:29.789Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
+              "Title": "EmployeeGathering.cs",
+              "DocumentMoniker": "D:\\Programacao\\PUC\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\EmployeeAPI\\Controllers\\EmployeeGathering.cs",
+              "RelativeDocumentMoniker": "AmarivAPI\\EmployeeAPI\\Controllers\\EmployeeGathering.cs",
+              "ToolTip": "D:\\Programacao\\PUC\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\EmployeeAPI\\Controllers\\EmployeeGathering.cs",
+              "RelativeToolTip": "AmarivAPI\\EmployeeAPI\\Controllers\\EmployeeGathering.cs",
+              "ViewState": "AQIAABAAAAAAAAAAAAAgwFQAAAAPAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-05T13:51:20.533Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "EmployeeSignIn.cs",
+              "DocumentMoniker": "D:\\Programacao\\PUC\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\EmployeeAPI\\Controllers\\EmployeeSignIn.cs",
+              "RelativeDocumentMoniker": "AmarivAPI\\EmployeeAPI\\Controllers\\EmployeeSignIn.cs",
+              "ToolTip": "D:\\Programacao\\PUC\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\EmployeeAPI\\Controllers\\EmployeeSignIn.cs",
+              "RelativeToolTip": "AmarivAPI\\EmployeeAPI\\Controllers\\EmployeeSignIn.cs",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAABcAAABGAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-05T12:37:45.652Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "LoginController.cs",
               "DocumentMoniker": "D:\\Programacao\\PUC\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\Controllers\\LoginController.cs",
               "RelativeDocumentMoniker": "AmarivAPI\\Controllers\\LoginController.cs",
               "ToolTip": "D:\\Programacao\\PUC\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\Controllers\\LoginController.cs",
               "RelativeToolTip": "AmarivAPI\\Controllers\\LoginController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB4AAAAAAAAA",
+              "ViewState": "AQIAABUAAAAAAAAAAAAowAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-18T00:35:27.052Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-05T12:27:44.371Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "SignInController.cs",
-              "DocumentMoniker": "D:\\Programacao\\PUC\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\Controllers\\SignInController.cs",
-              "RelativeDocumentMoniker": "AmarivAPI\\Controllers\\SignInController.cs",
-              "ToolTip": "D:\\Programacao\\PUC\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\Controllers\\SignInController.cs",
-              "RelativeToolTip": "AmarivAPI\\Controllers\\SignInController.cs",
-              "ViewState": "AQIAAAQAAAAAAAAAAAAQwA4AAAA+AAAA",
+              "DocumentIndex": 3,
+              "Title": "UserService.cs",
+              "DocumentMoniker": "D:\\Programacao\\PUC\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\EmployeeAPI\\Services\\UserService.cs",
+              "RelativeDocumentMoniker": "AmarivAPI\\EmployeeAPI\\Services\\UserService.cs",
+              "ToolTip": "D:\\Programacao\\PUC\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\EmployeeAPI\\Services\\UserService.cs",
+              "RelativeToolTip": "AmarivAPI\\EmployeeAPI\\Services\\UserService.cs",
+              "ViewState": "AQIAAAsAAAAAAAAAAAAYwBUAAAATAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-18T00:05:28.527Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-28T12:17:25.796Z"
             }
           ]
         }
