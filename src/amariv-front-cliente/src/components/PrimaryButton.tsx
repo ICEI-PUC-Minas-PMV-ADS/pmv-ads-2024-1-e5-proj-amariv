@@ -20,15 +20,15 @@ const button = tv({
     cor: {
       primary: {
         fundo: "bg-primary-green",
-        texto: "text-secondary-green"
+        texto: "text-white"
       },
       secondary: {
         fundo: "bg-secondary-green",
         texto: "text-dark-green"
       },
       transparent: {
-        fundo: "bg-transparent border-2 border-dark-green dark:border-white",
-        texto: "text-dark-green dark:text-white"
+        fundo: "bg-transparent border-2 border-white",
+        texto: "text-white"
       },
       yellow: {
         fundo: "bg-yellow-300",
