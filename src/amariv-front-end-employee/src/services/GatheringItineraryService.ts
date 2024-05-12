@@ -7,7 +7,7 @@ import { GatheringItinerary } from "src/models/GatheringItinerary";
 
 export class GatheringItineraryService {
   static async populateData(token: string) {
-    const response = await fetch(getApiUrl() + "CreateStartPosition", {
+    const response = await fetch(getApiUrl() + "CreateGatheringItinerary", {
       method: 'GET',
       headers: {
         'Authorization': 'Bearer ' + token,

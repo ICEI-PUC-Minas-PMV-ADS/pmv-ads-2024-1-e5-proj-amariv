@@ -4,10 +4,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace AmarivAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class CriacaoUsuario : Migration
+    public partial class start : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -68,6 +70,96 @@ namespace AmarivAPI.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Enderecos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Logradouro = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Numero = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Bairro = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Cep = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Referencia = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Enderecos", x => x.Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "ItensRoteiroDeColetas",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Id_RoreiroDeColetas = table.Column<int>(type: "int", nullable: false),
+                    Id_Coletas = table.Column<int>(type: "int", nullable: false),
+                    PosicaoLista = table.Column<int>(type: "int", nullable: false),
+                    Endereco = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Materiais = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ItensRoteiroDeColetas", x => x.Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Materiais",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Descricao = table.Column<string>(type: "varchar(250)", maxLength: 250, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Tipo = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Data_criacao = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    Peso = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Materiais", x => x.Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "RoteiroDeColetas",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    FuncionarioId = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    DataRoteiro = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    DataCadastro = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    Status = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    Delete = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    NumeroDeColetas = table.Column<int>(type: "int", nullable: false),
+                    NumeroMaxColetas = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RoteiroDeColetas", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_RoteiroDeColetas_AspNetUsers_FuncionarioId",
+                        column: x => x.FuncionarioId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -198,6 +290,64 @@ namespace AmarivAPI.Migrations
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
+            migrationBuilder.CreateTable(
+                name: "Coletas",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    UserId = table.Column<int>(type: "int", nullable: true),
+                    EnderecoId = table.Column<int>(type: "int", nullable: true),
+                    RoteiroColetaId = table.Column<int>(type: "int", nullable: false),
+                    PosicaoLista = table.Column<int>(type: "int", nullable: true),
+                    ClienteNome = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ClienteCel = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ClienteTel = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Status = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    Delete = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    AprovacaoAdmin = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    Lat = table.Column<double>(type: "double", nullable: true),
+                    Lon = table.Column<double>(type: "double", nullable: true),
+                    DataCadastro = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    DataDeColeta = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    ListaItensColeta = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Coletas", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Coletas_RoteiroDeColetas_RoteiroColetaId",
+                        column: x => x.RoteiroColetaId,
+                        principalTable: "RoteiroDeColetas",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { "adm", null, "admin", "ADMIN" },
+                    { "clt", null, "cliente", "CLIENTE" },
+                    { "fun", null, "funcionario", "FUNCIONARIO" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "Nome", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "adm", 0, "86c97c21-2f9b-4bf4-ada8-4b07c39d642b", "amarivadm@gmail.com", true, false, null, "Administrador", "AMARIVADM@GMAIL.COM", "AMARIVADM@GMAIL.COM", "AQAAAAIAAYagAAAAEM6bRdl2dwpqa3vQqqGlPgWdR0DVJUA78d+YzqNO/24yXyw0e5fjGY8ywH4kHORH8Q==", null, false, "645086e1-906c-4261-a6e1-e2716bfd96e1", false, "amarivadm@gmail.com" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { "adm", "adm" });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -234,6 +384,11 @@ namespace AmarivAPI.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Coletas_RoteiroColetaId",
+                table: "Coletas",
+                column: "RoteiroColetaId");
         }
 
         /// <inheritdoc />
@@ -255,10 +410,25 @@ namespace AmarivAPI.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Coletas");
+
+            migrationBuilder.DropTable(
+                name: "Enderecos");
+
+            migrationBuilder.DropTable(
+                name: "ItensRoteiroDeColetas");
+
+            migrationBuilder.DropTable(
+                name: "Materiais");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "RoteiroDeColetas");
         }
     }
 }

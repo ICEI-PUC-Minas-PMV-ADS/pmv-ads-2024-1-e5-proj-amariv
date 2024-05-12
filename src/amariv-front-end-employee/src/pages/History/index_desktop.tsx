@@ -42,11 +42,11 @@ export function HistoryDesktopPage() {
           </div>
         </NavBar>
         <div className="w-full flex justify-center">
-          <div className="w-[30rem] px-[2rem] py-[2rem]">
+          <div className="w-[40rem] px-[2rem] py-[2rem]">
             <h2 className="text-2xl font-bold">Coletas concluídas</h2>
             <Spacer height='1rem' />
             {gatheringItinerary !== null &&
-              <HistoryGatheringViewer historyGatherings={gatheringItinerary?.gatherings ?? []} />}
+              <HistoryGatheringViewer historyGatherings={gatheringItinerary?.coletas ?? []} />}
             <Spacer height='2rem' />
           </div>
         </div>

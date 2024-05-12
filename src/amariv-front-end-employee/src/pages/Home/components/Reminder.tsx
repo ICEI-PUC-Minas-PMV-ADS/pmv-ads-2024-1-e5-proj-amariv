@@ -16,7 +16,7 @@ export type ReminderProps = {
  */
 
 export const Reminder = ({ duration, gatheringItinerary }: ReminderProps) => {
-  const gatheringCount = React.useRef(gatheringItinerary?.gatherings.reduce((prevValue, item) => {
+  const gatheringCount = React.useRef(gatheringItinerary?.coletas.reduce((prevValue, item) => {
     return prevValue + (item.status === true ? 1 : 0);
   }, 0));
 

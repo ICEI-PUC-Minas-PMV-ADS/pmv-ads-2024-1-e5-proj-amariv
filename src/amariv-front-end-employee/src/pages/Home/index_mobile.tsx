@@ -15,7 +15,7 @@ import { AppContext } from "src/AppContext";
 
 export function HomeMobilePage() {
   const ctrl = HomeContext.usePageController();
-  const { state: { token, gatheringItinerary } } = React.useContext(AppContext);
+  const { state: { gatheringItinerary } } = React.useContext(AppContext);
   const { userName, startPosition } = HomeContext.usePageState();
   const [map, setMap] = React.useState<google.maps.Map | null>(null);
   const [prevTime, setPrevTime] = React.useState<number | null>(null);
@@ -47,16 +47,6 @@ export function HomeMobilePage() {
     navigate("/routes", { replace: true });
   }, [navigate]);
 
-  const handlePopulateClick = React.useCallback((event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
-    try {
-      if (token) {
-        ctrl.populateData(token);
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  }, [ctrl, token]);
-
   /**
    * Layout
    */
@@ -78,12 +68,6 @@ export function HomeMobilePage() {
                   <DefaultMap center={startPosition} onCreateMap={setMap} />
                   <Spacer height="1rem" />
                   <div className="w-full flex justify-end">
-                    <Button
-                      className="w-[10rem]"
-                      color="secondary"
-                      rounded="sm"
-                      label="Popular dados"
-                      onClick={handlePopulateClick} />
                     <Button
                       className="w-[10rem]"
                       color="secondary"

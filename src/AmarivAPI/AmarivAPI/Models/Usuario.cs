@@ -6,9 +6,7 @@ namespace AmarivAPI.Models
     public class Usuario: IdentityUser
     {   
         public Usuario() : base()
-        {
-
-        }
+        { }
 
         public string Nome { get; set; }
     }

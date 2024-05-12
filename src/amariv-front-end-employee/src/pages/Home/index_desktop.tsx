@@ -54,6 +54,7 @@ export function HomeDesktopPage() {
     navigate("/history", { replace: true });
   }, [navigate]);
 
+  /*
   const handlePopulateClick = React.useCallback((event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
     try {
       if (token) {
@@ -63,6 +64,7 @@ export function HomeDesktopPage() {
       console.log(e);
     }
   }, [ctrl, token]);
+  */
 
   /**
    * Layout
@@ -83,7 +85,7 @@ export function HomeDesktopPage() {
               </div>
             </NavBar>
             <div className="w-full flex flex-col justify-center items-center">
-              <div className="w-[30vw] px-[2rem] py-[2rem]">
+              <div className="w-[40vw] px-[2rem] py-[2rem]">
                 <h2 className="text-2xl font-bold">Bem vindo {userName}!</h2>
                 <Spacer height="1rem" />
                 {gatheringItinerary !== null
@@ -97,18 +99,20 @@ export function HomeDesktopPage() {
                         className="w-[10rem]"
                         color="secondary"
                         rounded="sm"
-                        label="Popular dados"
-                        onClick={handlePopulateClick} />
-                      <Button
-                        className="w-[10rem]"
-                        color="secondary"
-                        rounded="sm"
                         label="Ver rotas"
                         onClick={handleRoutesClick} />
                     </div>
                   </>
                   : <>
                     <p className="text-2xl">Não ha rotas definidas!</p>
+                    {/*
+                    <Button
+                      className="w-[10rem]"
+                      color="secondary"
+                      rounded="sm"
+                      label="Popular dados"
+                      onClick={handlePopulateClick} />
+                    */}
                   </>}
                 <Spacer height="2rem" />
               </div>

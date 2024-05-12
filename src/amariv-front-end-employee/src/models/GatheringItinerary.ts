@@ -13,5 +13,5 @@ export interface GatheringItinerary {
   delete: boolean,
   numeroDeColetas: number,
   numeroMaxColetas: number,
-  gatherings: Gathering[],
+  coletas: Gathering[],
 }

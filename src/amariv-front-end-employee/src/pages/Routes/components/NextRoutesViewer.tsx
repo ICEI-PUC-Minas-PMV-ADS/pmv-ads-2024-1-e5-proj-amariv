@@ -24,7 +24,7 @@ export function NextRoutesViewer({ gatheringItinerary }: NextRoutesViewerProps) 
 
   React.useEffect(() => {
     if (gatheringItinerary) {
-      setRouteItems(gatheringItinerary.gatherings.filter((i) => i.status === true && i.delete === false));
+      setRouteItems(gatheringItinerary.coletas.filter((i) => i.status === true && i.delete === false));
     }
   }, [gatheringItinerary]);
 

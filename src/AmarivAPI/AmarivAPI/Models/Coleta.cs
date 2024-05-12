@@ -24,7 +24,7 @@ namespace AmarivAPI.Models
         [AllowNull]
         public string? ClienteTel { get; set; }
         [Required]
-        public string Status { get; set; }  /* Pendent, Completed, Canceled */
+        public bool Status { get; set; }  /* Pendent, Completed, Canceled */
         [Required]
         public bool Delete {  get; set; } 
         public bool AprovacaoAdmin {  get; set; } /* sim, não*/
@@ -40,6 +40,11 @@ namespace AmarivAPI.Models
         /// O campo ListaItensColeta será do tipo TEXT no banco de dados para comportar os materiais que
         /// irão ser adicionados na coleta. EXEMPLO DA LISTA (ID:DESCRIÇÃO:PESO): "1:papel:leve,2:metal:pesado, etc... "      
         /// </summary>
-        public string? ListaItensColeta { get; set; }
+        public string? ListaItensColeta { get; set; }     
+        
+        [ForeignKey("EnderecoId")]
+        public virtual Endereco Endereco { get; }
+        [ForeignKey("RoteiroColetaId")]
+        public virtual RoteiroDeColetas RoteiroDeColetas { get; }
     }
 }

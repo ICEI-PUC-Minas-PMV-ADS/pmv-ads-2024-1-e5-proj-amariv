@@ -43,7 +43,7 @@ export function RoutesDesktopPage() {
           </div>
         </NavBar>
         <div className="flex justify-center px-[2rem] py-[2rem]">
-          <div className="w-[30vw]">
+          <div className="w-[40vw]">
             {gatheringItinerary !== null
               ? <>
                 <h2 className="text-2xl font-bold">Rota atual</h2>

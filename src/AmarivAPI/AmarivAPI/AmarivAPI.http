@@ -22,13 +22,13 @@ Accept: application/json
 {
    "Nome": "John",
    "Email": "john@email.com",
-   "Password": "Test@123",
-   "RePassword": "Test@123"
+   "Password": "@Test123",
+   "RePassword": "@Test123"
 }
 
 ###
 
-POST {{AmarivAPI_HostAddress}}/SalvarMaterial
+POST {{AmarivAPI_HostAddress}}/Emp/GetGatheringItinerary
 Content-Type: application/json
 Accept: application/json
 
@@ -44,8 +44,8 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "Email": "mike@email.com",
-  "Password": "Test@123"
+  "Email": "john@email.com",
+  "Password": "@Test123"
 }
 
 ###
