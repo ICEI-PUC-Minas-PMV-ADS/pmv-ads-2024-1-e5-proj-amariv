@@ -48,6 +48,12 @@ namespace AmarivAPI.Data
                 .HasPrincipalKey<Usuario>(e => e.Id);
 
             builder.Entity<Coleta>()
+                .HasOne(e => e.Usuario)
+                .WithMany()
+                .HasForeignKey<Coleta>(e => e.UserId)
+                .HasPrincipalKey<Usuario>(e => e.Id); ;
+
+            builder.Entity<Coleta>()
                 .HasOne(e => e.RoteiroDeColetas)
                 .WithMany(e => e.Coletas)
                 .HasForeignKey(e => e.RoteiroColetaId);
