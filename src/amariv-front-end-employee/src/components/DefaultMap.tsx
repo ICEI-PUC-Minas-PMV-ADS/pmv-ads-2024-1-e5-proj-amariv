@@ -55,7 +55,7 @@ export const DefaultMap = ({
         onCreateMap?.(m);
       }
     })();
-  }, [map, onCreateMap]);
+  }, [map, center, onCreateMap]);
 
   React.useEffect(() => {
     if (containerRef.current) {

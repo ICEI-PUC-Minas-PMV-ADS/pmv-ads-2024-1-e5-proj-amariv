@@ -14,6 +14,7 @@
     "@types/node": "^16.18.96",
     "@types/react": "^18.2.79",
     "@types/react-dom": "^18.2.25",
+    "crypto-js": "^4.2.0",
     "firebase": "^10.11.0",
     "react": "^18.2.0",
     "react-device-detect": "^2.2.3",

@@ -1,4 +1,5 @@
-﻿using AmarivAPI.Models;
+﻿using AmarivAPI.Data;
+using AmarivAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AmarivAPI.EmployeeAPI.Controllers
@@ -6,6 +7,11 @@ namespace AmarivAPI.EmployeeAPI.Controllers
     [ApiController]
     public class GatheringItinerary : Controller
     {
+        private AmarivContext _context;
+        public GatheringItinerary(AmarivContext context) {
+            _context = context;
+        }
+
         [Route("/Emp/GetGatheringItinerary")]
         public IActionResult GetGatheringItinerary()
         {
@@ -15,7 +21,7 @@ namespace AmarivAPI.EmployeeAPI.Controllers
                 FuncionarioId = "4bf1eb69-9ad5-4d35-907d-c8134b6e1134",
                 DataRoteiro = DateTime.Now.AddDays(2),
                 Status = false,
-                Delete = false,
+                IsDelete = false,
                 NumeroDeColetas = 4,
                 NumeroMaxColetas = 5,
                 ItemsDeRoteiroDeColeta = new List<ItemRoteiroDeColeta>() {

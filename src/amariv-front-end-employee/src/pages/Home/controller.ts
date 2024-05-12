@@ -1,7 +1,9 @@
 import { UserService } from "src/services/UserService";
 import { PageBaseController } from "../../framework/controller";
 import { GatheringService } from "src/services/GatheringService";
-import { Gathering } from "src/models/Gathering";
+import { GatheringItinerary } from "src/models/GatheringItinerary";
+import { loader } from "src/AppMap";
+import { GoogRoutesService } from "src/services/GoogRoutesService";
 
 /**
  * Home state.
@@ -40,6 +42,15 @@ export type HomeAction = {
 
 export class HomeController extends PageBaseController<HomeState, HomeAction> {
 
+  async renderCurrentRouteAndGenerateTimeEstimated(
+    map: google.maps.Map,
+    startPosition: { lat: number; lon: number; },
+    gatheringItinerary: GatheringItinerary,
+  ): Promise<number> {
+    await this.generateOriginPin(map, startPosition);
+    return await this.generateCurrentRoute(map, startPosition, gatheringItinerary);
+  }
+
   async getStartPosition(token: string) {
     const { lat, lon } = await GatheringService.getStartPosition(token);
     this.dispatch({ type: 'set_position', lat, lon })
@@ -48,6 +59,49 @@ export class HomeController extends PageBaseController<HomeState, HomeAction> {
   async getUserInfo(token: string) {
     const { userName } = await UserService.getUserInfo(token);
     this.dispatch({ type: 'set_username', userName })
+  }
+
+  private async generateOriginPin(
+    map: google.maps.Map,
+    startPosition: { lat: number; lon: number; },
+  ) {
+    const { PinElement, AdvancedMarkerElement } = await loader.importLibrary("marker");
+    const pin = new PinElement({ background: 'blue', glyphColor: 'white' });
+    new AdvancedMarkerElement({
+      map,
+      content: pin.element,
+      position: { lat: startPosition.lat, lng: startPosition.lon },
+    });
+  }
+
+  private async generateCurrentRoute(
+    map: google.maps.Map,
+    startPosition: { lat: number; lon: number; },
+    gatheringItinerary: GatheringItinerary,
+  ): Promise<number> {
+    const { AdvancedMarkerElement } = await loader.importLibrary("marker");
+    const targetPosition = gatheringItinerary.itemsDeRoteiroDeColeta[0].geoLocation;
+
+    new AdvancedMarkerElement({
+      map,
+      position: { lat: targetPosition.lat, lng: targetPosition.lon },
+    });
+
+    const r = await GoogRoutesService.computeRoutes({
+      origin: startPosition,
+      destination: targetPosition,
+    });
+
+    const d = r.routes[0].duration as string;
+    const normalizedDuration = d.substring(0, d.length - 1);
+
+    new google.maps.Polyline({
+      map,
+      path: google.maps.geometry.encoding.decodePath(r.routes[0].polyline.encodedPolyline),
+      strokeColor: 'green',
+    });
+
+    return parseInt(normalizedDuration) / 60;
   }
 
   doReducer(prevState: HomeState, action: HomeAction): HomeState {

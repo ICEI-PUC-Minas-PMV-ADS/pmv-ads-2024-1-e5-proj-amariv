@@ -1,15 +1,16 @@
+import React from "react";
 import { NavBar } from "../../components/NavBar";
 import { Spacer } from "../../components/Spacer";
 import { BottomNav } from "../../components/BottomNav";
 import { HistoryGatheringViewer } from "./components/HistoryGatheringViewer";
-import { HistoryContext } from "./context";
+import { AppContext } from "src/AppContext";
 
 /**
  * History page mobile
  */
 
 export function HistoryMobilePage() {
-  const { historyGatherings } = HistoryContext.usePageState();
+  const { state: { gatheringItinerary } } = React.useContext(AppContext);
 
   /**
    * Layout
@@ -23,7 +24,7 @@ export function HistoryMobilePage() {
         <div className="px-[2rem] py-[2rem]">
           <h2 className="text-2xl font-bold">Coletas concluídas</h2>
           <Spacer height='1rem' />
-          <HistoryGatheringViewer historyGatherings={historyGatherings} />
+          <HistoryGatheringViewer historyGatherings={gatheringItinerary?.itemsDeRoteiroDeColeta ?? []} />
           <Spacer height='2rem' />
         </div>
       </div>

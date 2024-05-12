@@ -1,13 +1,10 @@
-import { HistoryGatheringService } from "src/services/HistoryGatheringService";
 import { PageBaseController } from "../../framework/controller";
-import { HistoryGathering } from "src/models/HistoryGathering";
 
 /**
  * History state.
  */
 
 export type HistoryState = {
-  historyGatherings: HistoryGathering[],
 };
 
 /**
@@ -15,7 +12,6 @@ export type HistoryState = {
  */
 
 export const initialHistoryState = {
-  historyGatherings: [],
 };
 
 /**
@@ -23,8 +19,6 @@ export const initialHistoryState = {
  */
 
 export type HistoryAction = {
-  type: 'set_history_gatherings',
-  historyGatherings: HistoryGathering[],
 };
 
 /**
@@ -32,15 +26,7 @@ export type HistoryAction = {
  */
 
 export class HistoryController extends PageBaseController<HistoryState, HistoryAction> {
-  async getHistoryGatherings() {
-    const historyGatherings = await HistoryGatheringService.getHistoryGatherings();
-    this.dispatch({ type: 'set_history_gatherings', historyGatherings });
-  }
-
   doReducer(prevState: HistoryState, action: HistoryAction): HistoryState {
-    switch (action.type) {
-      case 'set_history_gatherings':
-        return { ...prevState, historyGatherings: action.historyGatherings };
-    }
+    return prevState;
   }
 }

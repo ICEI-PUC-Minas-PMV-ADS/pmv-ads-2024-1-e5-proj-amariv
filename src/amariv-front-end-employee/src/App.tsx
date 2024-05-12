@@ -2,9 +2,8 @@ import React from 'react';
 import { AppContext, AppContextProvider } from './AppContext';
 import { AppRoutes } from './AppRoutes';
 import { NotificationProvider } from './components/NotificationProvider';
-import './App.css';
-import { GatheringItinerary } from './models/GatheringItinerary';
 import { GatheringItineraryService } from './services/GatheringItineraryService';
+import './App.css';
 
 /**
  * Application component.
@@ -43,7 +42,7 @@ function AppImpl() {
         console.log(e);
       }
     })();
-  }, [token]);
+  }, [token, dispatch]);
 
   /**
    * Layout

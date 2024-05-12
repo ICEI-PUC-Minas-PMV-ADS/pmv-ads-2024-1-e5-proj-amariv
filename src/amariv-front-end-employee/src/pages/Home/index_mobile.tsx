@@ -7,8 +7,6 @@ import { BottomNav } from "../../components/BottomNav";
 import { useNavigate } from "react-router-dom";
 import { HomeContext } from "./context";
 import { DefaultMap } from "src/components/DefaultMap";
-import { loader } from "src/AppMap";
-import { GoogRoutesService } from "src/services/GoogRoutesService";
 import { AppContext } from "src/AppContext";
 
 /**
@@ -16,6 +14,7 @@ import { AppContext } from "src/AppContext";
  */
 
 export function HomeMobilePage() {
+  const ctrl = HomeContext.usePageController();
   const { state: { gatheringItinerary } } = React.useContext(AppContext);
   const { userName, startPosition } = HomeContext.usePageState();
   const [map, setMap] = React.useState<google.maps.Map | null>(null);
@@ -28,51 +27,17 @@ export function HomeMobilePage() {
 
   React.useEffect(() => {
     (async function () {
-      if (map && startPosition && gatheringItinerary) {
-        const { PinElement, AdvancedMarkerElement } = await loader.importLibrary("marker");
-        const pin = new PinElement({ background: 'blue', glyphColor: 'white' });
-        const intermediates: { lat: number, lon: number }[] = [];
-
-        // Origin
-        new AdvancedMarkerElement({
-          map,
-          content: pin.element,
-          position: { lat: startPosition.lat, lng: startPosition.lon },
-        });
-
-        for (let i = 0; i < gatheringItinerary.itemsDeRoteiroDeColeta.length; i++) {
-          const g = gatheringItinerary.itemsDeRoteiroDeColeta[i];
-
-          intermediates.push(g.geoLocation);
-
-          // First gathering
-          new AdvancedMarkerElement({
-            map, position: {
-              lat: g.geoLocation.lat,
-              lng: g.geoLocation.lon,
-            },
-          });
+      try {
+        if (map && startPosition && gatheringItinerary) {
+          const estimatedTime = await ctrl
+            .renderCurrentRouteAndGenerateTimeEstimated(map, startPosition, gatheringItinerary);
+          setPrevTime(estimatedTime);
         }
-
-        const r = await GoogRoutesService.computeRoutes({
-          origin: startPosition,
-          destination: startPosition,
-          intermediates: intermediates,
-        });
-
-        const d = r.routes[0].duration as string;
-        const normalizedDuration = d.substring(0, d.length - 1);
-        setPrevTime(parseInt(normalizedDuration) / 60);
-
-        // Trace route
-        new google.maps.Polyline({
-          map,
-          path: google.maps.geometry.encoding.decodePath(r.routes[0].polyline.encodedPolyline),
-          strokeColor: 'green',
-        });
+      } catch (e) {
+        console.log(e);
       }
     })();
-  }, [map, startPosition, gatheringItinerary]);
+  }, [ctrl, map, startPosition, gatheringItinerary]);
 
   /**
    * Events

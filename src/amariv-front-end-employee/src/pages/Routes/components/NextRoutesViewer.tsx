@@ -23,7 +23,7 @@ export function NextRoutesViewer({ gatheringItinerary }: NextRoutesViewerProps) 
 
   React.useEffect(() => {
     if (gatheringItinerary) {
-      setRouteItems(gatheringItinerary.itemsDeRoteiroDeColeta);
+      setRouteItems(gatheringItinerary.itemsDeRoteiroDeColeta.filter((i) => i.isActive === true));
     }
   }, [gatheringItinerary]);
 

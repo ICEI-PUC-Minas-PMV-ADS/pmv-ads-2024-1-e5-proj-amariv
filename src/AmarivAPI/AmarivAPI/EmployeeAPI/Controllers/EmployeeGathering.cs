@@ -29,7 +29,7 @@ namespace AmarivAPI.EmployeeAPI.Controllers
                 FuncionarioId = "4bf1eb69-9ad5-4d35-907d-c8134b6e1134",
                 DataRoteiro = DateTime.Now.AddDays(2),
                 Status = false,
-                Delete = false,
+                IsDelete = false,
                 NumeroDeColetas = 4,
                 NumeroMaxColetas = 5,
                 ItemsDeRoteiroDeColeta = new List<ItemRoteiroDeColeta>() {

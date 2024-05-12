@@ -2,15 +2,15 @@ import React from "react";
 import { NavBar } from "../../components/NavBar";
 import { Spacer } from "../../components/Spacer";
 import { HistoryGatheringViewer } from "./components/HistoryGatheringViewer";
-import { HistoryContext } from "./context";
 import { useNavigate } from "react-router-dom";
+import { AppContext } from "src/AppContext";
 
 /**
  * History page desktop
  */
 
 export function HistoryDesktopPage() {
-  const { historyGatherings } = HistoryContext.usePageState();
+  const { state: { gatheringItinerary } } = React.useContext(AppContext);
   const navigate = useNavigate();
 
   /**
@@ -45,7 +45,7 @@ export function HistoryDesktopPage() {
           <div className="w-[30rem] px-[2rem] py-[2rem]">
             <h2 className="text-2xl font-bold">Coletas concluídas</h2>
             <Spacer height='1rem' />
-            <HistoryGatheringViewer historyGatherings={historyGatherings} />
+            <HistoryGatheringViewer historyGatherings={gatheringItinerary?.itemsDeRoteiroDeColeta ?? []} />
             <Spacer height='2rem' />
           </div>
         </div>

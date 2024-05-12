@@ -16,7 +16,7 @@ namespace AmarivAPI.Models
         [Required]
         public Boolean Status { get; set; }
         [Required]
-        public Boolean Delete { get; set; }
+        public Boolean IsDelete { get; set; }
         public int NumeroDeColetas { get; set; }
         public int NumeroMaxColetas { get; set; }
         public virtual ICollection<ItemRoteiroDeColeta> ItemsDeRoteiroDeColeta { get; set; }

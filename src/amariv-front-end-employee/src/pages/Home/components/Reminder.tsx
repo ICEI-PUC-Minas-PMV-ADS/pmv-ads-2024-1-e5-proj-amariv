@@ -16,6 +16,9 @@ export type ReminderProps = {
  */
 
 export const Reminder = ({ duration, gatheringItinerary }: ReminderProps) => {
+  const gatheringCount = React.useRef(gatheringItinerary?.itemsDeRoteiroDeColeta.reduce((prevValue, item) => {
+    return prevValue + (item.isActive === true ? 1 : 0);
+  }, 0));
 
   /**
    * Aux functions.
@@ -39,7 +42,7 @@ export const Reminder = ({ duration, gatheringItinerary }: ReminderProps) => {
             </span>
           </div>
           <p className="my-2 text-[.85rem]">
-            Existem {getGatheringDesc(gatheringItinerary.numeroDeColetas)} disponíveis para serem realizadas.
+            Existem {getGatheringDesc(gatheringCount?.current ?? 0)} disponíveis para serem realizadas.
           </p>
           <p className="text-[.85rem]">
             <strong>Tempo estimado: {Math.ceil(duration)}min</strong>

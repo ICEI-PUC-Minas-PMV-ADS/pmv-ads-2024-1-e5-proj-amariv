@@ -81,7 +81,7 @@ namespace AmarivAPI.Services
             try
             {
                 RoteiroDeColetas roteiro = _context.RoteiroDeColetas.FirstOrDefault(r => r.Id == id);
-                roteiro.Delete = true;
+                roteiro.IsDelete = true;
                 _context.SaveChanges();
                 return Result.Ok();
             }
