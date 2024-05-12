@@ -1,6 +1,7 @@
 import React from "react";
 import { NextRouteList } from "./NextRouteList";
-import { GatheringItem, GatheringItinerary } from "src/models/GatheringItinerary";
+import { GatheringItinerary } from "src/models/GatheringItinerary";
+import { Gathering } from "src/models/Gathering";
 
 /**
  * NextRoutesViewerProps
@@ -15,7 +16,7 @@ export type NextRoutesViewerProps = {
  */
 
 export function NextRoutesViewer({ gatheringItinerary }: NextRoutesViewerProps) {
-  const [routeItems, setRouteItems] = React.useState<GatheringItem[]>([]);
+  const [routeItems, setRouteItems] = React.useState<Gathering[]>([]);
 
   /**
    * Effects.
@@ -23,7 +24,7 @@ export function NextRoutesViewer({ gatheringItinerary }: NextRoutesViewerProps) 
 
   React.useEffect(() => {
     if (gatheringItinerary) {
-      setRouteItems(gatheringItinerary.itemsDeRoteiroDeColeta.filter((i) => i.isActive === true));
+      setRouteItems(gatheringItinerary.gatherings.filter((i) => i.status === true && i.delete === false));
     }
   }, [gatheringItinerary]);
 

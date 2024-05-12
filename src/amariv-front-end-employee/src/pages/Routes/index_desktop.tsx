@@ -44,15 +44,21 @@ export function RoutesDesktopPage() {
         </NavBar>
         <div className="flex justify-center px-[2rem] py-[2rem]">
           <div className="w-[30vw]">
-            <h2 className="text-2xl font-bold">Rota atual</h2>
-            <Spacer height='1rem' />
-            <RouteViewer />
-            <Spacer height='2rem' />
-            <h2 className="text-2xl font-bold">Proximas rotas</h2>
-            <p className="font-md text-[#6E6E6E]">Arraste para reordenar</p>
-            <Spacer height='1rem' />
-            <NextRoutesViewer gatheringItinerary={gatheringItinerary} />
-            <Spacer height='2rem' />
+            {gatheringItinerary !== null
+              ? <>
+                <h2 className="text-2xl font-bold">Rota atual</h2>
+                <Spacer height='1rem' />
+                <RouteViewer />
+                <Spacer height='2rem' />
+                <h2 className="text-2xl font-bold">Proximas rotas</h2>
+                <p className="font-md text-[#6E6E6E]">Arraste para reordenar</p>
+                <Spacer height='1rem' />
+                <NextRoutesViewer gatheringItinerary={gatheringItinerary} />
+                <Spacer height='2rem' />
+              </>
+              : <>
+                <p className="text-2xl">Não ha rotas definidas!</p>
+              </>}
           </div>
         </div>
       </div>

@@ -1,13 +1,13 @@
 import React from "react";
 import { HistoryGatheringList } from "./HistoryGatheringList";
-import { GatheringItem } from "src/models/GatheringItinerary";
+import { Gathering } from "src/models/Gathering";
 
 /**
  * HistoryGatheringViewerProps
  */
 
 export type HistoryGatheringViewerProps = {
-  historyGatherings: GatheringItem[],
+  historyGatherings: Gathering[],
 };
 
 /**
@@ -15,7 +15,7 @@ export type HistoryGatheringViewerProps = {
  */
 
 export function HistoryGatheringViewer({ historyGatherings }: HistoryGatheringViewerProps) {
-  const [gatheringItems, setGatheringItems] = React.useState<GatheringItem[]>([]);
+  const [gatheringItems, setGatheringItems] = React.useState<Gathering[]>([]);
 
   /**
    * Effect
@@ -24,7 +24,7 @@ export function HistoryGatheringViewer({ historyGatherings }: HistoryGatheringVi
   React.useEffect(() => {
     (async () => {
       try {
-        setGatheringItems(historyGatherings.filter((i) => i.isActive === false));
+        setGatheringItems(historyGatherings.filter((i) => i.status === false));
       } catch (e) {
         console.log(e);
       }

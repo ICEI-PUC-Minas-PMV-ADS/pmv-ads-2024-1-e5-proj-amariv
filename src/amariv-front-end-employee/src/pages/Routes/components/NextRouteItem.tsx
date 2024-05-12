@@ -2,14 +2,13 @@ import React from "react";
 import IcHandle from './../assets/ic_handle.svg';
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { GatheringItem } from "src/models/GatheringItinerary";
-
+import { Gathering } from "src/models/Gathering";
 
 /**
  * NextRouteItemProps
  */
 export type NextRouteItemProps = {
-  route: GatheringItem,
+  route: Gathering,
   position: number,
 };
 
@@ -43,10 +42,10 @@ export function NextRouteItem({ route, position }: NextRouteItemProps) {
         <div className="text-2xl pe-4">{position}º</div>
         <div className="flex-1">
           <p className="text-sm">
-            {route.endereco}
+            {route.endereco.logradouro}
           </p>
           <p className="font-bold">
-            <strong>Materiais:</strong> {route.materiais}
+            <strong>Materiais:</strong> {route.listaItensColeta}
           </p>
         </div>
         <div className="flex px-4 py-3" ref={setActivatorNodeRef} {...attributes} {...listeners}>

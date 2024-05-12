@@ -34,9 +34,13 @@ function AppImpl() {
     (async function () {
       try {
         if (token) {
-          const gatheringItinerary = await GatheringItineraryService
+          const gatheringItineraries = await GatheringItineraryService
             .getGatheringItinerary(token);
-          dispatch({ type: 'set_gathering_itinerary', payload: gatheringItinerary });
+          if (gatheringItineraries.length > 0) {
+            dispatch({ type: 'set_gathering_itinerary', payload: gatheringItineraries[0] });
+          } else {
+            dispatch({ type: 'set_gathering_itinerary', payload: null });
+          }
         }
       } catch (e) {
         console.log(e);

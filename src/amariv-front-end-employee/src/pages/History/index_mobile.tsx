@@ -24,7 +24,8 @@ export function HistoryMobilePage() {
         <div className="px-[2rem] py-[2rem]">
           <h2 className="text-2xl font-bold">Coletas concluídas</h2>
           <Spacer height='1rem' />
-          <HistoryGatheringViewer historyGatherings={gatheringItinerary?.itemsDeRoteiroDeColeta ?? []} />
+          {gatheringItinerary !== null &&
+            <HistoryGatheringViewer historyGatherings={gatheringItinerary?.gatherings ?? []} />}
           <Spacer height='2rem' />
         </div>
       </div>

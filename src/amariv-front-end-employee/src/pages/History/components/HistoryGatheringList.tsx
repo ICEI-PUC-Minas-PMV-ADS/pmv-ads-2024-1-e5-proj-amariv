@@ -1,4 +1,4 @@
-import { HistoryGathering } from "../../../models/HistoryGathering";
+import { Gathering } from "src/models/Gathering";
 import { HistoryGatheringItem } from "./HistoryGatheringItem";
 
 /**
@@ -6,7 +6,7 @@ import { HistoryGatheringItem } from "./HistoryGatheringItem";
  */
 
 export type HistoryGatheringListProps = {
-  gatherings: HistoryGathering[],
+  gatherings: Gathering[],
 };
 
 /**

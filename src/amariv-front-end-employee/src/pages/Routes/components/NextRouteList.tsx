@@ -2,7 +2,6 @@ import React from "react";
 import { NextRouteItem } from "./NextRouteItem";
 import { SortableContext, arrayMove, sortableKeyboardCoordinates } from "@dnd-kit/sortable";
 import { restrictToVerticalAxis } from '@dnd-kit/modifiers';
-import { GatheringItem } from "src/models/GatheringItinerary";
 import {
   Active,
   DndContext,
@@ -17,6 +16,7 @@ import {
   useSensor,
   useSensors
 } from '@dnd-kit/core';
+import { Gathering } from "src/models/Gathering";
 
 
 /**
@@ -37,8 +37,8 @@ const dropAnimationConfig: DropAnimation = {
  * NextRouteListProps
  */
 export type NextRouteListProps = {
-  routes: GatheringItem[],
-  onChangeRoutes: (newRoutes: GatheringItem[]) => void,
+  routes: Gathering[],
+  onChangeRoutes: (newRoutes: Gathering[]) => void,
 };
 
 /**
@@ -95,7 +95,7 @@ export function NextRouteList({ routes, onChangeRoutes }: NextRouteListProps) {
       onDragStart={handleOnDragStart}
       onDragEnd={handleOnDragEnd}
     >
-      <SortableContext items={routes}>
+      <SortableContext items={routes.map((r) => ({ id: r.id }))}>
         <div className="w-full">
           {routes.map((route, index) => (<NextRouteItem key={route.id} position={index + 1} route={route} />))}
         </div>
