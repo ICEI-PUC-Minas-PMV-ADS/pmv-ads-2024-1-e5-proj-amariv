@@ -10,3 +10,5 @@
 # Front end employee
 /src/amariv-front-end-employee/node_modules/
 /src/amariv-front-end-employee/.env
+/src/AmarivAPI/AmarivAPI/bin
+/src/AmarivAPI/AmarivAPI/obj
