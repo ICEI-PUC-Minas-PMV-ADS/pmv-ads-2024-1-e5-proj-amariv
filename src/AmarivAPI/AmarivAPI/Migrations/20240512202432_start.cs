@@ -320,6 +320,12 @@ namespace AmarivAPI.Migrations
                 {
                     table.PrimaryKey("PK_Coletas", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_Coletas_AspNetUsers_UserId",
+                        column: x => x.RoteiroColetaId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
                         name: "FK_Coletas_RoteiroDeColetas_RoteiroColetaId",
                         column: x => x.RoteiroColetaId,
                         principalTable: "RoteiroDeColetas",

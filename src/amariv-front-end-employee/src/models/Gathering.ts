@@ -1,5 +1,6 @@
 import { Address } from "./Address";
 import { GatheringItinerary } from "./GatheringItinerary";
+import { User } from "./User";
 
 /**
  * Gathering
@@ -19,7 +20,8 @@ export interface Gathering {
   aprovacaoAdmin: boolean,
   lat: number,
   lon: number,
-  dataCadastro: Date,
-  dataDeColeta: Date,
+  dataCadastro: string,
+  dataDeColeta: string,
   listaItensColeta: string,
+  usuario: User | null,
 }
