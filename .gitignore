@@ -1,9 +1,12 @@
-src/AmarivAPI/.vs/
-src/AmarivAPI/bin/
-src/AmarivAPI/obj/
+# Backend
+/src/AmarivAPI/.vs/
+/src/AmarivAPI/bin/
+/src/AmarivAPI/obj/
 
-src/amariv-front-end/node_modules/
-src/amariv-front-end/.env
+# Front end admin
+/src/amariv-front-end/node_modules/
+/src/amariv-front-end/.env
 
-src/amariv-front-end-employee/node_modules/
-src/amariv-front-end-employee/.env
+# Front end employee
+/src/amariv-front-end-employee/node_modules/
+/src/amariv-front-end-employee/.env
