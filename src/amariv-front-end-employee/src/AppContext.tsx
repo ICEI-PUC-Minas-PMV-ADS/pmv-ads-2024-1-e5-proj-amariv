@@ -1,6 +1,7 @@
 import React from "react";
 import { AuthUtils } from "./utils/AuthUtils";
 import { GatheringItinerary } from "./models/GatheringItinerary";
+import { Gathering } from "./models/Gathering";
 
 /**
  * AppContextState
@@ -14,7 +15,7 @@ export type AppContextState = {
  * AppContext
  */
 export const AppContext = React.createContext<AppContextState>({
-  state: { gatheringItinerary: null },
+  state: { gatheringItinerary: null, currentGathering: null },
   dispatch: () => { },
 });
 
@@ -25,6 +26,7 @@ export type AppState = {
   token?: string,
   startPosition?: { lat: number, lon: number },
   gatheringItinerary: GatheringItinerary | null,
+  currentGathering: Gathering | null,
 };
 
 /**
@@ -46,7 +48,13 @@ const AppReducer = (
     case 'login':
       return { ...state, token: action.payload };
     case 'set_gathering_itinerary':
-      return { ...state, gatheringItinerary: action.payload };
+      if (action.payload === null) {
+        return { ...state, gatheringItinerary: null, currentGathering: null };
+      }
+      const gatheringItinerary = action.payload as GatheringItinerary;
+      const filteredGatherings = gatheringItinerary.coletas.filter((i) => i.status === true && i.delete === false);
+      const sortedAndFilteredGatherings = filteredGatherings.sort((a, b) => a.posicaoLista - b.posicaoLista);
+      return { ...state, gatheringItinerary, currentGathering: sortedAndFilteredGatherings[0] };
     case 'logout':
       return { ...state, token: undefined };
   }
@@ -64,7 +72,11 @@ export const AppContextProvider = (props: React.PropsWithChildren) => {
 
   const [state, dispatch] = React.useReducer<
     React.Reducer<AppState, AppAction>
-  >(AppReducer, { token: localUserData, gatheringItinerary: null });
+  >(AppReducer, {
+    token: localUserData,
+    gatheringItinerary: null,
+    currentGathering: null,
+  });
 
   return (
     <AppContext.Provider value={{ state, dispatch }}>

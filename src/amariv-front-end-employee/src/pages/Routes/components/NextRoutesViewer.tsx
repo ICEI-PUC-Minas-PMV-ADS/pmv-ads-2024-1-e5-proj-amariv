@@ -1,30 +1,25 @@
-import React from "react";
 import { NextRouteList } from "./NextRouteList";
-import { GatheringItinerary } from "src/models/GatheringItinerary";
 import { Gathering } from "src/models/Gathering";
-import { GatheringItineraryService } from "src/services/GatheringItineraryService";
-import { AppContext } from "src/AppContext";
 
 /**
  * NextRoutesViewerProps
  */
-
 export type NextRoutesViewerProps = {
-  gatheringItinerary: GatheringItinerary | null,
+  routeItems: Gathering[],
+  onUpdateRouteItems: (items: Gathering[]) => void,
 };
 
 /**
  * NextRoutesViewer
  */
 
-export function NextRoutesViewer({ gatheringItinerary }: NextRoutesViewerProps) {
-  const { state: { token }, dispatch } = React.useContext(AppContext);
-  const [routeItems, setRouteItems] = React.useState<Gathering[]>([]);
+export function NextRoutesViewer({ routeItems, onUpdateRouteItems }: NextRoutesViewerProps) {
 
   /**
    * Effects.
    */
 
+  /*
   const handleChangeRoute = React.useCallback((newRoute: Gathering[]) => {
     (async function () {
       try {
@@ -50,6 +45,7 @@ export function NextRoutesViewer({ gatheringItinerary }: NextRoutesViewerProps) 
       setRouteItems(sortedAndFilteredGatherings);
     }
   }, [gatheringItinerary, routeItems]);
+  */
 
   /**
    * Layout
@@ -60,7 +56,7 @@ export function NextRoutesViewer({ gatheringItinerary }: NextRoutesViewerProps) 
       <NextRouteList
         routes={routeItems}
         onChangeRoutes={(newRoutes) => {
-          handleChangeRoute(newRoutes);
+          onUpdateRouteItems(newRoutes);
         }} />
     </div>
   );
