@@ -39,7 +39,7 @@ Accept: application/json
 
 ###
 
-DELETE {{AmarivAPI_HostAddress}}/DeletarMaterial?id=2
+DELETE {{AmarivAPI_HostAddress}}/DeletarMaterial?id=5
 Accept: application/json
 
 ###
