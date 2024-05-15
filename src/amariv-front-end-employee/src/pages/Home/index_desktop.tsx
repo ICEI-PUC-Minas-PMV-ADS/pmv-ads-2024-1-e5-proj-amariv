@@ -14,7 +14,7 @@ import { AppContext } from "src/AppContext";
 
 export function HomeDesktopPage() {
   const ctrl = HomeContext.usePageController();
-  const { state: { token, gatheringItinerary } } = React.useContext(AppContext);
+  const { state: { gatheringItinerary } } = React.useContext(AppContext);
   const { userName, startPosition } = HomeContext.usePageState();
   const [map, setMap] = React.useState<google.maps.Map | null>(null);
   const [prevTime, setPrevTime] = React.useState<number | null>(null);
@@ -53,18 +53,6 @@ export function HomeDesktopPage() {
   const handleMenuHistoryClick = React.useCallback((event: React.MouseEvent<HTMLDivElement, MouseEvent>): void => {
     navigate("/history", { replace: true });
   }, [navigate]);
-
-  /*
-  const handlePopulateClick = React.useCallback((event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
-    try {
-      if (token) {
-        ctrl.populateData(token);
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  }, [ctrl, token]);
-  */
 
   /**
    * Layout
@@ -105,14 +93,6 @@ export function HomeDesktopPage() {
                   </>
                   : <>
                     <p className="text-2xl">Não ha rotas definidas!</p>
-                    {/*
-                    <Button
-                      className="w-[10rem]"
-                      color="secondary"
-                      rounded="sm"
-                      label="Popular dados"
-                      onClick={handlePopulateClick} />
-                    */}
                   </>}
                 <Spacer height="2rem" />
               </div>

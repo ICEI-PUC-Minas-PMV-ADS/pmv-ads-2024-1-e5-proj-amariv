@@ -1,10 +1,11 @@
-﻿using AmarivAPI.EmployeeAPI.Data.DTOs;
+﻿#nullable enable
+
+using AmarivAPI.EmployeeAPI.Data.DTOs;
 using AmarivAPI.Models;
 using AmarivAPI.Services;
 using AutoMapper;
 using FluentResults;
 using Microsoft.AspNetCore.Identity;
-using System.IdentityModel.Tokens.Jwt;
 
 namespace AmarivAPI.EmployeeAPI.Services
 {
@@ -29,13 +30,13 @@ namespace AmarivAPI.EmployeeAPI.Services
             SignInResult result = await _signInManager.PasswordSignInAsync(signInDTO.Email, signInDTO.Password, false, false);
             if (result.Succeeded)
             {
-                Usuario user = RecuperaUsuarioPorEmail(signInDTO.Email);
+                Usuario? user = RecuperaUsuarioPorEmail(signInDTO.Email);
                 if (user != null)
                 {
                     IList<string> roles = await _signInManager.UserManager.GetRolesAsync(user);
                     if (roles.Contains("funcionario"))
                     {
-                        return Result.Ok(new {
+                        return Result.Ok<object>(new {
                             token = _tokenService.CreateToken(user, roles.FirstOrDefault()).Value,
                         });
                     }
@@ -50,12 +51,16 @@ namespace AmarivAPI.EmployeeAPI.Services
 
         internal Task<Usuario?> GetUserInfo(System.Security.Claims.ClaimsPrincipal c)
         {
-            return _signInManager.UserManager.FindByIdAsync(
-                c.Claims.FirstOrDefault(c =>
-                    string.Equals(c.Type, "id", StringComparison.InvariantCultureIgnoreCase))?.Value);
+            var userId = c.Claims.FirstOrDefault(c =>
+                string.Equals(c.Type, "id", StringComparison.InvariantCultureIgnoreCase))?.Value;
+            if (userId == null)
+            {
+                return Task.FromResult<Usuario?>(null);
+            }
+            return _signInManager.UserManager.FindByIdAsync(userId);
         }
 
-        private Usuario RecuperaUsuarioPorEmail(string email)
+        private Usuario? RecuperaUsuarioPorEmail(string email)
         {
             return _signInManager
                 .UserManager

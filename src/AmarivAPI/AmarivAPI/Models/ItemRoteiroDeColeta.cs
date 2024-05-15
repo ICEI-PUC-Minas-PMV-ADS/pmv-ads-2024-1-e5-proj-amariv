@@ -20,7 +20,7 @@ namespace AmarivAPI.Models
         public virtual bool IsActive { get; set; }
         [NotMapped]
         public virtual ItemRoteiroDeColetaPos GeoLocation {  get; set; }
-        public bool IsDelete { get; } = false;
+        public bool IsDelete { get; set; } = false;
     }
 
     [Keyless]

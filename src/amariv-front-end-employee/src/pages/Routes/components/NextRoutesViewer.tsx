@@ -2,6 +2,8 @@ import React from "react";
 import { NextRouteList } from "./NextRouteList";
 import { GatheringItinerary } from "src/models/GatheringItinerary";
 import { Gathering } from "src/models/Gathering";
+import { GatheringItineraryService } from "src/services/GatheringItineraryService";
+import { AppContext } from "src/AppContext";
 
 /**
  * NextRoutesViewerProps
@@ -16,17 +18,38 @@ export type NextRoutesViewerProps = {
  */
 
 export function NextRoutesViewer({ gatheringItinerary }: NextRoutesViewerProps) {
+  const { state: { token }, dispatch } = React.useContext(AppContext);
   const [routeItems, setRouteItems] = React.useState<Gathering[]>([]);
 
   /**
    * Effects.
    */
 
+  const handleChangeRoute = React.useCallback((newRoute: Gathering[]) => {
+    (async function () {
+      try {
+        if (gatheringItinerary !== null && token !== undefined) {
+          const newGatheringItinerary = await GatheringItineraryService.changeGatheringOrder(
+            token,
+            gatheringItinerary!.id,
+            newRoute.map((g, i) => ({ id: g.id, posicaoLista: i })),
+          );
+          dispatch({ type: 'set_gathering_itinerary', payload: newGatheringItinerary });
+          setRouteItems(newRoute);
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    })();
+  }, [gatheringItinerary, token, dispatch]);
+
   React.useEffect(() => {
     if (gatheringItinerary) {
-      setRouteItems(gatheringItinerary.coletas.filter((i) => i.status === true && i.delete === false));
+      const filteredGatherings = gatheringItinerary.coletas.filter((i) => i.status === true && i.delete === false);
+      const sortedAndFilteredGatherings = filteredGatherings.sort((a, b) => a.posicaoLista - b.posicaoLista);
+      setRouteItems(sortedAndFilteredGatherings);
     }
-  }, [gatheringItinerary]);
+  }, []);
 
   /**
    * Layout
@@ -37,7 +60,7 @@ export function NextRoutesViewer({ gatheringItinerary }: NextRoutesViewerProps) 
       <NextRouteList
         routes={routeItems}
         onChangeRoutes={(newRoutes) => {
-          setRouteItems(newRoutes);
+          handleChangeRoute(newRoutes);
         }} />
     </div>
   );

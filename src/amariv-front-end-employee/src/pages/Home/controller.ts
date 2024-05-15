@@ -83,9 +83,10 @@ export class HomeController extends PageBaseController<HomeState, HomeAction> {
     startPosition: { lat: number; lon: number; },
     gatheringItinerary: GatheringItinerary,
   ): Promise<number> {
-    /*
     const { AdvancedMarkerElement } = await loader.importLibrary("marker");
-    const targetPosition = gatheringItinerary.itemsDeRoteiroDeColeta[0].geoLocation;
+    const filteredGatherings = gatheringItinerary.coletas.filter((i) => i.status === true && i.delete === false);
+    const sortedAndFilteredGatherings = filteredGatherings.sort((a, b) => a.posicaoLista - b.posicaoLista);
+    const targetPosition = sortedAndFilteredGatherings[0];
 
     new AdvancedMarkerElement({
       map,
@@ -105,8 +106,7 @@ export class HomeController extends PageBaseController<HomeState, HomeAction> {
       path: google.maps.geometry.encoding.decodePath(r.routes[0].polyline.encodedPolyline),
       strokeColor: 'green',
     });
-    */
-    return parseInt("2") / 60;
+    return parseInt(normalizedDuration) / 60;
   }
 
   doReducer(prevState: HomeState, action: HomeAction): HomeState {

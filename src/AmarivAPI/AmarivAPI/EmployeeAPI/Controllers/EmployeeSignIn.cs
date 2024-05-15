@@ -31,7 +31,7 @@ namespace AmarivAPI.employee_api.Controllers
                 }
                 return Ok(result.Result.Value);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return Unauthorized(new
                 {

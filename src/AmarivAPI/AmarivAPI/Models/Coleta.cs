@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿#nullable enable
+
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.CodeAnalysis;
 
@@ -10,7 +12,7 @@ namespace AmarivAPI.Models
         [Required]
         public int Id { get; set; }
         [AllowNull]
-        public int? UserId { get; set; }
+        public string? UserId { get; set; }
         [AllowNull]
         public int? EnderecoId { get; set; }
         [AllowNull]
@@ -43,10 +45,10 @@ namespace AmarivAPI.Models
         public string? ListaItensColeta { get; set; }
 
         [ForeignKey("UserId")]
-        public virtual Usuario? Usuario { get; }
+        public virtual Usuario? Usuario { get; set; }
         [ForeignKey("EnderecoId")]
-        public virtual Endereco Endereco { get; }
+        public virtual Endereco? Endereco { get; set; }
         [ForeignKey("RoteiroColetaId")]
-        public virtual RoteiroDeColetas RoteiroDeColetas { get; }
+        public virtual RoteiroDeColetas? RoteiroDeColetas { get; set; }
     }
 }

@@ -13,7 +13,7 @@ namespace AmarivAPI.Migrations
 {
     [DbContext(typeof(AmarivContext))]
     [Migration("20240512202432_start")]
-    partial class start
+    partial class StartMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

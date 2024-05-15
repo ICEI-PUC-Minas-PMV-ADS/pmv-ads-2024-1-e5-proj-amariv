@@ -1,4 +1,5 @@
 ﻿using AmarivAPI.Data;
+using AmarivAPI.EmployeeAPI.Data.DTOs;
 using AmarivAPI.Models;
 using FluentResults;
 using Microsoft.AspNetCore.Mvc;
@@ -23,165 +24,6 @@ namespace AmarivAPI.EmployeeAPI.Controllers
             });
         }
 
-        [Route("/Emp/CreateGatheringItinerary")]
-        public IActionResult generateGatheringItineraryData()
-        {
-            try
-            {
-                using (var t = _context.Database.BeginTransaction())
-                {
-                    var today = DateTime.Now;
-                    var userId = User.Claims.FirstOrDefault(x => x.Type == "id").Value;
-
-                    var gIt = new RoteiroDeColetas()
-                    {
-                        FuncionarioId = userId,
-                        DataCadastro = today,
-                        DataRoteiro = today.AddDays(2),
-                        Delete = false,
-                        NumeroDeColetas = 4,
-                        NumeroMaxColetas = 5,
-                    };
-                    _context.RoteiroDeColetas.Add(gIt);
-                    _context.SaveChanges();
-                    {
-                        var addr = new Endereco()
-                        {
-                            Logradouro = "Rua A",
-                            Numero = "100",
-                            Bairro = "Almeiras",
-                            Cep = "01001-000",
-                            Referencia = "Prox a igreja",
-                        };
-                        _context.Enderecos.Add(addr);
-                        _context.SaveChanges();
-
-                        var gOne = new Coleta()
-                        {
-                            RoteiroColetaId = gIt.Id,
-                            AprovacaoAdmin = true,
-                            PosicaoLista = 1,
-                            Status = false,
-                            ClienteCel = "31 90000-0001",
-                            ClienteNome = "Pedro",
-                            DataCadastro = today,
-                            Delete = false,
-                            Lat = 0.0,
-                            Lon = 0.0,
-                            DataDeColeta = today.AddDays(2),
-                            EnderecoId = addr.Id,
-                            ListaItensColeta = "1:Metal(level)",
-                        };
-                        _context.Coletas.Add(gOne);
-                        _context.SaveChanges();
-                    }
-                    {
-                        var addr = new Endereco()
-                        {
-                            Logradouro = "Rua B",
-                            Numero = "120",
-                            Bairro = "Almeiras",
-                            Cep = "01001-001",
-                            Referencia = "Prox ao supermercado",
-                        };
-                        _context.Enderecos.Add(addr);
-                        _context.SaveChanges();
-
-                        var gOne = new Coleta()
-                        {
-                            RoteiroColetaId = gIt.Id,
-                            AprovacaoAdmin = true,
-                            PosicaoLista = 2,
-                            Status = true,
-                            ClienteCel = "31 90000-0002",
-                            ClienteNome = "Joao",
-                            DataCadastro = today,
-                            Delete = false,
-                            Lat = 0.0,
-                            Lon = 0.0,
-                            DataDeColeta = today.AddDays(2),
-                            EnderecoId = addr.Id,
-                            ListaItensColeta = "1:Metal(level)",
-                        };
-                        _context.Coletas.Add(gOne);
-                        _context.SaveChanges();
-                    }
-                    {
-                        var addr = new Endereco()
-                        {
-                            Logradouro = "Rua C",
-                            Numero = "140",
-                            Bairro = "Almeiras",
-                            Cep = "01001-002",
-                            Referencia = "",
-                        };
-                        _context.Enderecos.Add(addr);
-                        _context.SaveChanges();
-
-                        var gOne = new Coleta()
-                        {
-                            RoteiroColetaId = gIt.Id,
-                            AprovacaoAdmin = true,
-                            PosicaoLista = 3,
-                            Status = true,
-                            ClienteCel = "31 90000-0003",
-                            ClienteNome = "Maria",
-                            DataCadastro = today,
-                            Delete = false,
-                            Lat = 0.0,
-                            Lon = 0.0,
-                            DataDeColeta = today.AddDays(2),
-                            EnderecoId = addr.Id,
-                            ListaItensColeta = "1:Metal(level)",
-                        };
-                        _context.Coletas.Add(gOne);
-                        _context.SaveChanges();
-                    }
-                    {
-                        var addr = new Endereco()
-                        {
-                            Logradouro = "Rua D",
-                            Numero = "160",
-                            Bairro = "Almeiras",
-                            Cep = "01001-003",
-                            Referencia = "",
-                        };
-                        _context.Enderecos.Add(addr);
-                        _context.SaveChanges();
-
-                        var gOne = new Coleta()
-                        {
-                            RoteiroColetaId = gIt.Id,
-                            AprovacaoAdmin = true,
-                            PosicaoLista = 4,
-                            Status = true,
-                            ClienteCel = "31 90000-0004",
-                            ClienteNome = "Joaquina",
-                            DataCadastro = today,
-                            Delete = false,
-                            Lat = 0.0,
-                            Lon = 0.0,
-                            DataDeColeta = today.AddDays(2),
-                            EnderecoId = addr.Id,
-                            ListaItensColeta = "1:Metal(level)",
-                        };
-                        _context.Coletas.Add(gOne);
-                        _context.SaveChanges();
-                    }
-                    t.Commit();
-                }
-            }
-            catch (Exception ex)
-            {
-                return Unauthorized(new
-                {
-                    message = "Failed to create data",
-                });
-            }
-            return Ok(new { });
-        }
-
-
         [Route("/Emp/GetGatheringItinerary")]
         public IActionResult GetGatheringItinerary()
         {
@@ -195,6 +37,84 @@ namespace AmarivAPI.EmployeeAPI.Controllers
             return Ok(new List<RoteiroDeColetas>() {
                 res
             });
+        }
+
+        [Route("/Emp/ChangeGatheringOrder")]
+        [HttpPost()]
+        public IActionResult ChangeGatheringOrder(ChangeGatheringOrderDTO dto)
+        {
+            try
+            {
+                var gatheringItinerary = _context.RoteiroDeColetas.Where(x => x.Id == dto.Id).FirstOrDefault();
+                if (gatheringItinerary == null)
+                {
+                    return BadRequest(new
+                    {
+                        message = "Falha ao recuperar roteiro de coleta.",
+                    });
+                }
+
+                var affectedRoutesList = dto.RouteIdMap.Select(x => {
+                    int value = -1;
+                    if (!x.TryGetValue("id", out value))
+                    {
+                        throw new Exception();
+                    }
+                    return value;
+                }).ToList();
+
+                var coletas = _context.Coletas.Where(x => affectedRoutesList.Contains(x.Id)).ToList();
+                if (coletas.Count() == 0 || coletas.Count() != affectedRoutesList.Count)
+                {
+                    return BadRequest(new
+                    {
+                        message = "Falha ao recuperar registro de coletas",
+                    });
+                }
+                using (var t = _context.Database.BeginTransaction())
+                {
+                    for (int i = 0; i < affectedRoutesList.Count; i++)
+                    {
+                        var coletaId = affectedRoutesList.ElementAt(i);
+                        var coleta = coletas.Where(x => x.Id == coletaId).FirstOrDefault();
+                        if (coleta == null)
+                        {
+                            return BadRequest(new
+                            {
+                                message = "Falha ao recuperar registro de coletas",
+                            });
+                        }
+
+                        var item = dto.RouteIdMap.Single(x => {
+                            int value = -1;
+                            if (!x.TryGetValue("id", out value))
+                            {
+                                throw new Exception();
+                            }
+                            return value == coletaId;
+                        });
+
+                        var newPosicaoLista = -1;
+                        if (!item.TryGetValue("posicaoLista", out newPosicaoLista))
+                        {
+                            throw new Exception();
+                        }
+                        coleta.PosicaoLista = newPosicaoLista + 1;
+
+                        _context.Coletas.Entry(coleta).CurrentValues.SetValues(coleta);
+                        _context.SaveChanges();
+                    }
+                    t.Commit();
+                }
+                return Ok(gatheringItinerary);
+            }
+            catch (Exception)
+            {
+                return BadRequest(new
+                {
+                    message = "Falha ao recuperar registro de coletas",
+                });
+            }
         }
     }
 }
