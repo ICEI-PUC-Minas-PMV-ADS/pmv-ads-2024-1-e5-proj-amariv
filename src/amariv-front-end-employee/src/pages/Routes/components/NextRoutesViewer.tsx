@@ -44,12 +44,12 @@ export function NextRoutesViewer({ gatheringItinerary }: NextRoutesViewerProps) 
   }, [gatheringItinerary, token, dispatch]);
 
   React.useEffect(() => {
-    if (gatheringItinerary) {
+    if (gatheringItinerary && routeItems.length === 0) {
       const filteredGatherings = gatheringItinerary.coletas.filter((i) => i.status === true && i.delete === false);
       const sortedAndFilteredGatherings = filteredGatherings.sort((a, b) => a.posicaoLista - b.posicaoLista);
       setRouteItems(sortedAndFilteredGatherings);
     }
-  }, []);
+  }, [gatheringItinerary, routeItems]);
 
   /**
    * Layout

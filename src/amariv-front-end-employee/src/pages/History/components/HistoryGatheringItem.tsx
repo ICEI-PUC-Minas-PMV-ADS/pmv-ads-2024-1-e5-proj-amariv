@@ -22,7 +22,7 @@ export function HistoryGatheringItem({ gathering }: HistoryGatheringItemProps) {
         {gathering.endereco.bairro} - CEP: {gathering.endereco.cep}
       </p>
       <p><strong>Celular:</strong> {gathering.clienteCel}</p>
-      <p><strong>Telefone:</strong> {gathering.clienteTel}</p>
+      <p><strong>Telefone:</strong> {gathering.usuario?.telefone ?? gathering.clienteTel}</p>
       <p>
         <strong>Materiais:</strong> {gathering.listaItensColeta}
       </p>

@@ -27,7 +27,7 @@ export function RoutesMobilePage() {
             ? <>
               <h2 className="text-2xl font-bold">Rota atual</h2>
               <Spacer height='1rem' />
-              <RouteViewer />
+              <RouteViewer gatheringItinerary={gatheringItinerary} />
               <Spacer height='2rem' />
               <h2 className="text-2xl font-bold">Proximas rotas</h2>
               <p className="font-md text-[#6E6E6E]">Arraste para reordenar</p>
