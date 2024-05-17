@@ -3,12 +3,20 @@
   "WorkspaceRootPath": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\onedrive\\documentos\\github\\src\\amarivapi\\amarivapi\\models\\funcionarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\models\\funcionarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\onedrive\\documentos\\github\\src\\amarivapi\\amarivapi\\amarivapi.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
       "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\amarivapi.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\onedrive\\documentos\\github\\src\\amarivapi\\amarivapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\onedrive\\documentos\\github\\src\\amarivapi\\amarivapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\onedrive\\documentos\\github\\src\\amarivapi\\amarivapi\\models\\funcionarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\models\\funcionarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\onedrive\\documentos\\github\\src\\amarivapi\\amarivapi\\models\\material.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -23,20 +31,12 @@
       "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\controllers\\funcionariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\onedrive\\documentos\\github\\src\\amarivapi\\amarivapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\onedrive\\documentos\\github\\src\\amarivapi\\amarivapi\\data\\dtos\\materialdtos\\creatematerialdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\data\\dtos\\materialdtos\\creatematerialdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\onedrive\\documentos\\github\\src\\amarivapi\\amarivapi\\data\\dtos\\materialdtos\\readmaterialdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\data\\dtos\\materialdtos\\readmaterialdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\onedrive\\documentos\\github\\src\\amarivapi\\amarivapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\onedrive\\documentos\\github\\src\\amarivapi\\amarivapi\\services\\materialservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -248,7 +248,7 @@
         },
         {
           "DockedWidth": 111,
-          "SelectedChildIndex": 9,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
@@ -264,7 +264,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "Material.cs",
               "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Models\\Material.cs",
               "RelativeDocumentMoniker": "AmarivAPI\\Models\\Material.cs",
@@ -276,7 +276,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "MaterialController.cs",
               "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Controllers\\MaterialController.cs",
               "RelativeDocumentMoniker": "AmarivAPI\\Controllers\\MaterialController.cs",
@@ -288,20 +288,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "AmarivAPI.http",
               "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\AmarivAPI.http",
               "RelativeDocumentMoniker": "AmarivAPI\\AmarivAPI.http",
               "ToolTip": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\AmarivAPI.http",
               "RelativeToolTip": "AmarivAPI\\AmarivAPI.http",
-              "ViewState": "AQIAACgAAAAAAAAAAAAkwIUAAAADAAAA",
+              "ViewState": "AQIAACgAAAAAAAAAAAAkwEEAAAAPAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
               "WhenOpened": "2024-04-25T19:34:59.432Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "CreateMaterialDto.cs",
               "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Data\\Dtos\\MaterialDtos\\CreateMaterialDto.cs",
               "RelativeDocumentMoniker": "AmarivAPI\\Data\\Dtos\\MaterialDtos\\CreateMaterialDto.cs",
@@ -325,7 +325,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "ReadMaterialDto.cs",
               "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Data\\Dtos\\MaterialDtos\\ReadMaterialDto.cs",
               "RelativeDocumentMoniker": "AmarivAPI\\Data\\Dtos\\MaterialDtos\\ReadMaterialDto.cs",
@@ -337,7 +337,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 2,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Program.cs",
               "RelativeDocumentMoniker": "AmarivAPI\\Program.cs",
@@ -345,11 +345,12 @@
               "RelativeToolTip": "AmarivAPI\\Program.cs",
               "ViewState": "AQIAAC0AAAAAAAAAAAAAAFkAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-26T01:39:01.306Z"
+              "WhenOpened": "2024-04-26T01:39:01.306Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 1,
               "Title": "appsettings.json",
               "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\appsettings.json",
               "RelativeDocumentMoniker": "AmarivAPI\\appsettings.json",
@@ -357,11 +358,12 @@
               "RelativeToolTip": "AmarivAPI\\appsettings.json",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-04-26T01:33:52.499Z"
+              "WhenOpened": "2024-04-26T01:33:52.499Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "Funcionarios.cs",
               "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Models\\Funcionarios.cs",
               "RelativeDocumentMoniker": "AmarivAPI\\Models\\Funcionarios.cs",
@@ -398,7 +400,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "FuncionarioController.cs",
               "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Controllers\\FuncionarioController.cs",
               "RelativeDocumentMoniker": "AmarivAPI\\Controllers\\FuncionarioController.cs",
@@ -646,7 +648,8 @@
               "RelativeToolTip": "AmarivAPI\\Controllers\\RoteiroDeColetasController.cs",
               "ViewState": "AQIAABYAAAAAAAAAAAAgwEEAAAAiAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-25T20:49:27.143Z"
+              "WhenOpened": "2024-04-25T20:49:27.143Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
