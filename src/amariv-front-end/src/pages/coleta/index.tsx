@@ -7,12 +7,13 @@ import { Form } from "../../components/Form";
 import "./index.css";
 import { Link } from "react-router-dom";
 import { FormAddMateriais } from "./components/FormAddMateriais";
+import { CreateColetaDto } from "../../models/ColetaDtos/CreateColetaDto";
 
 
 
 export function ColetaPage() {
   const [active, setMode] = useState(false);
-  
+  const [endereco, setEndereco] = useState(CreateColetaDto);
  
 
   const toggleMode = () => {
@@ -50,7 +51,7 @@ export function ColetaPage() {
         >
           <div className="hamburger hamburgerIcon"></div>
         </div>
-        <div className={active ? "menu menuOpen" : "menu menuClose"}>
+        {/* <div className={active ? "menu menuOpen" : "menu menuClose"}>
           <div className="list">
             <Link className="listItems" to={""}>
               Coletas pendentes
@@ -71,7 +72,7 @@ export function ColetaPage() {
               Funcionários
             </Link>
           </div>
-        </div>
+        </div> */}
 
         <div className="content">
           <h2 className="mt-[30px] text-[#53735B] text-[1.75rem]">
@@ -84,7 +85,7 @@ export function ColetaPage() {
           <Form>
             <div className="dados-cliente">
               <div>
-                <Input type="text" label="Nome" id="txtNome" required />
+                <Input type="text" label="Nome" id="txtNome" onChange={} required />
               </div>
               <div>
                 <Input type="tel" label="Celular" id="txtCel" required />

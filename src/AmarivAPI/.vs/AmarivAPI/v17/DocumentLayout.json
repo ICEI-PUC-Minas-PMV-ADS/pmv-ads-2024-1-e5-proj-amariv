@@ -60,7 +60,7 @@
               "RelativeDocumentMoniker": "AmarivAPI\\Controllers\\ColetaController.cs",
               "ToolTip": "C:\\Users\\HenriqueAGP\\Documents\\GitHub\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\Controllers\\ColetaController.cs",
               "RelativeToolTip": "AmarivAPI\\Controllers\\ColetaController.cs",
-              "ViewState": "AQIAABAAAAAAAAAAAAAgwEEAAABPAAAA",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAAEEAAABPAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-05T23:32:06.193Z",
               "IsPinned": true,
@@ -133,8 +133,7 @@
               "RelativeToolTip": "AmarivAPI\\Services\\ColetaService.cs",
               "ViewState": "AQIAAJ4AAAAAAAAAAAA4wG0AAAAvAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-07T17:19:16.021Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-07T17:19:16.021Z"
             },
             {
               "$type": "Document",
