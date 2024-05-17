@@ -14,32 +14,87 @@ import { CreateColetaDto } from "../../models/ColetaDtos/CreateColetaDto";
 export function ColetaPage() {
   const [active, setMode] = useState(false);
   const [endereco, setEndereco] = useState(CreateColetaDto);
- 
+  const [nome, setNome ] = useState()
+  const [cel, setCel ] = useState()
+  const [tel, setTel] = useState()
+  const [cep, setCep ] = useState()
+  const [logradouro, setLogradouro ] = useState()
+  const [numero, setNumero ] = useState()
+  const [bairro, setBairro ] = useState()
+  const [cidade, setCidade ] = useState()
+  const [complemento, setComplemento] = useState()
 
+  const [dataColeta, setDataColeta ] = useState()
+  const [horarioColeta, setHorarioColeta ] = useState()
+ 
   const toggleMode = () => {
     setMode(!active);
   };
 
-  const dateInputRef = useRef<HTMLInputElement>(null);
-  const handleDateChange = () => {
-    if (dateInputRef.current) {
-      const selectedDate = dateInputRef.current.value;
-      console.log("Data selecionada:", selectedDate);
-    }
-  };
 
 
-  const timeInputRef = useRef<HTMLInputElement>(null);
-  const handleTimeChange = () => {
-    if (timeInputRef.current) {
-      const selectedTime = timeInputRef.current.value;
-      console.log("Hora selecionada:", selectedTime);
-    }
-  };
+  function HanleNomeChange(event: React.ChangeEvent<HTMLInputElement>): void {
+    setNome(event.target.value)
+  }
+
+  function HandleCelChange(event: React.ChangeEvent<HTMLInputElement>): void {
+    throw new Error("Function not implemented.");
+  }
+
+  function HandleTelChange(event: React.ChangeEvent<HTMLInputElement>): void {
+    throw new Error("Function not implemented.");
+  }
+
+  function HandleCepChange(event: React.ChangeEvent<HTMLInputElement>): void {
+    throw new Error("Function not implemented.");
+  }
+
+  function HandleLogradouroChange(event: React.ChangeEvent<HTMLInputElement>): void {
+    throw new Error("Function not implemented.");
+  }
+
+  function HandleNumeroChange(event: React.ChangeEvent<HTMLInputElement>): void {
+    throw new Error("Function not implemented.");
+  }
+
+  function HandleBairroChange(event: React.ChangeEvent<HTMLInputElement>): void {
+    throw new Error("Function not implemented.");
+  }
+
+  function HandleCidadeChange(event: React.ChangeEvent<HTMLInputElement>): void {
+    throw new Error("Function not implemented.");
+  }
+
+  function HandleComplementoChange(event: React.ChangeEvent<HTMLInputElement>): void {
+    throw new Error("Function not implemented.");
+  }
+
+  function handleDataColetaChange(event: React.ChangeEvent<HTMLInputElement>): void {
+    throw new Error("Function not implemented.");
+  }
+
+  function handleHorarioColetaChange(event: React.ChangeEvent<HTMLInputElement>): void {
+    throw new Error("Function not implemented.");
+  }
+
+  // const dateInputRef = useRef<HTMLInputElement>(null);
+  // const handleDateChange = () => {
+  //   if (dateInputRef.current) {
+  //     const selectedDate = dateInputRef.current.value;
+  //     console.log("Data selecionada:", selectedDate);
+  //   }
+  // };
+
+
+  // const timeInputRef = useRef<HTMLInputElement>(null);
+  // const handleTimeChange = () => {
+  //   if (timeInputRef.current) {
+  //     const selectedTime = timeInputRef.current.value;
+  //     console.log("Hora selecionada:", selectedTime);
+  //   }
+  // };
 
  
-
-
 
 
   return (
@@ -85,13 +140,13 @@ export function ColetaPage() {
           <Form>
             <div className="dados-cliente">
               <div>
-                <Input type="text" label="Nome" id="txtNome" onChange={} required />
+                <Input type="text" label="Nome" id="txtNome" onChange={HanleNomeChange} required />
               </div>
               <div>
-                <Input type="tel" label="Celular" id="txtCel" required />
+                <Input type="tel" label="Celular" id="txtCel" onChange={HandleCelChange} required />
               </div>
               <div>
-                <Input type="tel" label="Telefone Fixo"  id="txtTel" required />
+                <Input type="tel" label="Telefone Fixo"  id="txtTel" onChange={HandleTelChange} required />
               </div>
             </div>
 
@@ -100,41 +155,39 @@ export function ColetaPage() {
             </div>
             <div className="endereco-cliente">
               <div>
-                <Input type="text" label="CEP" required />
+                <Input type="text" label="CEP" onChange={HandleCepChange} required />
               </div>
               <div>
-                <Input type="text" label="Logradouro" required />
+                <Input type="text" label="Logradouro" onChange={HandleLogradouroChange} required />
               </div>
               <div>
-                <Input type="text" label="Número" required />
+                <Input type="text" label="Número" onChange={HandleNumeroChange} required />
               </div>
             </div>
             <div className="endereco-cliente">
               <div>
-                <Input type="text" label="Bairro" required />
+                <Input type="text" label="Bairro" onChange={HandleBairroChange} required />
               </div>
               <div>
-                <Input type="text" label="Cidade" required />
+                <Input type="text" label="Cidade" onChange={HandleCidadeChange} required />
               </div>
               <div>
-                <Input type="text" label="Complemento" required />
+                <Input type="text" label="Complemento" onChange={HandleComplementoChange} required />
               </div>
             </div>
             <div className="endereco-cliente">
               <div>
                 <InputDate
                   label="Data da coleta"
-                  type="date"
-                  ref={dateInputRef}
-                  onChange={handleDateChange}
+                  type="date"               
+                  onChange={handleDataColetaChange}
                 />
               </div>
               <div>
                 <InputTime
                   label="Horário de Coleta"
-                  type="time"
-                  ref={timeInputRef}
-                  onChange={handleTimeChange}
+                  type="time"            
+                  onChange={handleHorarioColetaChange}
                 />
               </div>
               <div>
