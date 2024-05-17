@@ -23,7 +23,7 @@ export const DropdownInput = React.forwardRef(
         <select
           {...props}
           ref={ref}
-          className="w-[220px] m-[15px] py-2 px-4 rounded-full bg-[#FBFFF3] border-[1px] border-[#004646]"
+          className="w-[220px] mb-[.5rem] py-2 px-4 rounded-full bg-[#FBFFF3] border-[1px] border-[#004646]"
         >
           <option value="" disabled hidden>
             {placeholder}
