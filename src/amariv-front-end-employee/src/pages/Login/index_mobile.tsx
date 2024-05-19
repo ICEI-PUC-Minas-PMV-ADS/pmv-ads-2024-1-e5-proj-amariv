@@ -44,7 +44,7 @@ export function LoginMobilePage() {
    * Layout
    */
   return (
-    <div className='w-screen h-screen bg-[#53735B] p-10 flex items-center flex-col overflow-y-auto'>
+    <div className='w-full h-full bg-[#53735B] p-10 flex items-center flex-col overflow-y-auto'>
       <div className='flex items-center flex-col'>
         <img src={AmarivLogo} alt="Amariv logo" className='w-[10rem] h-[7rem] mt-[6rem]' />
         <span className='text-[#FBFFF3] text-lg mt-2'>ACESSO RESTRITO</span>

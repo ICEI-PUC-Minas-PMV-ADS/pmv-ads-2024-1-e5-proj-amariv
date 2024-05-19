@@ -17,6 +17,7 @@ export class GatheringItineraryService {
         'Authorization': 'Bearer ' + token,
         'Content-Type': 'application/json; chatset=utf-8',
         'Accept': 'application/json',
+        'ngrok-skip-browser-warning': '69420',
       },
       body: JSON.stringify({
         id,
@@ -38,6 +39,7 @@ export class GatheringItineraryService {
         'Authorization': 'Bearer ' + token,
         'Content-Type': 'application/json; chatset=utf-8',
         'Accept': 'application/json',
+        'ngrok-skip-browser-warning': '69420',
       }
     });
 
@@ -55,6 +57,25 @@ export class GatheringItineraryService {
         'Authorization': 'Bearer ' + token,
         'Content-Type': 'application/json; chatset=utf-8',
         'Accept': 'application/json',
+        'ngrok-skip-browser-warning': '69420',
+      }
+    });
+
+    if (response.ok) {
+      return await response.json();
+    } else {
+      throw await response.json();
+    }
+  }
+
+  static async getStartPosition(token: string): Promise<{ lat: number, lon: number }> {
+    const response = await fetch(getApiUrl() + "GetStartPosition", {
+      method: 'GET',
+      headers: {
+        'Authorization': 'Bearer ' + token,
+        'Content-Type': 'application/json; chatset=utf-8',
+        'Accept': 'application/json',
+        'ngrok-skip-browser-warning': '69420',
       }
     });
 

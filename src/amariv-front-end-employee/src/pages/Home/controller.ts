@@ -56,7 +56,7 @@ export class HomeController extends PageBaseController<HomeState, HomeAction> {
   }
 
   async getStartPosition(token: string) {
-    const { lat, lon } = await GatheringService.getStartPosition(token);
+    const { lat, lon } = await GatheringItineraryService.getStartPosition(token);
     this.dispatch({ type: 'set_position', lat, lon })
   }
 
@@ -84,7 +84,7 @@ export class HomeController extends PageBaseController<HomeState, HomeAction> {
     gatheringItinerary: GatheringItinerary,
   ): Promise<number> {
     const { AdvancedMarkerElement } = await loader.importLibrary("marker");
-    const filteredGatherings = gatheringItinerary.coletas.filter((i) => i.status === true && i.delete === false);
+    const filteredGatherings = gatheringItinerary.coletas.filter((i) => i.status === false && i.delete === false);
     const sortedAndFilteredGatherings = filteredGatherings.sort((a, b) => a.posicaoLista - b.posicaoLista);
     const targetPosition = sortedAndFilteredGatherings[0];
 

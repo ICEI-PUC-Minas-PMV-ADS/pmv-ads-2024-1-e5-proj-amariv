@@ -61,6 +61,8 @@ namespace AmarivAPI.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     PhoneNumber = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    Celular = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     PhoneNumberConfirmed = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     TwoFactorEnabled = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(type: "datetime(6)", nullable: true),
@@ -307,6 +309,7 @@ namespace AmarivAPI.Migrations
                     ClienteTel = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Status = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    IsSuccess = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     Delete = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     AprovacaoAdmin = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     Lat = table.Column<double>(type: "double", nullable: true),

@@ -5,11 +5,11 @@ using Microsoft.AspNetCore.Mvc;
 namespace AmarivAPI.EmployeeAPI.Controllers
 {
     [ApiController]
-    public class EmployeeUser : Controller
+    public class EmployeeUserController : Controller
     {
         private UserService _userService;
 
-        public EmployeeUser(UserService userService)
+        public EmployeeUserController(UserService userService)
         {
             _userService = userService;
         }

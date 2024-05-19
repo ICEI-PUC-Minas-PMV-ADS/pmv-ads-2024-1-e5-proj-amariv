@@ -24,7 +24,7 @@ export function HistoryGatheringViewer({ historyGatherings }: HistoryGatheringVi
   React.useEffect(() => {
     (async () => {
       try {
-        setGatheringItems(historyGatherings.filter((i) => i.status === false));
+        setGatheringItems(historyGatherings.filter((i) => i.status === true));
       } catch (e) {
         console.log(e);
       }

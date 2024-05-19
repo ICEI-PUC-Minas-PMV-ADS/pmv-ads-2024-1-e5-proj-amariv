@@ -26,7 +26,9 @@ namespace AmarivAPI.Models
         [AllowNull]
         public string? ClienteTel { get; set; }
         [Required]
-        public bool Status { get; set; }  /* Pendent, Completed, Canceled */
+        public bool Status { get; set; }
+        [Required]
+        public bool IsSuccess { get; set; }
         [Required]
         public bool Delete {  get; set; } 
         public bool AprovacaoAdmin {  get; set; } /* sim, não*/

@@ -54,9 +54,8 @@ export function HomeMobilePage() {
   return (
     <>
       {(startPosition !== null) &&
-        <div className="w-screen h-screen bg-[#E8F4EB] overflow-y-auto flex flex-col">
+        <div className="w-full h-full bg-[#E8F4EB] overflow-y-auto flex flex-col">
           <div className="w-screen flex-1 overflow-y-auto">
-            <div className="w-full h-[1.5rem] bg-[#53735B]"></div>
             <NavBar title="AMARIV" />
             <div className="px-[2rem] py-[2rem]">
               <h2 className="text-2xl font-bold">Bem vindo {userName}!</h2>

@@ -1,7 +1,9 @@
 ﻿using AmarivAPI.Data;
 using AmarivAPI.EmployeeAPI.Data.DTOs;
+using AmarivAPI.EmployeeAPI.Mappers;
 using AmarivAPI.Models;
 using FluentResults;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,6 +18,7 @@ namespace AmarivAPI.EmployeeAPI.Controllers
         }
 
         [Route("/Emp/GetStartPosition")]
+        [Authorize(Roles = "funcionario")]
         public IActionResult GetStartPosition()
         {
             return Ok(new {
@@ -25,22 +28,27 @@ namespace AmarivAPI.EmployeeAPI.Controllers
         }
 
         [Route("/Emp/GetGatheringItinerary")]
+        [Authorize(Roles = "funcionario")]
         public IActionResult GetGatheringItinerary()
         {
+            var result = new List<object>();
             var userId = User.Claims.FirstOrDefault(x => x.Type == "id").Value;
-            var res = _context.RoteiroDeColetas
+            var gatheringItinerary = _context.RoteiroDeColetas
                 .Include("Funcionario")
                 .Include("Coletas")
                 .Include("Coletas.Endereco")
-                .Where(x => x.FuncionarioId == userId)
+                .Where(x => x.FuncionarioId == userId && x.DataRoteiro >= DateTime.Now)
                 .FirstOrDefault();
-            return Ok(new List<RoteiroDeColetas>() {
-                res
-            });
+            if (gatheringItinerary != null)
+            {
+                result.Add(new RoteiroDeColetaMapper(_context, gatheringItinerary).ToJson());
+            }
+            return Ok(result);
         }
 
-        [Route("/Emp/ChangeGatheringOrder")]
         [HttpPost()]
+        [Route("/Emp/ChangeGatheringOrder")]        
+        [Authorize(Roles = "funcionario")]
         public IActionResult ChangeGatheringOrder(ChangeGatheringOrderDTO dto)
         {
             try
@@ -106,7 +114,7 @@ namespace AmarivAPI.EmployeeAPI.Controllers
                     }
                     t.Commit();
                 }
-                return Ok(gatheringItinerary);
+                return Ok(new RoteiroDeColetaMapper(_context, gatheringItinerary).ToJson());
             }
             catch (Exception)
             {

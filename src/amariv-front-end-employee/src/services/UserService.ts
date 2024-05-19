@@ -16,6 +16,7 @@ export class UserService {
         "Authorization": "Bearer " + token,
         "Content-Type": "application/json",
         "Accept": "application/json",
+        'ngrok-skip-browser-warning': '69420',
       }
     });
 
@@ -47,6 +48,7 @@ export class UserService {
       headers: {
         "Content-Type": "application/json",
         "Accept": "application/json",
+        'ngrok-skip-browser-warning': '69420',
       },
     });
 

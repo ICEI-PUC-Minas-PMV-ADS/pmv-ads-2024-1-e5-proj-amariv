@@ -7,11 +7,11 @@ namespace AmarivAPI.employee_api.Controllers
 {
     [Route("Emp/SignIn")]
     [ApiController]
-    public class EmployeeSignIn : Controller
+    public class EmployeeSignInController : Controller
     {
         private UserService _userService;
 
-        public EmployeeSignIn(UserService userService)
+        public EmployeeSignInController(UserService userService)
         {
             _userService = userService;
         }

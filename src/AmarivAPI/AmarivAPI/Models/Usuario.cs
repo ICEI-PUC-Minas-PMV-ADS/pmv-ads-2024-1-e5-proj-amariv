@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using System.ComponentModel.DataAnnotations;
 
 namespace AmarivAPI.Models
 {
@@ -9,5 +8,6 @@ namespace AmarivAPI.Models
         { }
 
         public string Nome { get; set; }
+        public string Celular { get; set; } = string.Empty;
     }
 }
