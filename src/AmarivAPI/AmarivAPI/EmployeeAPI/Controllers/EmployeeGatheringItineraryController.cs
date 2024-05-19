@@ -22,8 +22,8 @@ namespace AmarivAPI.EmployeeAPI.Controllers
         public IActionResult GetStartPosition()
         {
             return Ok(new {
-                lat = -20.023420422539655,
-                lon = -44.03434894706644,
+                lat = StartPosition.lat,
+                lon = StartPosition.lon,
             });
         }
 
@@ -38,6 +38,7 @@ namespace AmarivAPI.EmployeeAPI.Controllers
                 .Include("Coletas")
                 .Include("Coletas.Endereco")
                 .Where(x => x.FuncionarioId == userId && x.DataRoteiro >= DateTime.Now)
+                .OrderBy(x => x.DataRoteiro)
                 .FirstOrDefault();
             if (gatheringItinerary != null)
             {

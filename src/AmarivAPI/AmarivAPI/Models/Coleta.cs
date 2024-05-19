@@ -26,9 +26,9 @@ namespace AmarivAPI.Models
         [AllowNull]
         public string? ClienteTel { get; set; }
         [Required]
-        public bool Status { get; set; }
+        public bool Status { get; set; }        // Define se a coleta esta em aberto.
         [Required]
-        public bool IsSuccess { get; set; }
+        public bool IsSuccess { get; set; }     // Define se a coleta ou feita ou se foi cancelada.
         [Required]
         public bool Delete {  get; set; } 
         public bool AprovacaoAdmin {  get; set; } /* sim, não*/

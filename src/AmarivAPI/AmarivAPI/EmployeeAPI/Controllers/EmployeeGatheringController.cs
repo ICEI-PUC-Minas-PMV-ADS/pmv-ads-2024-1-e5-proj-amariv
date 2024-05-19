@@ -49,6 +49,14 @@ namespace AmarivAPI.EmployeeAPI.Controllers
                             message = "Roteiro de coleta não localizado!",
                         });
                     }
+                    var remainGatherings = _context.Coletas.Where(x => x.RoteiroColetaId == dto.gatheringItineraryId && x.Status == false).ToList();
+                    if (remainGatherings.Count == 0)
+                    {
+                        gatheringItinerary.Status = true;
+
+                        _context.RoteiroDeColetas.Entry(gatheringItinerary).CurrentValues.SetValues(gatheringItinerary);
+                        _context.SaveChanges();
+                    }                    
                     return Ok(new RoteiroDeColetaMapper(_context, gatheringItinerary).ToJson());
                 }                
             }

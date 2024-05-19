@@ -11,7 +11,7 @@ namespace AmarivAPI.Models
         [Required]
         public string FuncionarioId { get; set; }
         [Required]
-        public DateTime DataRoteiro { get; set; } // Data em que o roteiro sera executado.
+        public DateTime DataRoteiro { get; set; } // 19/05/2024 - 23:59
         public DateTime DataCadastro { get; set; } = DateTime.Now;
         [Required]
         public Boolean Status { get; set; }
