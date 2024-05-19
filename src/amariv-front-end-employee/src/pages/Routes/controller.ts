@@ -1,7 +1,6 @@
 import { Gathering } from "src/models/Gathering";
 import { PageBaseController } from "../../framework/controller";
 import { GatheringItinerary } from "src/models/GatheringItinerary";
-import { GatheringItineraryService } from "src/services/GatheringItineraryService";
 import { GatheringService } from "src/services/GatheringService";
 
 /**

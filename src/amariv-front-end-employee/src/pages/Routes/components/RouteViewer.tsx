@@ -14,7 +14,7 @@ export type RouteViewerProps = {
  * RouteViewer
  */
 
-export function RouteViewer(props: RouteViewerProps) {
+export function RouteViewer({ canEdit, onFinishGathering }: RouteViewerProps) {
   const { currentGathering } = RoutesContext.usePageState()
 
   /**
@@ -29,9 +29,9 @@ export function RouteViewer(props: RouteViewerProps) {
 
   const handleStartFinishGathering = React.useCallback((event: React.MouseEvent<HTMLDivElement, MouseEvent>): void => {
     if (currentGathering) {
-      props.onFinishGathering(currentGathering.id)
+      onFinishGathering(currentGathering.id)
     }
-  }, [props.onFinishGathering, currentGathering]);
+  }, [onFinishGathering, currentGathering]);
 
   /**
    * Layout
@@ -74,7 +74,7 @@ export function RouteViewer(props: RouteViewerProps) {
           <strong>Materiais:</strong> {currentGathering?.listaItensColeta ?? ""}.
         </div>
 
-        {props.canEdit &&
+        {canEdit &&
           <div className="w-full flex items-stretch flex-row border-t border-[#ffffff40] text-white font-bold">
             {!isDesktop && <div className="flex-1 text-[#CADDA8] text-xl font-bold flex justify-center items-center" onClick={handleNavigate}>
               <div className="py-4">Navegar</div>

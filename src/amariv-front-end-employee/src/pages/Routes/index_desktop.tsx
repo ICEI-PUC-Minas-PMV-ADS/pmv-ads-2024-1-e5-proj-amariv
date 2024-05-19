@@ -118,7 +118,7 @@ export function RoutesDesktopPage() {
     } catch (e) {
       console.log(e);
     }
-  }, [gatheringItinerary, isSuccess, showConfirm, token]);
+  }, [ctrl, gatheringItinerary, isSuccess, showConfirm, token, dispatch]);
 
   const handleModalYes = React.useCallback((event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
     setIsSuccess(true);

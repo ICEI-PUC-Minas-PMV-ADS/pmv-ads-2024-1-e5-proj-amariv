@@ -1,6 +1,5 @@
 import { UserService } from "src/services/UserService";
 import { PageBaseController } from "../../framework/controller";
-import { GatheringService } from "src/services/GatheringService";
 import { GatheringItinerary } from "src/models/GatheringItinerary";
 import { GoogRoutesService } from "src/services/GoogRoutesService";
 import { GatheringItineraryService } from "src/services/GatheringItineraryService";

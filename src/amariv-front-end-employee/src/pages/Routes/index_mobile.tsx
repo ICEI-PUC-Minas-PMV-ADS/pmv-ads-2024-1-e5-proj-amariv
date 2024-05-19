@@ -106,7 +106,7 @@ export function RoutesMobilePage() {
     } catch (e) {
       console.log(e);
     }
-  }, [gatheringItinerary, isSuccess, showConfirm, token, dispatch]);
+  }, [ctrl, gatheringItinerary, isSuccess, showConfirm, token, dispatch]);
 
   const handleModalYes = React.useCallback((event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
     setIsSuccess(true);

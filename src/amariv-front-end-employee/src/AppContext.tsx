@@ -52,7 +52,7 @@ const AppReducer = (
         return { ...state, gatheringItinerary: null, currentGathering: null };
       }
       const gatheringItinerary = action.payload as GatheringItinerary;
-      const filteredGatherings = gatheringItinerary.coletas.filter((i) => i.true && i.delete === false);
+      const filteredGatherings = gatheringItinerary.coletas.filter((i) => i.status === false && i.delete === false);
       const sortedAndFilteredGatherings = filteredGatherings.sort((a, b) => a.posicaoLista - b.posicaoLista);
       return { ...state, gatheringItinerary, currentGathering: sortedAndFilteredGatherings[0] };
     case 'logout':
