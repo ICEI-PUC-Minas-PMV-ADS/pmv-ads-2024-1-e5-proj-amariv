@@ -59,7 +59,10 @@ namespace AmarivAPI.Data
                 .HasForeignKey(e => e.RoteiroColetaId);
 
             builder.Entity<Coleta>()
-                .HasOne(e => e.Endereco);
+                .HasOne(e => e.Endereco)
+                .WithOne()
+                .HasForeignKey<Coleta>(e => e.EnderecoId)
+                .HasPrincipalKey<Endereco>(e => e.Id);
         }
         public DbSet<Coleta> Coletas { get; set; }
         public DbSet<Endereco> Enderecos { get; set; }
