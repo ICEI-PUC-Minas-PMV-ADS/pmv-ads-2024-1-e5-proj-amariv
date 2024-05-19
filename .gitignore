@@ -1,3 +1,5 @@
-/src/AmarivAPI/.vs
-/src/AmarivAPI/bin
-/src/AmarivAPI/obj
+/src/AmarivAPI/.vs/
+/src/AmarivAPI/AmarivAPI/bin/
+/src/AmarivAPI/AmarivAPI/obj/
+
+/src/amariv-front-end/node_modules
