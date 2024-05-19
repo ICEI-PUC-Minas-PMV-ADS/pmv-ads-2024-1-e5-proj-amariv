@@ -17,7 +17,7 @@ export const DropdownInput = React.forwardRef(
         <select
           {...props}
           ref={ref}
-          className="w-full py-2 px-4 rounded-[30px] rounded-md bg-[#FBFFF3] border border-[#004646] focus:outline-none focus:ring focus:border-[#004646]"
+          className="w-full py-2 px-4 rounded-[30px] bg-[#FBFFF3] border border-[#004646] focus:outline-none focus:ring focus:border-[#004646]"
         >
           {placeholder && (
             <option value="" disabled hidden>
@@ -35,4 +35,4 @@ export const DropdownInput = React.forwardRef(
   }
 );
 
-export default DropdownInput
+export default DropdownInput;
