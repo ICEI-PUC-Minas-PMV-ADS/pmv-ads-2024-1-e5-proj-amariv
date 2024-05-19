@@ -9,6 +9,8 @@ import { Button } from "src/components/Button";
 import { Gathering } from "src/models/Gathering";
 import { GatheringItineraryService } from "src/services/GatheringItineraryService";
 import { RoutesContext } from "./context";
+import { useNotification } from "src/components/NotificationProvider";
+import { UserService } from "src/services/UserService";
 
 /**
  * Routes page desktop
@@ -18,11 +20,13 @@ export function RoutesDesktopPage() {
   const ctrl = RoutesContext.usePageController();
   const { state: { token, gatheringItinerary }, dispatch } = React.useContext(AppContext);
   const [lastRouteItems, setLastRouteItems] = React.useState<Gathering[]>([]);
-  const [routeItems, setRouteItems] = React.useState<Gathering[]>([]);
+  const [routeItems, setRouteItems] = React.useState<Gathering[] | null>(null);
+  const [gatheringId, setGatheringId] = React.useState<number | null>(null);
   const [hasChange, setHasChange] = React.useState<boolean>(false);
   const [showConfirm, setShowConfirm] = React.useState<boolean>(false);
   const [isSuccess, setIsSuccess] = React.useState<boolean | null>(null);
   const navigate = useNavigate();
+  const notification = useNotification();
 
   /**
    * Effects.
@@ -30,17 +34,50 @@ export function RoutesDesktopPage() {
 
 
   React.useEffect(() => {
-    if (gatheringItinerary && routeItems.length === 0) {
+    if (gatheringItinerary && routeItems === null) {
       const filteredGatherings = gatheringItinerary.coletas.filter((i) => i.status === false && i.delete === false);
       const sortedAndFilteredGatherings = filteredGatherings.sort((a, b) => a.posicaoLista - b.posicaoLista);
       if (sortedAndFilteredGatherings.length > 0) {
         ctrl.setCurrentRoute(sortedAndFilteredGatherings[0]);
+      } else {
+        ctrl.setCurrentRoute(null);
       }
       setRouteItems(sortedAndFilteredGatherings);
       setLastRouteItems(sortedAndFilteredGatherings);
     }
   }, [gatheringItinerary, routeItems, ctrl]);
 
+  React.useEffect(() => {
+    (async function () {
+      try {
+        if (token && gatheringItinerary && gatheringId && isSuccess !== null) {
+          const updatedGatheringItinerary = await ctrl.setFinishGathering(
+            token,
+            gatheringItinerary.id,
+            gatheringId,
+            isSuccess,
+          );
+
+          dispatch({ type: 'set_gathering_itinerary', payload: updatedGatheringItinerary });
+
+          setShowConfirm(false);
+          setIsSuccess(null);
+          setGatheringId(null);
+
+          const filteredGatherings = updatedGatheringItinerary.coletas.filter((i) => i.status === false && i.delete === false);
+          const sortedAndFilteredGatherings = filteredGatherings.sort((a, b) => a.posicaoLista - b.posicaoLista);
+          if (sortedAndFilteredGatherings.length > 0) {
+            ctrl.setCurrentRoute(sortedAndFilteredGatherings[0]);
+          } else {
+            ctrl.setCurrentRoute(null);
+          }
+          setRouteItems(sortedAndFilteredGatherings);
+        }
+      } catch (e: any) {
+        notification(e.message);
+      }
+    })();
+  }, [ctrl, token, gatheringItinerary, gatheringId, isSuccess, dispatch, notification]);
   /**
    * Events
    */
@@ -76,7 +113,7 @@ export function RoutesDesktopPage() {
   const handleConfirmClick = React.useCallback((event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
     (async function () {
       try {
-        if (gatheringItinerary !== null && token !== undefined && routeItems.length > 0) {
+        if (gatheringItinerary !== null && token !== undefined && routeItems && routeItems?.length > 0) {
           const newGatheringItinerary = await GatheringItineraryService.changeGatheringOrder(
             token,
             gatheringItinerary!.id,
@@ -88,37 +125,24 @@ export function RoutesDesktopPage() {
           setLastRouteItems(routeItems);
           setHasChange(false);
         }
-      } catch (e) {
-        console.log(e);
+      } catch (e: any) {
+        notification(e.message);
       }
     })();
-  }, [token, gatheringItinerary, routeItems, dispatch]);
+  }, [token, gatheringItinerary, routeItems, dispatch, notification]);
 
-  const handleFinishGathering = React.useCallback(async (gatheringId: number): Promise<void> => {
+  const handleFinishGathering = React.useCallback(async (finishGatheringId: number): Promise<void> => {
     try {
       if (isSuccess === null) {
         if (showConfirm === false) {
           setShowConfirm(true);
-        } else {
-          if (token && gatheringItinerary && isSuccess !== null) {
-            const updatedGatheringItinerary = await ctrl.setFinishGathering(
-              token,
-              gatheringItinerary.id,
-              gatheringId,
-              isSuccess,
-            );
-
-            dispatch({ type: 'set_gathering_itinerary', payload: updatedGatheringItinerary });
-
-            setShowConfirm(false);
-            setIsSuccess(null);
-          }
+          setGatheringId(finishGatheringId);
         }
       }
-    } catch (e) {
-      console.log(e);
+    } catch (e: any) {
+      notification(e.message);
     }
-  }, [ctrl, gatheringItinerary, isSuccess, showConfirm, token, dispatch]);
+  }, [isSuccess, showConfirm, notification]);
 
   const handleModalYes = React.useCallback((event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
     setIsSuccess(true);
@@ -132,6 +156,17 @@ export function RoutesDesktopPage() {
     setShowConfirm(false);
   }, []);
 
+  const handleMenuExitClick = React.useCallback(async (): Promise<void> => {
+    try {
+      if (token) {
+        await UserService.logout(token);
+        dispatch({ type: 'logout' });
+      }
+    } catch (e: any) {
+      notification(e.message);
+    }
+  }, [token, dispatch, notification]);
+
   /**
    * Layout
    */
@@ -144,7 +179,7 @@ export function RoutesDesktopPage() {
 
       {showConfirm && <>
         <div className="w-full h-full bg-[#000000A0] absolute">
-          <div className="w-[80%] relative bg-white p-4 rounded left-[50%] -translate-x-1/2 top-[50%] -translate-y-1/2">
+          <div className="w-[20rem] relative bg-white p-4 rounded left-[50%] -translate-x-1/2 top-[50%] -translate-y-1/2">
             <h2 className="text-center">Você confirmar a finalização desta rota?</h2>
             <Spacer height=".5rem" />
             <h3 className="text-center font-bold">A coleta foi realizada?</h3>
@@ -175,11 +210,13 @@ export function RoutesDesktopPage() {
               <div className="text-[#ffffff] cursor-pointer">Rotas</div>
               <Spacer width="2rem" />
               <div className="text-[#E8F4EB] cursor-pointer" onClick={handleMenuHistoryClick}>Historico de coletas</div>
+              <Spacer width="2rem" />
+              <div className="text-[#E8F4EB] cursor-pointer" onClick={handleMenuExitClick}>Sair</div>
             </div>
           </NavBar>
           <div className="flex justify-center px-[2rem] py-[2rem]">
             <div className="w-[40vw]">
-              {gatheringItinerary !== null
+              {(gatheringItinerary !== null && routeItems && routeItems.length > 0)
                 ? <>
                   <h2 className="text-2xl font-bold">Rota atual</h2>
                   <Spacer height='1rem' />

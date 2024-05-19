@@ -58,4 +58,24 @@ export class UserService {
       throw await response.json();
     }
   }
+
+  /**
+   * Logout
+   */
+
+  static async logout(token: string): Promise<void> {
+    const response = await fetch(getApiUrl() + "Logout", {
+      method: 'POST',
+      headers: {
+        "Authorization": "Bearer " + token,
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        'ngrok-skip-browser-warning': '69420',
+      },
+    });
+
+    if (!response.ok) {
+      throw await response.json();
+    }
+  }
 }

@@ -4,13 +4,16 @@ import { Spacer } from "../../components/Spacer";
 import { HistoryGatheringViewer } from "./components/HistoryGatheringViewer";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "src/AppContext";
+import { UserService } from "src/services/UserService";
+import { useNotification } from "src/components/NotificationProvider";
 
 /**
  * History page desktop
  */
 
 export function HistoryDesktopPage() {
-  const { state: { gatheringItinerary } } = React.useContext(AppContext);
+  const { state: { token, gatheringItinerary }, dispatch } = React.useContext(AppContext);
+  const notification = useNotification();
   const navigate = useNavigate();
 
   /**
@@ -24,6 +27,17 @@ export function HistoryDesktopPage() {
   const handleMenuRouteClick = React.useCallback((event: React.MouseEvent<HTMLDivElement, MouseEvent>): void => {
     navigate("/routes", { replace: true });
   }, [navigate]);
+
+  const handleMenuExitClick = React.useCallback(async (): Promise<void> => {
+    try {
+      if (token) {
+        await UserService.logout(token);
+        dispatch({ type: 'logout' });
+      }
+    } catch (e: any) {
+      notification(e.message);
+    }
+  }, [token, dispatch, notification]);
 
   /**
    * Layout
@@ -39,6 +53,8 @@ export function HistoryDesktopPage() {
             <div className="text-[#E8F4EB] cursor-pointer" onClick={handleMenuRouteClick}>Rotas</div>
             <Spacer width="2rem" />
             <div className="text-[#ffffff] cursor-pointer">Historico de coletas</div>
+            <Spacer width="2rem" />
+            <div className="text-[#E8F4EB] cursor-pointer" onClick={handleMenuExitClick}>Sair</div>
           </div>
         </NavBar>
         <div className="w-full flex justify-center">

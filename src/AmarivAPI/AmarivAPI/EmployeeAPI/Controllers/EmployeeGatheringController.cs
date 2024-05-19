@@ -1,5 +1,6 @@
 ﻿using AmarivAPI.Data;
 using AmarivAPI.EmployeeAPI.Data.DTOs;
+using AmarivAPI.EmployeeAPI.Mappers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -48,7 +49,7 @@ namespace AmarivAPI.EmployeeAPI.Controllers
                             message = "Roteiro de coleta não localizado!",
                         });
                     }
-                    return Ok(gatheringItinerary);
+                    return Ok(new RoteiroDeColetaMapper(_context, gatheringItinerary).ToJson());
                 }                
             }
             catch (Exception)

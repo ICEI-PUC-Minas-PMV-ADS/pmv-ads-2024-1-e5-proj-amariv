@@ -6,6 +6,7 @@ import { HomeDesktopPage } from "./index_desktop";
 import { HomeMobilePage } from "./index_mobile";
 import { AppContext } from "src/AppContext";
 import { Loading } from "./components/Loading";
+import { useNotification } from "src/components/NotificationProvider";
 
 /**
  * Home page
@@ -15,6 +16,7 @@ export const HomePage = PageComponent(() => {
   const [loading, setLoading] = React.useState(true);
   const { token } = React.useContext(AppContext).state;
   const ctrl = HomeContext.usePageController();
+  const notification = useNotification();
 
   /**
    * Effects
@@ -28,11 +30,11 @@ export const HomePage = PageComponent(() => {
           await ctrl.getStartPosition(token);
           setLoading(false);
         }
-      } catch (e) {
-        console.log(e);
+      } catch (e: any) {
+        notification(e.message);
       }
     })();
-  }, [ctrl, token]);
+  }, [ctrl, token, notification]);
 
   /**
    * Layout

@@ -6,6 +6,7 @@ using AmarivAPI.Services;
 using AutoMapper;
 using FluentResults;
 using Microsoft.AspNetCore.Identity;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace AmarivAPI.EmployeeAPI.Services
 {
@@ -60,12 +61,22 @@ namespace AmarivAPI.EmployeeAPI.Services
             return _signInManager.UserManager.FindByIdAsync(userId);
         }
 
-        private Usuario? RecuperaUsuarioPorEmail(string email)
+        public Usuario? RecuperaUsuarioPorEmail(string email)
         {
             return _signInManager
                 .UserManager
                 .Users
                 .FirstOrDefault(usuario => usuario.NormalizedUserName == email.ToUpper());
+        }
+
+        public Task<Result<string?>> Logout()
+        {
+            var resultado = _signInManager.SignOutAsync();
+            if (resultado.IsCompletedSuccessfully)
+            {
+                return Task.FromResult(Result.Ok<string?>(null));
+            }
+            return Task.FromResult(Result.Fail<string?>("Logout falhou"));
         }
     }
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { AppContext, AppContextProvider } from './AppContext';
 import { AppRoutes } from './AppRoutes';
-import { NotificationProvider } from './components/NotificationProvider';
+import { NotificationProvider, useNotification } from './components/NotificationProvider';
 import { GatheringItineraryService } from './services/GatheringItineraryService';
 import './App.css';
 
@@ -25,6 +25,7 @@ export function App() {
 
 function AppImpl() {
   const { state: { token }, dispatch } = React.useContext(AppContext);
+  const notification = useNotification();
 
   /**
    * Effects.
@@ -42,11 +43,11 @@ function AppImpl() {
             dispatch({ type: 'set_gathering_itinerary', payload: null });
           }
         }
-      } catch (e) {
-        console.log(e);
+      } catch (e: any) {
+        notification(e.message);
       }
     })();
-  }, [token, dispatch]);
+  }, [token, dispatch, notification]);
 
   /**
    * Layout

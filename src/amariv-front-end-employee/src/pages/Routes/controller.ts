@@ -25,7 +25,7 @@ export const initialRoutesState: RoutesState = {
 
 export type RoutesAction = {
   type: 'set_gathering',
-  payload: { currentGathering: Gathering },
+  payload: { currentGathering: Gathering | null },
 };
 
 /**
@@ -42,7 +42,7 @@ export class RoutesController extends PageBaseController<RoutesState, RoutesActi
     return await GatheringService.setFinishGathering(token, gatheringItineraryId, gatheringId, isSuccess);
   }
 
-  setCurrentRoute(currentGathering: Gathering) {
+  setCurrentRoute(currentGathering: Gathering | null) {
     this.dispatch({ type: 'set_gathering', payload: { currentGathering } });
   }
 

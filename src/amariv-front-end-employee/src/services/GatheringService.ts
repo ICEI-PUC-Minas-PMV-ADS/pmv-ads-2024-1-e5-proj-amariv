@@ -12,7 +12,7 @@ export class GatheringService {
     gatheringId: number,
     isSuccess: boolean,
   ): Promise<GatheringItinerary> {
-    const response = await fetch(getApiUrl() + "SetFinishRoute", {
+    const response = await fetch(getApiUrl() + "SetFinishGathering", {
       method: 'POST',
       headers: {
         'Authorization': 'Bearer ' + token,

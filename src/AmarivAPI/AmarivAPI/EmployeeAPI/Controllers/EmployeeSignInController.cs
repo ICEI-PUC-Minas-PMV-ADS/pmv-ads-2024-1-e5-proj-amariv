@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AmarivAPI.employee_api.Controllers
 {
-    [Route("Emp/SignIn")]
     [ApiController]
     public class EmployeeSignInController : Controller
     {
@@ -17,6 +16,7 @@ namespace AmarivAPI.employee_api.Controllers
         }
 
         [HttpPost]
+        [Route("Emp/SignIn")]
         public IActionResult Index(SignInDTO signInDTO)
         {
             try
@@ -38,6 +38,19 @@ namespace AmarivAPI.employee_api.Controllers
                     message = "Falha em nossos servidores, tente novamente mais tarde!"
                 });
             }
+        }
+
+        [HttpPost]
+        [Route("Emp/Logout")]
+        public async Task<IActionResult> Logout()
+        {
+            var result = await _userService.Logout();
+            if (result.IsSuccess) {
+                return Ok();
+            }
+            return NotFound(new {
+                message = result.Value.ToString(),
+            });
         }
     }
 }

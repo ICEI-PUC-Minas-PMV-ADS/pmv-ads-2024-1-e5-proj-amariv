@@ -15,7 +15,7 @@ export type RouteViewerProps = {
  */
 
 export function RouteViewer({ canEdit, onFinishGathering }: RouteViewerProps) {
-  const { currentGathering } = RoutesContext.usePageState()
+  const { currentGathering } = RoutesContext.usePageState();
 
   /**
    * Events
@@ -32,6 +32,32 @@ export function RouteViewer({ canEdit, onFinishGathering }: RouteViewerProps) {
       onFinishGathering(currentGathering.id)
     }
   }, [onFinishGathering, currentGathering]);
+
+  const handleCelCall = React.useCallback((event: React.MouseEvent<HTMLDivElement, MouseEvent>): void => {
+    if (currentGathering) {
+      let tel = currentGathering.clienteCel;
+      if (tel && tel.length > 0) {
+        tel = tel.replaceAll('(', '');
+        tel = tel.replaceAll(')', '');
+        tel = tel.replaceAll(' ', '');
+        tel = tel.replaceAll('-', '');
+        window.open('tel:' + tel);
+      }
+    }
+  }, [currentGathering]);
+
+  const handleTelCall = React.useCallback((event: React.MouseEvent<HTMLDivElement, MouseEvent>): void => {
+    if (currentGathering) {
+      let tel = currentGathering.usuario?.telefone ?? currentGathering.clienteTel;
+      if (tel && tel.length > 0) {
+        tel = tel.replaceAll('(', '');
+        tel = tel.replaceAll(')', '');
+        tel = tel.replaceAll(' ', '');
+        tel = tel.replaceAll('-', '');
+        window.open('tel:' + tel);
+      }
+    }
+  }, [currentGathering]);
 
   /**
    * Layout
@@ -55,7 +81,7 @@ export function RouteViewer({ canEdit, onFinishGathering }: RouteViewerProps) {
             Celular: {currentGathering?.clienteCel}
           </div>
           {!isDesktop &&
-            <div className="py-4 px-[2rem] border-s border-[#ffffff30] text-[#CADDA8] font-bold">
+            <div className="py-4 px-[2rem] border-s border-[#ffffff30] text-[#CADDA8] font-bold" onClick={handleCelCall}>
               Ligar
             </div>}
         </div>
@@ -65,7 +91,7 @@ export function RouteViewer({ canEdit, onFinishGathering }: RouteViewerProps) {
             Telefone: {currentGathering?.usuario?.telefone ?? currentGathering?.clienteTel}
           </div>
           {!isDesktop &&
-            <div className="py-4 px-[2rem] border-s border-[#ffffff40] text-[#CADDA8] font-bold">
+            <div className="py-4 px-[2rem] border-s border-[#ffffff40] text-[#CADDA8] font-bold" onClick={handleTelCall}>
               Ligar
             </div>}
         </div>
@@ -80,7 +106,7 @@ export function RouteViewer({ canEdit, onFinishGathering }: RouteViewerProps) {
               <div className="py-4">Navegar</div>
             </div>}
             <div
-              className="flex-1  text-xl text-[#CADDA8] font-bold flex justify-center items-center border-s border-[#ffffff40]"
+              className="flex-1  text-xl text-[#CADDA8] font-bold flex justify-center items-center border-s border-[#ffffff40] cursor-pointer"
               onClick={handleStartFinishGathering}>
               <div className="py-4">Finalizar</div>
             </div>

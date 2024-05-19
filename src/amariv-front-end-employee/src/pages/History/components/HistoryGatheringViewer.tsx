@@ -1,6 +1,7 @@
 import React from "react";
 import { HistoryGatheringList } from "./HistoryGatheringList";
 import { Gathering } from "src/models/Gathering";
+import { useNotification } from "src/components/NotificationProvider";
 
 /**
  * HistoryGatheringViewerProps
@@ -16,6 +17,7 @@ export type HistoryGatheringViewerProps = {
 
 export function HistoryGatheringViewer({ historyGatherings }: HistoryGatheringViewerProps) {
   const [gatheringItems, setGatheringItems] = React.useState<Gathering[]>([]);
+  const notification = useNotification();
 
   /**
    * Effect
@@ -25,11 +27,11 @@ export function HistoryGatheringViewer({ historyGatherings }: HistoryGatheringVi
     (async () => {
       try {
         setGatheringItems(historyGatherings.filter((i) => i.status === true));
-      } catch (e) {
-        console.log(e);
+      } catch (e: any) {
+        notification(e.message);
       }
     })();
-  }, [historyGatherings]);
+  }, [historyGatherings, notification]);
 
   /**
    * Layout
