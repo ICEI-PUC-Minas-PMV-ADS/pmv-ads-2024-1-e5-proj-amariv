@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import MaterialCard from '../../components/MaterialCard';
+import MaterialModal from '../../components/MaterialModal';
 import { Button2 } from '../../components/Button2';
-import { Button3 } from '../../components/Button3';
-import { DropdownInput } from '../../components/DropdownInput';
-import { Input } from '../../components/Input';
-import { Form } from '../../components/Form';
 import axios from 'axios';
+import MaterialFilter from '../../components/MaterialFilter';
 
 const API_BASE_URL = 'http://localhost:5100';
 
@@ -25,9 +23,25 @@ const MaterialPage: React.FC = () => {
     tipo: "",
     peso: "",
   });
-  const [searchDescription, setSearchDescription] = useState("");
-  const [selectedMaterialType, setSelectedMaterialType] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filteredMaterialType, setFilteredMaterialType] = useState("");
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
+
+  const materialOptions = [
+    "Todos",
+    "Metal",
+    "Plástico",
+    "Papel",
+    "Papelão",
+    "Vidro",
+  ];
+
+  const weightOptions = [
+    "Todos",
+    "Leve",
+    "Médio",
+    "Pesado",
+  ];
 
   useEffect(() => {
     fetchMaterials();
@@ -40,6 +54,18 @@ const MaterialPage: React.FC = () => {
         setMaterials(response.data);
       })
       .catch(error => console.error("Erro ao recuperar materiais:", error));
+  };
+
+  const handleSearch = () => {
+    if (searchTerm === "" && filteredMaterialType === "Todos") {
+      return materials;
+    } else {
+      return materials.filter(material => {
+        const matchesSearchTerm = searchTerm === "" || material.descricao.toLowerCase().includes(searchTerm.toLowerCase());
+        const matchesMaterialType = filteredMaterialType === "Todos" || material.tipo === filteredMaterialType;
+        return matchesSearchTerm && matchesMaterialType;
+      });
+    }
   };
 
   const handleAddMaterial = () => {
@@ -65,7 +91,7 @@ const MaterialPage: React.FC = () => {
 
   const handleEditMaterial = (index: number) => {
     setMaterialInfo(materials[index]);
-    setEditingIndex(materials[index].id); // Definir o ID do material
+    setEditingIndex(materials[index].id);
     setShowMaterialPanel(true);
   };
 
@@ -78,128 +104,55 @@ const MaterialPage: React.FC = () => {
       .catch(error => console.error("Erro ao excluir material:", error));
   };
 
-  const materialOptions = [
-    "Selecione...",
-    "Metal",
-    "Plástico",
-    "Papel",
-    "Papelão",
-    "Vidro",
-  ];
-
   return (
     <div className="App">
       <div className="content">
         <div className="title">
-          <h2 className="mt-[30px] text-[#53735B] text-[1.75rem]">
+          <h2 className="mt-[30px] text-[#53735B] text-[1.75rem] float-left">
             Materiais
           </h2>
-          <div>
-            <Button2
-              type="button"
-              label="Adicionar material"
-              onClick={() => {
-                setEditingIndex(null);
-                setShowMaterialPanel(true);
-              }}
-              className="w-[150px] mt-[15px]"
-            />
-            {showMaterialPanel && (
-              <div className="material-panel">
-                <div className="title">
-                  <p className="text-[#666666] text-m my-1">
-                    {editingIndex !== null ? "Editar material" : "Adicionar material"}
-                  </p>
-                </div>
-                <div className="addmaterial">
-                  <div>
-                    <Input
-                      type="text"
-                      label="Descrição"
-                      value={materialInfo.descricao}
-                      onChange={(e) => setMaterialInfo({ ...materialInfo, descricao: e.target.value })}
-                      required
-                    />
-                  </div>
-                  <div>
-                    <Input
-                      type="text"
-                      label="Tipo"
-                      value={materialInfo.tipo}
-                      onChange={(e) => setMaterialInfo({ ...materialInfo, tipo: e.target.value })}
-                      required
-                    />
-                  </div>
-                  <div>
-                    <Input
-                      type="text"
-                      label="Peso"
-                      value={materialInfo.peso}
-                      onChange={(e) => setMaterialInfo({ ...materialInfo, peso: e.target.value })}
-                      required
-                    />
-                  </div>
-                </div>
-                <div className="material-buttons">
-                  <div>
-                    <Button3
-                      type="button"
-                      label="Cancelar"
-                      onClick={() => {
-                        setMaterialInfo({ id: 0, descricao: "", tipo: "", peso: "" });
-                        setShowMaterialPanel(false);
-                      }}
-                      className="w-[140px]"
-                    />
-                  </div>
-                  <div>
-                    <Button2
-                      type="button"
-                      label={editingIndex !== null ? "Salvar" : "Adicionar"}
-                      onClick={handleAddMaterial}
-                      className="w-[140px]"
-                    />
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
+          <Button2
+            type="button"
+            label="Adicionar material"
+            onClick={() => {
+              setEditingIndex(null);
+              setShowMaterialPanel(true);
+            }}
+            className="w-[150px] mt-[15px] float-right"
+          />
         </div>
 
-        <Form>
-          <div className="title">
-            <p className="text-[#666666] text-m my-1">Filtros</p>
-          </div>
-          <div className="dados-cliente">
-            <div>
-              <Input
-                type="text"
-                label="Pesquisar por descrição"
-                value={searchDescription}
-                onChange={(e) => setSearchDescription(e.target.value)}
-                required
-              />
-            </div>
-            <div>
-              <DropdownInput
-                label="Pesquisar por tipo"
-                options={materialOptions}
-                placeholder="Selecione um material..."
-                value={selectedMaterialType}
-                onChange={(e) => setSelectedMaterialType(e.target.value)}
-                required
-              />
-            </div>
-          </div>
-        </Form>
+        {showMaterialPanel && (
+          <MaterialModal
+            materialInfo={materialInfo}
+            materialOptions={materialOptions}
+            weightOptions={weightOptions}
+            onSave={handleAddMaterial}
+            onCancel={() => {
+              setMaterialInfo({ id: 0, descricao: "", tipo: "", peso: "" });
+              setShowMaterialPanel(false);
+            }}
+            onChange={(field, value) =>
+              setMaterialInfo({ ...materialInfo, [field]: value })
+            }
+          />
+        )}
 
-        <div className="material-cards">
-          {materials.map((material, index) => (
+        <MaterialFilter
+          materialOptions={materialOptions}
+          selectedMaterialType={filteredMaterialType}
+          setSelectedMaterialType={setFilteredMaterialType}
+          searchDescription={searchTerm}
+          setSearchDescription={setSearchTerm}
+        />
+
+        <div className="mt-8 material-cards grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-12">
+          {handleSearch().map((material, index) => (
             <MaterialCard
-              key={material.id} // Usando o ID como chave
+              key={material.id}
               material={material}
               onEdit={() => handleEditMaterial(index)}
-              onDelete={() => handleDeleteMaterial(material.id)} // Passando o ID para a função
+              onDelete={() => handleDeleteMaterial(material.id)}
             />
           ))}
         </div>

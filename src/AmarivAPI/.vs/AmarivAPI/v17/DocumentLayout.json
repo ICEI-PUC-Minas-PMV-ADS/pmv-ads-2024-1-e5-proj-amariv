@@ -3,6 +3,14 @@
   "WorkspaceRootPath": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\onedrive\\documentos\\github\\src\\amarivapi\\amarivapi\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\onedrive\\documentos\\github\\src\\amarivapi\\amarivapi\\controllers\\materialcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\controllers\\materialcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\onedrive\\documentos\\github\\src\\amarivapi\\amarivapi\\amarivapi.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
       "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\amarivapi.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
     },
@@ -21,10 +29,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\onedrive\\documentos\\github\\src\\amarivapi\\amarivapi\\models\\material.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\models\\material.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\onedrive\\documentos\\github\\src\\amarivapi\\amarivapi\\controllers\\materialcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\controllers\\materialcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\onedrive\\documentos\\github\\src\\amarivapi\\amarivapi\\controllers\\funcionariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -57,10 +61,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\onedrive\\documentos\\github\\src\\amarivapi\\amarivapi\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\onedrive\\documentos\\github\\src\\amarivapi\\amarivapi\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\onedrive\\documentos\\github\\src\\amarivapi\\amarivapi\\data\\dtos\\funcionariosdtos\\funcionarioresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -248,60 +248,37 @@
         },
         {
           "DockedWidth": 111,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "MaterialProfile.cs",
-              "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Profiles\\MaterialProfile.cs",
-              "RelativeDocumentMoniker": "AmarivAPI\\Profiles\\MaterialProfile.cs",
-              "ToolTip": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Profiles\\MaterialProfile.cs",
-              "RelativeToolTip": "AmarivAPI\\Profiles\\MaterialProfile.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-25T20:34:14.25Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Material.cs",
-              "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Models\\Material.cs",
-              "RelativeDocumentMoniker": "AmarivAPI\\Models\\Material.cs",
-              "ToolTip": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Models\\Material.cs",
-              "RelativeToolTip": "AmarivAPI\\Models\\Material.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-25T19:40:06.188Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 1,
               "Title": "MaterialController.cs",
               "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Controllers\\MaterialController.cs",
               "RelativeDocumentMoniker": "AmarivAPI\\Controllers\\MaterialController.cs",
               "ToolTip": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Controllers\\MaterialController.cs",
               "RelativeToolTip": "AmarivAPI\\Controllers\\MaterialController.cs",
-              "ViewState": "AQIAACQAAAAAAAAAAAAuwFQAAAABAAAA",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAwwFQAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-25T21:00:19.539Z"
+              "WhenOpened": "2024-04-25T21:00:19.539Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "AmarivAPI.http",
               "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\AmarivAPI.http",
               "RelativeDocumentMoniker": "AmarivAPI\\AmarivAPI.http",
               "ToolTip": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\AmarivAPI.http",
               "RelativeToolTip": "AmarivAPI\\AmarivAPI.http",
-              "ViewState": "AQIAACgAAAAAAAAAAAAkwEEAAAAPAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABcAAAATAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
               "WhenOpened": "2024-04-25T19:34:59.432Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "CreateMaterialDto.cs",
               "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Data\\Dtos\\MaterialDtos\\CreateMaterialDto.cs",
               "RelativeDocumentMoniker": "AmarivAPI\\Data\\Dtos\\MaterialDtos\\CreateMaterialDto.cs",
@@ -325,7 +302,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "ReadMaterialDto.cs",
               "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Data\\Dtos\\MaterialDtos\\ReadMaterialDto.cs",
               "RelativeDocumentMoniker": "AmarivAPI\\Data\\Dtos\\MaterialDtos\\ReadMaterialDto.cs",
@@ -337,7 +314,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Program.cs",
               "RelativeDocumentMoniker": "AmarivAPI\\Program.cs",
@@ -345,12 +322,11 @@
               "RelativeToolTip": "AmarivAPI\\Program.cs",
               "ViewState": "AQIAAC0AAAAAAAAAAAAAAFkAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-26T01:39:01.306Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-26T01:39:01.306Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "appsettings.json",
               "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\appsettings.json",
               "RelativeDocumentMoniker": "AmarivAPI\\appsettings.json",
@@ -363,7 +339,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "Funcionarios.cs",
               "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Models\\Funcionarios.cs",
               "RelativeDocumentMoniker": "AmarivAPI\\Models\\Funcionarios.cs",
@@ -371,12 +347,11 @@
               "RelativeToolTip": "AmarivAPI\\Models\\Funcionarios.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABcAAAAyAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-05T18:37:51.009Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-05T18:37:51.009Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "MaterialService.cs",
               "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Services\\MaterialService.cs",
               "RelativeDocumentMoniker": "AmarivAPI\\Services\\MaterialService.cs",
@@ -388,19 +363,44 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 0,
               "Title": "LoginController.cs",
               "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Controllers\\LoginController.cs",
               "RelativeDocumentMoniker": "AmarivAPI\\Controllers\\LoginController.cs",
               "ToolTip": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Controllers\\LoginController.cs",
               "RelativeToolTip": "AmarivAPI\\Controllers\\LoginController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAACIAAAAjAAAA",
+              "ViewState": "AQIAAAsAAAAAAAAAAAAQwC0AAAAjAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-25T19:15:15.432Z"
+              "WhenOpened": "2024-04-25T19:15:15.432Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
+              "Title": "Material.cs",
+              "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Models\\Material.cs",
+              "RelativeDocumentMoniker": "AmarivAPI\\Models\\Material.cs",
+              "ToolTip": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Models\\Material.cs",
+              "RelativeToolTip": "AmarivAPI\\Models\\Material.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-25T19:40:06.188Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "MaterialProfile.cs",
+              "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Profiles\\MaterialProfile.cs",
+              "RelativeDocumentMoniker": "AmarivAPI\\Profiles\\MaterialProfile.cs",
+              "ToolTip": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Profiles\\MaterialProfile.cs",
+              "RelativeToolTip": "AmarivAPI\\Profiles\\MaterialProfile.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-25T20:34:14.25Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "FuncionarioController.cs",
               "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Controllers\\FuncionarioController.cs",
               "RelativeDocumentMoniker": "AmarivAPI\\Controllers\\FuncionarioController.cs",
@@ -412,7 +412,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "NotificacaoController.cs",
               "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Controllers\\NotificacaoController.cs",
               "RelativeDocumentMoniker": "AmarivAPI\\Controllers\\NotificacaoController.cs",
@@ -424,7 +424,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "launchSettings.json",
               "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "AmarivAPI\\Properties\\launchSettings.json",
@@ -448,7 +448,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "UsuarioService.cs",
               "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Services\\UsuarioService.cs",
               "RelativeDocumentMoniker": "AmarivAPI\\Services\\UsuarioService.cs",

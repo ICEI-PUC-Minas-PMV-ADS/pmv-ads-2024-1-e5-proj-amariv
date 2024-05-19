@@ -4,184 +4,156 @@ import { Button2 } from "../../components/Button2";
 import { Button3 } from "../../components/Button3";
 import { DropdownInput } from "../../components/DropdownInput";
 import { Form } from "../../components/Form";
-import "./index.css";
 import { Link } from "react-router-dom";
+import { InputDate } from "../../components/InputDate";
 
-interface Material {
+interface Funcionario {
   description: string;
   quantity: string;
 }
 
 export function FuncionarioPage() {
   const [active, setMode] = useState(false);
-  const [materials, setMaterials] = useState<Material[]>([]);
-  const [showMaterialPanel, setShowMaterialPanel] = useState(false);
-  const [materialInfo, setMaterialInfo] = useState<Material>({
+  const [funcionarios, setFuncionarios] = useState<Funcionario[]>([]);
+  const [showFuncionarioPanel, setShowFuncionarioPanel] = useState(false);
+  const [funcionarioInfo, setFuncionarioInfo] = useState<Funcionario>({
     description: "",
     quantity: "",
   });
 
-  const toggleMode = () => {
-    setMode(!active);
+  const toggleFuncionarioPanel = () => {
+    setShowFuncionarioPanel(!showFuncionarioPanel);
   };
 
-  const toggleMaterialPanel = () => {
-    setShowMaterialPanel(!showMaterialPanel);
-  };
   const handleCancelClick = () => {
-    setShowMaterialPanel(!showMaterialPanel);
+    setShowFuncionarioPanel(!showFuncionarioPanel);
   };
 
-  const handleMaterialInfoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFuncionarioInfoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setMaterialInfo({
-      ...materialInfo,
+    setFuncionarioInfo({
+      ...funcionarioInfo,
       [name]: value,
     });
   };
 
-  const addMaterial = () => {
-    setMaterials((prevMaterials) => [...prevMaterials, materialInfo]);
-    setMaterialInfo({
+  const addFuncionario = () => {
+    setFuncionarios((prevFuncionarios) => [...prevFuncionarios, funcionarioInfo]);
+    setFuncionarioInfo({
       description: "",
       quantity: "",
     });
-    toggleMaterialPanel();
+    toggleFuncionarioPanel();
   };
 
-  const materialRef = useRef<HTMLSelectElement>(null);
+  const funcionarioRef = useRef<HTMLSelectElement>(null);
 
-  const handleMaterialChange = () => {
-    if (materialRef.current) {
-      const selectedMaterial = materialRef.current.value;
-      console.log("Material selecionado:", selectedMaterial);
+  const handleFuncionarioChange = () => {
+    if (funcionarioRef.current) {
+      const selectedFuncionario = funcionarioRef.current.value;
+      console.log("Material selecionado:", selectedFuncionario);
     }
   };
-  const materialOptions = [
+
+  const funcionarioOptions = [
     "Selecione...",
+    "Masculino",
+    "Feminino",
+    "Outro",
+  ];
+
+  const materialOptions = [
+    " ",
     "Metal",
-    "Plástico",
-    "Papel",
-    "Papelão",
     "Vidro",
+    "Papel",
+    "Plástico",
+    "Papelão"
+  ];
+
+  const pesoOptions = [
+    " ",
+    "Leve",
+    "Médio",
+    "Pesado",
   ];
 
   return (
-    <>
-      <div className="App">
-        <div
-          className={active ? "icon iconActive" : "icon"}
-          onClick={toggleMode}
-        >
-          <div className="hamburger hamburgerIcon"></div>
-        </div>
-        <div className={active ? "menu menuOpen" : "menu menuClose"}>
-          <div className="list">
-            <Link className="listItems" to={""}>
-              Coletas pendentes
-            </Link>
-            <Link className="listItems" to={""}>
-              Roteiro de coletas
-            </Link>
-            <Link className="listItems" to={"/coleta"}>
-              Agendamento
-            </Link>
-            <Link className="listItems" to={""}>
-              Histórico de Coletas
-            </Link>
-            <Link className="listItems" to={""}>
-              Materiais
-            </Link>
-            <Link className="listItems" to={""}>
-              Funcionários
-            </Link>
-          </div>
-        </div>
-
-        <div className="content">
-          <div className="title">
-            <div>
-              <h2 className="mt-[30px] text-[#53735B] text-[1.75rem]">
-                Materiais
-              </h2>
-            </div>
-            <div>
-              <div>
-                <Button2
-                  type="button"
-                  label="Adicionar material"
-                  onClick={toggleMaterialPanel}
-                  className="w-[150px] mt-[15px]"
-                />
-                {showMaterialPanel && (
-                  <div className="material-panel">
-                    <div className="title">
-                      <p className="text-[#666666] text-m my-1">
-                        Adicionar material
-                      </p>
-                    </div>
-                    <div className="addmaterial">
-                      <div>
-                        <Input type="text" label="Descrição" required />
-                      </div>
-                      <div>
-                        <DropdownInput
-                          label="Selecione um material"
-                          options={materialOptions}
-                          placeholder="Selecione um material..."
-                          ref={materialRef}
-                          onChange={handleMaterialChange}
-                          required
-                        />
-                      </div>
-                    </div>
-                    <div className="material-buttons">
-                      <div>
-                        <Button3
-                          type="button"
-                          label="Cancelar"
-                          onClick={handleCancelClick}
-                          className="w-[140px]"
-                        />
-                      </div>
-                      <div>
-                        <Button2
-                          type="button"
-                          label="Adicionar"
-                          onClick={addMaterial}
-                          className="w-[140px]"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-
-          <Form>
-            <div className="title">
-              <p className="text-[#666666] text-m my-1">Filtros</p>
-            </div>
-            <div className="dados-cliente">
-              <div>
-                <Input type="text" label="Pesquisar por descrição" required />
-              </div>
-              <div>
-                <DropdownInput
-                  label="Pesquisar por tipo"
-                  options={materialOptions}
-                  placeholder="Selecione um material..."
-                  ref={materialRef}
-                  onChange={handleMaterialChange}
-                  required
-                />
-              </div>
-            </div>
-          </Form>
-        </div>
+    <div className="flex flex-col items-center bg-gray-100 min-h-screen p-4">
+      <div className="w-full max-w-4xl flex justify-between items-center mb-8">
+        <h2 className="text-[#53735B] text-4xl">Funcionários</h2>
+        <Button2
+          type="button"
+          label="Adicionar funcionário"
+          onClick={toggleFuncionarioPanel}
+          className="w-[150px]"
+        />
       </div>
-    </>
+      {showFuncionarioPanel && (
+        <div className="bg-white rounded-lg shadow-lg p-6 mb-4 w-full max-w-4xl">
+          <p className="text-[#666666] text-base mb-4">Adicionar funcionário</p>
+          <div className="grid grid-cols-2 gap-4">
+            <Input type="text" label="Nome" required />
+            <Input type="text" label="E-mail" />
+            <InputDate type="date" label="Data de admissão" required />
+            <DropdownInput
+              label="Sexo"
+              options={funcionarioOptions}
+              placeholder="Selecione um material..."
+              ref={funcionarioRef}
+              onChange={handleFuncionarioChange}
+              required
+            />
+            <Input type="text" label="Telefone fixo" />
+            <Input type="password" label="Senha" required />
+            <Input type="text" label="Suporta peso" required />
+            <Input type="text" label="Matrícula" required />
+            <Input type="text" label="CPF" />
+            <InputDate type="date" label="Data de nascimento" required />
+            <Input type="text" label="Cargo" required />
+            <Input type="text" label="Telefone celular" required />
+            <Input type="password" label="Confirme a senha" required />
+          </div>
+          <div className="flex justify-end mt-4 space-x-4">
+            <Button3
+              type="button"
+              label="Cancelar"
+              onClick={handleCancelClick}
+              className="w-[140px]"
+            />
+            <Button2
+              type="button"
+              label="Adicionar"
+              onClick={addFuncionario}
+              className="w-[140px]"
+            />
+          </div>
+        </div>
+      )}
+
+      <Form className="w-full max-w-4xl">
+        <p className="text-[#666666] text-base mb-4">Filtros</p>
+        <div className="grid grid-cols-2 gap-4">
+          <Input type="text" label="Pesquisar por nome" required />
+          <DropdownInput
+            label="Pesquisar por tipo"
+            options={materialOptions}
+            placeholder="Selecione um material..."
+          />
+          <DropdownInput
+            label="Pesquisar por tipo"
+            options={pesoOptions}
+            placeholder="Selecione um material..."
+          />
+          <DropdownInput
+            label="Pesquisar por tipo"
+            options={materialOptions}
+            placeholder="Selecione um material..."
+          />
+          <InputDate type="date" label="Data" required />
+        </div>
+      </Form>
+    </div>
   );
 }
 
