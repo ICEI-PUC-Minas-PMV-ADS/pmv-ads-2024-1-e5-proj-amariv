@@ -44,7 +44,7 @@ function AppImpl() {
           }
         }
       } catch (e: any) {
-        notification(e.message);
+        notification(e);
       }
     })();
   }, [token, dispatch, notification]);

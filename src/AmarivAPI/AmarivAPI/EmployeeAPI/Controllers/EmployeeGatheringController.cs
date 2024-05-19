@@ -24,13 +24,20 @@ namespace AmarivAPI.EmployeeAPI.Controllers
             try
             {
                 using (var _t = _context.Database.BeginTransaction())
-                {
+                {   
                     var gathering = _context.Coletas.Where(x => x.Id == dto.gatheringId).FirstOrDefault();
                     if (gathering == null)
                     {
                         return NotFound(new
                         {
                             message = "Coleta não localizado!",
+                        });
+                    }
+                    if (DateTime.Now.Date != gathering.DataDeColeta)
+                    {
+                        return NotFound(new
+                        {
+                            message = "Não é possivel finalizar a coleta pois não esta na data da coleta!",
                         });
                     }
                     gathering.Status = true;

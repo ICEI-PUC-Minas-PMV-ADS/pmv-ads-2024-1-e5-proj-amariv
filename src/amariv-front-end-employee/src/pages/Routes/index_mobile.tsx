@@ -71,7 +71,7 @@ export function RoutesMobilePage() {
           setRouteItems(sortedAndFilteredGatherings);
         }
       } catch (e: any) {
-        notification(e.message);
+        notification(e);
       }
     })();
   }, [ctrl, token, gatheringItinerary, gatheringId, isSuccess, dispatch, notification]);
@@ -115,7 +115,7 @@ export function RoutesMobilePage() {
           setHasChange(false);
         }
       } catch (e: any) {
-        notification(e.message);
+        notification(e);
       }
     })();
   }, [token, gatheringItinerary, routeItems, dispatch, notification]);
@@ -148,7 +148,7 @@ export function RoutesMobilePage() {
         dispatch({ type: 'logout' });
       }
     } catch (e: any) {
-      notification(e.message);
+      notification(e);
     }
   }, [token, dispatch, notification]);
 

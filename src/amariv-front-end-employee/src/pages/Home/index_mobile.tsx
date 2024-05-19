@@ -39,7 +39,7 @@ export function HomeMobilePage() {
           setPrevTime(estimatedTime);
         }
       } catch (e: any) {
-        notification(e.message);
+        notification(e);
       }
     })();
   }, [ctrl, map, startPosition, gatheringItinerary, notification]);
@@ -67,7 +67,7 @@ export function HomeMobilePage() {
         dispatch({ type: 'logout' });
       }
     } catch (e: any) {
-      notification(e.message);
+      notification(e);
     }
   }, [token, dispatch, notification]);
 

@@ -31,7 +31,7 @@ export const HomePage = PageComponent(() => {
           setLoading(false);
         }
       } catch (e: any) {
-        notification(e.message);
+        notification(e);
       }
     })();
   }, [ctrl, token, notification]);

@@ -26,7 +26,7 @@ export function HistoryMobilePage() {
         dispatch({ type: 'logout' });
       }
     } catch (e: any) {
-      notification(e.message);
+      notification(e);
     }
   }, [token, dispatch, notification]);
 

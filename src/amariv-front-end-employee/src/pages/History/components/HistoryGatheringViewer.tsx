@@ -28,7 +28,7 @@ export function HistoryGatheringViewer({ historyGatherings }: HistoryGatheringVi
       try {
         setGatheringItems(historyGatherings.filter((i) => i.status === true));
       } catch (e: any) {
-        notification(e.message);
+        notification(e);
       }
     })();
   }, [historyGatherings, notification]);

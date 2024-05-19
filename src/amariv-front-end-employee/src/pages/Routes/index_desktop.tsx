@@ -74,7 +74,9 @@ export function RoutesDesktopPage() {
           setRouteItems(sortedAndFilteredGatherings);
         }
       } catch (e: any) {
-        notification(e.message);
+        setShowConfirm(false);
+        setIsSuccess(null);
+        notification(e);
       }
     })();
   }, [ctrl, token, gatheringItinerary, gatheringId, isSuccess, dispatch, notification]);
@@ -126,7 +128,7 @@ export function RoutesDesktopPage() {
           setHasChange(false);
         }
       } catch (e: any) {
-        notification(e.message);
+        notification(e);
       }
     })();
   }, [token, gatheringItinerary, routeItems, dispatch, notification]);
@@ -140,7 +142,7 @@ export function RoutesDesktopPage() {
         }
       }
     } catch (e: any) {
-      notification(e.message);
+      notification(e);
     }
   }, [isSuccess, showConfirm, notification]);
 
@@ -163,7 +165,7 @@ export function RoutesDesktopPage() {
         dispatch({ type: 'logout' });
       }
     } catch (e: any) {
-      notification(e.message);
+      notification(e);
     }
   }, [token, dispatch, notification]);
 

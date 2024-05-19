@@ -14,7 +14,7 @@ export type NotificationContextState = {
  */
 
 export const NotificationContext = React.createContext<NotificationContextState>({
-  setMessage: () => {},
+  setMessage: () => { },
 });
 
 /**
@@ -42,10 +42,10 @@ export const NotificationContainer = (props: NotificationContainerProps) => {
               h-[4rem] flex justify-center items-center bg-[#CADDA8]
               flex flex-col rounded-xl shadow-xl p-2`}>
 
-              <p className='w-full text-xs text-center'><strong>{props.message?.title ?? ""}</strong></p>
-              <p className='w-full text-xs text-center flex-1'>
+            <p className='w-full text-xs text-center'><strong>{props.message?.title ?? ""}</strong></p>
+            <p className='w-full text-xs text-center flex-1'>
 
-              {props.message?.message ?? ""}              
+              {props.message?.message ?? ""}
             </p>
           </div>
         </div>}
@@ -59,11 +59,10 @@ export const NotificationContainer = (props: NotificationContainerProps) => {
 
 export function NotificationProvider({ children }: React.PropsWithChildren) {
   const [anim, setAnim] = React.useState("");
-  const [message, setMessage] = React.useState<Message|undefined>();
+  const [message, setMessage] = React.useState<Message | undefined>();
 
   React.useLayoutEffect(() => {
-    if (message !== undefined && anim === "")
-    {
+    if (message !== undefined && anim === "") {
       setAnim("start");
       setTimeout(() => {
         setAnim("end");
