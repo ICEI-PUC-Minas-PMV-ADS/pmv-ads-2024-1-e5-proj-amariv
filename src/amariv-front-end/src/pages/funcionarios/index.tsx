@@ -4,7 +4,6 @@ import { Button2 } from "../../components/Button2";
 import { Button3 } from "../../components/Button3";
 import { DropdownInput } from "../../components/DropdownInput";
 import { Form } from "../../components/Form";
-import { Link } from "react-router-dom";
 import { InputDate } from "../../components/InputDate";
 
 interface Funcionario {
@@ -20,7 +19,6 @@ export function FuncionarioPage() {
     description: "",
     quantity: "",
   });
-
   const toggleFuncionarioPanel = () => {
     setShowFuncionarioPanel(!showFuncionarioPanel);
   };
@@ -51,12 +49,12 @@ export function FuncionarioPage() {
   const handleFuncionarioChange = () => {
     if (funcionarioRef.current) {
       const selectedFuncionario = funcionarioRef.current.value;
-      console.log("Material selecionado:", selectedFuncionario);
+      console.log("Funcionário selecionado:", selectedFuncionario);
     }
   };
 
   const funcionarioOptions = [
-    "Selecione...",
+    "Todos",
     "Masculino",
     "Feminino",
     "Outro",
@@ -141,9 +139,9 @@ export function FuncionarioPage() {
             placeholder="Selecione um material..."
           />
           <DropdownInput
-            label="Pesquisar por tipo"
+            label="Pesquisar por peso"
             options={pesoOptions}
-            placeholder="Selecione um material..."
+            placeholder="Selecione um peso..."
           />
           <DropdownInput
             label="Pesquisar por tipo"

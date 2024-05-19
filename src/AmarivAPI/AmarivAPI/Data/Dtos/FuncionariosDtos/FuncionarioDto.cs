@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace AmarivAPI.DTOs.FuncionarioDtos
 {
@@ -8,26 +7,21 @@ namespace AmarivAPI.DTOs.FuncionarioDtos
         [Required(ErrorMessage = "O campo Nome é obrigatório.")]
         public string Nome { get; set; }
 
-        public string Matricula { get; set; }
-
+        [Required(ErrorMessage = "O campo Email é obrigatório.")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "O campo CPF é obrigatório.")]
-        public string Cpf { get; set; }
-
+        [Required(ErrorMessage = "O campo Sexo é obrigatório.")]
         public string Sexo { get; set; }
 
-        public DateTime DataAdmissao { get; set; }
-
-        public DateTime DataNascimento { get; set; }
-
-        public string Telefone { get; set; }
-
-        public string Cargo { get; set; }
+        public bool SuportaPeso { get; set; }
 
         [Required(ErrorMessage = "O campo Senha é obrigatório.")]
         public string Senha { get; set; }
 
-        public bool SuportaPeso { get; set; }
+        [Required(ErrorMessage = "O campo Cargo é obrigatório.")]
+        public string Cargo { get; set; }
+
+        [Required(ErrorMessage = "O campo Telefone é obrigatório.")]
+        public string Telefone { get; set; }
     }
 }

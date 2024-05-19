@@ -36,12 +36,6 @@ namespace AmarivAPI.Services
                 throw new Exception("Já existe um funcionário com o mesmo email.");
             }
 
-            // Trata valores nulos antes de adicionar o funcionário
-            funcionario.Matricula = funcionario.Matricula ?? string.Empty;
-            funcionario.Email = funcionario.Email ?? string.Empty;
-            funcionario.Telefone = funcionario.Telefone ?? string.Empty;
-            funcionario.Cargo = funcionario.Cargo ?? string.Empty;
-
             // Adiciona o novo funcionário ao contexto e salva as alterações
             _context.Funcionarios.Add(funcionario);
             _context.SaveChanges();
@@ -50,12 +44,6 @@ namespace AmarivAPI.Services
         // Atualiza as informações de um funcionário
         public void Update(Funcionario funcionario)
         {
-            // Trata valores nulos antes de atualizar o funcionário
-            funcionario.Matricula = funcionario.Matricula ?? string.Empty;
-            funcionario.Email = funcionario.Email ?? string.Empty;
-            funcionario.Telefone = funcionario.Telefone ?? string.Empty;
-            funcionario.Cargo = funcionario.Cargo ?? string.Empty;
-
             // Atualiza o funcionário no contexto e salva as alterações
             _context.Funcionarios.Update(funcionario);
             _context.SaveChanges();

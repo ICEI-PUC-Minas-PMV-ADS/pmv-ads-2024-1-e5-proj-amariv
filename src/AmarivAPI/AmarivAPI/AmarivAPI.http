@@ -118,13 +118,9 @@ Content-Type: application/json
 Accept: application/json
 
 {
-    "Nome": "Maria Souza",
-    "Matricula": "789012",
-    "Email": "marssffia.soufffsszas@example.com",
-    "Cpf": "98765432109",
+    "Nome": "Marisssa Sosuza",
+    "Email": "mfgarfssffia.@gmail.com",
     "Sexo": "Feminino",
-    "DataAdmissao": "2023-04-15",
-    "DataNascimento": "1995-08-20",
     "Telefone": "11987654321",
     "Cargo": "Analista",
     "Senha": "SenhaSegura123",
@@ -137,16 +133,13 @@ Content-Type: application/json
 Accept: application/json
 
 {
-    "Nome": "Mariaaaa Souza Atualizada",
-    "Matricula": "789012",
-    "Email": "maria.souza@example.com",
+   "Nome": "Maria Souza",
+    "Email": "marssffia.soufffsszas@example.com",
     "Cpf": "98765432109",
     "Sexo": "Feminino",
-    "DataAdmissao": "2023-04-15",
-    "DataNascimento": "1995-08-20",
     "Telefone": "11987654321",
-    "Cargo": "Analista Sênior",
-    "Senha": "NovaSenha123",
+    "Cargo": "Analista",
+    "Senha": "SenhaSegura123",
     "SuportaPeso": true
 }
 
