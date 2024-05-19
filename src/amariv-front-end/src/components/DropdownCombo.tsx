@@ -2,11 +2,11 @@ import React from "react";
 
 export type DropdownInputProps = React.ComponentProps<"select"> & {
   label: string;
-  options: string[]; // Lista de opções disponíveis
+  options: { id: number, desc: string }[]; // Lista de opções disponíveis
   placeholder?: string; // Placeholder opcional
 };
 
-export const DropdownInput = React.forwardRef(
+export const DropdownCombo = React.forwardRef(
   (
     { label, options, placeholder = "", ...props }: DropdownInputProps,
     ref: React.LegacyRef<HTMLSelectElement>
@@ -27,8 +27,8 @@ export const DropdownInput = React.forwardRef(
             </option>
           )}
           {options.map((option) => (
-            <option key={option} value={option}>
-              {option}
+            <option key={option.id} value={option.id}>
+              {option.desc}
             </option>
           ))}
         </select>
@@ -37,4 +37,4 @@ export const DropdownInput = React.forwardRef(
   }
 );
 
-export default DropdownInput;
+export default DropdownCombo;

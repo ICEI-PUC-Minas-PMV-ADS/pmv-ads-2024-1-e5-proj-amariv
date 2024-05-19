@@ -5,76 +5,54 @@ import { InputTime } from "../../components/InputTime";
 import { Button2 } from "../../components/Button2";
 import { Form } from "../../components/Form";
 import "./index.css";
-import { Link } from "react-router-dom";
 import { FormAddMateriais } from "./components/FormAddMateriais";
 import { CreateColetaDto } from "../../models/ColetaDtos/CreateColetaDto";
+import { CreateEnderecoDto } from "../../models/EnderecoDtos/CreateEnderecoDto";
+import { coletaController } from "./ColetaController";
 
 
 
 export function ColetaPage() {
-  const [active, setMode] = useState(false);
-  const [endereco, setEndereco] = useState(CreateColetaDto);
-  const [nome, setNome ] = useState()
-  const [cel, setCel ] = useState()
-  const [tel, setTel] = useState()
-  const [cep, setCep ] = useState()
-  const [logradouro, setLogradouro ] = useState()
-  const [numero, setNumero ] = useState()
-  const [bairro, setBairro ] = useState()
-  const [cidade, setCidade ] = useState()
-  const [complemento, setComplemento] = useState()
+  const [nome, setNome ] = useState(String)
+  const [cel, setCel ] = useState(String)
+  const [tel, setTel] = useState(String)
+  const [cep, setCep ] = useState(String)
+  const [logradouro, setLogradouro ] = useState(String)
+  const [numero, setNumero ] = useState(String)
+  const [bairro, setBairro ] = useState(String)
+  const [cidade, setCidade ] = useState(String)
+  const [complemento, setComplemento] = useState(String)
 
-  const [dataColeta, setDataColeta ] = useState()
-  const [horarioColeta, setHorarioColeta ] = useState()
+  const [dataColeta, setDataColeta ] = useState(String)
+  const [horarioColeta, setHorarioColeta ] = useState(String)
  
-  const toggleMode = () => {
-    setMode(!active);
-  };
 
+ 
 
-
-  function HanleNomeChange(event: React.ChangeEvent<HTMLInputElement>): void {
-    setNome(event.target.value)
-  }
-
-  function HandleCelChange(event: React.ChangeEvent<HTMLInputElement>): void {
+  function VerificaDisponibilidadeHorario(event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
     throw new Error("Function not implemented.");
   }
 
-  function HandleTelChange(event: React.ChangeEvent<HTMLInputElement>): void {
-    throw new Error("Function not implemented.");
-  }
+  function CriarAgendamentoColeta(event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
+    var enderecoDto : Partial<CreateEnderecoDto> = {
+      logradouro : logradouro,
+      numero : numero,
+      bairro : bairro,
+      cep : cep,
+      cidade : cidade,
+      referencia : complemento
+    };
+    
+    var coletaDto : Partial<CreateColetaDto> ={
+      clienteNome : nome,
+      clienteCel : cel,
+      clienteTel : tel,
+      //dataCadastro :Date.now(),
+      dataDeColeta : coletaController.converteStringEmDate(dataColeta,horarioColeta)
 
-  function HandleCepChange(event: React.ChangeEvent<HTMLInputElement>): void {
-    throw new Error("Function not implemented.");
-  }
 
-  function HandleLogradouroChange(event: React.ChangeEvent<HTMLInputElement>): void {
-    throw new Error("Function not implemented.");
-  }
+    }
 
-  function HandleNumeroChange(event: React.ChangeEvent<HTMLInputElement>): void {
-    throw new Error("Function not implemented.");
-  }
-
-  function HandleBairroChange(event: React.ChangeEvent<HTMLInputElement>): void {
-    throw new Error("Function not implemented.");
-  }
-
-  function HandleCidadeChange(event: React.ChangeEvent<HTMLInputElement>): void {
-    throw new Error("Function not implemented.");
-  }
-
-  function HandleComplementoChange(event: React.ChangeEvent<HTMLInputElement>): void {
-    throw new Error("Function not implemented.");
-  }
-
-  function handleDataColetaChange(event: React.ChangeEvent<HTMLInputElement>): void {
-    throw new Error("Function not implemented.");
-  }
-
-  function handleHorarioColetaChange(event: React.ChangeEvent<HTMLInputElement>): void {
-    throw new Error("Function not implemented.");
   }
 
   // const dateInputRef = useRef<HTMLInputElement>(null);
@@ -100,12 +78,7 @@ export function ColetaPage() {
   return (
     <>
       <div className="App">
-        <div
-          className={active ? "icon iconActive" : "icon"}
-          onClick={toggleMode}
-        >
-          <div className="hamburger hamburgerIcon"></div>
-        </div>
+      
         {/* <div className={active ? "menu menuOpen" : "menu menuClose"}>
           <div className="list">
             <Link className="listItems" to={""}>
@@ -140,13 +113,32 @@ export function ColetaPage() {
           <Form>
             <div className="dados-cliente">
               <div>
-                <Input type="text" label="Nome" id="txtNome" onChange={HanleNomeChange} required />
+                <Input type="text"
+                  label="Nome"
+                  id="txtNome"
+                  value={nome}
+                  onChange={ (evt) => setNome(evt.target.value)} 
+                  required 
+                  />
               </div>
               <div>
-                <Input type="tel" label="Celular" id="txtCel" onChange={HandleCelChange} required />
+                <Input 
+                  type="tel"
+                  label="Celular" 
+                  id="txtCel" 
+                  value={cel}
+                  onChange={ (evt) => setCel(evt.target.value)} 
+                  />
               </div>
               <div>
-                <Input type="tel" label="Telefone Fixo"  id="txtTel" onChange={HandleTelChange} required />
+                <Input 
+                  type="tel" 
+                  label="Telefone Fixo"  
+                  id="txtTel" 
+                  value={tel}
+                  onChange={ (evt) => setTel(evt.target.value)} 
+                  required 
+                  />
               </div>
             </div>
 
@@ -155,24 +147,54 @@ export function ColetaPage() {
             </div>
             <div className="endereco-cliente">
               <div>
-                <Input type="text" label="CEP" onChange={HandleCepChange} required />
+                <Input 
+                  type="text" 
+                  label="CEP" 
+                  value={cep}
+                  onChange={ (evt) => setCep(evt.target.value)} 
+                  required />
               </div>
               <div>
-                <Input type="text" label="Logradouro" onChange={HandleLogradouroChange} required />
+                <Input 
+                  type="text" 
+                  label="Logradouro" 
+                  value={logradouro}
+                  onChange={ (evt) => setLogradouro(evt.target.value)} 
+                  required />
               </div>
               <div>
-                <Input type="text" label="Número" onChange={HandleNumeroChange} required />
+                <Input 
+                  type="text" 
+                  label="Número" 
+                  value={numero}
+                  onChange={ (evt) => setNumero(evt.target.value)} 
+                  required />
               </div>
             </div>
             <div className="endereco-cliente">
               <div>
-                <Input type="text" label="Bairro" onChange={HandleBairroChange} required />
+                <Input 
+                  type="text" 
+                  label="Bairro" 
+                  value={bairro}
+                  onChange={ (evt) => setBairro(evt.target.value)} 
+                  required />
               </div>
               <div>
-                <Input type="text" label="Cidade" onChange={HandleCidadeChange} required />
+                <Input 
+                  type="text" 
+                  label="Cidade" 
+                  value={cidade}
+                  onChange={ (evt) => setCidade(evt.target.value)} 
+                  required />
               </div>
               <div>
-                <Input type="text" label="Complemento" onChange={HandleComplementoChange} required />
+                <Input 
+                  type="text" 
+                  label="Complemento" 
+                  value={complemento}
+                  onChange={ (evt) => setComplemento(evt.target.value)} 
+                  required />
               </div>
             </div>
             <div className="endereco-cliente">
@@ -180,14 +202,16 @@ export function ColetaPage() {
                 <InputDate
                   label="Data da coleta"
                   type="date"               
-                  onChange={handleDataColetaChange}
+                  value={dataColeta}
+                  onChange={ (evt) => setDataColeta(evt.target.value)} 
                 />
               </div>
               <div>
                 <InputTime
                   label="Horário de Coleta"
                   type="time"            
-                  onChange={handleHorarioColetaChange}
+                  value={horarioColeta}
+                  onChange={ (evt) => setHorarioColeta(evt.target.value)} 
                 />
               </div>
               <div>
@@ -195,6 +219,7 @@ export function ColetaPage() {
                   type="button"
                   label="Verificar disponibilidade"
                   className="w-[90%] mt-[15px]"
+                  onClick={VerificaDisponibilidadeHorario}
                 />
               </div>
             </div>
@@ -202,10 +227,13 @@ export function ColetaPage() {
             <FormAddMateriais 
             />
 
+            
+
             <Button2
               type="submit"
               label="Criar agendamento"
               className="w-[40%] mt-[15px]"
+              onClick={CriarAgendamentoColeta}
             />
           </Form>
         </div>

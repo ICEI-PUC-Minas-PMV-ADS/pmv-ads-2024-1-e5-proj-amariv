@@ -1,13 +1,28 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { Button2 } from "../../../components/Button2";
-import { Button3 } from "../../../components/Button3";
 import DropdownInput from "../../../components/DropdownInput";
-import { Input } from "../../../components/Input";
+import { materialService } from "../../../services/MaterialService";
+import React from "react";
+import DropdownCombo from "../../../components/DropdownCombo";
 
+
+function recuperaInfoMaterial(callback: (items: any[]) => void) {
+  const materiais = materialService.recuperaMateriais() 
+  const ddlMateriais = [{id:0, desc: "Selecione"} ] 
+
+  materiais.then( (ele) => {
+    const data = ele.data as any[];
+    data.forEach( item => {
+      ddlMateriais.push({id: item.id, desc : item.descricao  })
+    });
+    callback( ddlMateriais )
+  })
+}
 
 export function FormAddMateriais () {
     const [showMaterialPanel, setShowMaterialPanel] = useState(false);
     const [materials, setMaterials] = useState<Material[]>([]);
+    const [listaMateriais, setListaMateriais] = useState<any[]>([]);
 
 
     interface Material {
@@ -46,32 +61,27 @@ export function FormAddMateriais () {
       };
 
 
-      const pesoRef = useRef<HTMLSelectElement>(null);
-      const handlePesoChange = () => {
-        if (pesoRef.current) {
-          const selectedPeso = pesoRef.current.value;
-          console.log("Peso informado: ", selectedPeso);
-        }
-      };
-      const pesoOptions = ["Informe o peso...", "Leve", "Médio", "Pesado"];
+     
+      
+      const pesoOptions = [ "Leve", "Médio", "Pesado"];
 
-      const materialOptions = [
-        "Selecione...",
-        "Metal",
-        "Plástico",
-        "Papel",
-        "Papelão",
-        "Vidro",
-      ];
+     
+           
+  React.useEffect(() => {
+    recuperaInfoMaterial((items) => {
+      setListaMateriais(items);
+    });
+  }, []);
+      
 
-      const materialRef = useRef<HTMLSelectElement>(null);
-      const handleMaterialChange = () => {
-        if (materialRef.current) {
-          const selectedMaterial = materialRef.current.value;
-          console.log("Material selecionado:", selectedMaterial);
-        }
-      };
+  function handlePesoChange(event: React.ChangeEvent<HTMLSelectElement>): void {
+    throw new Error("Function not implemented.");
+  }
 
+  function handleMaterialChange(event: React.ChangeEvent<HTMLSelectElement>): void {
+  
+
+  }
 
     return (
         <>
@@ -81,9 +91,8 @@ export function FormAddMateriais () {
 
             <div className="dados-cliente" >
 
-                <DropdownInput
-                    options={materialOptions}
-                    ref={materialRef}
+                <DropdownCombo
+                    options={listaMateriais}                  
                     label="Descrição do material"
                     placeholder="latas, garrafas, etc."
                     onChange={handleMaterialChange}
@@ -91,8 +100,7 @@ export function FormAddMateriais () {
                 />
 
                 <DropdownInput
-                    options={pesoOptions}
-                    ref={pesoRef}
+                    options={pesoOptions}                 
                     label="Peso do material"
                     placeholder="Leve,pesado..."
                     onChange={handlePesoChange}
@@ -106,54 +114,12 @@ export function FormAddMateriais () {
                         onClick={toggleMaterialPanel}
                         className="w-[80%] mt-[15px]"
                     />
-
-
-                    {showMaterialPanel && (
-                        <div className="material-panel">
-                            <div className="title">
-                                <p className="text-[#666666] text-m my-1">
-                                    Adicionar material
-                                </p>
-                            </div>
-                            <div className="addmaterial">
-                                <Input
-                                    type="text"
-                                    label="Descrição Material"
-
-                                />
-
-                                <DropdownInput
-                                    label="Informe o peso"
-                                    options={pesoOptions}
-                                    placeholder="Selecione um material..."
-                                    ref={pesoRef}
-                                    onChange={handleMaterialChange}
-                                    required
-                                />
-
-                            </div>
-                            <div className="materal-buttons">
-                                <div>
-                                    <Button3
-                                        type="button"
-                                        label="Cancelar"
-                                        onClick={handleCancelClick}
-                                        className="w-[140px]"
-                                    />
-                                </div>
-                                <div>
-                                    <Button2
-                                        type="button"
-                                        label="Adicionar"
-                                        onClick={addMaterial}
-                                        className="w-[140px]"
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                    )}
+               
                 </div>
             </div>
         </>
     )
 }
+
+
+

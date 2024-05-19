@@ -4,10 +4,10 @@ import { RegisterPage } from "./pages/register";
 import { LoginPage } from "./pages/Login";
 import { PasswordRecoveryPage } from "./pages/password-recovery";
 import { ColetaPage } from "./pages/coleta";
-import { MaterialPage } from "./pages/materiais";
 import { FuncionarioPage } from "./pages/funcionarios";
 import { AuthUtils } from "./utils/AuthUtils";
 import { AppContext } from "./AppContext";
+import MaterialPage from "./pages/materiais/Material";
 
 /**
  * AuthAppRoutes

@@ -3,8 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\HenriqueAGP\\Documents\\GitHub\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|c:\\users\\henriqueagp\\documents\\github\\pmv-ads-2024-1-e5-proj-amariv\\src\\amarivapi\\amarivapi\\controllers\\materialcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\controllers\\materialcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|c:\\users\\henriqueagp\\documents\\github\\pmv-ads-2024-1-e5-proj-amariv\\src\\amarivapi\\amarivapi\\controllers\\coletacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\controllers\\coletacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|c:\\users\\henriqueagp\\documents\\github\\pmv-ads-2024-1-e5-proj-amariv\\src\\amarivapi\\amarivapi\\models\\coleta.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\models\\coleta.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|c:\\users\\henriqueagp\\documents\\github\\pmv-ads-2024-1-e5-proj-amariv\\src\\amarivapi\\amarivapi\\models\\material.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\models\\material.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|c:\\users\\henriqueagp\\documents\\github\\pmv-ads-2024-1-e5-proj-amariv\\src\\amarivapi\\amarivapi\\data\\dtos\\coletasdto\\createcoletadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\data\\dtos\\coletasdto\\createcoletadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|c:\\users\\henriqueagp\\documents\\github\\pmv-ads-2024-1-e5-proj-amariv\\src\\amarivapi\\amarivapi\\data\\dtos\\enderecodto\\createenderecodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\data\\dtos\\enderecodto\\createenderecodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|c:\\users\\henriqueagp\\documents\\github\\pmv-ads-2024-1-e5-proj-amariv\\src\\amarivapi\\amarivapi\\profiles\\roteirodecoletaprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -17,10 +37,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|c:\\users\\henriqueagp\\documents\\github\\pmv-ads-2024-1-e5-proj-amariv\\src\\amarivapi\\amarivapi\\profiles\\coletaprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\profiles\\coletaprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|c:\\users\\henriqueagp\\documents\\github\\pmv-ads-2024-1-e5-proj-amariv\\src\\amarivapi\\amarivapi\\models\\coleta.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\models\\coleta.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|c:\\users\\henriqueagp\\documents\\github\\pmv-ads-2024-1-e5-proj-amariv\\src\\amarivapi\\amarivapi\\services\\coletaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -50,17 +66,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 174,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "ColetaController.cs",
               "DocumentMoniker": "C:\\Users\\HenriqueAGP\\Documents\\GitHub\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\Controllers\\ColetaController.cs",
               "RelativeDocumentMoniker": "AmarivAPI\\Controllers\\ColetaController.cs",
               "ToolTip": "C:\\Users\\HenriqueAGP\\Documents\\GitHub\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\Controllers\\ColetaController.cs",
               "RelativeToolTip": "AmarivAPI\\Controllers\\ColetaController.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAAEEAAABPAAAA",
+              "ViewState": "AQIAAAEAAAAAAAAAAAAAAAoAAAAuAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-05T23:32:06.193Z",
               "IsPinned": true,
@@ -68,13 +84,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 2,
               "Title": "Coleta.cs",
               "DocumentMoniker": "C:\\Users\\HenriqueAGP\\Documents\\GitHub\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\Models\\Coleta.cs",
               "RelativeDocumentMoniker": "AmarivAPI\\Models\\Coleta.cs",
               "ToolTip": "C:\\Users\\HenriqueAGP\\Documents\\GitHub\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\Models\\Coleta.cs",
               "RelativeToolTip": "AmarivAPI\\Models\\Coleta.cs",
-              "ViewState": "AQIAAB0AAAAAAAAAAAAWwCYAAAADAAAA",
+              "ViewState": "AQIAABwAAAAAAAAAAAAlwBQAAAAGAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-05T23:50:58.958Z",
               "IsPinned": true
@@ -89,7 +105,56 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
+              "Title": "MaterialController.cs",
+              "DocumentMoniker": "C:\\Users\\HenriqueAGP\\Documents\\GitHub\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\Controllers\\MaterialController.cs",
+              "RelativeDocumentMoniker": "AmarivAPI\\Controllers\\MaterialController.cs",
+              "ToolTip": "C:\\Users\\HenriqueAGP\\Documents\\GitHub\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\Controllers\\MaterialController.cs",
+              "RelativeToolTip": "AmarivAPI\\Controllers\\MaterialController.cs",
+              "ViewState": "AQIAAAoAAAAAAAAAAAAAABgAAAAYAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-19T01:00:20.293Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Material.cs",
+              "DocumentMoniker": "C:\\Users\\HenriqueAGP\\Documents\\GitHub\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\Models\\Material.cs",
+              "RelativeDocumentMoniker": "AmarivAPI\\Models\\Material.cs",
+              "ToolTip": "C:\\Users\\HenriqueAGP\\Documents\\GitHub\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\Models\\Material.cs",
+              "RelativeToolTip": "AmarivAPI\\Models\\Material.cs",
+              "ViewState": "AQIAAAgAAAAAAAAAAAAQwA4AAAAEAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-18T23:47:43.912Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "CreateEnderecoDto.cs",
+              "DocumentMoniker": "C:\\Users\\HenriqueAGP\\Documents\\GitHub\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\Data\\Dtos\\EnderecoDto\\CreateEnderecoDto.cs",
+              "RelativeDocumentMoniker": "AmarivAPI\\Data\\Dtos\\EnderecoDto\\CreateEnderecoDto.cs",
+              "ToolTip": "C:\\Users\\HenriqueAGP\\Documents\\GitHub\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\Data\\Dtos\\EnderecoDto\\CreateEnderecoDto.cs",
+              "RelativeToolTip": "AmarivAPI\\Data\\Dtos\\EnderecoDto\\CreateEnderecoDto.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-17T23:43:14.379Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "CreateColetaDto.cs",
+              "DocumentMoniker": "C:\\Users\\HenriqueAGP\\Documents\\GitHub\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\Data\\Dtos\\ColetasDto\\CreateColetaDto.cs",
+              "RelativeDocumentMoniker": "AmarivAPI\\Data\\Dtos\\ColetasDto\\CreateColetaDto.cs",
+              "ToolTip": "C:\\Users\\HenriqueAGP\\Documents\\GitHub\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\Data\\Dtos\\ColetasDto\\CreateColetaDto.cs",
+              "RelativeToolTip": "AmarivAPI\\Data\\Dtos\\ColetasDto\\CreateColetaDto.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAsAAAAGAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-17T23:42:53.528Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "RoteiroDeColetaProfile.cs",
               "DocumentMoniker": "C:\\Users\\HenriqueAGP\\Documents\\GitHub\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\Profiles\\RoteiroDeColetaProfile.cs",
               "RelativeDocumentMoniker": "AmarivAPI\\Profiles\\RoteiroDeColetaProfile.cs",
@@ -101,7 +166,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 7,
               "Title": "EnderecoProfile.cs",
               "DocumentMoniker": "C:\\Users\\HenriqueAGP\\Documents\\GitHub\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\Profiles\\EnderecoProfile.cs",
               "RelativeDocumentMoniker": "AmarivAPI\\Profiles\\EnderecoProfile.cs",
@@ -113,7 +178,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 8,
               "Title": "ColetaProfile.cs",
               "DocumentMoniker": "C:\\Users\\HenriqueAGP\\Documents\\GitHub\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\Profiles\\ColetaProfile.cs",
               "RelativeDocumentMoniker": "AmarivAPI\\Profiles\\ColetaProfile.cs",
@@ -125,7 +190,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 9,
               "Title": "ColetaService.cs",
               "DocumentMoniker": "C:\\Users\\HenriqueAGP\\Documents\\GitHub\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\Services\\ColetaService.cs",
               "RelativeDocumentMoniker": "AmarivAPI\\Services\\ColetaService.cs",
@@ -133,11 +198,12 @@
               "RelativeToolTip": "AmarivAPI\\Services\\ColetaService.cs",
               "ViewState": "AQIAAJ4AAAAAAAAAAAA4wG0AAAAvAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-07T17:19:16.021Z"
+              "WhenOpened": "2024-05-07T17:19:16.021Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 10,
               "Title": "RoteiroDeColetas.cs",
               "DocumentMoniker": "C:\\Users\\HenriqueAGP\\Documents\\GitHub\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\Models\\RoteiroDeColetas.cs",
               "RelativeDocumentMoniker": "AmarivAPI\\Models\\RoteiroDeColetas.cs",
@@ -149,7 +215,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 11,
               "Title": "Endereco.cs",
               "DocumentMoniker": "C:\\Users\\HenriqueAGP\\Documents\\GitHub\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\Models\\Endereco.cs",
               "RelativeDocumentMoniker": "AmarivAPI\\Models\\Endereco.cs",
@@ -161,7 +227,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 13,
               "Title": "AgendamentoDeColeta.cs",
               "DocumentMoniker": "C:\\Users\\HenriqueAGP\\Documents\\GitHub\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\Models\\AgendamentoDeColeta.cs",
               "RelativeDocumentMoniker": "AmarivAPI\\Models\\AgendamentoDeColeta.cs",
@@ -173,7 +239,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 12,
               "Title": "AgendamentoDeColetaItem.cs",
               "DocumentMoniker": "C:\\Users\\HenriqueAGP\\Documents\\GitHub\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\Models\\AgendamentoDeColetaItem.cs",
               "RelativeDocumentMoniker": "AmarivAPI\\Models\\AgendamentoDeColetaItem.cs",
