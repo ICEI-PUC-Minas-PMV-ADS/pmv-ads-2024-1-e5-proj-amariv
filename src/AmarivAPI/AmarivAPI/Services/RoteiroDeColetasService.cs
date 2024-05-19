@@ -184,6 +184,7 @@ namespace AmarivAPI.Services
                 return Result.Fail("Não foi possivel localizar o Roteiro de coletas");
             }
         }
+        
         /// <summary>
         /// Função para conferir se o roteiro está disponivel para 
         /// </summary>
@@ -197,10 +198,5 @@ namespace AmarivAPI.Services
             else
                 return true;                         
         }
-
-    
-
-
-
     }
 }

@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿#nullable enable
+
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.CodeAnalysis;
 
@@ -10,7 +12,7 @@ namespace AmarivAPI.Models
         [Required]
         public int Id { get; set; }
         [AllowNull]
-        public int? UserId { get; set; }
+        public string? UserId { get; set; }
         [AllowNull]
         public int? EnderecoId { get; set; }
         [AllowNull]
@@ -24,7 +26,9 @@ namespace AmarivAPI.Models
         [AllowNull]
         public string? ClienteTel { get; set; }
         [Required]
-        public string Status { get; set; }  /* Pendent, Completed, Canceled */
+        public bool Status { get; set; }        // Define se a coleta esta em aberto.
+        [Required]
+        public bool IsSuccess { get; set; }     // Define se a coleta ou feita ou se foi cancelada.
         [Required]
         public bool Delete {  get; set; } 
         public bool AprovacaoAdmin {  get; set; } /* sim, não*/
@@ -41,5 +45,12 @@ namespace AmarivAPI.Models
         /// irão ser adicionados na coleta. EXEMPLO DA LISTA (ID:DESCRIÇÃO:PESO): "1:papel:leve,2:metal:pesado, etc... "      
         /// </summary>
         public string? ListaItensColeta { get; set; }
+
+        [ForeignKey("UserId")]
+        public virtual Usuario? Usuario { get; set; }
+        [ForeignKey("EnderecoId")]
+        public virtual Endereco? Endereco { get; set; }
+        [ForeignKey("RoteiroColetaId")]
+        public virtual RoteiroDeColetas? RoteiroDeColetas { get; set; }
     }
 }

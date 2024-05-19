@@ -1,0 +1,23 @@
+.notification-container {
+  left: 50%;
+}
+
+.notification-container.start {
+  transform: translate(-50%, 30%);
+  animation: notification-anim-slide-in 300ms;
+}
+
+.notification-container.end {
+  transform: translate(-50%, -105%);
+  animation: notification-anim-slide-out 300ms;
+}
+
+@keyframes notification-anim-slide-in {
+  from { transform: translate(-50%, -105%); }
+  to { transform: translate(-50%, 30%); }
+}
+
+@keyframes notification-anim-slide-out {
+  from { transform: translate(-50%, 30%); }
+  to { transform: translate(-50%, -105%); }
+}

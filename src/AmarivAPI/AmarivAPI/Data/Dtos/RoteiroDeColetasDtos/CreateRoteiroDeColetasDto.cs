@@ -12,7 +12,6 @@ namespace AmarivAPI.Data.Dtos.RoteiroDeColetasDtos
         public int NumeroDeColetas { get; set; }
         public int NumeroMaxColetas { get; set; }
 
-
-
+        public ICollection<ItemRoteiroDeColeta> Id_ItensDoRoteiro { get; set; }
     }
 }
