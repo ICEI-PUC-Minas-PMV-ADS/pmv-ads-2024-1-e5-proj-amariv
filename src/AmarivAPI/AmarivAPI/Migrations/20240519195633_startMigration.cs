@@ -9,11 +9,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AmarivAPI.Migrations
 {
     /// <inheritdoc />
-<<<<<<<< HEAD:src/AmarivAPI/AmarivAPI/Migrations/20240424225242_add-migration CriacaoBanco.cs
-    public partial class addmigrationCriacaoBanco : Migration
-========
-    public partial class StartMigration : Migration
->>>>>>>> vitor_branch:src/AmarivAPI/AmarivAPI/Migrations/20240512202432_start.cs
+    public partial class startMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -48,6 +44,8 @@ namespace AmarivAPI.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Nome = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    Celular = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     UserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     NormalizedUserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
@@ -65,8 +63,6 @@ namespace AmarivAPI.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     PhoneNumber = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Celular = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
                     PhoneNumberConfirmed = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     TwoFactorEnabled = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(type: "datetime(6)", nullable: true),
@@ -80,8 +76,6 @@ namespace AmarivAPI.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-<<<<<<<< HEAD:src/AmarivAPI/AmarivAPI/Migrations/20240424225242_add-migration CriacaoBanco.cs
-========
                 name: "Enderecos",
                 columns: table => new
                 {
@@ -95,6 +89,8 @@ namespace AmarivAPI.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Cep = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    Cidade = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     Referencia = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
@@ -105,7 +101,6 @@ namespace AmarivAPI.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
->>>>>>>> vitor_branch:src/AmarivAPI/AmarivAPI/Migrations/20240512202432_start.cs
                 name: "ItensRoteiroDeColetas",
                 columns: table => new
                 {
@@ -113,15 +108,12 @@ namespace AmarivAPI.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Id_RoreiroDeColetas = table.Column<int>(type: "int", nullable: false),
                     Id_Coletas = table.Column<int>(type: "int", nullable: false),
-<<<<<<<< HEAD:src/AmarivAPI/AmarivAPI/Migrations/20240424225242_add-migration CriacaoBanco.cs
-                    PosicaoLista = table.Column<int>(type: "int", nullable: false)
-========
                     PosicaoLista = table.Column<int>(type: "int", nullable: false),
                     Endereco = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Materiais = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4")
->>>>>>>> vitor_branch:src/AmarivAPI/AmarivAPI/Migrations/20240512202432_start.cs
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    IsDelete = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -146,39 +138,6 @@ namespace AmarivAPI.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Materiais", x => x.Id);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "RoteiroDeColetas",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-<<<<<<<< HEAD:src/AmarivAPI/AmarivAPI/Migrations/20240424225242_add-migration CriacaoBanco.cs
-========
-                    FuncionarioId = table.Column<string>(type: "varchar(255)", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    DataRoteiro = table.Column<DateTime>(type: "datetime(6)", nullable: false),
->>>>>>>> vitor_branch:src/AmarivAPI/AmarivAPI/Migrations/20240512202432_start.cs
-                    DataCadastro = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    Status = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    Delete = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    NumeroDeColetas = table.Column<int>(type: "int", nullable: false),
-                    NumeroMaxColetas = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_RoteiroDeColetas", x => x.Id);
-<<<<<<<< HEAD:src/AmarivAPI/AmarivAPI/Migrations/20240424225242_add-migration CriacaoBanco.cs
-========
-                    table.ForeignKey(
-                        name: "FK_RoteiroDeColetas_AspNetUsers_FuncionarioId",
-                        column: x => x.FuncionarioId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
->>>>>>>> vitor_branch:src/AmarivAPI/AmarivAPI/Migrations/20240512202432_start.cs
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -309,17 +268,43 @@ namespace AmarivAPI.Migrations
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
-<<<<<<<< HEAD:src/AmarivAPI/AmarivAPI/Migrations/20240424225242_add-migration CriacaoBanco.cs
-========
+            migrationBuilder.CreateTable(
+                name: "RoteiroDeColetas",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    FuncionarioId = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    DataRoteiro = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    DataCadastro = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    Status = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    Delete = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    NumeroDeColetas = table.Column<int>(type: "int", nullable: false),
+                    NumeroMaxColetas = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RoteiroDeColetas", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_RoteiroDeColetas_AspNetUsers_FuncionarioId",
+                        column: x => x.FuncionarioId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
             migrationBuilder.CreateTable(
                 name: "Coletas",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    UserId = table.Column<int>(type: "int", nullable: true),
+                    UserId = table.Column<string>(type: "varchar(255)", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     EnderecoId = table.Column<int>(type: "int", nullable: true),
-                    RoteiroColetaId = table.Column<int>(type: "int", nullable: false),
+                    RoteiroColetaId = table.Column<int>(type: "int", nullable: true),
                     PosicaoLista = table.Column<int>(type: "int", nullable: true),
                     ClienteNome = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -343,20 +328,22 @@ namespace AmarivAPI.Migrations
                     table.PrimaryKey("PK_Coletas", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Coletas_AspNetUsers_UserId",
-                        column: x => x.RoteiroColetaId,
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Coletas_Enderecos_EnderecoId",
+                        column: x => x.EnderecoId,
+                        principalTable: "Enderecos",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Coletas_RoteiroDeColetas_RoteiroColetaId",
                         column: x => x.RoteiroColetaId,
                         principalTable: "RoteiroDeColetas",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
->>>>>>>> vitor_branch:src/AmarivAPI/AmarivAPI/Migrations/20240512202432_start.cs
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
@@ -369,12 +356,8 @@ namespace AmarivAPI.Migrations
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "Nome", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-<<<<<<<< HEAD:src/AmarivAPI/AmarivAPI/Migrations/20240424225242_add-migration CriacaoBanco.cs
-                values: new object[] { "adm", 0, "a5e7cbc8-a2ed-462f-ad6c-bf0fa0fa0df1", "amarivadm@gmail.com", true, false, null, "Administrador", "AMARIVADM@GMAIL.COM", "AMARIVADM@GMAIL.COM", "AQAAAAIAAYagAAAAEElr+28CQnR2YHj5GzC85Acb94FViDInudxcyEzeTuzm6i7XwbOcKijM9LoOhGvgDA==", null, false, "42032ea2-9e96-46e5-b079-6719e3409cf6", false, "amarivadm@gmail.com" });
-========
-                values: new object[] { "adm", 0, "86c97c21-2f9b-4bf4-ada8-4b07c39d642b", "amarivadm@gmail.com", true, false, null, "Administrador", "AMARIVADM@GMAIL.COM", "AMARIVADM@GMAIL.COM", "AQAAAAIAAYagAAAAEM6bRdl2dwpqa3vQqqGlPgWdR0DVJUA78d+YzqNO/24yXyw0e5fjGY8ywH4kHORH8Q==", null, false, "645086e1-906c-4261-a6e1-e2716bfd96e1", false, "amarivadm@gmail.com" });
->>>>>>>> vitor_branch:src/AmarivAPI/AmarivAPI/Migrations/20240512202432_start.cs
+                columns: new[] { "Id", "AccessFailedCount", "Celular", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "Nome", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "adm", 0, "", "134650a9-ea02-4b7d-b6c4-5639d139bfd3", "amarivadm@gmail.com", true, false, null, "Administrador", "AMARIVADM@GMAIL.COM", "AMARIVADM@GMAIL.COM", "AQAAAAIAAYagAAAAEFHrBDxr5d7uYIXta00c5RHCqCaFhlAxwv33bLVa5+8MTo/SeJdcvbzwtrqmxvDVSg==", null, false, "ba4c5cdb-28f5-480a-9a99-72565cf9e34a", false, "amarivadm@gmail.com" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
@@ -419,9 +402,25 @@ namespace AmarivAPI.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_Coletas_EnderecoId",
+                table: "Coletas",
+                column: "EnderecoId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Coletas_RoteiroColetaId",
                 table: "Coletas",
                 column: "RoteiroColetaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Coletas_UserId",
+                table: "Coletas",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RoteiroDeColetas_FuncionarioId",
+                table: "RoteiroDeColetas",
+                column: "FuncionarioId",
+                unique: true);
         }
 
         /// <inheritdoc />
@@ -443,34 +442,25 @@ namespace AmarivAPI.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-<<<<<<<< HEAD:src/AmarivAPI/AmarivAPI/Migrations/20240424225242_add-migration CriacaoBanco.cs
-========
                 name: "Coletas");
 
             migrationBuilder.DropTable(
-                name: "Enderecos");
-
-            migrationBuilder.DropTable(
->>>>>>>> vitor_branch:src/AmarivAPI/AmarivAPI/Migrations/20240512202432_start.cs
                 name: "ItensRoteiroDeColetas");
 
             migrationBuilder.DropTable(
                 name: "Materiais");
 
             migrationBuilder.DropTable(
-<<<<<<<< HEAD:src/AmarivAPI/AmarivAPI/Migrations/20240424225242_add-migration CriacaoBanco.cs
-                name: "RoteiroDeColetas");
-
-            migrationBuilder.DropTable(
-========
->>>>>>>> vitor_branch:src/AmarivAPI/AmarivAPI/Migrations/20240512202432_start.cs
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "Enderecos");
 
             migrationBuilder.DropTable(
                 name: "RoteiroDeColetas");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
         }
     }
 }
