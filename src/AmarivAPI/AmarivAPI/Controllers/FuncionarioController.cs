@@ -62,14 +62,21 @@ namespace AmarivAPI.Controllers
 
         // Atualiza as informações de um funcionário
         [HttpPut("{id}")]
-        public IActionResult Update(int id, FuncionarioDto funcionarioDto)
+        public IActionResult Update(int id, FuncionarioUpdateDto funcionarioDto)
         {
-            var funcionario = _mapper.Map<Funcionario>(funcionarioDto);
-            funcionario.Id = id;
+            var funcionario = _funcionarioService.GetById(id);
+            if (funcionario == null)
+            {
+                return NotFound("Funcionário não encontrado");
+            }
+
+            _mapper.Map(funcionarioDto, funcionario); // Atualiza as propriedades do funcionário com base no DTO
+
             try
             {
                 _funcionarioService.Update(funcionario);
-                return Ok("Funcionário atualizado com sucesso");
+                var funcionarioResponseDto = _mapper.Map<FuncionarioResponseDto>(funcionario);
+                return Ok(funcionarioResponseDto);
             }
             catch (Exception ex)
             {

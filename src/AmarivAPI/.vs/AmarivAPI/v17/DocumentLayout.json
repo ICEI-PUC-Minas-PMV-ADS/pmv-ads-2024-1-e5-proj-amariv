@@ -3,56 +3,64 @@
   "WorkspaceRootPath": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\onedrive\\documentos\\github\\src\\amarivapi\\amarivapi\\amarivapi.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
-      "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\amarivapi.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\onedrive\\documentos\\github\\src\\amarivapi\\amarivapi\\profiles\\funcionarioprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\profiles\\funcionarioprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\onedrive\\documentos\\github\\src\\amarivapi\\amarivapi\\data\\dtos\\funcionariosdtos\\funcionarioupdatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\data\\dtos\\funcionariosdtos\\funcionarioupdatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\onedrive\\documentos\\github\\src\\amarivapi\\amarivapi\\data\\dtos\\funcionariosdtos\\funcionariodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\data\\dtos\\funcionariosdtos\\funcionariodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\onedrive\\documentos\\github\\src\\amarivapi\\amarivapi\\data\\dtos\\funcionariosdtos\\funcionarioresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\data\\dtos\\funcionariosdtos\\funcionarioresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\onedrive\\documentos\\github\\src\\amarivapi\\amarivapi\\models\\funcionarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\models\\funcionarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\onedrive\\documentos\\github\\src\\amarivapi\\amarivapi\\services\\funcionarioservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\services\\funcionarioservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Migrations\\20240519033208_amariv.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:AmarivAPI\\Migrations\\20240519033208_amariv.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\onedrive\\documentos\\github\\src\\amarivapi\\amarivapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\onedrive\\documentos\\github\\src\\amarivapi\\amarivapi\\profiles\\itemroteirodecoletaprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\profiles\\itemroteirodecoletaprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\onedrive\\documentos\\github\\src\\amarivapi\\amarivapi\\models\\itemroteirodecoleta.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\models\\itemroteirodecoleta.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\onedrive\\documentos\\github\\src\\amarivapi\\amarivapi\\controllers\\funcionariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\controllers\\funcionariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\onedrive\\documentos\\github\\src\\amarivapi\\amarivapi\\amarivapi.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\amarivapi.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\onedrive\\documentos\\github\\src\\amarivapi\\amarivapi\\data\\dtos\\funcionariosdtos\\funcionarioupdatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\data\\dtos\\funcionariosdtos\\funcionarioupdatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\onedrive\\documentos\\github\\src\\amarivapi\\amarivapi\\data\\dtos\\funcionariosdtos\\funcionarioresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\data\\dtos\\funcionariosdtos\\funcionarioresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\onedrive\\documentos\\github\\src\\amarivapi\\amarivapi\\data\\dtos\\funcionariosdtos\\funcionariodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\data\\dtos\\funcionariosdtos\\funcionariodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\onedrive\\documentos\\github\\src\\amarivapi\\amarivapi\\data\\dtos\\notificacaodtos\\createnotificacaodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\data\\dtos\\notificacaodtos\\createnotificacaodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\onedrive\\documentos\\github\\src\\amarivapi\\amarivapi\\models\\funcionarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\models\\funcionarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\onedrive\\documentos\\github\\src\\amarivapi\\amarivapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\onedrive\\documentos\\github\\src\\amarivapi\\amarivapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\onedrive\\documentos\\github\\src\\amarivapi\\amarivapi\\profiles\\itemroteirodecoletaprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\profiles\\itemroteirodecoletaprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\onedrive\\documentos\\github\\src\\amarivapi\\amarivapi\\services\\funcionarioservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\services\\funcionarioservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\onedrive\\documentos\\github\\src\\amarivapi\\amarivapi\\models\\itemroteirodecoleta.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\models\\itemroteirodecoleta.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\onedrive\\documentos\\github\\src\\amarivapi\\amarivapi\\services\\tokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\services\\tokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\onedrive\\documentos\\github\\src\\amarivapi\\amarivapi\\services\\notificacaoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\services\\notificacaoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\onedrive\\documentos\\github\\src\\amarivapi\\amarivapi\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -61,10 +69,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\onedrive\\documentos\\github\\src\\amarivapi\\amarivapi\\controllers\\materialcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\controllers\\materialcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\onedrive\\documentos\\github\\src\\amarivapi\\amarivapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\onedrive\\documentos\\github\\src\\amarivapi\\amarivapi\\models\\material.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -115,10 +119,6 @@
       "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\data\\dtos\\notificacaodtos\\notificacaodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\onedrive\\documentos\\github\\src\\amarivapi\\amarivapi\\services\\notificacaoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\services\\notificacaoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\onedrive\\documentos\\github\\src\\amarivapi\\amarivapi\\services\\roteirodecoletasservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\services\\roteirodecoletasservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -165,10 +165,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\onedrive\\documentos\\github\\src\\amarivapi\\amarivapi\\profiles\\roteirodecoletaprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\profiles\\roteirodecoletaprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\onedrive\\documentos\\github\\src\\amarivapi\\amarivapi\\services\\tokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\services\\tokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\onedrive\\documentos\\github\\src\\amarivapi\\amarivapi\\data\\dtos\\roteirodecoletasdtos\\createroteirodecoletasdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -229,6 +225,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\onedrive\\documentos\\github\\src\\amarivapi\\amarivapi\\migrations\\20240505184714_funcionarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\migrations\\20240505184714_funcionarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|d:\\onedrive\\documentos\\github\\src\\amarivapi\\amarivapi\\migrations\\20240519033208_amariv.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{078F06B9-56E3-4636-B200-1932A45B560D}|AmarivAPI\\AmarivAPI.csproj|solutionrelative:amarivapi\\migrations\\20240519033208_amariv.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -257,40 +257,66 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "AmarivAPI.http",
-              "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\AmarivAPI.http",
-              "RelativeDocumentMoniker": "AmarivAPI\\AmarivAPI.http",
-              "ToolTip": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\AmarivAPI.http",
-              "RelativeToolTip": "AmarivAPI\\AmarivAPI.http",
-              "ViewState": "AQIAAGcAAAAAAAAAAAAcwHkAAAAnAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
-              "WhenOpened": "2024-04-25T19:34:59.432Z",
+              "Title": "FuncionarioProfile.cs",
+              "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Profiles\\FuncionarioProfile.cs",
+              "RelativeDocumentMoniker": "AmarivAPI\\Profiles\\FuncionarioProfile.cs",
+              "ToolTip": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Profiles\\FuncionarioProfile.cs",
+              "RelativeToolTip": "AmarivAPI\\Profiles\\FuncionarioProfile.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAC8AAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-05T19:44:07.406Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "FuncionarioService.cs",
-              "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Services\\FuncionarioService.cs",
-              "RelativeDocumentMoniker": "AmarivAPI\\Services\\FuncionarioService.cs",
-              "ToolTip": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Services\\FuncionarioService.cs",
-              "RelativeToolTip": "AmarivAPI\\Services\\FuncionarioService.cs",
-              "ViewState": "AQIAAAgAAAAAAAAAAAAQwD8AAAABAAAA",
+              "DocumentIndex": 8,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\appsettings.json",
+              "RelativeDocumentMoniker": "AmarivAPI\\appsettings.json",
+              "ToolTip": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\appsettings.json",
+              "RelativeToolTip": "AmarivAPI\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAUAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-04-26T01:33:52.499Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "ItemRoteiroDeColeta.cs",
+              "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Models\\ItemRoteiroDeColeta.cs",
+              "RelativeDocumentMoniker": "AmarivAPI\\Models\\ItemRoteiroDeColeta.cs",
+              "ToolTip": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Models\\ItemRoteiroDeColeta.cs",
+              "RelativeToolTip": "AmarivAPI\\Models\\ItemRoteiroDeColeta.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-05T18:53:35.707Z",
+              "WhenOpened": "2024-04-28T17:44:03.292Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "FuncionarioController.cs",
+              "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Controllers\\FuncionarioController.cs",
+              "RelativeDocumentMoniker": "AmarivAPI\\Controllers\\FuncionarioController.cs",
+              "ToolTip": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Controllers\\FuncionarioController.cs",
+              "RelativeToolTip": "AmarivAPI\\Controllers\\FuncionarioController.cs",
+              "ViewState": "AQIAAD4AAAAAAAAAAAAwwFoAAAA+AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-05T19:02:43.699Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "Funcionarios.cs",
-              "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Models\\Funcionarios.cs",
-              "RelativeDocumentMoniker": "AmarivAPI\\Models\\Funcionarios.cs",
-              "ToolTip": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Models\\Funcionarios.cs",
-              "RelativeToolTip": "AmarivAPI\\Models\\Funcionarios.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAABgAAAAAAAAA",
+              "Title": "FuncionarioDto.cs",
+              "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Data\\Dtos\\FuncionariosDtos\\FuncionarioDto.cs",
+              "RelativeDocumentMoniker": "AmarivAPI\\Data\\Dtos\\FuncionariosDtos\\FuncionarioDto.cs",
+              "ToolTip": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Data\\Dtos\\FuncionariosDtos\\FuncionarioDto.cs",
+              "RelativeToolTip": "AmarivAPI\\Data\\Dtos\\FuncionariosDtos\\FuncionarioDto.cs",
+              "ViewState": "AQIAAAUAAAAAAAAAAAAQwBwAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-05T18:37:51.009Z",
+              "WhenOpened": "2024-05-05T19:01:53.866Z",
               "EditorCaption": ""
             },
             {
@@ -309,110 +335,58 @@
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "FuncionarioDto.cs",
-              "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Data\\Dtos\\FuncionariosDtos\\FuncionarioDto.cs",
-              "RelativeDocumentMoniker": "AmarivAPI\\Data\\Dtos\\FuncionariosDtos\\FuncionarioDto.cs",
-              "ToolTip": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Data\\Dtos\\FuncionariosDtos\\FuncionarioDto.cs",
-              "RelativeToolTip": "AmarivAPI\\Data\\Dtos\\FuncionariosDtos\\FuncionarioDto.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAApAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-05T19:01:53.866Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
               "Title": "FuncionarioUpdateDto.cs",
               "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Data\\Dtos\\FuncionariosDtos\\FuncionarioUpdateDto.cs",
               "RelativeDocumentMoniker": "AmarivAPI\\Data\\Dtos\\FuncionariosDtos\\FuncionarioUpdateDto.cs",
               "ToolTip": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Data\\Dtos\\FuncionariosDtos\\FuncionarioUpdateDto.cs",
               "RelativeToolTip": "AmarivAPI\\Data\\Dtos\\FuncionariosDtos\\FuncionarioUpdateDto.cs",
-              "ViewState": "AQIAAAUAAAAAAAAAAAAQwAgAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-05T19:06:21.141Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "FuncionarioProfile.cs",
-              "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Profiles\\FuncionarioProfile.cs",
-              "RelativeDocumentMoniker": "AmarivAPI\\Profiles\\FuncionarioProfile.cs",
-              "ToolTip": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Profiles\\FuncionarioProfile.cs",
-              "RelativeToolTip": "AmarivAPI\\Profiles\\FuncionarioProfile.cs",
-              "ViewState": "AQIAAAoAAAAAAAAAAAAgwCkAAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-05T19:44:07.406Z",
+              "DocumentIndex": 2,
+              "Title": "AmarivAPI.http",
+              "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\AmarivAPI.http",
+              "RelativeDocumentMoniker": "AmarivAPI\\AmarivAPI.http",
+              "ToolTip": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\AmarivAPI.http",
+              "RelativeToolTip": "AmarivAPI\\AmarivAPI.http",
+              "ViewState": "AQIAAFIAAAAAAAAAAAAywG0AAAAvAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2024-04-25T19:34:59.432Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 9,
-              "Title": "ItemRoteiroDeColetaProfile.cs",
-              "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Profiles\\ItemRoteiroDeColetaProfile.cs",
-              "RelativeDocumentMoniker": "AmarivAPI\\Profiles\\ItemRoteiroDeColetaProfile.cs",
-              "ToolTip": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Profiles\\ItemRoteiroDeColetaProfile.cs",
-              "RelativeToolTip": "AmarivAPI\\Profiles\\ItemRoteiroDeColetaProfile.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Program.cs",
+              "RelativeDocumentMoniker": "AmarivAPI\\Program.cs",
+              "ToolTip": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Program.cs",
+              "RelativeToolTip": "AmarivAPI\\Program.cs",
+              "ViewState": "AQIAADMAAAAAAAAAAAAcwD4AAAA/AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-25T20:34:12.667Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "ItemRoteiroDeColeta.cs",
-              "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Models\\ItemRoteiroDeColeta.cs",
-              "RelativeDocumentMoniker": "AmarivAPI\\Models\\ItemRoteiroDeColeta.cs",
-              "ToolTip": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Models\\ItemRoteiroDeColeta.cs",
-              "RelativeToolTip": "AmarivAPI\\Models\\ItemRoteiroDeColeta.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-28T17:44:03.292Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "FuncionarioController.cs",
-              "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Controllers\\FuncionarioController.cs",
-              "RelativeDocumentMoniker": "AmarivAPI\\Controllers\\FuncionarioController.cs",
-              "ToolTip": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Controllers\\FuncionarioController.cs",
-              "RelativeToolTip": "AmarivAPI\\Controllers\\FuncionarioController.cs",
-              "ViewState": "AQIAAC8AAAAAAAAAAAAxwFwAAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-05T19:02:43.699Z",
+              "WhenOpened": "2024-04-26T01:39:01.306Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 7,
-              "Title": "20240519033208_amariv.cs",
-              "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Migrations\\20240519033208_amariv.cs",
-              "RelativeDocumentMoniker": "AmarivAPI\\Migrations\\20240519033208_amariv.cs",
-              "ToolTip": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Migrations\\20240519033208_amariv.cs",
-              "RelativeToolTip": "AmarivAPI\\Migrations\\20240519033208_amariv.cs",
-              "ViewState": "AQIAADEAAAAAAAAAAAAgwAAAAAAAAAAA",
+              "Title": "Funcionarios.cs",
+              "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Models\\Funcionarios.cs",
+              "RelativeDocumentMoniker": "AmarivAPI\\Models\\Funcionarios.cs",
+              "ToolTip": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Models\\Funcionarios.cs",
+              "RelativeToolTip": "AmarivAPI\\Models\\Funcionarios.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABwAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-19T03:32:08.368Z",
+              "WhenOpened": "2024-05-05T18:37:51.009Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\appsettings.json",
-              "RelativeDocumentMoniker": "AmarivAPI\\appsettings.json",
-              "ToolTip": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\appsettings.json",
-              "RelativeToolTip": "AmarivAPI\\appsettings.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-04-26T01:33:52.499Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 6,
               "Title": "CreateNotificacaoDto.cs",
               "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Data\\Dtos\\NotificacaoDtos\\CreateNotificacaoDto.cs",
               "RelativeDocumentMoniker": "AmarivAPI\\Data\\Dtos\\NotificacaoDtos\\CreateNotificacaoDto.cs",
@@ -425,7 +399,71 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 10,
+              "Title": "ItemRoteiroDeColetaProfile.cs",
+              "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Profiles\\ItemRoteiroDeColetaProfile.cs",
+              "RelativeDocumentMoniker": "AmarivAPI\\Profiles\\ItemRoteiroDeColetaProfile.cs",
+              "ToolTip": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Profiles\\ItemRoteiroDeColetaProfile.cs",
+              "RelativeToolTip": "AmarivAPI\\Profiles\\ItemRoteiroDeColetaProfile.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-25T20:34:12.667Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "FuncionarioService.cs",
+              "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Services\\FuncionarioService.cs",
+              "RelativeDocumentMoniker": "AmarivAPI\\Services\\FuncionarioService.cs",
+              "ToolTip": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Services\\FuncionarioService.cs",
+              "RelativeToolTip": "AmarivAPI\\Services\\FuncionarioService.cs",
+              "ViewState": "AQIAACIAAAAAAAAAAAAAwD8AAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-05T18:53:35.707Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "NotificacaoService.cs",
+              "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Services\\NotificacaoService.cs",
+              "RelativeDocumentMoniker": "AmarivAPI\\Services\\NotificacaoService.cs",
+              "ToolTip": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Services\\NotificacaoService.cs",
+              "RelativeToolTip": "AmarivAPI\\Services\\NotificacaoService.cs",
+              "ViewState": "AQIAABYAAAAAAAAAAAAgwDMAAABfAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-25T19:50:54.747Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "TokenService.cs",
+              "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Services\\TokenService.cs",
+              "RelativeDocumentMoniker": "AmarivAPI\\Services\\TokenService.cs",
+              "ToolTip": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Services\\TokenService.cs",
+              "RelativeToolTip": "AmarivAPI\\Services\\TokenService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-25T19:35:34.989Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 56,
+              "Title": "20240519033208_amariv.cs",
+              "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Migrations\\20240519033208_amariv.cs",
+              "RelativeDocumentMoniker": "AmarivAPI\\Migrations\\20240519033208_amariv.cs",
+              "ToolTip": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Migrations\\20240519033208_amariv.cs",
+              "RelativeToolTip": "AmarivAPI\\Migrations\\20240519033208_amariv.cs",
+              "ViewState": "AQIAADEAAAAAAAAAAAAgwAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-19T03:32:08.368Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
               "Title": "MaterialProfile.cs",
               "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Profiles\\MaterialProfile.cs",
               "RelativeDocumentMoniker": "AmarivAPI\\Profiles\\MaterialProfile.cs",
@@ -437,7 +475,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 17,
               "Title": "Material.cs",
               "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Models\\Material.cs",
               "RelativeDocumentMoniker": "AmarivAPI\\Models\\Material.cs",
@@ -449,7 +487,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 15,
               "Title": "LoginController.cs",
               "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Controllers\\LoginController.cs",
               "RelativeDocumentMoniker": "AmarivAPI\\Controllers\\LoginController.cs",
@@ -457,12 +495,11 @@
               "RelativeToolTip": "AmarivAPI\\Controllers\\LoginController.cs",
               "ViewState": "AQIAABUAAAAAAAAAAAAowC0AAAAjAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-25T19:15:15.432Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-25T19:15:15.432Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 20,
               "Title": "MaterialService.cs",
               "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Services\\MaterialService.cs",
               "RelativeDocumentMoniker": "AmarivAPI\\Services\\MaterialService.cs",
@@ -474,19 +511,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Program.cs",
-              "RelativeDocumentMoniker": "AmarivAPI\\Program.cs",
-              "ToolTip": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Program.cs",
-              "RelativeToolTip": "AmarivAPI\\Program.cs",
-              "ViewState": "AQIAAC0AAAAAAAAAAAAAAFkAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-26T01:39:01.306Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 19,
               "Title": "ReadMaterialDto.cs",
               "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Data\\Dtos\\MaterialDtos\\ReadMaterialDto.cs",
               "RelativeDocumentMoniker": "AmarivAPI\\Data\\Dtos\\MaterialDtos\\ReadMaterialDto.cs",
@@ -498,7 +523,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 18,
               "Title": "CreateMaterialDto.cs",
               "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Data\\Dtos\\MaterialDtos\\CreateMaterialDto.cs",
               "RelativeDocumentMoniker": "AmarivAPI\\Data\\Dtos\\MaterialDtos\\CreateMaterialDto.cs",
@@ -510,7 +535,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 16,
               "Title": "MaterialController.cs",
               "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Controllers\\MaterialController.cs",
               "RelativeDocumentMoniker": "AmarivAPI\\Controllers\\MaterialController.cs",
@@ -518,12 +543,11 @@
               "RelativeToolTip": "AmarivAPI\\Controllers\\MaterialController.cs",
               "ViewState": "AQIAAAwAAAAAAAAAAAAwwFQAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-25T21:00:19.539Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-25T21:00:19.539Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 21,
               "Title": "NotificacaoController.cs",
               "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Controllers\\NotificacaoController.cs",
               "RelativeDocumentMoniker": "AmarivAPI\\Controllers\\NotificacaoController.cs",
@@ -535,7 +559,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 24,
               "Title": "launchSettings.json",
               "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "AmarivAPI\\Properties\\launchSettings.json",
@@ -547,7 +571,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 25,
               "Title": "AmarivContext.cs",
               "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Data\\AmarivContext.cs",
               "RelativeDocumentMoniker": "AmarivAPI\\Data\\AmarivContext.cs",
@@ -559,7 +583,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 23,
               "Title": "UsuarioService.cs",
               "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Services\\UsuarioService.cs",
               "RelativeDocumentMoniker": "AmarivAPI\\Services\\UsuarioService.cs",
@@ -571,7 +595,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 28,
               "Title": "NotificacaoDto.cs",
               "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Data\\Dtos\\NotificacaoDtos\\NotificacaoDto.cs",
               "RelativeDocumentMoniker": "AmarivAPI\\Data\\Dtos\\NotificacaoDtos\\NotificacaoDto.cs",
@@ -583,7 +607,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 26,
               "Title": "ColetaService.cs",
               "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Services\\ColetaService.cs",
               "RelativeDocumentMoniker": "AmarivAPI\\Services\\ColetaService.cs",
@@ -595,7 +619,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 27,
               "Title": "EmailService.cs",
               "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Services\\EmailService.cs",
               "RelativeDocumentMoniker": "AmarivAPI\\Services\\EmailService.cs",
@@ -604,18 +628,6 @@
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-05T21:32:16.455Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 28,
-              "Title": "NotificacaoService.cs",
-              "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Services\\NotificacaoService.cs",
-              "RelativeDocumentMoniker": "AmarivAPI\\Services\\NotificacaoService.cs",
-              "ToolTip": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Services\\NotificacaoService.cs",
-              "RelativeToolTip": "AmarivAPI\\Services\\NotificacaoService.cs",
-              "ViewState": "AQIAABYAAAAAAAAAAAAgwDMAAABfAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-25T19:50:54.747Z"
             },
             {
               "$type": "Document",
@@ -667,7 +679,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 56,
+              "DocumentIndex": 55,
               "Title": "20240505184714_funcionarios.cs",
               "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Migrations\\20240505184714_funcionarios.cs",
               "RelativeDocumentMoniker": "AmarivAPI\\Migrations\\20240505184714_funcionarios.cs",
@@ -777,18 +789,6 @@
             {
               "$type": "Document",
               "DocumentIndex": 41,
-              "Title": "TokenService.cs",
-              "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Services\\TokenService.cs",
-              "RelativeDocumentMoniker": "AmarivAPI\\Services\\TokenService.cs",
-              "ToolTip": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Services\\TokenService.cs",
-              "RelativeToolTip": "AmarivAPI\\Services\\TokenService.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-25T19:35:34.989Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 42,
               "Title": "CreateRoteiroDeColetasDto.cs",
               "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Data\\Dtos\\RoteiroDeColetasDtos\\CreateRoteiroDeColetasDto.cs",
               "RelativeDocumentMoniker": "AmarivAPI\\Data\\Dtos\\RoteiroDeColetasDtos\\CreateRoteiroDeColetasDto.cs",
@@ -800,7 +800,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 43,
+              "DocumentIndex": 42,
               "Title": "UpdateRoteiroDeColetasDto.cs",
               "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Data\\Dtos\\RoteiroDeColetasDtos\\UpdateRoteiroDeColetasDto.cs",
               "RelativeDocumentMoniker": "AmarivAPI\\Data\\Dtos\\RoteiroDeColetasDtos\\UpdateRoteiroDeColetasDto.cs",
@@ -812,7 +812,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 44,
+              "DocumentIndex": 43,
               "Title": "CreateItemRoteiroDeColetasDto.cs",
               "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Data\\Dtos\\ItensRoteiroDeColetasDtos\\CreateItemRoteiroDeColetasDto.cs",
               "RelativeDocumentMoniker": "AmarivAPI\\Data\\Dtos\\ItensRoteiroDeColetasDtos\\CreateItemRoteiroDeColetasDto.cs",
@@ -824,7 +824,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 45,
+              "DocumentIndex": 44,
               "Title": "ReadRoteiroDeColetasDto.cs",
               "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Data\\Dtos\\RoteiroDeColetasDtos\\ReadRoteiroDeColetasDto.cs",
               "RelativeDocumentMoniker": "AmarivAPI\\Data\\Dtos\\RoteiroDeColetasDtos\\ReadRoteiroDeColetasDto.cs",
@@ -836,7 +836,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 46,
+              "DocumentIndex": 45,
               "Title": "UpdateItemRoteiroDeColetaDto.cs",
               "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Data\\Dtos\\ItensRoteiroDeColetasDtos\\UpdateItemRoteiroDeColetaDto.cs",
               "RelativeDocumentMoniker": "AmarivAPI\\Data\\Dtos\\ItensRoteiroDeColetasDtos\\UpdateItemRoteiroDeColetaDto.cs",
@@ -848,7 +848,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 47,
+              "DocumentIndex": 46,
               "Title": "ReadItemRoteiroDeColetas.cs",
               "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Data\\Dtos\\ItensRoteiroDeColetasDtos\\ReadItemRoteiroDeColetas.cs",
               "RelativeDocumentMoniker": "AmarivAPI\\Data\\Dtos\\ItensRoteiroDeColetasDtos\\ReadItemRoteiroDeColetas.cs",
@@ -860,7 +860,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 48,
+              "DocumentIndex": 47,
               "Title": "20240424225242_add-migration CriacaoBanco.cs",
               "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Migrations\\20240424225242_add-migration CriacaoBanco.cs",
               "RelativeDocumentMoniker": "AmarivAPI\\Migrations\\20240424225242_add-migration CriacaoBanco.cs",
@@ -872,7 +872,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 50,
+              "DocumentIndex": 49,
               "Title": "20240425221400_CreateNotificacaoTable.cs",
               "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Migrations\\20240425221400_CreateNotificacaoTable.cs",
               "RelativeDocumentMoniker": "AmarivAPI\\Migrations\\20240425221400_CreateNotificacaoTable.cs",
@@ -884,7 +884,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 49,
+              "DocumentIndex": 48,
               "Title": "UsuarioProfile.cs",
               "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Profiles\\UsuarioProfile.cs",
               "RelativeDocumentMoniker": "AmarivAPI\\Profiles\\UsuarioProfile.cs",
@@ -896,7 +896,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 51,
+              "DocumentIndex": 50,
               "Title": "20240425220430_CreateNotificacaoTable.cs",
               "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Migrations\\20240425220430_CreateNotificacaoTable.cs",
               "RelativeDocumentMoniker": "AmarivAPI\\Migrations\\20240425220430_CreateNotificacaoTable.cs",
@@ -908,7 +908,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 52,
+              "DocumentIndex": 51,
               "Title": "SignInController.cs",
               "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Controllers\\SignInController.cs",
               "RelativeDocumentMoniker": "AmarivAPI\\Controllers\\SignInController.cs",
@@ -920,7 +920,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 53,
+              "DocumentIndex": 52,
               "Title": "LoginResquest.cs",
               "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Data\\Requests\\LoginResquest.cs",
               "RelativeDocumentMoniker": "AmarivAPI\\Data\\Requests\\LoginResquest.cs",
@@ -932,7 +932,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 54,
+              "DocumentIndex": 53,
               "Title": "ConfirmaEmailRequest.cs",
               "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Data\\Requests\\ConfirmaEmailRequest.cs",
               "RelativeDocumentMoniker": "AmarivAPI\\Data\\Requests\\ConfirmaEmailRequest.cs",
@@ -944,7 +944,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 55,
+              "DocumentIndex": 54,
               "Title": "SolicitaRecuperacaoRequest.cs",
               "DocumentMoniker": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\Data\\Requests\\SolicitaRecuperacaoRequest.cs",
               "RelativeDocumentMoniker": "AmarivAPI\\Data\\Requests\\SolicitaRecuperacaoRequest.cs",

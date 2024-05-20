@@ -37,6 +37,12 @@ namespace AmarivAPI.Profiles
                 .ForMember(dest => dest.SuportaPeso, opt => opt.MapFrom(src => src.SuportaPeso))
                 .ForMember(dest => dest.Cargo, opt => opt.MapFrom(src => src.Cargo))
                 .ForMember(dest => dest.Telefone, opt => opt.MapFrom(src => src.Telefone));
+
+            // Mapeia os dados de FuncionarioUpdateDto para Funcionario
+            CreateMap<FuncionarioUpdateDto, Funcionario>()
+                .ForMember(dest => dest.Nome, opt => opt.MapFrom(src => src.Nome))
+                .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
+                .ForMember(dest => dest.Cargo, opt => opt.MapFrom(src => src.Cargo));
         }
     }
 }

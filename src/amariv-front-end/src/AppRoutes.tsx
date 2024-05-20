@@ -4,8 +4,8 @@ import { RegisterPage } from "./pages/register";
 import { LoginPage } from "./pages/Login";
 import { PasswordRecoveryPage } from "./pages/password-recovery";
 import { ColetaPage } from "./pages/coleta";
-import MaterialPage from "./pages/materiais/Material";
-import { FuncionarioPage } from "./pages/funcionarios";
+import MaterialPage from "./pages/materiais/MaterialPage";
+import FuncionariosPage from "./pages/funcionarios/FuncionariosPage"
 import { AuthUtils } from "./utils/AuthUtils";
 import { AppContext } from "./AppContext";
 import Sidebar from "./components/Sidebar";
@@ -26,7 +26,7 @@ export const AuthAppRoutes: React.FC<AuthAppRoutesProps> = ({ children }) => {
       <Route path="/home" element={<div>Home</div>} />
       <Route path="/coleta" element={<ColetaPage />} />
       <Route path="/materiais" element={<MaterialPage />} />
-      <Route path="/funcionarios" element={<FuncionarioPage />} />
+      <Route path="/Funcionarios" element={<FuncionariosPage />} />
       <Route path="/*" element={<React.Fragment>{children}</React.Fragment>} />
     </Routes>
   );

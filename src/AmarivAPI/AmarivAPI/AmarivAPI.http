@@ -107,7 +107,7 @@ Accept: application/json
 
 
 ###
-GET {{AmarivAPI_HostAddress}}/api/funcionario/1
+GET {{AmarivAPI_HostAddress}}/api/funcionario/5
 Accept: application/json
 
 
@@ -119,7 +119,7 @@ Accept: application/json
 
 {
     "Nome": "Marisssa Sosuza",
-    "Email": "mfgarfssffia.@gmail.com",
+    "Email": "mfgarfssfffia.@gmail.com",
     "Sexo": "Feminino",
     "Telefone": "11987654321",
     "Cargo": "Analista",
