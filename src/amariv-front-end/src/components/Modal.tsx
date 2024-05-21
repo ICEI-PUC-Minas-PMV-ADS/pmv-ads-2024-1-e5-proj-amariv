@@ -19,54 +19,51 @@ interface ModalProps {
 
 const Modal: React.FC<ModalProps> = ({ title, fields, onSave, onCancel, className }) => {
   return (
-    <div className="fixed z-10 inset-0 overflow-y-auto flex items-center justify-center">
-      <div className="bg-gray-500 bg-opacity-75 fixed inset-0"></div>
-      <div className={`bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full ${className}`}>
-        <div className="bg-white px-4 pt-5 pb-4 sm:p-6">
-          <h3 className="text-lg leading-6 font-medium text-gray-900 text-center">{title}</h3>
-          <div className="mt-4">
-            {fields.map((field, index) => (
-              <div key={index} className="mt-4">
-                {field.type === 'input' && (
-                  <Input
-                    type="text"
-                    label={field.label}
-                    value={field.value}
-                    onChange={(e) => field.onChange(e.target.value)}
-                    required
-                  />
-                )}
-                {field.type === 'select' && (
-                  <DropdownInput
-                    label={field.label}
-                    options={field.options || []}
-                    value={field.value}
-                    onChange={(e) => field.onChange(e.target.value)}
-                    placeholder={field.placeholder}
-                    required
-                  />
-                )}
-              </div>
-            ))}
+    <div className="bg-[#e8f4eb] rounded-[5px] p-4 pr-16 pl-16">
+      <h2 className="text-lg font-semibold text-gray-800 mb-4">{title}</h2>
+      <form onSubmit={onSave}>
+        {fields.map((field, index) => (
+          <div key={index} className="mb-3">
+            <label htmlFor={field.label} className="text-sm text-gray-600">{field.label}:</label>
+            {field.type === 'input' && (
+              <input
+                type="text"
+                id={field.label}
+                value={field.value}
+                onChange={(e) => field.onChange(e.target.value)}
+                className="w-full py-2 px-3 rounded-[30px] border border-gray-300 focus:outline-none focus:border-blue-500"
+              />
+            )}
+            {field.type === 'select' && (
+              <select
+                id={field.label}
+                value={field.value}
+                onChange={(e) => field.onChange(e.target.value)}
+                className="w-full py-2 px-3 rounded-[30px] border border-gray-300 focus:outline-none focus:border-blue-500"
+              >
+                {field.options && field.options.map((option, index) => (
+                  <option key={index} value={option}>{option}</option>
+                ))}
+              </select>
+            )}
           </div>
-        </div>
-        <div className="bg-gray-50 px-4 py-3 flex justify-center">
+        ))}
+        <div className="flex justify-end mt-4">
           <button
-            type="button"
-            onClick={onSave}
-            className="inline-flex justify-center w-24 rounded-lg border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:text-sm mr-4"
+            type="submit"
+            className="bg-[#53735B] hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-[30px] mr-2"
           >
             Salvar
           </button>
           <button
             type="button"
             onClick={onCancel}
-            className="inline-flex justify-center w-24 rounded-lg border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
+            className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-[30px]"
           >
             Cancelar
           </button>
         </div>
-      </div>
+      </form>
     </div>
   );
 };

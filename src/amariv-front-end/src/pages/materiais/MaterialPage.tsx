@@ -2,21 +2,12 @@ import React, { useState, useEffect } from 'react';
 import MaterialCard from '../../components/MaterialCard';
 import Modal from '../../components/Modal';
 import { Button2 } from '../../components/Button2';
-import axios from 'axios';
 import Filter from '../../components/Filter';
-
-const API_BASE_URL = 'http://localhost:5100';
-
-interface Material {
-  id: number;
-  descricao: string;
-  tipo: string;
-  peso: string;
-}
+import { Material } from '../../models/Material';
+import { fetchMaterials, updateMaterial, saveMaterial, deleteMaterial } from '../../services/MaterialService';
 
 const MaterialPage: React.FC = () => {
   const [materials, setMaterials] = useState<Material[]>([]);
-  const [showMaterialPanel, setShowMaterialPanel] = useState(false);
   const [materialInfo, setMaterialInfo] = useState<Material>({
     id: 0,
     descricao: "",
@@ -24,8 +15,9 @@ const MaterialPage: React.FC = () => {
     peso: "",
   });
   const [searchTerm, setSearchTerm] = useState("");
-  const [filteredMaterialType, setFilteredMaterialType] = useState("");
+  const [filteredMaterialType, setFilteredMaterialType] = useState("Todos");
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
+  const [showModal, setShowModal] = useState(false);
 
   const materialOptions = [
     "Todos",
@@ -37,24 +29,23 @@ const MaterialPage: React.FC = () => {
   ];
 
   const weightOptions = [
-    "Todos",
+    "Selecione",
     "Leve",
     "Médio",
     "Pesado",
   ];
 
   useEffect(() => {
-    fetchMaterials();
+    const fetchData = async () => {
+      try {
+        const data = await fetchMaterials();
+        setMaterials(data);
+      } catch (error) {
+        console.error("Erro ao buscar materiais:", error);
+      }
+    };
+    fetchData();
   }, []);
-
-  const fetchMaterials = () => {
-    axios.get(`${API_BASE_URL}/RecuperaMateriais`)
-      .then(response => {
-        console.log("Materiais recuperados:", response.data);
-        setMaterials(response.data);
-      })
-      .catch(error => console.error("Erro ao recuperar materiais:", error));
-  };
 
   const handleSearch = () => {
     if (searchTerm === "" && filteredMaterialType === "Todos") {
@@ -68,40 +59,37 @@ const MaterialPage: React.FC = () => {
     }
   };
 
-  const handleAddMaterial = () => {
-    if (editingIndex !== null) {
-      axios.post(`${API_BASE_URL}/UpdateMaterial?id=${editingIndex}`, materialInfo)
-        .then(() => {
-          console.log("Material atualizado com sucesso!");
-          fetchMaterials();
-        })
-        .catch(error => console.error("Erro ao atualizar material:", error));
-    } else {
-      axios.post(`${API_BASE_URL}/SalvarMaterial`, materialInfo)
-        .then(() => {
-          console.log("Material adicionado com sucesso!");
-          fetchMaterials();
-        })
-        .catch(error => console.error("Erro ao adicionar material:", error));
-    }
+  const handleAddMaterial = async () => {
+    try {
+      if (editingIndex !== null) {
+        await updateMaterial(editingIndex, materialInfo);
+      } else {
+        await saveMaterial(materialInfo);
+      }
 
-    setMaterialInfo({ id: 0, descricao: "", tipo: "", peso: "" });
-    setShowMaterialPanel(false);
+      setMaterialInfo({ id: 0, descricao: "", tipo: "", peso: "" });
+      setShowModal(false);
+      const updatedMaterials = await fetchMaterials();
+      setMaterials(updatedMaterials);
+    } catch (error) {
+      console.error("Erro ao adicionar/atualizar material:", error);
+    }
   };
 
   const handleEditMaterial = (index: number) => {
     setMaterialInfo(materials[index]);
     setEditingIndex(materials[index].id);
-    setShowMaterialPanel(true);
+    setShowModal(true);
   };
 
-  const handleDeleteMaterial = (id: number) => {
-    axios.delete(`${API_BASE_URL}/DeletarMaterial?id=${id}`)
-      .then(() => {
-        console.log("Material excluído com sucesso!");
-        setMaterials(prevMaterials => prevMaterials.filter(material => material.id !== id));
-      })
-      .catch(error => console.error("Erro ao excluir material:", error));
+  const handleDeleteMaterial = async (id: number) => {
+    try {
+      await deleteMaterial(id);
+      const updatedMaterials = materials.filter(material => material.id !== id);
+      setMaterials(updatedMaterials);
+    } catch (error) {
+      console.error("Erro ao excluir material:", error);
+    }
   };
 
   return (
@@ -116,44 +104,11 @@ const MaterialPage: React.FC = () => {
             label="Adicionar material"
             onClick={() => {
               setEditingIndex(null);
-              setShowMaterialPanel(true);
+              setShowModal(true);
             }}
             className="w-[150px] mt-[15px] float-right"
           />
         </div>
-
-        {showMaterialPanel && (
-          <Modal
-            title="Adicionar Material"
-            fields={[
-              {
-                type: 'input',
-                label: 'Descrição',
-                value: materialInfo.descricao,
-                onChange: (value) => setMaterialInfo({ ...materialInfo, descricao: value }),
-              },
-              {
-                type: 'select',
-                label: 'Tipo',
-                value: materialInfo.tipo,
-                onChange: (value) => setMaterialInfo({ ...materialInfo, tipo: value }),
-                options: materialOptions,
-              },
-              {
-                type: 'select',
-                label: 'Peso',
-                value: materialInfo.peso,
-                onChange: (value) => setMaterialInfo({ ...materialInfo, peso: value }),
-                options: weightOptions,
-              },
-            ]}
-            onSave={handleAddMaterial}
-            onCancel={() => {
-              setMaterialInfo({ id: 0, descricao: "", tipo: "", peso: "" });
-              setShowMaterialPanel(false);
-            }}
-          />
-        )}
 
         <Filter
           title="Filtros"
@@ -185,6 +140,41 @@ const MaterialPage: React.FC = () => {
             />
           ))}
         </div>
+
+        {showModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-500 bg-opacity-75">
+            <Modal
+              title="Adicionar Material"
+              fields={[
+                {
+                  type: 'input',
+                  label: 'Descrição',
+                  value: materialInfo.descricao,
+                  onChange: (value) => setMaterialInfo({ ...materialInfo, descricao: value }),
+                },
+                {
+                  type: 'select',
+                  label: 'Tipo',
+                  value: materialInfo.tipo,
+                  onChange: (value) => setMaterialInfo({ ...materialInfo, tipo: value }),
+                  options: materialOptions,
+                },
+                {
+                  type: 'select',
+                  label: 'Peso',
+                  value: materialInfo.peso,
+                  onChange: (value) => setMaterialInfo({ ...materialInfo, peso: value }),
+                  options: weightOptions,
+                },
+              ]}
+              onSave={handleAddMaterial}
+              onCancel={() => {
+                setMaterialInfo({ id: 0, descricao: "", tipo: "", peso: "" });
+                setShowModal(false);
+              }}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

@@ -85,10 +85,10 @@ const FuncionarioModal: React.FC<FuncionarioModalProps> = ({
             onChange={(e) => setFuncionarioInfo({ ...funcionarioInfo, cargo: e.target.value })}
             className="w-full py-2 px-3 rounded border border-gray-300 focus:outline-none focus:border-blue-500"
           >
-            <option value="">Selecione</option>
-            <option value="analista">Analista</option>
-            <option value="gerente">Gerente</option>
-            <option value="desenvolvedor">Desenvolvedor</option>
+            <option value="Todos">Selecione</option>
+            <option value="Motorista">Motorista</option>
+            <option value="Reciclagem">Reciclagem</option>
+            <option value="Administrador">Administrador</option>
             <option value="outro">Outro</option>
           </select>
         </div>
@@ -116,7 +116,7 @@ const FuncionarioModal: React.FC<FuncionarioModalProps> = ({
         <div className="flex justify-end mt-4">
           <button
             type="submit"
-            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded mr-2"
+            className="bg-[#53735B] hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded mr-2"
           >
             Salvar
           </button>
