@@ -1,90 +1,74 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import Filter from '../../components/Filter';
 import FuncionarioCard from '../../components/FuncionarioCard';
-import Modal from '../../components/Modal';
+import FuncionarioModal from '../../components/FuncionarioModal';
 import { Button2 } from '../../components/Button2';
+import { fetchFuncionarios, addFuncionario, updateFuncionario, deleteFuncionario } from '../../services/FuncionarioService';
+import { Funcionario } from '../../models/Funcionario';
+import { FuncionarioMapper } from '../../mappers/FuncionarioMapper';
 
-const API_BASE_URL = 'http://localhost:5100';
-
-interface Funcionario {
-  id: number;
-  nome: string;
-  email: string;
-  cargo: string;
-}
-
-interface FuncionarioInfo {
-  id: number;
-  nome: string;
-  email: string;
-  cargo: string;
-}
-
-const initialFuncionarioInfo: FuncionarioInfo = {
+const initialFuncionarioInfo: Funcionario = {
   id: 0,
   nome: "",
   email: "",
+  sexo: "",
+  telefone: "",
   cargo: "",
+  senha: "",
+  suportaPeso: false,
 };
-
-const createFuncionarioInfo = (): FuncionarioInfo => ({
-  ...initialFuncionarioInfo,
-});
 
 const FuncionariosPage = () => {
   const [funcionarios, setFuncionarios] = useState<Funcionario[]>([]);
-  const [showFuncionarioPanel, setShowFuncionarioPanel] = useState(false);
-  const [funcionarioInfo, setFuncionarioInfo] = useState<FuncionarioInfo>(createFuncionarioInfo());
+  const [showFuncionarioModal, setShowFuncionarioModal] = useState(false);
+  const [funcionarioInfo, setFuncionarioInfo] = useState<Funcionario>(initialFuncionarioInfo);
   const [searchTerm, setSearchTerm] = useState("");
-  const [filteredCargo, setFilteredCargo] = useState("");
+  const [filteredCargo, setFilteredCargo] = useState("Todos");
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
 
-  const cargoOptions = ["Todos", "Analista", "Gerente", "Desenvolvedor", "Outro"];
+  const cargoOptions = ["Todos", "Motorista", "Reciclagem", "Administrador", "Outro"];
 
   useEffect(() => {
-    fetchFuncionarios();
+    fetchFuncionarios().then(data => {
+      const mappedFuncionarios = data.map(funcionario => FuncionarioMapper.mapFuncionarioFromApi(funcionario));
+      setFuncionarios(mappedFuncionarios);
+    });
   }, []);
 
-  const fetchFuncionarios = () => {
-    axios.get(`${API_BASE_URL}/api/funcionario`)
-      .then(response => {
-        setFuncionarios(response.data);
-      })
-      .catch(error => console.error("Erro ao recuperar funcionários:", error));
-  };
-
-  const handleAddFuncionario = () => {
-    const url = editingIndex ? `${API_BASE_URL}/api/funcionario/${editingIndex}` : `${API_BASE_URL}/api/funcionario`;
-    const method = editingIndex ? 'put' : 'post';
-
-    axios[method](url, funcionarioInfo)
-      .then(() => {
-        fetchFuncionarios();
-        setFuncionarioInfo(createFuncionarioInfo());
-        setShowFuncionarioPanel(false);
-        setEditingIndex(null);
-      })
-      .catch(error => console.error(`Erro ao ${editingIndex ? 'atualizar' : 'adicionar'} funcionário:`, error));
-  };
-
   const handleEditFuncionario = (funcionario: Funcionario) => {
-    setFuncionarioInfo({ ...funcionario });
+    setFuncionarioInfo(funcionario);
     setEditingIndex(funcionario.id);
-    setShowFuncionarioPanel(true);
+    setShowFuncionarioModal(true);
+  };
+
+  const handleAddFuncionario = (event: React.FormEvent) => {
+    event.preventDefault();
+
+    if (editingIndex !== null) {
+      updateFuncionario(editingIndex, FuncionarioMapper.mapFuncionarioToApi(funcionarioInfo)).then(() => {
+        fetchFuncionarios().then(data => {
+          const mappedFuncionarios = data.map(funcionario => FuncionarioMapper.mapFuncionarioFromApi(funcionario));
+          setFuncionarios(mappedFuncionarios);
+        });
+      });
+    } else {
+      addFuncionario(FuncionarioMapper.mapFuncionarioToApi(funcionarioInfo)).then(() => {
+        fetchFuncionarios().then(data => {
+          const mappedFuncionarios = data.map(funcionario => FuncionarioMapper.mapFuncionarioFromApi(funcionario));
+          setFuncionarios(mappedFuncionarios);
+        });
+      });
+    }
+
+    setFuncionarioInfo(initialFuncionarioInfo);
+    setShowFuncionarioModal(false);
+    setEditingIndex(null);
   };
 
   const handleDeleteFuncionario = (id: number) => {
-    console.log('Excluindo funcionário com ID:', id);
-    axios.delete(`${API_BASE_URL}/api/funcionario/${id}`)
-      .then(() => {
-        console.log('Funcionário excluído com sucesso!');
-        setFuncionarios(funcionarios.filter(funcionario => funcionario.id !== id));
-      })
-      .catch(error => {
-        console.error("Erro ao excluir funcionário:", error);
-        console.error('Resposta do servidor:', error.response?.data);
-      });
+    deleteFuncionario(id).then(() => {
+      setFuncionarios(funcionarios.filter(funcionario => funcionario.id !== id));
+    });
   };
 
   const handleSearch = () => {
@@ -105,46 +89,54 @@ const FuncionariosPage = () => {
             label="Adicionar funcionário"
             onClick={() => {
               setEditingIndex(null);
-              setShowFuncionarioPanel(true);
+              setShowFuncionarioModal(true);
             }}
             className="w-[200px] mt-[15px] float-right"
           />
         </div>
 
-        {showFuncionarioPanel && (
-          <Modal
-            title={editingIndex ? "Editar Funcionário" : "Adicionar Funcionário"}
-            fields={[
-              { type: 'input', label: 'Nome', value: funcionarioInfo.nome, onChange: (value) => setFuncionarioInfo({ ...funcionarioInfo, nome: value }) },
-              { type: 'input', label: 'Email', value: funcionarioInfo.email, onChange: (value) => setFuncionarioInfo({ ...funcionarioInfo, email: value }) },
-              { type: 'select', label: 'Cargo', value: funcionarioInfo.cargo, onChange: (value) => setFuncionarioInfo({ ...funcionarioInfo, cargo: value }), options: cargoOptions },
-            ]}
-            onSave={handleAddFuncionario}
-            onCancel={() => {
-              setFuncionarioInfo(createFuncionarioInfo());
-              setShowFuncionarioPanel(false);
-            }}
-          />
+        {showFuncionarioModal && (
+          <div className="fixed inset-0 flex items-center justify-center z-50">
+            <div className="absolute inset-0 bg-gray-900 opacity-50"></div>
+            <div className="relative rounded-lg shadow-lg p-6 w-full max-w-md">
+              <FuncionarioModal
+                title={editingIndex ? "Editar Funcionário" : "Adicionar Funcionário"}
+                funcionarioInfo={funcionarioInfo}
+                setFuncionarioInfo={setFuncionarioInfo}
+                onSave={handleAddFuncionario}
+                onCancel={() => {
+                  setFuncionarioInfo(initialFuncionarioInfo);
+                  setShowFuncionarioModal(false);
+                }}
+              />
+            </div>
+          </div>
         )}
 
         <Filter
           title="Filtros"
           fields={[
             { type: 'input', label: 'Pesquisar por nome', value: searchTerm, onChange: setSearchTerm },
-            { type: 'select', label: 'Filtrar por cargo', value: filteredCargo, onChange: setFilteredCargo, options: cargoOptions, placeholder: 'Selecione um cargo...' },
+            { type: 'select', label: 'Filtrar por cargo', value: filteredCargo, onChange: setFilteredCargo, options: cargoOptions },
           ]}
         />
 
-        <div className="mt-8 material-cards grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-12">
-          {handleSearch().map(funcionario => (
-            <FuncionarioCard
-              key={funcionario.id}
-              funcionario={funcionario}
-              onEdit={() => handleEditFuncionario(funcionario)}
-              onDelete={() => handleDeleteFuncionario(funcionario.id)}
-            />
-          ))}
-        </div>
+        {funcionarios.length > 0 ? (
+          <div className="mt-8 material-cards grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-12">
+            {handleSearch().map(funcionario => (
+              <FuncionarioCard
+                key={funcionario.id}
+                funcionario={funcionario}
+                onEdit={() => handleEditFuncionario(funcionario)}
+                onDelete={() => handleDeleteFuncionario(funcionario.id)}
+              />
+            ))}
+          </div>
+        ) : (
+          <div className="mt-8 text-center">
+            <p>Nenhum funcionário encontrado.</p>
+          </div>
+        )}
       </div>
     </div>
   );
