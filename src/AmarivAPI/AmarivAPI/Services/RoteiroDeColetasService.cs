@@ -49,15 +49,7 @@ namespace AmarivAPI.Services
             return lista.Any(r => r.DataCadastro.Date == roteiro.DataCadastro.Date && r.Delete == false);
         }
 
-         public static int ConsultaDisponibilidadeRoteiroDeColeta(DateTime data, AmarivContext context)
-        {
-            List<RoteiroDeColetas> lista = context.RoteiroDeColetas.ToList();
-            var roteiro = lista.Find(r => r.DataCadastro.Date == data && r.Delete == false);
-            if (roteiro != null)
-                return roteiro.Id;
-            else
-                return 0;
-        }
+      
 
         #region Updates_RoteiroDeColetas
 

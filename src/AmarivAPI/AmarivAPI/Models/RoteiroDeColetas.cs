@@ -19,7 +19,7 @@ namespace AmarivAPI.Models
         public Boolean Delete { get; set; }
         public int NumeroDeColetas { get; set; }
         public int NumeroMaxColetas { get; set; }
-        [ForeignKey("FuncionarioId")]
+        [ForeignKey("FuncionarioId")]      
         public virtual Usuario Funcionario { get; set; }
         public virtual ICollection<Coleta> Coletas { get; set; } = new List<Coleta>();
     }

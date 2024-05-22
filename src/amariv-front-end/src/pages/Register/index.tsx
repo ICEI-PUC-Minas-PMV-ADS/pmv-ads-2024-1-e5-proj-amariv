@@ -46,16 +46,15 @@ export function RegisterPage() {
           return;
         }
 
-        AuthUtils.login(
-          appContext,
-          await UserService.signIn({
-            name,
-            email,
-            password,
-            confPassword,
-            phone,
-          })
-        );
+        const user = await UserService.signIn({
+          name,
+          email,
+          password,
+          confPassword,
+          phone,
+        });
+
+        //AuthUtils.login(appContext, );
 
         navigate("/home");
       } catch (e) {

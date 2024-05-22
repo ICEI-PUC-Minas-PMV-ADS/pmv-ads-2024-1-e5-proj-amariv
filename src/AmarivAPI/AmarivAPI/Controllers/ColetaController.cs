@@ -40,9 +40,9 @@ namespace AmarivAPI.Controllers
 
         [HttpPost]
         [Route("/SalvarColeta")]
-        public IActionResult SalvarColeta([FromBody] CreateColetaDto coletaDto)
+        public IActionResult SalvarColeta([FromBody] CreateColetaDto coletaDto, string funcionarioId)
         {
-            var result = _coletaService.SalvarColeta(coletaDto);
+            var result = _coletaService.SalvarColeta(coletaDto, funcionarioId);
             if (result.IsSuccess)
                 return Ok(result);
             else

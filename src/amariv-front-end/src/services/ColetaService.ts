@@ -9,9 +9,9 @@ const useApi = axios.create({
 export const coletaService = {
    
 
-    salvarColeta: async (coletaDto: CreateColetaDto) => {
+    salvarColeta: async (coletaDto: CreateColetaDto, id : string) => {
         const jsonBody = JSON.stringify(coletaDto) 
-        const response = await useApi.post(`/SalvarColeta`, jsonBody ,{
+        const response = await useApi.post(`/SalvarColeta/?funcionarioId=${id}`, jsonBody ,{
           headers: {
             "Content-type": "application/json; chatset=utf-8"
           }
@@ -47,7 +47,7 @@ export const coletaService = {
                 "Content-type": "application/json; chatset=utf-8"
             }
         });
-        response.data
+       return response.data
     },
 
     inserirColetaEmRoteiro: async(idColeta: string, idRoteiro: string) => {

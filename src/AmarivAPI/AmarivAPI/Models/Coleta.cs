@@ -12,7 +12,7 @@ namespace AmarivAPI.Models
         [Required]
         public int Id { get; set; }
         [AllowNull]
-        public string? UserId { get; set; }
+        public string? UserId { get; set; } = null;
         [AllowNull]
         public int? EnderecoId { get; set; }
         [AllowNull]
@@ -26,25 +26,25 @@ namespace AmarivAPI.Models
         [AllowNull]
         public string? ClienteTel { get; set; }
         [Required]
-        public bool Status { get; set; }        // Define se a coleta esta em aberto.
+        public bool Status { get; set; } = true;      // Define se a coleta esta em aberto.
         [Required]
-        public bool IsSuccess { get; set; }     // Define se a coleta ou feita ou se foi cancelada.
+        public bool IsSuccess { get; set; } = false;   // Define se a coleta ou feita ou se foi cancelada.
         [Required]
-        public bool Delete {  get; set; } 
-        public bool AprovacaoAdmin {  get; set; } /* sim, não*/
+        public bool Delete { get; set; } = false;
+        public bool AprovacaoAdmin { get; set; } = false; /* sim, não*/
         [AllowNull]
         public double? Lat { get; set; }
         [AllowNull]
         public double? Lon { get; set; }
         [Required]
-        public DateTime DataCadastro { get; set; }
+        public DateTime DataCadastro { get; set; } =DateTime.Now;
         [Required]
         public DateTime DataDeColeta { get; set; }
         /// <summary>
         /// O campo ListaItensColeta será do tipo TEXT no banco de dados para comportar os materiais que
-        /// irão ser adicionados na coleta. EXEMPLO DA LISTA (ID:DESCRIÇÃO:PESO): "1:papel:leve,2:metal:pesado, etc... "      
+        /// irão ser adicionados na coleta. EXEMPLO DA LISTA (ID (MATERIAL):PESO): "1:leve;2:pesado; etc... "      
         /// </summary>
-        public string? ListaItensColeta { get; set; }
+        public string? ListaItensColeta { get; set; } // "1:Leve;2:Pesado"
 
         [ForeignKey("UserId")]
         public virtual Usuario? Usuario { get; set; }

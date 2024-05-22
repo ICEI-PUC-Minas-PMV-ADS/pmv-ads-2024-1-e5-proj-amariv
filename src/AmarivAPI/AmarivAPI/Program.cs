@@ -63,6 +63,7 @@ builder.Services.AddAuthentication(auth =>
 });
 
 builder.Services.AddScoped<UsuarioService, UsuarioService>();
+builder.Services.AddScoped<EnderecoService, EnderecoService>();
 builder.Services.AddScoped<MaterialService, MaterialService>();
 builder.Services.AddScoped<ColetaService, ColetaService>();
 builder.Services.AddScoped<TokenService, TokenService>();

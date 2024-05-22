@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AmarivAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class startMigration : Migration
+    public partial class newMigrationH : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -101,27 +101,6 @@ namespace AmarivAPI.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "ItensRoteiroDeColetas",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Id_RoreiroDeColetas = table.Column<int>(type: "int", nullable: false),
-                    Id_Coletas = table.Column<int>(type: "int", nullable: false),
-                    PosicaoLista = table.Column<int>(type: "int", nullable: false),
-                    Endereco = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Materiais = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    IsDelete = table.Column<bool>(type: "tinyint(1)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ItensRoteiroDeColetas", x => x.Id);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
                 name: "Materiais",
                 columns: table => new
                 {
@@ -131,9 +110,7 @@ namespace AmarivAPI.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Tipo = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Data_criacao = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    Peso = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                    Data_criacao = table.Column<DateTime>(type: "datetime(6)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -357,7 +334,7 @@ namespace AmarivAPI.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Celular", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "Nome", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "adm", 0, "", "134650a9-ea02-4b7d-b6c4-5639d139bfd3", "amarivadm@gmail.com", true, false, null, "Administrador", "AMARIVADM@GMAIL.COM", "AMARIVADM@GMAIL.COM", "AQAAAAIAAYagAAAAEFHrBDxr5d7uYIXta00c5RHCqCaFhlAxwv33bLVa5+8MTo/SeJdcvbzwtrqmxvDVSg==", null, false, "ba4c5cdb-28f5-480a-9a99-72565cf9e34a", false, "amarivadm@gmail.com" });
+                values: new object[] { "adm", 0, "", "9ac4e072-1247-4989-a370-b4dbda244815", "amarivadm@gmail.com", true, false, null, "Administrador", "AMARIVADM@GMAIL.COM", "AMARIVADM@GMAIL.COM", "AQAAAAIAAYagAAAAEN6qoNxCAUatvqtYN9omVKmyTT4OypdTVJ38bgSot4Fc0NtO9eKuqrVE0o5hnXIHNQ==", null, false, "b8eba43f-d7e2-40ad-a997-affd2a814b0c", false, "amarivadm@gmail.com" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
@@ -419,8 +396,7 @@ namespace AmarivAPI.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_RoteiroDeColetas_FuncionarioId",
                 table: "RoteiroDeColetas",
-                column: "FuncionarioId",
-                unique: true);
+                column: "FuncionarioId");
         }
 
         /// <inheritdoc />
@@ -443,9 +419,6 @@ namespace AmarivAPI.Migrations
 
             migrationBuilder.DropTable(
                 name: "Coletas");
-
-            migrationBuilder.DropTable(
-                name: "ItensRoteiroDeColetas");
 
             migrationBuilder.DropTable(
                 name: "Materiais");

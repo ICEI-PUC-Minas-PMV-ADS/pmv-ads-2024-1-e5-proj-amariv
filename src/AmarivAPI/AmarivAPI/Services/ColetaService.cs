@@ -20,17 +20,19 @@ namespace AmarivAPI.Services
             _mapper = mapper;
             _context = context;
         }
-
-        public Result<string> SalvarColeta(CreateColetaDto dto)
+       
+        public Result<string> SalvarColeta(CreateColetaDto dto, string funcionarioId)
         {
             RoteiroDeColetas roteiro;
-            DateTime dataColeta;    
-            
+            DateTime dataColeta;
+          
             try
             {
                 Coleta coleta = _mapper.Map<Coleta>(dto);
                 dataColeta = coleta.DataDeColeta;
-                var roteiroId = RoteiroDeColetasService.ConsultaDisponibilidadeRoteiroDeColeta(dataColeta, _context);
+
+                var roteiroId = ConsultaDisponibilidadeRoteiroDeColeta(dataColeta);
+                //var roteiroId = 0;
                 if (roteiroId != 0)
                 {
                      roteiro = _context.RoteiroDeColetas.FirstOrDefault(r => r.Id == roteiroId && r.NumeroDeColetas < r.NumeroMaxColetas);
@@ -53,6 +55,7 @@ namespace AmarivAPI.Services
                 else
                 {
                     roteiro = new RoteiroDeColetas();
+                    roteiro.FuncionarioId = funcionarioId;
                     roteiro.DataCadastro = DateTime.Now;
                     roteiro.Status = true;
                     roteiro.DataRoteiro = dataColeta;
@@ -74,6 +77,23 @@ namespace AmarivAPI.Services
                 return Result.Fail("Falha ao cadastrar coleta");
             }
             
+        }
+
+        public int ConsultaDisponibilidadeRoteiroDeColeta(DateTime data)
+        {
+            List<RoteiroDeColetas> lista = _context.RoteiroDeColetas.ToList();
+            if (lista.Count > 0)
+            {
+                var roteiro = lista.Find(r => r.DataCadastro.Date == data && r.Delete == false);
+                if (roteiro != null)
+                    return roteiro.Id;
+                else
+                    return 0;
+            }
+            else
+            {
+                return 0;
+            }
         }
 
         public Result UpdateColeta(UpdateColetaDto coletaDto, int id)

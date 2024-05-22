@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Input } from "../../components/Input";
 import { InputDate } from "../../components/InputDate";
 import { InputTime } from "../../components/InputTime";
@@ -9,6 +9,8 @@ import { FormAddMateriais } from "./components/FormAddMateriais";
 import { CreateColetaDto } from "../../models/ColetaDtos/CreateColetaDto";
 import { CreateEnderecoDto } from "../../models/EnderecoDtos/CreateEnderecoDto";
 import { coletaController } from "./ColetaController";
+import { EnderecoService } from "../../services/EnderecoService";
+import { coletaService } from "../../services/ColetaService";
 
 
 
@@ -22,92 +24,61 @@ export function ColetaPage() {
   const [bairro, setBairro ] = useState(String)
   const [cidade, setCidade ] = useState(String)
   const [complemento, setComplemento] = useState(String)
-
+  const [listaMateriais, setListaMateriais ]  = useState<string>("0:selecione")
   const [dataColeta, setDataColeta ] = useState(String)
   const [horarioColeta, setHorarioColeta ] = useState(String)
  
 
- 
-
-  function VerificaDisponibilidadeHorario(event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
+  function VerificaDisponibilidadeHorario(): void {
     throw new Error("Function not implemented.");
   }
 
-  function CriarAgendamentoColeta(event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
-    var enderecoDto : Partial<CreateEnderecoDto> = {
-      logradouro : logradouro,
-      numero : numero,
-      bairro : bairro,
-      cep : cep,
-      cidade : cidade,
-      referencia : complemento
-    };
+  async function CriarAgendamentoColeta(): Promise<void> {
+    try {
+      
+      var enderecoDto : CreateEnderecoDto = {
+        logradouro : logradouro,
+        numero : numero,
+        bairro : bairro,
+        cep : cep,
+        cidade : cidade,
+        referencia : complemento
+      };
+
+      const endereco = await EnderecoService.salvarEndereco(enderecoDto);
+      
+      var coletaDto : CreateColetaDto = {
+        userId: '222',
+        enderecoId: endereco.successes[0].message,
+        clienteNome : nome,
+        clienteCel : cel,
+        clienteTel : tel,
+        lat: 11111,
+        lon: 22222,
+        dataCadastro : new Date(Date.now()),
+        dataDeColeta : coletaController.converteStringEmDate(dataColeta),
+        listaItensColeta: listaMateriais,
+        status: false
+      };
+
+     const coleta = await coletaService.salvarColeta(coletaDto,"eeebe625-bddb-4e5b-8c66-94fc1b5957b8");
     
-    var coletaDto : Partial<CreateColetaDto> ={
-      clienteNome : nome,
-      clienteCel : cel,
-      clienteTel : tel,
-      //dataCadastro :Date.now(),
-      dataDeColeta : coletaController.converteStringEmDate(dataColeta,horarioColeta)
 
-
+    } catch (e: any) {
+      console.log(e);
     }
-
   }
-
-  // const dateInputRef = useRef<HTMLInputElement>(null);
-  // const handleDateChange = () => {
-  //   if (dateInputRef.current) {
-  //     const selectedDate = dateInputRef.current.value;
-  //     console.log("Data selecionada:", selectedDate);
-  //   }
-  // };
-
-
-  // const timeInputRef = useRef<HTMLInputElement>(null);
-  // const handleTimeChange = () => {
-  //   if (timeInputRef.current) {
-  //     const selectedTime = timeInputRef.current.value;
-  //     console.log("Hora selecionada:", selectedTime);
-  //   }
-  // };
-
- 
-
 
   return (
     <>
       <div className="App">
       
-        {/* <div className={active ? "menu menuOpen" : "menu menuClose"}>
-          <div className="list">
-            <Link className="listItems" to={""}>
-              Coletas pendentes
-            </Link>
-            <Link className="listItems" to={""}>
-              Roteiro de coletas
-            </Link>
-            <Link className="listItems" to={"/coleta"}>
-              Agendamento
-            </Link>
-            <Link className="listItems" to={""}>
-              Histórico de Coletas
-            </Link>
-            <Link className="listItems" to={""}>
-              Materiais
-            </Link>
-            <Link className="listItems" to={""}>
-              Funcionários
-            </Link>
-          </div>
-        </div> */}
-
         <div className="content">
           <h2 className="mt-[30px] text-[#53735B] text-[1.75rem]">
             Novo agendamento de coleta
           </h2>
           <div className="title">
-            <p className="text-[#666666] text-m my-1">Dados do cliente</p>
+            <p className="text-[#666666] text-sm my-1">Dados do cliente</p>
           </div>
 
           <Form>
@@ -225,15 +196,15 @@ export function ColetaPage() {
             </div>
             
             <FormAddMateriais 
-            />
-
-            
+              listaMateriais = {listaMateriais}
+              salvarMateriaislista = { (evt) => setListaMateriais(evt)}             
+            />  
 
             <Button2
-              type="submit"
+              type="button"
               label="Criar agendamento"
               className="w-[40%] mt-[15px]"
-              onClick={CriarAgendamentoColeta}
+              onClick={() => CriarAgendamentoColeta()}
             />
           </Form>
         </div>

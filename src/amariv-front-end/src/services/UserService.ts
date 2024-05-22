@@ -13,7 +13,7 @@ export class UserService {
     email: string,
     password: string,
   }): Promise<string> {
-    const response = await fetch(getApiUrl() + "login", {
+    const response = await fetch(Constants.ApiHost + "/login", {
       method: 'POST',
       body: JSON.stringify({
         Email: email,
