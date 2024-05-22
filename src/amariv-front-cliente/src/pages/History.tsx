@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import NavBar from "../components/Inputs/NavBar";
+import NavBar from "../components/NavBar";
 import TopBar from "../components/TopBar";
 
 function History() {

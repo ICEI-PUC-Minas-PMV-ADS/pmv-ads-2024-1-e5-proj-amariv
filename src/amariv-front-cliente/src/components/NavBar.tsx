@@ -1,5 +1,5 @@
-import DynamicIcon from "../DynamicIcon";
-import logo from "../../assets/amariv.png"
+import DynamicIcon from "./DynamicIcon";
+import logo from "../assets/amariv.png"
 import { tv } from "tailwind-variants";
 import { useNavigate } from "react-router-dom";
 
@@ -39,7 +39,7 @@ function NavBar({ path }: { path: string }) {
           <DynamicIcon iconName="IconHistory" size={30} />
           <p>Histórico</p>
         </div>
-        <div className="flex flex-col text-white font-semibold items-center hover:text-secondary-green cursor-pointer gap-1 lg:min-w-20 justify-between">
+        <div className={containerItem({ active: path == "/perfil" })} onClick={() => { navigate("/perfil") }}>
           <DynamicIcon iconName="IconUserCircle" size={30} />
           <p>Meu perfil</p>
         </div>

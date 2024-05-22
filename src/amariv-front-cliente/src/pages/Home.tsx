@@ -1,10 +1,10 @@
-import NavBar from "../components/Inputs/NavBar";
-import { useLocation } from "react-router-dom";
+import NavBar from "../components/NavBar";
+import { useLocation, useNavigate } from "react-router-dom";
 import TopBar from "../components/TopBar";
 import PrimaryButton from "../components/PrimaryButton";
 function Home() {
   const location = useLocation()
-
+  const navigate = useNavigate()
 
 
   return (
@@ -18,7 +18,7 @@ function Home() {
           <div className="w-full flex justify-between mb-6 items-center">
             <p className="text-2xl font-bold text-black">Lembrete</p>
             <div className="w-3/4 max-w-[235px] hidden md:block">
-              <PrimaryButton title="Novo agendamento" leftIcon="IconCirclePlus" />
+              <PrimaryButton title="Novo agendamento" leftIcon="IconCirclePlus" onClick={() => { navigate("/novoagendamento") }} />
             </div>
           </div>
           <div className="w-full flex justify-center">
@@ -34,7 +34,7 @@ function Home() {
 
           <div className="w-full flex justify-center mt-2 md:hidden">
             <div className="w-3/4 max-w-[235px]">
-              <PrimaryButton title="Novo agendamento" leftIcon="IconCirclePlus" />
+              <PrimaryButton title="Novo agendamento" leftIcon="IconCirclePlus" onClick={() => { navigate("/novoagendamento") }} />
             </div>
           </div>
         </div>
@@ -43,7 +43,7 @@ function Home() {
           <div className="w-full flex justify-between mb-6 items-center">
             <p className="text-2xl font-bold text-black">Últimas coletas</p>
             <div className="w-2/3 max-w-[235px] hidden md:block">
-              <PrimaryButton title="Ver histórico completo" leftIcon="IconHistory" />
+              <PrimaryButton title="Ver histórico completo" leftIcon="IconHistory" onClick={() => { navigate("/historico") }} />
             </div>
           </div>
           <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 w-full gap-2 lg:max-w-[1220px] md:max-w-[810px]">
@@ -68,7 +68,7 @@ function Home() {
           </div>
           <div className="w-full flex justify-center mt-2 mb-14">
             <div className="w-3/4 max-w-[235px] md:hidden">
-              <PrimaryButton title="Ver histórico completo" leftIcon="IconHistory" />
+              <PrimaryButton title="Ver histórico completo" leftIcon="IconHistory" onClick={() => { navigate("/historico") }} />
             </div>
           </div>
         </div>

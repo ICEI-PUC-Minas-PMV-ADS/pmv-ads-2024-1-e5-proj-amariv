@@ -6,6 +6,7 @@ import SchedulingLoggedOut from "./pages/SchedulingLoggedOut";
 import Home from "./pages/Home";
 import History from "./pages/History";
 import Scheduling from "./pages/Scheduling";
+import Profile from "./pages/Profile";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
   {
     path: "/novoagendamento",
     element: <Scheduling />
+  },
+  {
+    path: "/perfil",
+    element: <Profile />
   }
 ]);
 
