@@ -44,8 +44,8 @@ namespace AmarivAPI.Data
         public DbSet<Endereco> Enderecos { get; set; }
         public DbSet<Material> Materiais { get; set; }
         public DbSet<RoteiroDeColetas> RoteiroDeColetas { get; set; }
-            builder.Entity<Funcionario>().ToTable("Funcionarios");
-            builder.Entity<Funcionario>().HasKey(f => f.Id);
+            //builder.Entity<Funcionario>().ToTable("Funcionarios");
+            //builder.Entity<Funcionario>().HasKey(f => f.Id);
         
     }      
        

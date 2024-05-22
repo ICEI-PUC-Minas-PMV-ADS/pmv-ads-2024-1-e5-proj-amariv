@@ -56,8 +56,8 @@ export function LoginPage() {
           telefone: responseData.telefone || undefined,
         };
         
-        // Chama a função login do AuthUtils passando o contexto da aplicação e o objeto user
-        AuthUtils.login({ state, dispatch }, user);
+        // Chama a função login do AuthUtils passando o contexto da aplicação e o objeto user PODE GERAR UM ERRO!!!
+        AuthUtils.login({ state, dispatch }, responseData.token);
         
         navigate("/home");
       } else {

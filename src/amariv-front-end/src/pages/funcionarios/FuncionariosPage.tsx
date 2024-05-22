@@ -5,7 +5,6 @@ import FuncionarioModal from '../../components/FuncionarioModal';
 import { Button2 } from '../../components/Button2';
 import { fetchFuncionarios, addFuncionario, updateFuncionario, deleteFuncionario } from '../../services/FuncionarioService';
 import { Funcionario } from '../../models/Funcionario';
-import { FuncionarioMapper } from '../../mappers/FuncionarioMapper';
 
 const initialFuncionarioInfo: Funcionario = {
   id: 0,
