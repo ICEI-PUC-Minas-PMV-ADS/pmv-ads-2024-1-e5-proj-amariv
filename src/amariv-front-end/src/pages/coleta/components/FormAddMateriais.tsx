@@ -105,15 +105,7 @@ export function FormAddMateriais({...props}: FormAddMateriaisProps) {
         />
       </div>
       
-      <div>
-      {
-      ddlListaMateriais != null? ddlListaMateriais.map((item, index) => (
-        <div key={item.id}>
-          <p>{item.Descrição} </p>
-          <button onClick={() => handleRemoveItem(index)}>Deleta</button>
-        </div>
-      )) : <h3>Essa coleta não possui nenhum material cadastrado!</h3>}
-    </div>
+
     </>
   )
 }
