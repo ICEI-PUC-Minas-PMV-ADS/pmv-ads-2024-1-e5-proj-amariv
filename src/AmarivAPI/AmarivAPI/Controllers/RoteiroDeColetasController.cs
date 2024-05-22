@@ -12,12 +12,10 @@ namespace AmarivAPI.Controllers
     {
 
         private RoteiroDeColetasService _roteiroService;
-        private ItensRoteiroDeColetasService _itensService;
 
-        public RoteiroDeColetasController(RoteiroDeColetasService roteiroService, ItensRoteiroDeColetasService itensService)
+        public RoteiroDeColetasController(RoteiroDeColetasService roteiroService )
         {
-            _roteiroService = roteiroService;
-            _itensService = itensService;
+            _roteiroService = roteiroService;         
         }
 
 
@@ -67,6 +65,29 @@ namespace AmarivAPI.Controllers
 
         }
 
+        [HttpPost]
+        [Route("/UpdateNumMaxRoteiroDeColetas")]
+        public IActionResult UpdateRoteiroDeColetas([FromBody]  int numeroMaxColetas, int id)
+        {
+            var result = _roteiroService.UpdateRoteiroDeColeta(numeroMaxColetas , id);
+            if (result.IsSuccess)
+                return Ok(result);
+            else
+                return NotFound();
+        }
+
+
+        [HttpPost]
+        [Route("/AdicionaColetaRoteiroDeColetas")]
+        public IActionResult UpdateRoteiroDeColetas(int id)
+        {
+            var result = _roteiroService.UpdateRoteiroDeColeta(id);
+            if (result.IsSuccess)
+                return Ok(result);
+            else
+                return NotFound();
+        }
+
 
         [HttpPost]
         [Route("/DeletaRoteiroDeColetas")]
@@ -78,8 +99,6 @@ namespace AmarivAPI.Controllers
             else
                 return NotFound();
         }
-
-
 
     }
 }

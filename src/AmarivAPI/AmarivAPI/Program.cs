@@ -1,4 +1,5 @@
 using AmarivAPI.Data;
+using AmarivAPI.EmployeeAPI.Services;
 using AmarivAPI.Models;
 using AmarivAPI.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -6,17 +7,25 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCors(options => {
     options.AddPolicy(name: "_allowDevelopmentDomain",
         policy => {
-            policy.WithOrigins("http://localhost:3000");
-            policy.WithOrigins("http://10.0.2.2:3000");
-            policy.WithHeaders(["Access-Control-Allow-Headers", "*"]);
+            policy
+            .AllowAnyOrigin()
+            .AllowAnyHeader()
+            .AllowAnyMethod();
         }
     );
 });
+
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+    });
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("AmarivConnection");
@@ -44,22 +53,23 @@ builder.Services.AddAuthentication(auth =>
     token.SaveToken = true;
     token.TokenValidationParameters = new TokenValidationParameters
     {
-ValidateIssuerSigningKey = true,
-IssuerSigningKey = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes("fglzdrUAYU2S1wL2G4jXbtlXhVa2AG35")),
-ValidateIssuer = false,
-ValidateAudience = false,
-ClockSkew = TimeSpan.Zero
-};
-
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(
+                        Encoding.UTF8.GetBytes("fglzdrUAYU2S1wL2G4jXbtlXhVa2AG35")),
+        ValidateIssuer = false,
+        ValidateAudience = false,
+        ClockSkew = TimeSpan.Zero
+    };
 });
 
 builder.Services.AddScoped<UsuarioService, UsuarioService>();
+builder.Services.AddScoped<EnderecoService, EnderecoService>();
 builder.Services.AddScoped<MaterialService, MaterialService>();
+builder.Services.AddScoped<ColetaService, ColetaService>();
 builder.Services.AddScoped<TokenService, TokenService>();
-builder.Services.AddScoped<ItensRoteiroDeColetasService, ItensRoteiroDeColetasService>();
 builder.Services.AddScoped<RoteiroDeColetasService, RoteiroDeColetasService>();
 builder.Services.AddScoped<EmailService, EmailService>();
+builder.Services.AddScoped<UserService, UserService>();
 
 var app = builder.Build();
 app.UseCors("_allowDevelopmentDomain");
