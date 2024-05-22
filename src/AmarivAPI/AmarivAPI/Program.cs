@@ -1,11 +1,18 @@
 using AmarivAPI.Data;
 using AmarivAPI.EmployeeAPI.Services;
 using AmarivAPI.Models;
+using AmarivAPI.Profiles;
 using AmarivAPI.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using System;
 using System.Text;
 using System.Text.Json.Serialization;
 
@@ -31,10 +38,9 @@ builder.Services.AddControllers()
 var connectionString = builder.Configuration.GetConnectionString("AmarivConnection");
 
 builder.Services.AddDbContext<AmarivContext>(opts =>
-opts.UseLazyLoadingProxies().UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+    opts.UseLazyLoadingProxies().UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -70,20 +76,23 @@ builder.Services.AddScoped<TokenService, TokenService>();
 builder.Services.AddScoped<RoteiroDeColetasService, RoteiroDeColetasService>();
 builder.Services.AddScoped<EmailService, EmailService>();
 builder.Services.AddScoped<UserService, UserService>();
+builder.Services.AddScoped<NotificacaoService, NotificacaoService>();
+builder.Services.AddScoped<FuncionarioService>();
+builder.Services.AddAutoMapper(typeof(NotificacaoProfile).Assembly);
+builder.Services.AddAutoMapper(typeof(FuncionarioProfile).Assembly);
 
 var app = builder.Build();
+
 app.UseCors("_allowDevelopmentDomain");
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 app.UseAuthentication();
-
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
 
 app.MapControllers();

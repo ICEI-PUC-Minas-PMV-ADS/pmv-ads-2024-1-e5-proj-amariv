@@ -67,4 +67,9 @@ export const AppContextProvider = (props: React.PropsWithChildren) => {
       {props.children}
     </AppContext.Provider>
   );
-};
+}
+
+/**
+ * useAppContext
+ */
+export const useAppContext = () => React.useContext(AppContext);

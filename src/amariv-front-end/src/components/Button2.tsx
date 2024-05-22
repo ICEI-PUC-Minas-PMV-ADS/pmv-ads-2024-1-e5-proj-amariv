@@ -18,7 +18,7 @@ export function Button2({ label, ...props }: ButtonProps) {
     <button
       {...props}
       className={twMerge(
-        "w-full py-4 bg-[#53735b] text-[#fff] rounded-lg active:bg-[#AABD88]",
+        "w-full py-3 bg-[#53735b] text-white rounded-md shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#53735b] focus:ring-opacity-50",
         props.className
       )}
     >
@@ -26,3 +26,5 @@ export function Button2({ label, ...props }: ButtonProps) {
     </button>
   );
 }
+
+
