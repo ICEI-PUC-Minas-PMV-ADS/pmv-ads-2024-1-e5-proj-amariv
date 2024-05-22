@@ -7,16 +7,24 @@ import DropdownCombo from "../../../components/DropdownCombo";
 
 
 function recuperaInfoMaterial(callback: (items: any[]) => void) {
-  const materiais = materialService.recuperaMateriais()
+  const materiais =  materialService.recuperaMateriais()
   const ddlMateriais = [{ id: 0, desc: "Selecione" }]
 
   materiais.then((ele) => {
     const data = ele.data as any[];
-    data.forEach(item => {
+    data.forEach(item => {     
       ddlMateriais.push({ id: item.id, desc: item.descricao })
     });
     callback(ddlMateriais)
   })
+}
+
+
+
+export interface material {
+  id: string,
+  descricao: string,
+  peso: string
 }
 
 export type FormAddMateriaisProps = {
@@ -24,20 +32,27 @@ listaMateriais: string,
 salvarMateriaislista: (evt:any) => void
 
 }
-
-
 export function FormAddMateriais({...props}: FormAddMateriaisProps) {
   const [materialId, setMaterialId] = useState<string>();
+  const [materiaisInfo, setMateriaisInfo] = useState<material[]>();
   const [peso, setPeso] = useState<string>();
   const [ddlListaMateriais, setDdlListaMateriais] = useState<any[]>([]);
 
-
  
   React.useEffect(() => {
-    recuperaInfoMaterial((items) => {
+    recuperaInfoMaterial( (items) => {
       setDdlListaMateriais(items);
     });
   }, []);
+
+  const listaMateriaisAmostra = async (lista : string) => {
+     var materiaisDaColeta = lista.split(";")
+
+     materiaisDaColeta.map( (ele) => {
+      // materiaisInfo?.push({})
+     }); 
+
+  }
 
   const pesoOptions = ["Leve", "Médio", "Pesado"];
 
@@ -53,6 +68,10 @@ export function FormAddMateriais({...props}: FormAddMateriaisProps) {
     const novaListaMateriais = props.listaMateriais.concat(`${materialId}:${peso};`);
     props.salvarMateriaislista(novaListaMateriais);
   
+  }
+
+  function handleRemoveItem(index: number): void {
+    
   }
 
   return (
@@ -85,15 +104,16 @@ export function FormAddMateriais({...props}: FormAddMateriaisProps) {
           className="w-[80%] mt-[15px]"
         />
       </div>
-      <div id="listaAmostraMateriais">
-        {
-            props.listaMateriais != undefined ?  props.listaMateriais.split(";").map( (item) => (
-              <div>
-                <label>{item}</label>
-              </div>
-            )) : ""
-        }
-      </div>
+      
+      <div>
+      {
+      ddlListaMateriais != null? ddlListaMateriais.map((item, index) => (
+        <div key={item.id}>
+          <p>{item.Descrição} </p>
+          <button onClick={() => handleRemoveItem(index)}>Deleta</button>
+        </div>
+      )) : <h3>Essa coleta não possui nenhum material cadastrado!</h3>}
+    </div>
     </>
   )
 }

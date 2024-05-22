@@ -31,8 +31,7 @@ namespace AmarivAPI.Services
                 Coleta coleta = _mapper.Map<Coleta>(dto);
                 dataColeta = coleta.DataDeColeta;
 
-                var roteiroId = ConsultaDisponibilidadeRoteiroDeColeta(dataColeta);
-                //var roteiroId = 0;
+                var roteiroId = ConsultaDisponibilidadeRoteiroDeColeta(dataColeta);              
                 if (roteiroId != 0)
                 {
                      roteiro = _context.RoteiroDeColetas.FirstOrDefault(r => r.Id == roteiroId && r.NumeroDeColetas < r.NumeroMaxColetas);
@@ -64,7 +63,8 @@ namespace AmarivAPI.Services
                     roteiro.NumeroMaxColetas = 10;
                     _context.RoteiroDeColetas.Add(roteiro);
                     _context.SaveChanges();
-                                       
+                        
+                    coleta.UserId = funcionarioId;
                     coleta.RoteiroColetaId = roteiro.Id;
                     _context.Add(coleta);
                     _context.SaveChanges();
@@ -81,14 +81,11 @@ namespace AmarivAPI.Services
 
         public int ConsultaDisponibilidadeRoteiroDeColeta(DateTime data)
         {
-            List<RoteiroDeColetas> lista = _context.RoteiroDeColetas.ToList();
-            if (lista.Count > 0)
-            {
-                var roteiro = lista.Find(r => r.DataCadastro.Date == data && r.Delete == false);
-                if (roteiro != null)
-                    return roteiro.Id;
-                else
-                    return 0;
+            var roteiro = (from c in _context.RoteiroDeColetas where c.DataRoteiro == data select c).FirstOrDefault();
+            
+            if (roteiro != null)
+            {                      
+                    return roteiro.Id;          
             }
             else
             {

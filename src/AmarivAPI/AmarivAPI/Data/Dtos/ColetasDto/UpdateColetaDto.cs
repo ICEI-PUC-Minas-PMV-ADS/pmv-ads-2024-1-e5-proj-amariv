@@ -8,7 +8,7 @@ namespace AmarivAPI.Data.Dtos.ColetasDto
     public class UpdateColetaDto
     {
 
-        public int? UserId { get; set; }
+        public string? UserId { get; set; }
         public int? EnderecoId { get; set; }
         public int? RoteiroColetaId { get; set; }
         public int? PosicaoLista { get; set; }

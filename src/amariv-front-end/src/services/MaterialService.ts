@@ -7,7 +7,6 @@ const useApi = axios.create({
 
 
 export const materialService = {
-   
      recuperaMateriais : async () => {
         const response = await useApi.get("/RecuperaMateriais", {
             headers: {

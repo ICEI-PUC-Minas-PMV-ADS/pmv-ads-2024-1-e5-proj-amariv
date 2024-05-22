@@ -16,5 +16,4 @@ dataCadastro?: Date,
 dataDeColeta?: Date,
 listaItensColeta?: string
      
-  
 }

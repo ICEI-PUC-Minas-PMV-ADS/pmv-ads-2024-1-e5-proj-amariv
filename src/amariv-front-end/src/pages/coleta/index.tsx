@@ -24,7 +24,7 @@ export function ColetaPage() {
   const [bairro, setBairro ] = useState(String)
   const [cidade, setCidade ] = useState(String)
   const [complemento, setComplemento] = useState(String)
-  const [listaMateriais, setListaMateriais ]  = useState<string>("0:selecione")
+  const [listaMateriais, setListaMateriais ]  = useState<string>("")
   const [dataColeta, setDataColeta ] = useState(String)
   const [horarioColeta, setHorarioColeta ] = useState(String)
  
@@ -48,7 +48,7 @@ export function ColetaPage() {
       const endereco = await EnderecoService.salvarEndereco(enderecoDto);
       
       var coletaDto : CreateColetaDto = {
-        userId: '222',
+        userId: "4be676cf-a7db-4dc7-a344-8698eb6ba330",
         enderecoId: endereco.successes[0].message,
         clienteNome : nome,
         clienteCel : cel,
@@ -61,8 +61,7 @@ export function ColetaPage() {
         status: false
       };
 
-     const coleta = await coletaService.salvarColeta(coletaDto,"eeebe625-bddb-4e5b-8c66-94fc1b5957b8");
-    
+     const coleta = await coletaService.salvarColeta(coletaDto,"4be676cf-a7db-4dc7-a344-8698eb6ba330");
 
     } catch (e: any) {
       console.log(e);
