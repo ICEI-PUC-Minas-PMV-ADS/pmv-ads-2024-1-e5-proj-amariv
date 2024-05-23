@@ -10,7 +10,7 @@ export const UserService = {
         'Content-Type': 'application/json'
       }
     });
-    return response.data;
+    return response;
   }, // NÃO USAR ESSA FUNÇÃO DIRETAMENTE, USE O AUTHCONTEXT
 
   signup: async (form: RegisterForm) => {
@@ -21,5 +21,25 @@ export const UserService = {
       },
     });
     return response.data;
-  } // NÃO USAR ESSA FUNÇÃO DIRETAMENTE, USE O AUTHCONTEXT
+  }, // NÃO USAR ESSA FUNÇÃO DIRETAMENTE, USE O AUTHCONTEXT
+
+  getUser: async () => {
+    const token = localStorage.getItem('authToken')
+    const response = await useApi.get("/user", {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+    return response.data;
+  },
+
+  logout: async () => {
+    const token = localStorage.getItem('authToken')
+    const response = await useApi.post("/logout", {}, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+    return response;
+  },
 }

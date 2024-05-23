@@ -1,8 +1,9 @@
-﻿using AmarivAPI.Data.Dtos;
+﻿using AmarivAPI.Data.Dtos.UsuarioDtos;
 using AmarivAPI.Data.Requests;
 using AmarivAPI.Models;
 using AutoMapper;
 using FluentResults;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.Data;
 using System.Web;
@@ -37,6 +38,18 @@ namespace AmarivAPI.Services
                     .FirstOrDefault(usuario => usuario.NormalizedUserName == email.ToUpper());
         }
 
+        public ReadUsuarioDto RecuperaReadUsuarioDtoPorId (string id)
+        {
+           var usuario = _signInManager
+                    .UserManager
+                    .Users
+                    .FirstOrDefault(usuario => usuario.Id == id);
+
+            var map = _mapper.Map<ReadUsuarioDto>(usuario);
+
+            return map;
+        }
+
         public async Task<Result> CadastraCliente(CreateUsuarioDto createDto)
         {
             Usuario usuario = _mapper.Map<Usuario>(createDto);
@@ -62,7 +75,8 @@ namespace AmarivAPI.Services
                 var identityUser = RecuperaUsuarioPorEmail(createDto.Email);
                 var code = await _userManager.GenerateEmailConfirmationTokenAsync(identityUser);
                 _emailService.EnviarEmailConfirmacao(new[] { identityUser.Email }, "Confirme seu email", identityUser.Id, code);
-                return Result.Ok().WithSuccess("Usuário cadastrado com sucesso!");
+                Token token = _tokenService.CreateToken(identityUser, _signInManager.UserManager.GetRolesAsync(identityUser).Result.FirstOrDefault());
+                return Result.Ok().WithSuccess(token.Value);
             }
             return Result.Fail("Falha ao cadastrar usuário");
         }
@@ -81,6 +95,7 @@ namespace AmarivAPI.Services
             return Result.Fail("Falha ao logar");
         }
 
+        [Authorize]
         public Result Logout()
         {
             var resultado = _signInManager.SignOutAsync();

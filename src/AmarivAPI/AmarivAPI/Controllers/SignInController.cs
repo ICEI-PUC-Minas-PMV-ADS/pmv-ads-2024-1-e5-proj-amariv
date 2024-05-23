@@ -1,4 +1,4 @@
-﻿using AmarivAPI.Data.Dtos;
+﻿using AmarivAPI.Data.Dtos.UsuarioDtos;
 using AmarivAPI.Data.Requests;
 using AmarivAPI.Services;
 using FluentResults;

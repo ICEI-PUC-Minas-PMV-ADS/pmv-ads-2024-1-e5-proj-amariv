@@ -2,6 +2,6 @@ import axios from 'axios'
 
 export const useApi = axios.create(
   {
-    baseURL: "https://localhost:7273",
+    baseURL: "http://localhost:5100",
   }
 )

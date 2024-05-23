@@ -3,6 +3,7 @@ import DynamicIcon from "../DynamicIcon";
 import { tv } from "tailwind-variants";
 import { InputHTMLAttributes } from "react";
 import { IconSquare, IconSquareCheck } from "@tabler/icons-react";
+import InputMask from 'react-input-mask';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   error?: boolean
@@ -28,6 +29,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   titleExternalCheckbox?: string
   onClickSelectableInput?: () => void
   titleColor?: "dark" | "light"
+  mask?: string
 }
 
 const input = tv({
@@ -73,7 +75,7 @@ const input = tv({
   }
 })
 
-const Input: React.FC<InputProps> = ({ title, leftIcon, rightIcon, onClickLeftIcon, onClickRightIcon, error, errorMessage, internalSelectable, valueInternalSelectable, onClickInternalSelectable, selectableInput = false, color = "primary", value, internalTitle = false, selectableInputIconOpen = false, disabled = false, requiredField = false, externalCheckbox = false, onClickExternalCheckbox, titleExternalCheckbox, valueExternalCheckbox = false, onClickSelectableInput, titleColor = "light", ...props }) => {
+const Input: React.FC<InputProps> = ({ title, leftIcon, rightIcon, onClickLeftIcon, onClickRightIcon, error, errorMessage, internalSelectable, valueInternalSelectable, onClickInternalSelectable, selectableInput = false, color = "primary", value, internalTitle = false, selectableInputIconOpen = false, disabled = false, requiredField = false, externalCheckbox = false, onClickExternalCheckbox, titleExternalCheckbox, valueExternalCheckbox = false, onClickSelectableInput, titleColor = "light", mask = "", ...props }) => {
 
   const { background, internalSelectableStyle, selectableStyle, text, icon } = input()
 
@@ -117,7 +119,8 @@ const Input: React.FC<InputProps> = ({ title, leftIcon, rightIcon, onClickLeftIc
           }
           {
             selectableInput == false &&
-            <input
+            <InputMask
+              mask={mask}
               className={text({ color: disabled ? "disabled" : color })}
               disabled={disabled}
               value={value}

@@ -8,6 +8,7 @@ namespace AmarivAPI.Models
         { }
 
         public string Nome { get; set; }
-        public string Celular { get; set; } = string.Empty;
+        public string Celular { get; set; }
+        public string? Telefone { get; set; }
     }
 }

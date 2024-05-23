@@ -235,6 +235,9 @@ namespace AmarivAPI.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("longtext");
 
+                    b.Property<string>("Telefone")
+                        .HasColumnType("longtext");
+
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("tinyint(1)");
 
@@ -258,17 +261,16 @@ namespace AmarivAPI.Migrations
                         {
                             Id = "adm",
                             AccessFailedCount = 0,
-                            Celular = "",
-                            ConcurrencyStamp = "9ac4e072-1247-4989-a370-b4dbda244815",
+                            ConcurrencyStamp = "a631ed28-947e-4c51-addd-61109a7fc3da",
                             Email = "amarivadm@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             Nome = "Administrador",
                             NormalizedEmail = "AMARIVADM@GMAIL.COM",
                             NormalizedUserName = "AMARIVADM@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEN6qoNxCAUatvqtYN9omVKmyTT4OypdTVJ38bgSot4Fc0NtO9eKuqrVE0o5hnXIHNQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEABC04QssR6hY8gY/jbhA6ILIpLfuMW1x22Qp0pLnyNzW3CJCdcr2LQs/J8M/F4y/w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b8eba43f-d7e2-40ad-a997-affd2a814b0c",
+                            SecurityStamp = "38dfa314-2a73-4bf9-a9e7-0cbf04883ce1",
                             TwoFactorEnabled = false,
                             UserName = "amarivadm@gmail.com"
                         });

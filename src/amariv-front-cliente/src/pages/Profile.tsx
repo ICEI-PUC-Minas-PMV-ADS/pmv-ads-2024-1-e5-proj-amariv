@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import TopBar from "../components/TopBar";
 import Input from "../components/Inputs/Input";
@@ -6,9 +6,14 @@ import PrimaryButton from "../components/PrimaryButton";
 import img from "../assets/sem-dados.png"
 import { tv } from "tailwind-variants";
 import DynamicIcon from "../components/DynamicIcon";
+import { useContext } from "react";
+import { AuthContext } from "../contexts/AuthContext/AuthContext";
 
 function Profile() {
   const location = useLocation()
+  const authContext = useContext(AuthContext)
+  const navigate = useNavigate()
+  console.log(authContext.user)
 
   const enderecos: any[] = [
     {
@@ -91,10 +96,10 @@ function Profile() {
       <div className="w-full min-h-screen flex items-center justify-center lg:py-6 bg-light-backgroud">
         <div className="w-full flex bg-light-backgroud lg:bg-light-green items-center flex-col lg:w-[550px] lg:rounded-2xl lg:mt-4 mb-20">
           <div className="w-full flex flex-col gap-2 max-w-[420px] px-6">
-            <text className="text-3xl font-bold text-primary-green mb-2 mt-8">Joao Lucas</text>
+            <text className="text-3xl font-bold text-primary-green mb-2 mt-8">{authContext.user?.nome}</text>
             <div>
-              <p>Celular: (31)90000-0000</p>
-              <p>Telefone: (31)90000-0000</p>
+              <p>Celular: {authContext.user?.celular}</p>
+              <p>Telefone: {authContext.user?.telefone}</p>
             </div>
             <div className="w-1/2 self-end mt-2">
               <PrimaryButton color="secondary" title="Editar dados" />
@@ -110,7 +115,12 @@ function Profile() {
             </div>
             <div className="w-full flex items-center justify-center mt-8 lg:mt-16">
               <div className="w-full mb-16">
-                <PrimaryButton title="Sair" leftIcon="IconLogout" color="red" />
+                <PrimaryButton title="Sair" leftIcon="IconLogout" color="red" onClick={async () => {
+                  let result = await authContext.logout()
+                  if (result) {
+                    navigate("/")
+                  }
+                }} />
               </div>
             </div>
           </div>

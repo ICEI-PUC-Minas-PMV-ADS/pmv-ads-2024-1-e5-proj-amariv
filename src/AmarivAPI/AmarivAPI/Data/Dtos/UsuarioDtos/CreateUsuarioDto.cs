@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace AmarivAPI.Data.Dtos
+namespace AmarivAPI.Data.Dtos.UsuarioDtos
 {
     public class CreateUsuarioDto
     {
@@ -15,5 +15,7 @@ namespace AmarivAPI.Data.Dtos
         [Required]
         [Compare("Password")]
         public string RePassword { get; set; }
+        [Required]
+        public string Celular { get; set; }
     }
 }

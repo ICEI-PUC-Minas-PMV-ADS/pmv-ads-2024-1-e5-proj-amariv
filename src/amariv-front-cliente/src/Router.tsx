@@ -7,39 +7,41 @@ import Home from "./pages/Home";
 import History from "./pages/History";
 import Scheduling from "./pages/Scheduling";
 import Profile from "./pages/Profile";
+import ProtectedRoute from "./contexts/AuthContext/ProtectedRoute";
+import UnprotectedRoute from "./contexts/AuthContext/UnprotectedRoute";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: (<Landing />),
+    element: <UnprotectedRoute element={<Landing />} />,
   },
   {
     path: "/signin",
-    element: (< SignIn />),
+    element: <UnprotectedRoute element={< SignIn />} />,
   },
   {
     path: "/login",
-    element: <Login />,
+    element: <UnprotectedRoute element={< Login />} />,
   },
   {
     path: "/agendamento",
-    element: <SchedulingLoggedOut />
+    element: <UnprotectedRoute element={< SchedulingLoggedOut />} />
   },
   {
     path: "/home",
-    element: <Home />
+    element: <ProtectedRoute element={<Home />} />
   },
   {
     path: "/historico",
-    element: <History />
+    element: <ProtectedRoute element={<History />} />
   },
   {
     path: "/novoagendamento",
-    element: <Scheduling />
+    element: <ProtectedRoute element={<Scheduling />} />
   },
   {
     path: "/perfil",
-    element: <Profile />
+    element: <ProtectedRoute element={<Profile />} />
   }
 ]);
 
