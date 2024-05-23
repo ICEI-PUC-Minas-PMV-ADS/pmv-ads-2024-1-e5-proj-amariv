@@ -62,5 +62,16 @@ namespace AmarivAPI.Controllers
             }
             return Ok(resultado.Successes);
         }
+
+        [HttpPost("/emaildisponivel")]
+        public IActionResult ValidaEmail([FromBody]ValidaEmailRequest request)
+        {
+            var resultado = _usuarioService.EmailDisponivel(request);
+            if (resultado)
+            {
+                return Ok();
+            }
+            return StatusCode(StatusCodes.Status302Found);
+        }
     }
 }

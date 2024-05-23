@@ -5,12 +5,12 @@ function LoadingScreen({ open }: { open: boolean }) {
     <>
       {
         open &&
-        <div className="w-full h-full min-h-screen bg-[rgb(0,0,0,0.4)] flex items-center justify-center z-50">
+        <div className="w-full h-screen bg-[rgb(0,0,0,0.6)] flex items-center justify-center z-50 fixed">
           <CircularProgress
             size={40}
             sx={
               {
-                color: "#53735B"
+                color: "#CADDA8"
               }
             } />
         </div>

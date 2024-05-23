@@ -55,15 +55,16 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
   }
 
   const signup = async (form: RegisterForm) => {
-    const data = await UserService.signup(form)
-    if (data.token) {
-      setToken(data.token)
+    const result = await UserService.signup(form).then(async (e) => {
+      localStorage.setItem('authToken', e.data[0].message)
       const userData = await UserService.getUser()
       setUser(userData)
-      setInfosLoaded(true)
-      return true;
-    }
-    return false;
+      return true
+    }).catch(e => {
+      return false
+    })
+
+    return result
   }
 
   const setToken = (token: string) => {

@@ -1,4 +1,5 @@
-﻿using AmarivAPI.Data.Dtos.UsuarioDtos;
+﻿using AmarivAPI.Data;
+using AmarivAPI.Data.Dtos.UsuarioDtos;
 using AmarivAPI.Data.Requests;
 using AmarivAPI.Models;
 using AutoMapper;
@@ -18,9 +19,9 @@ namespace AmarivAPI.Services
         private TokenService _tokenService;
         private EmailService _emailService;
         private RoleManager<IdentityRole> _roleManager;
+        private AmarivContext _context;
 
-
-        public UsuarioService(IMapper mapper, UserManager<Usuario> userManager, SignInManager<Usuario> signInManager, TokenService tokenService, EmailService emailService, RoleManager<IdentityRole> roleManager)
+        public UsuarioService(IMapper mapper, UserManager<Usuario> userManager, SignInManager<Usuario> signInManager, TokenService tokenService, EmailService emailService, RoleManager<IdentityRole> roleManager, AmarivContext context)
         {
             _mapper = mapper;
             _userManager = userManager;
@@ -28,6 +29,7 @@ namespace AmarivAPI.Services
             _tokenService = tokenService;
             _emailService = emailService;
             _roleManager = roleManager;
+            _context = context;
         }
 
         public Usuario RecuperaUsuarioPorEmail(string email)
@@ -36,6 +38,17 @@ namespace AmarivAPI.Services
                     .UserManager
                     .Users
                     .FirstOrDefault(usuario => usuario.NormalizedUserName == email.ToUpper());
+        }
+
+        public Boolean EmailDisponivel(ValidaEmailRequest request)
+        {
+            var user = _context.Users.FirstOrDefault(x => x.Email == request.Email);
+            
+            if(user == null)
+            {
+                return true;
+            }
+            return false;
         }
 
         public ReadUsuarioDto RecuperaReadUsuarioDtoPorId (string id)

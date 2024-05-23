@@ -1,9 +1,11 @@
 import * as TablerIcons from '@tabler/icons-react'
 import DynamicIcon from "../DynamicIcon";
 import { tv } from "tailwind-variants";
-import { InputHTMLAttributes } from "react";
+import { InputHTMLAttributes, useEffect } from "react";
 import { IconSquare, IconSquareCheck } from "@tabler/icons-react";
 import InputMask from 'react-input-mask';
+import useDebounce from '../../hooks/useDebounce';
+import { CircularProgress } from '@mui/material';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   error?: boolean
@@ -16,7 +18,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   internalSelectable?: boolean
   valueInternalSelectable?: string
   onClickInternalSelectable?: () => void
-  color?: "primary" | "secondary"
+  color?: "primary" | "secondary" | "red"
   selectableInput?: boolean
   value?: string | undefined | number
   internalTitle?: boolean
@@ -30,6 +32,8 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   onClickSelectableInput?: () => void
   titleColor?: "dark" | "light"
   mask?: string
+  onChangeDebounce?: (value: string) => void
+  rightLoading?: boolean
 }
 
 const input = tv({
@@ -43,7 +47,8 @@ const input = tv({
   variants: {
     erro: {
       true: {
-        background: "border-red-500 border-solid border-[1px]"
+        background: "border-red-500 border-solid border-[1px]",
+        icon: "text-red-500"
       },
     },
     internalSelectableStyle: {
@@ -70,12 +75,24 @@ const input = tv({
         background: "bg-[#3f5745] border-[#3f5745]",
         text: "text-[#668d70]",
         icon: "text-[#668d70]"
+      },
+
+      red: {
+        icon: "text-red-500"
       }
     }
   }
 })
 
-const Input: React.FC<InputProps> = ({ title, leftIcon, rightIcon, onClickLeftIcon, onClickRightIcon, error, errorMessage, internalSelectable, valueInternalSelectable, onClickInternalSelectable, selectableInput = false, color = "primary", value, internalTitle = false, selectableInputIconOpen = false, disabled = false, requiredField = false, externalCheckbox = false, onClickExternalCheckbox, titleExternalCheckbox, valueExternalCheckbox = false, onClickSelectableInput, titleColor = "light", mask = "", ...props }) => {
+const Input: React.FC<InputProps> = ({ title, leftIcon, rightIcon, onClickLeftIcon, onClickRightIcon, error, errorMessage, internalSelectable, valueInternalSelectable, onClickInternalSelectable, selectableInput = false, color = "primary", value, internalTitle = false, selectableInputIconOpen = false, disabled = false, requiredField = false, externalCheckbox = false, onClickExternalCheckbox, titleExternalCheckbox, valueExternalCheckbox = false, onClickSelectableInput, titleColor = "light", mask = "", onChangeDebounce, rightLoading = false, ...props }) => {
+
+  const debounceChange = useDebounce(onChangeDebounce, 500)
+
+  useEffect(() => {
+    if (onChangeDebounce) {
+      debounceChange(value)
+    }
+  }, [value])
 
   const { background, internalSelectableStyle, selectableStyle, text, icon } = input()
 
@@ -114,7 +131,7 @@ const Input: React.FC<InputProps> = ({ title, leftIcon, rightIcon, onClickLeftIc
           {
             leftIcon &&
             <div className="ml-3" onClick={onClickLeftIcon}>
-              <DynamicIcon iconName={leftIcon} className={icon({ color: color })} />
+              <DynamicIcon iconName={leftIcon} className={icon({ color: color, erro: error })} />
             </div>
           }
           {
@@ -173,9 +190,24 @@ const Input: React.FC<InputProps> = ({ title, leftIcon, rightIcon, onClickLeftIc
               }
             </>
           }
-          {rightIcon &&
+          {(rightIcon || rightLoading) &&
             <div className="mx-3" onClick={onClickRightIcon}>
-              <DynamicIcon iconName={rightIcon} className={icon({ color: disabled ? "disabled" : color })} />
+              {
+                (rightLoading == false && rightIcon) &&
+                <DynamicIcon iconName={rightIcon} className={icon({ color: disabled ? "disabled" : (error ? "red" : color) })} />
+              }
+              {
+                (rightLoading == true) &&
+                <div className=' flex justify-center items-center'>
+                  <CircularProgress
+                    size={25}
+                    sx={
+                      {
+                        color: "#53735B"
+                      }
+                    } />
+                </div>
+              }
             </div>
           }
         </div>
@@ -194,7 +226,7 @@ const Input: React.FC<InputProps> = ({ title, leftIcon, rightIcon, onClickLeftIc
       </div>
       {
         error == true && errorMessage != null &&
-        <p className=" font-light text-red-500 text-[12px]">{errorMessage}</p>
+        <p className=" font-light text-red-500 text-[12px] ml-2">{errorMessage}</p>
       }
     </div>
   )

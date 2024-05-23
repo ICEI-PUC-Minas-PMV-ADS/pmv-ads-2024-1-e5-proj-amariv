@@ -20,7 +20,7 @@ export const UserService = {
         'Content-Type': 'application/json'
       },
     });
-    return response.data;
+    return response;
   }, // NÃO USAR ESSA FUNÇÃO DIRETAMENTE, USE O AUTHCONTEXT
 
   getUser: async () => {
@@ -41,5 +41,11 @@ export const UserService = {
       }
     })
     return response;
+  },
+
+  emailAvaliable: async (email: string): Promise<boolean> => {
+    const form = { email: email }
+    const response = await useApi.post("/emaildisponivel", form).then(e => (true)).catch(e => (false))
+    return response
   },
 }
