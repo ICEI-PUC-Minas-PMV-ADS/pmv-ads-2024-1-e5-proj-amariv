@@ -23,14 +23,14 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   iconOpen?: boolean
 }
 
-const InputSelecionavel: React.FC<Props> = ({ title, onClickSelectableInput, error, errorMessage, color, value, internalTitle, calendarIcon, iconOpen, disabled, requiredField, ...props }) => {
+const SelectInput: React.FC<Props> = ({ title, onClickSelectableInput, error, errorMessage, color, value, internalTitle, calendarIcon, iconOpen, disabled, requiredField, titleColor = "dark", ...props }) => {
 
   return (
-    <div >
-      <Input color={color} title={title} selectableInput={true} rightIcon={calendarIcon ? "IconCalendarEvent" : (iconOpen ? "IconChevronUp" : "IconChevronDown")} readOnly error={error} errorMessage={errorMessage} value={value} internalTitle={internalTitle}
+    <div className=" cursor-pointer">
+      <Input color={color} title={title} selectableInput={true} rightIcon={calendarIcon ? "IconCalendarEvent" : (iconOpen ? "IconChevronUp" : "IconChevronDown")} readOnly error={error} errorMessage={errorMessage} value={value} internalTitle={internalTitle} titleColor={titleColor}
         disabled={disabled} requiredField={requiredField} onClickSelectableInput={onClickSelectableInput}{...props} />
     </div>
 
   )
 }
-export default InputSelecionavel
+export default SelectInput

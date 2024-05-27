@@ -137,7 +137,7 @@ function SignIn() {
       return false
     }
 
-    if (form.celular == "" || form.celular == null || form.celular == undefined) {
+    if (form.celular.length < 11 || form.celular == null || form.celular == undefined) {
       setCelularError(true)
       return false
     }
@@ -265,12 +265,12 @@ function SignIn() {
               }} />
             <Input title="Celular" titleColor="dark" value={form.celular} mask="(99)99999-9999"
               error={celularError}
-              errorMessage="Digite um numero de celular válido. Ex: (31)97575-7575"
+              errorMessage="Digite um número de celular válido. Ex: (31)97575-7575"
               requiredField
               onChange={v => {
                 setCelularError(false)
                 let copiaForm = { ...form }
-                copiaForm.celular = v.target.value
+                copiaForm.celular = v.target.value.replace(/\D/g, '')
                 setForm(copiaForm)
               }} />
             <div className="w-full flex items-center justify-center flex-col">

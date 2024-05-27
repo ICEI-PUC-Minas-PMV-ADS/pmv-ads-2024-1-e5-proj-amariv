@@ -6,53 +6,18 @@ import PrimaryButton from "../components/PrimaryButton";
 import img from "../assets/sem-dados.png"
 import { tv } from "tailwind-variants";
 import DynamicIcon from "../components/DynamicIcon";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../contexts/AuthContext/AuthContext";
+import CreateEndereco from "../components/CreateEndereco";
+import UpdateUsuario from "../components/UpdateUsuario";
 
 function Profile() {
   const location = useLocation()
   const authContext = useContext(AuthContext)
   const navigate = useNavigate()
-  console.log(authContext.user)
+  const [modalEnderecoOpen, setModalEnderecoOpen] = useState(false)
+  const [modalUsuarioOpen, setModalUsuarioOpen] = useState(false)
 
-  const enderecos: any[] = [
-    {
-      id: 1,
-      logradouro: "Rua ali",
-      numero: 1000,
-      bairro: "Vila",
-      cidade: "BH",
-      estado: "MG",
-      complemento: ""
-    },
-    {
-      id: 2,
-      logradouro: "Rua ali",
-      numero: 1000,
-      bairro: "Vila",
-      cidade: "BH",
-      estado: "MG",
-      complemento: ""
-    },
-    {
-      id: 3,
-      logradouro: "Rua ali",
-      numero: 1000,
-      bairro: "Vila",
-      cidade: "BH",
-      estado: "MG",
-      complemento: ""
-    },
-    {
-      id: 4,
-      logradouro: "Rua ali",
-      numero: 1000,
-      bairro: "Vila",
-      cidade: "BH",
-      estado: "MG",
-      complemento: ""
-    }
-  ]
 
   const ItemEndereco = (endereco: any, index: number) => {
     let style = tv(
@@ -77,7 +42,7 @@ function Profile() {
     const { fundo } = style()
 
     return (
-      <div className={fundo({ bordaAtiva: index != enderecos.length - 1 })}>
+      <div className={fundo({ bordaAtiva: index != authContext.enderecos.length - 1 })}>
 
         <div>
           <p>{endereco.logradouro}, {endereco.numero}</p>
@@ -91,27 +56,40 @@ function Profile() {
 
   return (
     <div>
+      <UpdateUsuario isOpen={modalUsuarioOpen} onClose={() => { setModalUsuarioOpen(false) }} />
+      <CreateEndereco isOpen={modalEnderecoOpen} onClose={() => { setModalEnderecoOpen(false) }} />
       <NavBar path={location.pathname} />
       <TopBar title="Meu perfil" backButton={false} />
       <div className="w-full min-h-screen flex items-center justify-center lg:py-6 bg-light-backgroud">
         <div className="w-full flex bg-light-backgroud lg:bg-light-green items-center flex-col lg:w-[550px] lg:rounded-2xl lg:mt-4 mb-20">
           <div className="w-full flex flex-col gap-2 max-w-[420px] px-6">
-            <text className="text-3xl font-bold text-primary-green mb-2 mt-8">{authContext.user?.nome}</text>
-            <div>
+            <text className="text-3xl font-bold text-primary-green mt-8">{authContext.user?.nome}</text>
+            <div className="font-semibold">
               <p>Celular: {authContext.user?.celular}</p>
-              <p>Telefone: {authContext.user?.telefone}</p>
-            </div>
-            <div className="w-1/2 self-end mt-2">
-              <PrimaryButton color="secondary" title="Editar dados" />
-            </div>
-            <text className="text-3xl font-bold text-primary-green mb-2 mt-6">Endereços</text>
-            <div className="w-full h-64 border-[1px] border-solid border-dark-green rounded-md bg-input-color overflow-y-scroll">
               {
-                enderecos.map((e, index) => ItemEndereco(e, index))
+                authContext.user?.telefone &&
+                <p>Telefone: {authContext.user?.telefone}</p>
               }
             </div>
             <div className="w-1/2 self-end mt-2">
-              <PrimaryButton color="secondary" title="Novo endereço" />
+              <PrimaryButton color="secondary" title="Editar dados" leftIcon="IconEdit" onClick={() => setModalUsuarioOpen(true)} />
+            </div>
+            <text className="text-3xl font-bold text-primary-green mb-2 mt-6">Endereços</text>
+            <div className="w-full max-h-64 border-[1px] border-solid border-dark-green rounded-md bg-input-color overflow-y-scroll">
+              {
+                authContext.enderecos.map((e, index) => ItemEndereco(e, index))
+              }
+              {
+                authContext.enderecos.length == 0 &&
+                <div className=" flex flex-col items-center justify-center p-8 text-center">
+                  <img src={img} className="w-1/3 mb-2" />
+                  <p className="text-lg">Nenhum endereco cadastrado</p>
+                  <p className=" font-extralight text-[14px]">Clique em "Novo endereço" para cadastrar um novo endereço</p>
+                </div>
+              }
+            </div>
+            <div className="w-1/2 self-end mt-2">
+              <PrimaryButton color="secondary" title="Novo endereço" onClick={() => setModalEnderecoOpen(true)} leftIcon="IconCirclePlus" />
             </div>
             <div className="w-full flex items-center justify-center mt-8 lg:mt-16">
               <div className="w-full mb-16">

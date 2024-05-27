@@ -1,6 +1,7 @@
 import { useApi } from "../hooks/useApi";
 import { LoginForm } from "../types/LoginForm";
 import { RegisterForm } from "../types/RegisterForm";
+import { UpdateUsuarioForm } from "../types/UpdateUsuarioForm";
 
 export const UserService = {
   login: async (form: LoginForm) => {
@@ -47,5 +48,17 @@ export const UserService = {
     const form = { email: email }
     const response = await useApi.post("/emaildisponivel", form).then(e => (true)).catch(e => (false))
     return response
+  },
+
+  updateUsuario: async (form: UpdateUsuarioForm) => {
+    const token = localStorage.getItem('authToken')
+    const json = JSON.stringify(form)
+    const response = await useApi.post("/atualizarusuario", json, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+    });
+    return response;
   },
 }

@@ -7,6 +7,7 @@ using FluentResults;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.Data;
+using Microsoft.IdentityModel.Tokens;
 using System.Web;
 
 namespace AmarivAPI.Services
@@ -73,7 +74,8 @@ namespace AmarivAPI.Services
                 var identityUser = RecuperaUsuarioPorEmail(createDto.Email);
                 var code = await _userManager.GenerateEmailConfirmationTokenAsync(identityUser);
                 _emailService.EnviarEmailConfirmacao(new[] {identityUser.Email}, "Confirme seu email", identityUser.Id, code);
-                return Result.Ok().WithSuccess("Usuário cadastrado com sucesso!");
+                Token token = _tokenService.CreateToken(identityUser, _signInManager.UserManager.GetRolesAsync(identityUser).Result.FirstOrDefault());
+                return Result.Ok().WithSuccess(token.Value);
             }
             return Result.Fail("Falha ao cadastrar usuário");
         }
@@ -88,8 +90,7 @@ namespace AmarivAPI.Services
                 var identityUser = RecuperaUsuarioPorEmail(createDto.Email);
                 var code = await _userManager.GenerateEmailConfirmationTokenAsync(identityUser);
                 _emailService.EnviarEmailConfirmacao(new[] { identityUser.Email }, "Confirme seu email", identityUser.Id, code);
-                Token token = _tokenService.CreateToken(identityUser, _signInManager.UserManager.GetRolesAsync(identityUser).Result.FirstOrDefault());
-                return Result.Ok().WithSuccess(token.Value);
+                return Result.Ok().WithSuccess("Usuário cadastrado com sucesso!");
             }
             return Result.Fail("Falha ao cadastrar usuário");
         }
@@ -171,6 +172,30 @@ namespace AmarivAPI.Services
                 return Result.Ok().WithSuccess("Senha redefinida com sucesso!");
             }
             return Result.Fail("Falha ao recuperar senha");
+        }
+
+        public Result AlteraUsuario(UpdateUsuarioDto dto, String userId)
+        {
+            try
+            {
+                var identityUser = _signInManager
+                    .UserManager
+                    .Users
+                    .FirstOrDefault(usuario => usuario.Id == userId);
+                
+                    identityUser.Nome = dto.Nome;
+                    identityUser.Celular = dto.Celular;
+                    identityUser.Telefone = dto.Telefone;
+                
+                _context.Users.Update(identityUser);
+                _context.SaveChanges();
+                return Result.Ok().WithSuccess("Usuario atualizado com sucesso!");
+            }
+            catch
+            {
+                return Result.Fail("Falha ao atualizar usuario!");
+            }
+            
         }
     }
 }

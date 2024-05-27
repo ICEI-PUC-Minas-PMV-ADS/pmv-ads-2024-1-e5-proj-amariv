@@ -5,11 +5,17 @@ import { LoginForm } from '../../types/LoginForm';
 import { UserService } from '../../services/UserService';
 import { RegisterForm } from '../../types/RegisterForm';
 import LoadingScreen from '../../components/LoadingScreen';
+import { Endereco } from '../../types/Endereco';
+import { EnderecoService } from '../../services/EnderecoService';
+import { Material } from '../../types/Material';
+import { MaterialService } from '../../services/MaterialService';
 
 export const AuthProvider = ({ children }: { children: JSX.Element }) => {
 
   const [user, setUser] = useState<User | null>(null)
+  const [enderecos, setEnderecos] = useState<Endereco[]>([])
   const [infosLoaded, setInfosLoaded] = useState(false)
+  const [materiais, setMateriais] = useState<Material[]>([])
 
   useEffect(() => {
     const validarToken = async () => {
@@ -23,18 +29,37 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
         })
 
         if (userData) {
+          await EnderecoService.buscarEnderecos().then(e => {
+            setEnderecos(e.data)
+          })
           setUser(userData)
           setInfosLoaded(true)
         }
       } else setInfosLoaded(true)
     }
     validarToken()
+
+    MaterialService.getAll().then(x => {
+      setMateriais(x.data)
+    })
   }, []);
+
+  const atualizarEnderecos = async () => {
+    await EnderecoService.buscarEnderecos().then(e => {
+      setEnderecos(e.data)
+      console.log(e.data)
+    })
+  }
 
   const login = async (form: LoginForm): Promise<boolean> => {
     const result = await UserService.login(form).then(async (e) => {
       localStorage.setItem('authToken', e.data[0].message)
       const userData = await UserService.getUser()
+      if (userData) {
+        await EnderecoService.buscarEnderecos().then(e => {
+          setEnderecos(e.data)
+        })
+      }
       setUser(userData)
       return true
     }).catch(e => {
@@ -49,6 +74,7 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
     if (data.status == 200) {
       setUser(null)
       localStorage.removeItem('authToken')
+      setEnderecos([])
       return true
     }
     return false
@@ -80,7 +106,7 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
   return (
     <>
       <LoadingScreen open={!infosLoaded} />
-      <AuthContext.Provider value={{ user, login, logout, signup }}>
+      <AuthContext.Provider value={{ user, login, logout, signup, enderecos, atualizarEnderecos, materiais }}>
         {children}
       </AuthContext.Provider>
     </>

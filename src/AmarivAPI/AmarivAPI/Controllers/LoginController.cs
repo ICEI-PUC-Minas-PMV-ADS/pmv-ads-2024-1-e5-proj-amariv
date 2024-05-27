@@ -30,6 +30,19 @@ namespace AmarivAPI.Controllers
             return Ok(resultado.Successes);
         }
 
+        [HttpPost("/atualizarusuario")]
+        [Authorize]
+        public IActionResult AlteraUsuario([FromBody]UpdateUsuarioDto dto)
+        {
+            string userId = User.FindFirst("id").Value;
+            Result resultado = _usuarioService.AlteraUsuario(dto, userId);
+            if (resultado.IsFailed)
+            {
+                return StatusCode(500);
+            }
+            return Ok(resultado.Successes);
+        }
+
         [HttpGet("/user")]
         [Authorize]
         public IActionResult RecuperaUsuario () {

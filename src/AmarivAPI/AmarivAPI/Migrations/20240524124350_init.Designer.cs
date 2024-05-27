@@ -4,6 +4,7 @@ using AmarivAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AmarivAPI.Migrations
 {
     [DbContext(typeof(AmarivContext))]
-    partial class AmarivContextModelSnapshot : ModelSnapshot
+    [Migration("20240524124350_init")]
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -150,36 +153,6 @@ namespace AmarivAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Materiais");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Data_criacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Descricao = "Metal",
-                            Tipo = "Metal"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Data_criacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Descricao = "Plástico",
-                            Tipo = "Plástico"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Data_criacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Descricao = "Papel",
-                            Tipo = "Papel"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Data_criacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Descricao = "Vidro",
-                            Tipo = "Vidro"
-                        });
                 });
 
             modelBuilder.Entity("AmarivAPI.Models.RoteiroDeColetas", b =>
@@ -296,16 +269,16 @@ namespace AmarivAPI.Migrations
                         {
                             Id = "adm",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ccbe241b-a036-440f-9573-246a35266d38",
+                            ConcurrencyStamp = "11ef760a-cc41-4b65-add2-e19a2da1b745",
                             Email = "amarivadm@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             Nome = "Administrador",
                             NormalizedEmail = "AMARIVADM@GMAIL.COM",
                             NormalizedUserName = "AMARIVADM@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAELjo08LifoNe9Ld4Q9UsdcaCHwLb7ynJZAesq7HptAK1cI7iU7N+vbNeg9z0SlhEfw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJYs33nBUhLdWS0iJpO6nv/8PXLzKCaLZ0NwUGQDkFAV0hwA2ZaQjdYVc2d7ZQcvGg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "eeffb46a-59ef-449c-b32f-e495490d4631",
+                            SecurityStamp = "a916c2f6-17c5-49fd-9d96-aa6e3f32669f",
                             TwoFactorEnabled = false,
                             UserName = "amarivadm@gmail.com"
                         });
