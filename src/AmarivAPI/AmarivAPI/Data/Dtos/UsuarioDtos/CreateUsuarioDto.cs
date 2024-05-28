@@ -5,7 +5,6 @@ namespace AmarivAPI.Data.Dtos.UsuarioDtos
     public class CreateUsuarioDto
     {
         [Required]
-        [StringLength(20, ErrorMessage = "O nome deve ter no máximo 20 caracteres")]
         public string Nome { get; set; }
         [Required]
         public string Email { get; set; }

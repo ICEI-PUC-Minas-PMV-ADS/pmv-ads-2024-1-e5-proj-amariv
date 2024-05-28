@@ -9,6 +9,7 @@ import { Endereco } from '../../types/Endereco';
 import { EnderecoService } from '../../services/EnderecoService';
 import { Material } from '../../types/Material';
 import { MaterialService } from '../../services/MaterialService';
+import { UpdateUsuarioForm } from '../../types/UpdateUsuarioForm';
 
 export const AuthProvider = ({ children }: { children: JSX.Element }) => {
 
@@ -47,7 +48,6 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
   const atualizarEnderecos = async () => {
     await EnderecoService.buscarEnderecos().then(e => {
       setEnderecos(e.data)
-      console.log(e.data)
     })
   }
 
@@ -93,20 +93,23 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
     return result
   }
 
-  const setToken = (token: string) => {
-    localStorage.setItem('authToken', token)
+  const updateUsuario = async (form: UpdateUsuarioForm) => {
+    const result = await UserService.updateUsuario(form).then(async (e) => {
+      const userData = await UserService.getUser()
+      setUser(userData)
+      return true
+    }).catch(e => {
+      return false
+    })
+
+    return result
   }
 
-  const loadUserData = async () => {
-    const userData = await UserService.getUser()
-    setUser(userData)
-    return userData
-  }
 
   return (
     <>
       <LoadingScreen open={!infosLoaded} />
-      <AuthContext.Provider value={{ user, login, logout, signup, enderecos, atualizarEnderecos, materiais }}>
+      <AuthContext.Provider value={{ user, login, logout, signup, enderecos, atualizarEnderecos, materiais, updateUsuario }}>
         {children}
       </AuthContext.Provider>
     </>

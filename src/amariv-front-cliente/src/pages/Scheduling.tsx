@@ -9,18 +9,32 @@ import DynamicIcon from "../components/DynamicIcon";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../contexts/AuthContext/AuthContext";
 import CreateEndereco from "../components/CreateEndereco";
-import { MaterialService } from "../services/MaterialService";
 import AddMaterial from "../components/AddMaterial";
-import { Material } from "../types/Material";
+import UpdateUsuario from "../components/UpdateUsuario";
+import { UpdateUsuarioForm } from "../types/UpdateUsuarioForm";
+import { CreateColetaForm } from "../types/CreateColetaForm";
+import { Endereco } from "../types/Endereco";
 
 function Scheduling() {
   const location = useLocation()
   const authContext = useContext(AuthContext)
-  const [modalEnderecoOpen, setModalEnderecoOpen] = useState(false)
 
+  const [modalEnderecoOpen, setModalEnderecoOpen] = useState(false)
+  const [modalUsuarioOpen, setModalUsuarioOpen] = useState(false)
   const [modalMaterialOpen, setModalMaterialOpen] = useState(false)
 
   const [materiaisAdicionados, setMateriaisAdicionados] = useState<any[]>([])
+
+  const [form, setForm] = useState<CreateColetaForm>({
+    userId: authContext.user?.id as string,
+    enderecoId: authContext.enderecos[0] ? authContext.enderecos[0].id : 0,
+    clienteNome: authContext.user?.nome as string,
+    clienteCel: authContext.user?.celular as string,
+    clienteTel: authContext.user?.telefone ? authContext.user?.telefone : null,
+    dataCadastro: new Date().toISOString(),
+    dataDeColeta: "Selecionar",
+    listaItensColeta: ""
+  })
 
 
 
@@ -40,7 +54,7 @@ function Scheduling() {
     )
   }
 
-  const ItemEndereco = (endereco: any, index: number) => {
+  const ItemEndereco = (endereco: Endereco, index: number) => {
     let style = tv(
       {
         slots: {
@@ -63,8 +77,12 @@ function Scheduling() {
     const { fundo } = style()
 
     return (
-      <div className={fundo({ bordaAtiva: index != authContext.enderecos.length - 1 })}>
-        <DynamicIcon iconName="IconCircle" size={20} className="text-dark-green" />
+      <div className={fundo({ bordaAtiva: index != authContext.enderecos.length - 1 })} onClick={() => {
+        let copia = { ...form }
+        copia.enderecoId = endereco.id
+        setForm(copia)
+      }}>
+        <DynamicIcon iconName={form.enderecoId == endereco.id ? "IconCircleCheck" : "IconCircle"} size={20} className="text-dark-green" />
         <div>
           <p>{endereco.logradouro}, {endereco.numero}</p>
           <p>{endereco.bairro}</p>
@@ -76,7 +94,16 @@ function Scheduling() {
 
   return (
     <>
-      <CreateEndereco isOpen={modalEnderecoOpen} onClose={() => { setModalEnderecoOpen(false) }} />
+      <UpdateUsuario isOpen={modalUsuarioOpen} onClose={() => { setModalUsuarioOpen(false) }} />
+      <CreateEndereco isOpen={modalEnderecoOpen}
+        onConfirm={(id) => {
+          let copia = { ...form }
+          copia.enderecoId = id
+          setForm(copia)
+        }}
+        onClose={() => {
+          setModalEnderecoOpen(false)
+        }} />
       <AddMaterial
         isOpen={modalMaterialOpen}
         onCancel={() => { setModalMaterialOpen(false) }}
@@ -107,7 +134,7 @@ function Scheduling() {
                 }
               </div>
               <div className="w-1/2 self-end mt-2">
-                <PrimaryButton color="secondary" title="Editar dados" />
+                <PrimaryButton color="secondary" title="Editar dados" onClick={() => setModalUsuarioOpen(true)} />
               </div>
               <text className="text-3xl font-bold text-primary-green mb-2 mt-6">Endereço</text>
               <div className="w-full max-h-64 border-[1px] border-solid border-dark-green rounded-md bg-input-color overflow-y-scroll">

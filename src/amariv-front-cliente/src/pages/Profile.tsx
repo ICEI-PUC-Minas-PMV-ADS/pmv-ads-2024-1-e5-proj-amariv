@@ -19,6 +19,7 @@ function Profile() {
   const [modalUsuarioOpen, setModalUsuarioOpen] = useState(false)
 
 
+
   const ItemEndereco = (endereco: any, index: number) => {
     let style = tv(
       {

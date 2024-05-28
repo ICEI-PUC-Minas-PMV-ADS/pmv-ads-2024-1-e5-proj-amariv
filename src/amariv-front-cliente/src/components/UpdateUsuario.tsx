@@ -23,6 +23,7 @@ type props = {
 function UpdateUsuario({ isOpen, onClose }: props) {
 
   const authContext = useContext(AuthContext)
+  const [loading, setLoading] = useState(false)
 
   const [form, setForm] = useState<UpdateUsuarioForm>({
     nome: authContext.user?.nome as string,
@@ -54,11 +55,26 @@ function UpdateUsuario({ isOpen, onClose }: props) {
     return true
   }
 
+  const handleSave = async () => {
+
+    setLoading(true)
+    let result = await authContext.updateUsuario(form)
+    if (result) {
+      onClose()
+    }
+    else {
+      setUpdateError(true)
+    }
+    setLoading(false)
+
+  }
+
 
   return (
 
     <Modal open={isOpen} className=" overflow-y-scroll" onClose={onClose}>
       <div>
+        <LoadingScreen open={loading} /><LoadingScreen open={loading} />
         <div className="w-full min-h-screen flex items-center justify-center bg-[rgb(0,0,0,0.4)] lg:py-6">
           <div className="w-full min-h-screen lg:min-h-fit flex bg-light-backgroud items-center flex-col lg:w-[550px] lg:rounded-2xl ">
             <TopBar title="Editar dados" OnClickBack={onClose} />
@@ -104,6 +120,7 @@ function UpdateUsuario({ isOpen, onClose }: props) {
               <div className="w-2/3 mt-6 max-w-[250px] mb-16">
                 <PrimaryButton title="Salvar" leftIcon="IconCheck" onClick={() => {
                   if (validarCampos()) {
+                    handleSave()
                   }
                 }} />
               </div>

@@ -29,7 +29,7 @@ namespace AmarivAPI.Services
             try
             {
                 Coleta coleta = _mapper.Map<Coleta>(dto);
-                dataColeta = coleta.DataDeColeta;
+                dataColeta = coleta.DataDeColeta.ToUniversalTime();
 
                 var roteiroId = ConsultaDisponibilidadeRoteiroDeColeta(dataColeta);
                 //var roteiroId = 0;
@@ -84,7 +84,7 @@ namespace AmarivAPI.Services
             List<RoteiroDeColetas> lista = _context.RoteiroDeColetas.ToList();
             if (lista.Count > 0)
             {
-                var roteiro = lista.Find(r => r.DataCadastro.Date == data && r.Delete == false);
+                var roteiro = lista.Find(r => r.DataCadastro.ToUniversalTime().Date == data && r.Delete == false);
                 if (roteiro != null)
                     return roteiro.Id;
                 else

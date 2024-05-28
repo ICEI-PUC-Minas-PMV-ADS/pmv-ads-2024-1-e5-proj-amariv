@@ -13,9 +13,10 @@ import { Alert, Modal } from "@mui/material";
 type props = {
   isOpen: boolean,
   onClose: () => void
+  onConfirm?: (idNewEndereco: number) => void
 }
 
-function CreateEndereco({ isOpen, onClose }: props) {
+function CreateEndereco({ isOpen, onClose, onConfirm }: props) {
   const cepRegex = /^[0-9]{8}$/
   const [serverError, setServerError] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -68,9 +69,11 @@ function CreateEndereco({ isOpen, onClose }: props) {
 
   const handleEndereco = async () => {
     setLoading(true)
-    await EnderecoService.cadastrarEndereco(form).then(async () => {
+    await EnderecoService.cadastrarEndereco(form).then(async (r) => {
       await authContext.atualizarEnderecos()
       onClose()
+      if (onConfirm)
+        onConfirm(Number.parseInt(r.data.successes[0].message))
     }).catch(e => {
       setServerError(true)
     })
@@ -105,7 +108,6 @@ function CreateEndereco({ isOpen, onClose }: props) {
                     let result = await ViaCepService.buscarEndereco(value)
 
                     if (result.erro == null || result.erro == undefined) {
-                      console.log(result)
                       let copiaForm = { ...form }
                       copiaForm.logradouro = result.logradouro
                       copiaForm.bairro = result.bairro
