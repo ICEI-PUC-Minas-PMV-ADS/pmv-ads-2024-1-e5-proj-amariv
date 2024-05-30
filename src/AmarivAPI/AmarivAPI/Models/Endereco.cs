@@ -24,6 +24,10 @@ namespace AmarivAPI.Models
         [AllowNull]
         public string? Referencia { get; set; }
 
+        public string? UserId { get; set; } = null;
+
+        [ForeignKey("UserId")]
+        public virtual Usuario? Usuario { get; set; }
 
     }
 }

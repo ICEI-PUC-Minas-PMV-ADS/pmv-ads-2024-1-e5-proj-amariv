@@ -2,8 +2,10 @@
 ﻿using AmarivAPI.Data;
 using AmarivAPI.Data.Dtos.EnderecoDto;
 using AmarivAPI.Data.Dtos.MaterialDtos;
+using AmarivAPI.Data.Dtos.UsuarioDtos;
 using AmarivAPI.Services;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,6 +22,15 @@ namespace AmarivAPI.Controllers
         public EnderecoController(EnderecoService enderecoService)
         {
             _enderecoService = enderecoService;
+        }
+
+        [HttpGet("/enderecosusuario")]
+        [Authorize]
+        public IActionResult RecuperaEnderecosUsuario()
+        {
+            string userId = User.FindFirst("id").Value;
+            List<ReadEnderecoDto> enderecos = _enderecoService.RecuperaEnderecosUsuario(userId);
+            return Ok(enderecos);
         }
 
         [HttpGet]

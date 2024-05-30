@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AmarivAPI.Controllers
 {
+    [Route("[controller]")]
+    [ApiController]
     public class LogoutController: ControllerBase
     {
 
@@ -15,6 +17,7 @@ namespace AmarivAPI.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Logout()
         {
             Result resultado = _usuarioService.Logout();

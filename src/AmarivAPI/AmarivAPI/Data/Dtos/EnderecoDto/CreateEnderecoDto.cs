@@ -11,7 +11,7 @@ namespace AmarivAPI.Data.Dtos.EnderecoDto
         public string? Cep { get; set; }
         public string? Cidade { get; set; }
         public string? Referencia { get; set; }
-
+        public string? UserId { get; set; }
 
     }
 }

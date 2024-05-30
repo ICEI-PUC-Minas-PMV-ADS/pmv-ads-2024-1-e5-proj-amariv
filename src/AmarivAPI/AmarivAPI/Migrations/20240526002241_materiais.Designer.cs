@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AmarivAPI.Migrations
 {
     [DbContext(typeof(AmarivContext))]
-    [Migration("20240522161216_newMigrationH")]
-    partial class newMigrationH
+    [Migration("20240526002241_materiais")]
+    partial class materiais
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -121,7 +121,12 @@ namespace AmarivAPI.Migrations
                     b.Property<string>("Referencia")
                         .HasColumnType("longtext");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("varchar(255)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Enderecos");
                 });
@@ -148,6 +153,36 @@ namespace AmarivAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Materiais");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Data_criacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Metal",
+                            Tipo = "Metal"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Data_criacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Plástico",
+                            Tipo = "Plástico"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Data_criacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Papel",
+                            Tipo = "Papel"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Data_criacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Vidro",
+                            Tipo = "Vidro"
+                        });
                 });
 
             modelBuilder.Entity("AmarivAPI.Models.RoteiroDeColetas", b =>
@@ -238,6 +273,9 @@ namespace AmarivAPI.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("longtext");
 
+                    b.Property<string>("Telefone")
+                        .HasColumnType("longtext");
+
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("tinyint(1)");
 
@@ -261,17 +299,16 @@ namespace AmarivAPI.Migrations
                         {
                             Id = "adm",
                             AccessFailedCount = 0,
-                            Celular = "",
-                            ConcurrencyStamp = "9ac4e072-1247-4989-a370-b4dbda244815",
+                            ConcurrencyStamp = "ccbe241b-a036-440f-9573-246a35266d38",
                             Email = "amarivadm@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             Nome = "Administrador",
                             NormalizedEmail = "AMARIVADM@GMAIL.COM",
                             NormalizedUserName = "AMARIVADM@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEN6qoNxCAUatvqtYN9omVKmyTT4OypdTVJ38bgSot4Fc0NtO9eKuqrVE0o5hnXIHNQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELjo08LifoNe9Ld4Q9UsdcaCHwLb7ynJZAesq7HptAK1cI7iU7N+vbNeg9z0SlhEfw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b8eba43f-d7e2-40ad-a997-affd2a814b0c",
+                            SecurityStamp = "eeffb46a-59ef-449c-b32f-e495490d4631",
                             TwoFactorEnabled = false,
                             UserName = "amarivadm@gmail.com"
                         });
@@ -453,6 +490,15 @@ namespace AmarivAPI.Migrations
                     b.Navigation("Endereco");
 
                     b.Navigation("RoteiroDeColetas");
+
+                    b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("AmarivAPI.Models.Endereco", b =>
+                {
+                    b.HasOne("AmarivAPI.Models.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Usuario");
                 });

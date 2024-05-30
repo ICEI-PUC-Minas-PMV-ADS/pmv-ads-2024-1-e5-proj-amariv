@@ -1,6 +1,6 @@
 ﻿using AmarivAPI.Data;
 using AmarivAPI.Data.Dtos.EnderecoDto;
-using AmarivAPI.Data.Dtos.MaterialDtos;
+using AmarivAPI.Data.Requests;
 using AmarivAPI.Models;
 using AutoMapper;
 using FluentResults;
@@ -16,6 +16,13 @@ namespace AmarivAPI.Services
         {
             _mapper = mapper;
             _context = context;
+        }
+
+        public List<ReadEnderecoDto> RecuperaEnderecosUsuario(string userId)
+        {
+                List<Endereco> enderecos = _context.Enderecos.Where(x => x.UserId == userId).ToList();
+                List<ReadEnderecoDto> readEnderecos = _mapper.Map<List<Endereco>, List<ReadEnderecoDto>>(enderecos);
+                return readEnderecos;
         }
 
         public Result SalvarEndereco(CreateEnderecoDto enderecoDto)
