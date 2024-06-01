@@ -57,6 +57,39 @@ Accept: application/json
 
 ###
 
+POST {{AmarivAPI_HostAddress}}/signin
+Content-Type: application/json
+Accept: application/json
+
+{
+   "Nome": "John",
+   "Email": "john@email.com",
+   "Password": "Test@123",
+   "RePassword": "Test@123",
+   "Celular": "(11) 90000-0001",
+   "Telefone": "(11) 20000-0001"
+}
+
+###
+
+POST {{AmarivAPI_HostAddress}}/Emp/SignIn
+Content-Type: application/json
+Accept: application/json
+
+{
+   "Email": "john@email.com",
+   "Password": "Test@123"
+}
+
+###
+
+GET {{AmarivAPI_HostAddress}}/Emp/CreateGatheringItinerary
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer 
+
+###
+
 POST {{AmarivAPI_HostAddress}}/login
 Content-Type: application/json
 Accept: application/json

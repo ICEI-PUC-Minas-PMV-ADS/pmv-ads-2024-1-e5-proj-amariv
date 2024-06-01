@@ -38,10 +38,11 @@ namespace AmarivAPI.EmployeeAPI.Controllers
                     {
                         var addr = new Endereco()
                         {
-                            Logradouro = "Rua A",
-                            Numero = "100",
-                            Bairro = "Almeiras",
-                            Cep = "01001-000",
+                            Logradouro = "Rua Aldomário Soares Pinto",
+                            Numero = "115",
+                            Bairro = "Maria Ortiz",
+                            Cep = "29072-230",
+                            Cidade = "Vitória",
                             Referencia = "Prox a igreja",
                         };
                         _context.Enderecos.Add(addr);
@@ -57,8 +58,8 @@ namespace AmarivAPI.EmployeeAPI.Controllers
                             ClienteNome = "Pedro",
                             DataCadastro = today,
                             Delete = false,
-                            Lat = 0.0,
-                            Lon = 0.0,
+                            Lat = -20.25866334503462,
+                            Lon = -40.29376372522745,
                             DataDeColeta = today.AddDays(2),
                             EnderecoId = addr.Id,
                             ListaItensColeta = "1:Metal(level)",
@@ -69,10 +70,11 @@ namespace AmarivAPI.EmployeeAPI.Controllers
                     {
                         var addr = new Endereco()
                         {
-                            Logradouro = "Rua B",
-                            Numero = "120",
-                            Bairro = "Almeiras",
-                            Cep = "01001-001",
+                            Logradouro = "Rua Profa. Odila Simões",
+                            Numero = "245",
+                            Bairro = "Maria Ortiz",
+                            Cidade = "Vitória",
+                            Cep = "29070-330",
                             Referencia = "Prox ao supermercado",
                         };
                         _context.Enderecos.Add(addr);
@@ -88,8 +90,8 @@ namespace AmarivAPI.EmployeeAPI.Controllers
                             ClienteNome = "Joao",
                             DataCadastro = today,
                             Delete = false,
-                            Lat = 0.0,
-                            Lon = 0.0,
+                            Lat = -20.25567221825709,
+                            Lon = -40.29552252179683,
                             DataDeColeta = today.AddDays(2),
                             EnderecoId = addr.Id,
                             ListaItensColeta = "1:Metal(level)",
@@ -100,10 +102,11 @@ namespace AmarivAPI.EmployeeAPI.Controllers
                     {
                         var addr = new Endereco()
                         {
-                            Logradouro = "Rua C",
-                            Numero = "140",
-                            Bairro = "Almeiras",
-                            Cep = "01001-002",
+                            Logradouro = "Rua Armando Moreira de Oliveira",
+                            Numero = "119",
+                            Bairro = "Goiabeiras",
+                            Cidade = "Vitória",
+                            Cep = "29075-075",
                             Referencia = "",
                         };
                         _context.Enderecos.Add(addr);
@@ -119,8 +122,8 @@ namespace AmarivAPI.EmployeeAPI.Controllers
                             ClienteNome = "Maria",
                             DataCadastro = today,
                             Delete = false,
-                            Lat = 0.0,
-                            Lon = 0.0,
+                            Lat = -20.266196920806085,
+                            Lon = -40.299065504665485,
                             DataDeColeta = today.AddDays(2),
                             EnderecoId = addr.Id,
                             ListaItensColeta = "1:Metal(level)",
@@ -131,10 +134,11 @@ namespace AmarivAPI.EmployeeAPI.Controllers
                     {
                         var addr = new Endereco()
                         {
-                            Logradouro = "Rua D",
-                            Numero = "160",
-                            Bairro = "Almeiras",
-                            Cep = "01001-003",
+                            Logradouro = "Rua Waldyr Meireles",
+                            Numero = "188",
+                            Bairro = "Consolação",
+                            Cidade = "Vitória",
+                            Cep = "29045-670",
                             Referencia = "",
                         };
                         _context.Enderecos.Add(addr);
@@ -150,8 +154,8 @@ namespace AmarivAPI.EmployeeAPI.Controllers
                             ClienteNome = "Joaquina",
                             DataCadastro = today,
                             Delete = false,
-                            Lat = 0.0,
-                            Lon = 0.0,
+                            Lat = -20.30503096328269,
+                            Lon = -40.3126671099669,
                             DataDeColeta = today.AddDays(2),
                             EnderecoId = addr.Id,
                             ListaItensColeta = "1:Metal(level)",

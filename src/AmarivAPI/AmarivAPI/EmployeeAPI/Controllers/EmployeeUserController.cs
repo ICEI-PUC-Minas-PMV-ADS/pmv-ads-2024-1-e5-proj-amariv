@@ -22,7 +22,11 @@ namespace AmarivAPI.EmployeeAPI.Controllers
             var userInfo = await _userService.GetUserInfo(User);
             if (userInfo == null)
             {
-                return NotFound("User information not found!");
+                return BadRequest(new {
+                    Code = 1000,
+                    Message = "User information not found!",
+                    reset = true,
+                });
             }
             return new JsonResult(new {
                 Name = userInfo.Nome,
