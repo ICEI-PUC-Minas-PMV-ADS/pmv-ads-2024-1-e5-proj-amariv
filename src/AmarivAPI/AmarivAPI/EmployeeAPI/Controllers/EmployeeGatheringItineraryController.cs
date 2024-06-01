@@ -37,7 +37,7 @@ namespace AmarivAPI.EmployeeAPI.Controllers
                 .Include("Funcionario")
                 .Include("Coletas")
                 .Include("Coletas.Endereco")
-                .Where(x => x.FuncionarioId == userId && x.DataRoteiro >= DateTime.Now)
+                .Where(x => x.FuncionarioId == userId && x.DataRoteiro.Date >= DateTime.Today.Date)
                 .OrderBy(x => x.DataRoteiro)
                 .FirstOrDefault();
             if (gatheringItinerary != null)

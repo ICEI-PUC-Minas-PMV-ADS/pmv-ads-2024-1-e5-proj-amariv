@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿#nullable enable
+
+using Microsoft.AspNetCore.Identity;
 
 namespace AmarivAPI.Models
 {
@@ -8,7 +10,7 @@ namespace AmarivAPI.Models
         { }
 
         public string Nome { get; set; }
-        public string Celular { get; set; }
+        public string? Celular { get; set; }
         public string? Telefone { get; set; }
     }
 }
