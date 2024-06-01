@@ -4,31 +4,21 @@ import { Spacer } from "../../components/Spacer";
 import { BottomNav } from "../../components/BottomNav";
 import { HistoryGatheringViewer } from "./components/HistoryGatheringViewer";
 import { AppContext } from "src/AppContext";
-import { UserService } from "src/services/UserService";
-import { useNotification } from "src/components/NotificationProvider";
 
 /**
  * History page mobile
  */
 
 export function HistoryMobilePage() {
-  const { state: { token, gatheringItinerary }, dispatch } = React.useContext(AppContext);
-  const notification = useNotification();
+  const { state: { gatheringItinerary }, dispatch } = React.useContext(AppContext);
 
   /**
    * Events
    */
 
   const handleMenuExitClick = React.useCallback(async (): Promise<void> => {
-    try {
-      if (token) {
-        await UserService.logout(token);
-        dispatch({ type: 'logout' });
-      }
-    } catch (e: any) {
-      notification(e);
-    }
-  }, [token, dispatch, notification]);
+    dispatch({ type: 'set_show_logout_confirmation', payload: true });
+  }, [dispatch]);
 
   /**
    * Layout
