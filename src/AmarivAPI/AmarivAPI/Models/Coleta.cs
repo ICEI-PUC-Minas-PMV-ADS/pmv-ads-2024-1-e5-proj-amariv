@@ -13,6 +13,7 @@ namespace AmarivAPI.Models
         public int Id { get; set; }
         [AllowNull]
         public string? UserId { get; set; } = null;
+       
         [AllowNull]
         public int? EnderecoId { get; set; }
         [AllowNull]
@@ -37,7 +38,7 @@ namespace AmarivAPI.Models
         [AllowNull]
         public double? Lon { get; set; }
         [Required]
-        public DateTime DataCadastro { get; set; } =DateTime.Now;
+        public DateTime DataCadastro { get; set; } = DateTime.Now;
         [Required]
         public DateTime DataDeColeta { get; set; }
         /// <summary>

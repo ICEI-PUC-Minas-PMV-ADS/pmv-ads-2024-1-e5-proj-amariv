@@ -1,6 +1,7 @@
 
 
-export interface CreateColetaDto {       
+export interface CreateColetaDto {   
+
     userId?: string,
     enderecoId?:  number,
     roteiroColetaId?:  number,

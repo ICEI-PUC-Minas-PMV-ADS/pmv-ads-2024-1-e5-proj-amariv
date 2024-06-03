@@ -1,67 +1,102 @@
-import React, { useState, useRef, useEffect } from "react";
-import { Input } from "../../components/Input";
-import { InputDate } from "../../components/InputDate";
-import { InputTime } from "../../components/InputTime";
+import { useState  } from "react";
+import Input from "../../components/re_components/Inputs/Input";
 import { Button2 } from "../../components/Button2";
 import { Form } from "../../components/Form";
 import "./index.css";
 import { FormAddMateriais } from "./components/FormAddMateriais";
 import { CreateColetaDto } from "../../models/ColetaDtos/CreateColetaDto";
 import { CreateEnderecoDto } from "../../models/EnderecoDtos/CreateEnderecoDto";
-import { coletaController } from "./ColetaController";
-import { EnderecoService } from "../../services/EnderecoService";
 import { coletaService } from "../../services/ColetaService";
+import { enderecoService } from "../../services/EnderecoService";
+import { FormAddEndereco } from "./components/FormAddEndereco";
+import { FormVerificaData } from "./components/FormVerificaData";
+import SelectModal from "../../components/re_components/SelectModal";
+import { Funcionario } from "../../services/FuncionarioService";
 
 
 
 export function ColetaPage() {
+  
+  const [errorNome, setErrorNome] = useState(false)
+  const [errorTel, setErrorTel] = useState(false)
+  const [errorCel, setErrorCel] = useState(false)
+  const [errorEndereco, setErrorEndereco] = useState(false)
   const [nome, setNome ] = useState(String)
   const [cel, setCel ] = useState(String)
   const [tel, setTel] = useState(String)
-  const [cep, setCep ] = useState(String)
-  const [logradouro, setLogradouro ] = useState(String)
-  const [numero, setNumero ] = useState(String)
-  const [bairro, setBairro ] = useState(String)
-  const [cidade, setCidade ] = useState(String)
-  const [complemento, setComplemento] = useState(String)
   const [listaMateriais, setListaMateriais ]  = useState<string>("")
   const [dataColeta, setDataColeta ] = useState(String)
-  const [horarioColeta, setHorarioColeta ] = useState(String)
- 
+  const [enderecoDto, setEnderecoDto] = useState<CreateEnderecoDto>()
+  const [mensagemErro ,setMensagemErro] = useState()
 
-  function VerificaDisponibilidadeHorario(): void {
-    throw new Error("Function not implemented.");
+  const jogaMensagemErro = (status: boolean) => {
+    if (!status) {
+        return (
+            <div className=" bg-input-color w-[60%] flex flex-row justify-between p-4 rounded-lg">
+                <p className=""> Favor Preencha todos os campos no formulário de endereço!</p>
+                <button onClick={() => {setMensagemErro(undefined)}} className="w-[1.5rem] h-[1.5rem] flex justify-center items-center text-[1.5rem] text-red-600">X</button>
+            </div>
+        )
+    } else {
+        return (
+            <div className=" bg-input-color w-full flex flex-col p-4 rounded-lg">
+                <p className=""> Favor adicione material na coleta! </p>
+                <button onClick={() => {setMensagemErro(undefined)}} className="w-[1.5rem] h-[1.5rem] flex justify-center items-center text-[1.5rem] text-red-600">X</button>
+            </div>
+        )
+    }
+}
+
+  const validarCampos = () => {
+    if ( nome == undefined || nome == "" || nome == null) {
+      setErrorNome(true)
+      return false
+    }
+
+    if ( cel == undefined || cel == "" || cel == null)  {
+      setErrorCel(true)
+      return false
+    }
+
+    if ( tel == undefined || tel == "" || tel == null)  {
+      setErrorTel(true)
+      return false
+    }
+
+    if ( listaMateriais == undefined || listaMateriais == "" || listaMateriais == null)  {
+      jogaMensagemErro(true)   
+      return false
+    }
+
+    if (dataColeta == undefined || dataColeta == null ) {  
+      jogaMensagemErro(true)   
+      return false
+    }
+    
+    return true
   }
+
 
   async function CriarAgendamentoColeta(): Promise<void> {
     try {
-      
-      var enderecoDto : CreateEnderecoDto = {
-        logradouro : logradouro,
-        numero : numero,
-        bairro : bairro,
-        cep : cep,
-        cidade : cidade,
-        referencia : complemento
-      };
+      console.log(dataColeta)
+      if (enderecoDto !== undefined) {
+        const endereco = await enderecoService.salvarEndereco(enderecoDto);
+        var coletaDto: CreateColetaDto = {            
+          enderecoId: endereco.successes[0].message,
+          clienteNome: nome,
+          clienteCel: cel,
+          clienteTel: tel,
+          lat: 11111,
+          lon: 22222,
+          dataCadastro: new Date(Date.now()),
+          dataDeColeta: new Date(dataColeta),
+          listaItensColeta: listaMateriais,
+          status: false
+        };
 
-      const endereco = await EnderecoService.salvarEndereco(enderecoDto);
-      
-      var coletaDto : CreateColetaDto = {
-        userId: "4be676cf-a7db-4dc7-a344-8698eb6ba330",
-        enderecoId: endereco.successes[0].message,
-        clienteNome : nome,
-        clienteCel : cel,
-        clienteTel : tel,
-        lat: 11111,
-        lon: 22222,
-        dataCadastro : new Date(Date.now()),
-        dataDeColeta : coletaController.converteStringEmDate(dataColeta),
-        listaItensColeta: listaMateriais,
-        status: false
-      };
-
-     const coleta = await coletaService.salvarColeta(coletaDto,"4be676cf-a7db-4dc7-a344-8698eb6ba330");
+        const coleta = await coletaService.salvarColeta(coletaDto);
+      }
 
     } catch (e: any) {
       console.log(e);
@@ -71,7 +106,7 @@ export function ColetaPage() {
   return (
     <>
       <div className="App">
-      
+       { mensagemErro }
         <div className="content">
           <h2 className="mt-[30px] text-[#53735B] text-[1.75rem]">
             Novo agendamento de coleta
@@ -83,31 +118,45 @@ export function ColetaPage() {
           <Form>
             <div className="dados-cliente">
               <div>
-                <Input type="text"
-                  label="Nome"
-                  id="txtNome"
+                <Input 
+                  title="Nome Cliente"
+                  error = {errorNome}
+                  errorMessage = "Digite o nome do cliente"
+                  titleColor="dark"
+                  requiredField             
                   value={nome}
-                  onChange={ (evt) => setNome(evt.target.value)} 
-                  required 
+                  onChange={ (evt) => {
+                    setErrorNome(false)
+                    setNome(evt.target.value)
+                  }}               
                   />
               </div>
               <div>
                 <Input 
-                  type="tel"
-                  label="Celular" 
-                  id="txtCel" 
+                  title="Telefone Celular"
+                  error = {errorCel}
+                  mask = "(99) 99999-9999"
+                  errorMessage = "Digite o telefone celular"
+                  titleColor="dark"
+                  requiredField 
                   value={cel}
-                  onChange={ (evt) => setCel(evt.target.value)} 
+                  onChange={ (evt) => {
+                    setErrorCel(false)
+                    setCel(evt.target.value)}} 
                   />
               </div>
               <div>
                 <Input 
-                  type="tel" 
-                  label="Telefone Fixo"  
-                  id="txtTel" 
+                  title="Telefone Fixo"
+                  error = {errorTel}
+                  mask="9999-9999"
+                  errorMessage = "Digite o telefone Fixo"
+                  titleColor="dark"
+                  requiredField  
                   value={tel}
-                  onChange={ (evt) => setTel(evt.target.value)} 
-                  required 
+                  onChange={ (evt) => {
+                    setErrorTel(false)
+                    setTel(evt.target.value)}}                    
                   />
               </div>
             </div>
@@ -115,96 +164,33 @@ export function ColetaPage() {
             <div className="title">
               <p className="text-[#666666] text-m my-1">Endereço do cliente</p>
             </div>
-            <div className="endereco-cliente">
-              <div>
-                <Input 
-                  type="text" 
-                  label="CEP" 
-                  value={cep}
-                  onChange={ (evt) => setCep(evt.target.value)} 
-                  required />
-              </div>
-              <div>
-                <Input 
-                  type="text" 
-                  label="Logradouro" 
-                  value={logradouro}
-                  onChange={ (evt) => setLogradouro(evt.target.value)} 
-                  required />
-              </div>
-              <div>
-                <Input 
-                  type="text" 
-                  label="Número" 
-                  value={numero}
-                  onChange={ (evt) => setNumero(evt.target.value)} 
-                  required />
-              </div>
-            </div>
-            <div className="endereco-cliente">
-              <div>
-                <Input 
-                  type="text" 
-                  label="Bairro" 
-                  value={bairro}
-                  onChange={ (evt) => setBairro(evt.target.value)} 
-                  required />
-              </div>
-              <div>
-                <Input 
-                  type="text" 
-                  label="Cidade" 
-                  value={cidade}
-                  onChange={ (evt) => setCidade(evt.target.value)} 
-                  required />
-              </div>
-              <div>
-                <Input 
-                  type="text" 
-                  label="Complemento" 
-                  value={complemento}
-                  onChange={ (evt) => setComplemento(evt.target.value)} 
-                  required />
-              </div>
-            </div>
-            <div className="endereco-cliente">
-              <div>
-                <InputDate
-                  label="Data da coleta"
-                  type="date"               
-                  value={dataColeta}
-                  onChange={ (evt) => setDataColeta(evt.target.value)} 
-                />
-              </div>
-              <div>
-                <InputTime
-                  label="Horário de Coleta"
-                  type="time"            
-                  value={horarioColeta}
-                  onChange={ (evt) => setHorarioColeta(evt.target.value)} 
-                />
-              </div>
-              <div>
-                <Button2
-                  type="button"
-                  label="Verificar disponibilidade"
-                  className="w-[90%] mt-[15px]"
-                  onClick={VerificaDisponibilidadeHorario}
-                />
-              </div>
-            </div>
-            
+
+           <FormAddEndereco
+            salvarEndereco = { (newEndereco) => { setEnderecoDto(newEndereco) }}
+            endereco={enderecoDto ?? {} }
+            errorEndereco = {errorEndereco}
+            />
+                 
+           <FormVerificaData
+              setDataColetaFinal ={ (coleta) =>{ setDataColeta(coleta)}}           
+            />
+
             <FormAddMateriais 
               listaMateriais = {listaMateriais}
-              salvarMateriaislista = { (evt) => setListaMateriais(evt)}             
-            />  
-
+              salvarMateriaislista = { (materiais) => setListaMateriais(materiais)}             
+            /> 
+                     
             <Button2
               type="button"
               label="Criar agendamento"
               className="w-[40%] mt-[15px]"
-              onClick={() => CriarAgendamentoColeta()}
+              onClick={() => {
+               if(validarCampos()){
+                CriarAgendamentoColeta()               
+               }               
+              }}
             />
+
           </Form>
         </div>
       </div>

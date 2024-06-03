@@ -1,14 +1,10 @@
+export interface CreateEnderecoDto {
+  
+    logradouro? : string ,
+    numero? : string,
+    bairro? : string,
+    cep? : string,
+    cidade? : string,
+    referencia? : string
 
-
-export class CreateEnderecoDto {
-    constructor(
-        
-        public logradouro : string,
-        public numero : string,
-        public bairro : string,
-        public cep : string,
-        public cidade : string,
-        public referencia : string
-
-    ) { }
 }

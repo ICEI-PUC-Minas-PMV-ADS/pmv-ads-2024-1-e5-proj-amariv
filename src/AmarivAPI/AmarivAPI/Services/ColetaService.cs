@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http.HttpResults;
 using AmarivAPI.Data.Dtos.ColetasDto;
 using System.Reflection.Metadata.Ecma335;
+using Microsoft.AspNetCore.Mvc;
 
 
 namespace AmarivAPI.Services
@@ -21,7 +22,7 @@ namespace AmarivAPI.Services
             _context = context;
         }
        
-        public Result<string> SalvarColeta(CreateColetaDto dto, string funcionarioId)
+        public Result<string> SalvarColeta(CreateColetaDto dto )
         {
             RoteiroDeColetas roteiro;
             DateTime dataColeta;
@@ -53,23 +54,12 @@ namespace AmarivAPI.Services
                 }
                 else
                 {
-                    roteiro = new RoteiroDeColetas();
-                    roteiro.FuncionarioId = funcionarioId;
-                    roteiro.DataCadastro = DateTime.Now;
-                    roteiro.Status = true;
-                    roteiro.DataRoteiro = dataColeta;
-                    roteiro.Delete = false;
-                    roteiro.NumeroDeColetas = 1;
-                    roteiro.NumeroMaxColetas = 10;
-                    _context.RoteiroDeColetas.Add(roteiro);
-                    _context.SaveChanges();
-                        
-                    coleta.UserId = funcionarioId;
-                    coleta.RoteiroColetaId = roteiro.Id;
+                                          
+                    coleta.RoteiroColetaId = null;
                     _context.Add(coleta);
                     _context.SaveChanges();
 
-                    return Result.Ok("A Coleta e o Roteiro foram criados com sucesso!!");
+                    return Result.Ok("A Coleta foi Criada mas não foi atribuida a nenhum roteiro!!!");
                 }
             }
             catch (Exception)
@@ -94,6 +84,13 @@ namespace AmarivAPI.Services
             {
                 return 0;
             }
+        }
+
+        public bool ConsultaDisponibilidadeColeta(DateTime novaData)
+        {
+            var dataFinal = novaData.AddHours(1);
+            List<Coleta> lista = _context.Coletas.ToList();
+            return lista.Any(r => r.DataDeColeta.Date >= novaData && r.DataDeColeta.Date <= dataFinal);
         }
 
         public Result UpdateColeta(UpdateColetaDto coletaDto, int id)
@@ -192,6 +189,9 @@ namespace AmarivAPI.Services
                 return _mapper.Map<List<ReadColetaDto>>(lista);
             }
         }
+
+       
+
 
         public Result DeletarColeta(int id) 
         {

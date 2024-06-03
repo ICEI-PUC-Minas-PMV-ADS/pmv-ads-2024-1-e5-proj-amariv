@@ -49,7 +49,8 @@ namespace AmarivAPI.Services
             return lista.Any(r => r.DataCadastro.Date == roteiro.DataCadastro.Date && r.Delete == false);
         }
 
-      
+       
+
 
         #region Updates_RoteiroDeColetas
 

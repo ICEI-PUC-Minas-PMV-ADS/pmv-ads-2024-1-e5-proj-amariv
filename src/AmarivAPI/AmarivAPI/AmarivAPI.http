@@ -52,9 +52,23 @@ Accept: application/json
    "Nome": "Mike",
    "Email": "mike@email.com",
    "Password": "Test@123",
-   "RePassword": "Test@123"
+   "RePassword": "Test@123",
+   "celular": "00087978"
 }
 
+
+###
+POST {{AmarivAPI_HostAddress}}/signin
+Content-Type: application/json
+Accept: application/json
+
+{
+   "Nome": "Teste",
+   "Email": "teste@email.com",
+   "Password": "Test@123",
+   "RePassword": "Test@123",
+   "celular": "7898877"
+}
 ###
 
 POST {{AmarivAPI_HostAddress}}/signin

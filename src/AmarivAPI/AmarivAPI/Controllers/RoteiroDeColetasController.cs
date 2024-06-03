@@ -3,6 +3,7 @@ using AmarivAPI.Data.Dtos.MaterialDtos;
 using AmarivAPI.Data.Dtos.RoteiroDeColetasDtos;
 using AmarivAPI.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Globalization;
 
 namespace AmarivAPI.Controllers
 {
@@ -41,7 +42,7 @@ namespace AmarivAPI.Controllers
                 return NotFound();
         }
 
-
+      
         [HttpPost]
         [Route("/SalvarRoteiroDeColetas")]
         public IActionResult SalvarRoteiroDeColetas([FromBody] CreateRoteiroDeColetasDto roteiroDto)

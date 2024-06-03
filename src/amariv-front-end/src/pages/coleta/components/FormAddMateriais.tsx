@@ -1,77 +1,62 @@
-import { useState } from "react";
+import {  useState } from "react";
 import { Button2 } from "../../../components/Button2";
-import DropdownInput from "../../../components/DropdownInput";
 import { materialService } from "../../../services/MaterialService";
 import React from "react";
-import DropdownCombo from "../../../components/DropdownCombo";
-
-
-function recuperaInfoMaterial(callback: (items: any[]) => void) {
-  const materiais =  materialService.recuperaMateriais()
-  const ddlMateriais = [{ id: 0, desc: "Selecione" }]
-
-  materiais.then((ele) => {
-    const data = ele.data as any[];
-    data.forEach(item => {     
-      ddlMateriais.push({ id: item.id, desc: item.descricao })
-    });
-    callback(ddlMateriais)
-  })
-}
-
-
-
-export interface material {
-  id: string,
-  descricao: string,
-  peso: string
-}
+import PrimaryButton from "../../../components/re_components/PrimaryButton";
+import AddMaterial from "../../../components/re_components/AddMaterial";
+import img from "../../../assets/sem-dados.png"
 
 export type FormAddMateriaisProps = {
 listaMateriais: string,
-salvarMateriaislista: (evt:any) => void
+salvarMateriaislista: (materiais : string) => void
 
 }
-export function FormAddMateriais({...props}: FormAddMateriaisProps) {
-  const [materialId, setMaterialId] = useState<string>();
-  const [materiaisInfo, setMateriaisInfo] = useState<material[]>();
-  const [peso, setPeso] = useState<string>();
-  const [ddlListaMateriais, setDdlListaMateriais] = useState<any[]>([]);
 
- 
-  React.useEffect(() => {
-    recuperaInfoMaterial( (items) => {
-      setDdlListaMateriais(items);
-    });
-  }, []);
-
-  const listaMateriaisAmostra = async (lista : string) => {
-     var materiaisDaColeta = lista.split(";")
-
-     materiaisDaColeta.map( (ele) => {
-      // materiaisInfo?.push({})
-     }); 
-
-  }
-
-  const pesoOptions = ["Leve", "Médio", "Pesado"];
-
-  function handlePesoChange(event: React.ChangeEvent<HTMLSelectElement>): void {
-    setPeso(event.target.value)
-  }
-
-  function handleMaterialChange(event: React.ChangeEvent<HTMLSelectElement>): void {
-    setMaterialId(event.target.value)
-  }
-
-  function btnAdicionarMateriais(event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
-    const novaListaMateriais = props.listaMateriais.concat(`${materialId}:${peso};`);
-    props.salvarMateriaislista(novaListaMateriais);
+export function FormAddMateriais({listaMateriais, salvarMateriaislista}: FormAddMateriaisProps) {
   
-  }
+  const [materiais, setMateriais] = useState<any[]>([])
 
-  function handleRemoveItem(index: number): void {
-    
+  React.useEffect(() => {
+    materialService.recuperaMateriais()
+      .then((newMaterials) => setMateriais(newMaterials))
+      .catch((err) => console.log(err));
+  },[])
+
+  const [modalMaterialOpen, setModalMaterialOpen] = useState(false)
+  const [materiaisAdicionados, setMateriaisAdicionados] = useState<any[]>([])
+ 
+  const ItemMaterial = (material: any, index: number) => {
+    return (
+      <div key={index} className=" bg-input-color w-full flex flex-col p-4 rounded-lg">
+        <p className="">Material: {materiais.find(x => x.id == material.idMaterial)?.descricao}</p>
+        <p className="">Peso: {material.peso}</p>
+        <div className="flex gap-2 mt-4">
+          <PrimaryButton color="red" title="Excluir" onClick={() => {
+            let copia = [...materiaisAdicionados]
+            copia.splice(index, 1)
+            setMateriaisAdicionados(copia)
+            let numeroItensIncluidos = 0;
+            let novaListaMateriais = "";
+            const materiais = listaMateriais.split(";");
+            for (let i = 0 ; i < materiais.length; i++) {
+              const mat = materiais[i];
+              const [id] = mat.split(':');
+              const foiExcluido = id === material.idMaterial.toString();
+
+              if (!foiExcluido) {
+                if (numeroItensIncluidos === 0) {
+                  novaListaMateriais += mat;
+                } else {
+                  novaListaMateriais += ";" + mat;
+                }
+                numeroItensIncluidos += 1;
+              }              
+            }
+            salvarMateriaislista(novaListaMateriais);
+          }} />
+        </div>
+      </div>
+    )
   }
 
   return (
@@ -81,34 +66,52 @@ export function FormAddMateriais({...props}: FormAddMateriaisProps) {
       </div>
 
       <div className="dados-cliente" >
-        <DropdownCombo
-          options={ddlListaMateriais}
-          label="Descrição do material"
-          placeholder="latas, garrafas, etc."
-          onChange={handleMaterialChange}
-          required
-        />
+        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 w-full gap-2 lg:max-w-[1220px] md:max-w-[810px]">
+          {
+            materiaisAdicionados.length == 0 &&
+            <div className="flex flex-col gap-4 items-center justify-center p-8">
+              <img src={img} className="w-[30%]" />
+              <p className="font-light text-lg">{"Nenhum material adicionado..."}</p>
+            </div>
+          }
+          {
+            materiaisAdicionados.length > 0 &&
+            materiaisAdicionados.map((material, index) => ItemMaterial(material, index))
+          }
+        <div/>
+        <AddMaterial
+          materiais={materiais}
+          isOpen={modalMaterialOpen}
+          onCancel={() => { setModalMaterialOpen(false) }}
+          onConfirm={(idMaterial, peso) => {
+            let novoMaterial = {
+              idMaterial: idMaterial,
+              peso: peso
+            }
+            let copiaMateriais = [...materiaisAdicionados]
+            copiaMateriais.unshift(novoMaterial)
 
-        <DropdownInput
-          options={pesoOptions}
-          label="Peso do material"
-          placeholder="Leve,pesado..."
-          onChange={handlePesoChange}
-          required
-        />
+            if(listaMateriais === "")
+              salvarMateriaislista(listaMateriais + `${idMaterial}:${peso}`)
+            else
+              salvarMateriaislista(listaMateriais + `;${idMaterial}:${peso}`)
+           
+            setMateriaisAdicionados(copiaMateriais)
+            setModalMaterialOpen(false)
+            
+        }} />
 
+        
+        </div>
         <Button2
           type="button"
           label="Adicionar material"
-          onClick={btnAdicionarMateriais}
+          onClick={ () => { setModalMaterialOpen(true) }}
           className="w-[80%] mt-[15px]"
         />
+
       </div>
-      
 
     </>
   )
 }
-
-
-

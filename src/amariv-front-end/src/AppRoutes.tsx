@@ -9,8 +9,6 @@ import { FuncionarioPage } from "./pages/funcionarios";
 import { AuthUtils } from "./utils/AuthUtils";
 import { AppContext } from "./AppContext";
 import MaterialPage from "./pages/materiais/Material";
-import Sidebar from "./components/Sidebar";
-import FuncionariosPage from "./pages/funcionarios/FuncionariosPage";
 
 interface AuthAppRoutesProps {
   children: React.ReactNode;
@@ -29,7 +27,7 @@ export const AuthAppRoutes: React.FC<AuthAppRoutesProps> = ({ children }) => {
       <Route path="/home" element={<div>Home</div>} />
       <Route path="/coleta" element={<ColetaPage />} />
       <Route path="/materiais" element={<MaterialPage />} />
-      <Route path="/Funcionarios" element={<FuncionariosPage />} />
+      {/* <Route path="/Funcionarios" element={<FuncionariosPage />} /> */}
       <Route path="/*" element={<React.Fragment>{children}</React.Fragment>} />
     </Routes>
   );
