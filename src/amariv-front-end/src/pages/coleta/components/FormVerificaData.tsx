@@ -38,6 +38,7 @@ export const FormVerificaData = ({setDataColetaFinal}: FormVerificaDataProps) =>
             return (
                 <div className=" bg-input-color w-full flex flex-col p-4 rounded-lg">
                     <p className=""> O Horário da coleta não se encontra disponível, por favor escolha outro horario!!</p>
+                    <button onClick={() => {setMensagem(undefined)}} className="w-[1.5rem] h-[1.5rem] flex justify-center items-center text-[1.5rem] text-red-600">X</button>
                 </div>
             )
         }

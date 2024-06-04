@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AmarivAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class start_migration : Migration
+    public partial class newStartMigration01 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -389,7 +389,7 @@ namespace AmarivAPI.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Celular", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "Nome", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "Telefone", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "adm", 0, null, "9a12861f-39d6-462f-8efc-2d0eb59854f9", "amarivadm@gmail.com", true, false, null, "Administrador", "AMARIVADM@GMAIL.COM", "AMARIVADM@GMAIL.COM", "AQAAAAIAAYagAAAAEMrsm9ApnJAk5RbhoPJ+JcYChZ3USAQysHv0iTEZHIOSffDA0lCVT0RTaCBQkuFtrg==", null, false, "c8c22d6e-2869-4aec-9213-130dd15c9072", null, false, "amarivadm@gmail.com" });
+                values: new object[] { "adm", 0, null, "f8b98eef-6e61-4921-9924-9cb33c07b1ae", "amarivadm@gmail.com", true, false, null, "Administrador", "AMARIVADM@GMAIL.COM", "AMARIVADM@GMAIL.COM", "AQAAAAIAAYagAAAAEL8j5CtU8I2zdrLIKA8xXhZfdMRZ65x2kzNaIz7WugTAcEuM11scL7ei2Nj3gQJ4Mg==", null, false, "4aa35d1a-b470-434f-aaed-822d22b4f955", null, false, "amarivadm@gmail.com" });
 
             migrationBuilder.InsertData(
                 table: "Materiais",

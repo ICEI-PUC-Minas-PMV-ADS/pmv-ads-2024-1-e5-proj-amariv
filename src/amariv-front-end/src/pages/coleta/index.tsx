@@ -10,10 +10,13 @@ import { coletaService } from "../../services/ColetaService";
 import { enderecoService } from "../../services/EnderecoService";
 import { FormAddEndereco } from "./components/FormAddEndereco";
 import { FormVerificaData } from "./components/FormVerificaData";
-import SelectModal from "../../components/re_components/SelectModal";
-import { Funcionario } from "../../services/FuncionarioService";
+import { GoogleGeocodingService } from "../../services/GoogleGeocodingService";
 
-
+export interface local {
+  latitude: Number,
+  longitude: Number,
+  tipo: string
+}
 
 export function ColetaPage() {
   
@@ -28,6 +31,24 @@ export function ColetaPage() {
   const [dataColeta, setDataColeta ] = useState(String)
   const [enderecoDto, setEnderecoDto] = useState<CreateEnderecoDto>()
   const [mensagemErro ,setMensagemErro] = useState()
+
+  const consultaLocal  = async ( endereco : CreateEnderecoDto ) => {
+
+    const geometry =  await GoogleGeocodingService.buscarLocalizacao(endereco)
+     const local : local = {
+      latitude:  parseFloat(geometry.location.lat),
+      longitude: parseFloat(geometry.location.lng),
+      tipo: geometry.location_type
+     }   
+      return local
+  }
+  
+const consultaLocalidadeExata = (local: local) => {
+   if (local.tipo="ROOFTOP")
+    return true
+   else
+    return false
+} 
 
   const jogaMensagemErro = (status: boolean) => {
     if (!status) {
@@ -76,26 +97,28 @@ export function ColetaPage() {
     return true
   }
 
-
   async function CriarAgendamentoColeta(): Promise<void> {
     try {
-      console.log(dataColeta)
+      
       if (enderecoDto !== undefined) {
+
         const endereco = await enderecoService.salvarEndereco(enderecoDto);
+        const local = await consultaLocal(enderecoDto)       
         var coletaDto: CreateColetaDto = {            
           enderecoId: endereco.successes[0].message,
           clienteNome: nome,
           clienteCel: cel,
           clienteTel: tel,
-          lat: 11111,
-          lon: 22222,
+          lat: local.latitude,
+          lon: local.longitude,
+          localidadeExata: consultaLocalidadeExata(local),
           dataCadastro: new Date(Date.now()),
           dataDeColeta: new Date(dataColeta),
           listaItensColeta: listaMateriais,
           status: false
         };
-
         const coleta = await coletaService.salvarColeta(coletaDto);
+
       }
 
     } catch (e: any) {
@@ -186,7 +209,7 @@ export function ColetaPage() {
               className="w-[40%] mt-[15px]"
               onClick={() => {
                if(validarCampos()){
-                CriarAgendamentoColeta()               
+                CriarAgendamentoColeta()            
                }               
               }}
             />

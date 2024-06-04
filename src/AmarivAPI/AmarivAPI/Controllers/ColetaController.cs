@@ -71,7 +71,6 @@ namespace AmarivAPI.Controllers
                 return Ok(result);
             else
                 return NotFound();
-
         }
 
         [HttpPost]

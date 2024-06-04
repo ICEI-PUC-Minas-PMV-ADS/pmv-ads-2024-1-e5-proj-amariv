@@ -14,7 +14,6 @@ export type FormAddEnderecoProps ={
 export const FormAddEndereco = ({endereco, salvarEndereco, errorEndereco }: FormAddEnderecoProps) => {
     const cepRegex = /^[0-9]{8}$/
     const [loading, setLoading] = useState(false)
-
     const [loadingCep, setLoadingCep] = useState(false)
     const [errorCep, setErrorCep] = useState(false)
     const [errorLogradouro, setErrorLogradouro] = useState(false)

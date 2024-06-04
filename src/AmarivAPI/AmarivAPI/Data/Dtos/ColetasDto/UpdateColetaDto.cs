@@ -19,6 +19,7 @@ namespace AmarivAPI.Data.Dtos.ColetasDto
         public bool? Delete { get; set; }
         public double? Lat { get; set; }
         public double? Lon { get; set; }
+        public bool? LocalidadeExata { get; set; }
         public DateTime? DataCadastro { get; set; }
         public DateTime DataDeColeta { get; set; }
         public string? ListaItensColeta { get; set; }

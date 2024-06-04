@@ -37,6 +37,11 @@ namespace AmarivAPI.Models
         public double? Lat { get; set; }
         [AllowNull]
         public double? Lon { get; set; }
+        /// <summary>
+        ///  Define se a localidade passado por latitude e longitude é exata ou aproximada.
+        /// </summary>
+        [AllowNull]
+        public bool? LocalidadeExata {get; set;} 
         [Required]
         public DateTime DataCadastro { get; set; } = DateTime.Now;
         [Required]

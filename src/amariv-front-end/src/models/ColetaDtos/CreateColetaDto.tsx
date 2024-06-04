@@ -10,8 +10,9 @@ export interface CreateColetaDto {
     clienteCel?: string,
     clienteTel?: string,
     status?: boolean,
-    lat?: number,
-    lon?: number,
+    lat?: Number,
+    lon?: Number,
+    localidadeExata?: boolean,
     dataCadastro?: Date,
     dataDeColeta?: Date,
     listaItensColeta?: string
