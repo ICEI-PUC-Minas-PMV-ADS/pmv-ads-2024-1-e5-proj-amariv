@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AmarivAPI.Migrations
 {
     [DbContext(typeof(AmarivContext))]
-    [Migration("20240604211224_newStartMigration01")]
-    partial class newStartMigration01
+    [Migration("20240605094640_teste")]
+    partial class teste
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -68,6 +68,9 @@ namespace AmarivAPI.Migrations
 
                     b.Property<string>("ListaItensColeta")
                         .HasColumnType("longtext");
+
+                    b.Property<bool?>("LocalidadeExata")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<double?>("Lon")
                         .HasColumnType("double");
@@ -365,16 +368,16 @@ namespace AmarivAPI.Migrations
                         {
                             Id = "adm",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f8b98eef-6e61-4921-9924-9cb33c07b1ae",
+                            ConcurrencyStamp = "4c24babb-c451-47ea-af05-02fa1fac5464",
                             Email = "amarivadm@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             Nome = "Administrador",
                             NormalizedEmail = "AMARIVADM@GMAIL.COM",
                             NormalizedUserName = "AMARIVADM@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEL8j5CtU8I2zdrLIKA8xXhZfdMRZ65x2kzNaIz7WugTAcEuM11scL7ei2Nj3gQJ4Mg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOCjtq7D/w5jyqc4U3NoAGOeHlnp4XeSQfiPxrHiBd4o2CLNOATBKiAa2coJWR+pzQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "4aa35d1a-b470-434f-aaed-822d22b4f955",
+                            SecurityStamp = "b27cd65d-c108-41b0-abe4-91168693005c",
                             TwoFactorEnabled = false,
                             UserName = "amarivadm@gmail.com"
                         });
