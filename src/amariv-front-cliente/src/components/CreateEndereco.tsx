@@ -93,7 +93,7 @@ function CreateEndereco({ isOpen, onClose, onConfirm }: props) {
       />
       <Modal open={isOpen} className=" overflow-y-scroll" onClose={onClose}>
         <div>
-          <LoadingScreen open={loading} /><LoadingScreen open={loading} />
+          <LoadingScreen open={loading} />
           <div className="w-full min-h-screen flex items-center justify-center bg-[rgb(0,0,0,0.4)] lg:py-6">
             <div className="w-full min-h-screen lg:min-h-fit flex bg-light-backgroud items-center flex-col lg:w-[550px] lg:rounded-2xl ">
               <TopBar title="Novo endereço" OnClickBack={onClose} />

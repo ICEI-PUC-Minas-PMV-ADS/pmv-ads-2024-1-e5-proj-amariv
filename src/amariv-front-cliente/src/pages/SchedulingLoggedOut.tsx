@@ -45,7 +45,10 @@ function SchedulingLoggedOut() {
     clienteTel: "",
     dataCadastro: new Date().toISOString(),
     dataDeColeta: "Selecionar",
-    listaItensColeta: ""
+    listaItensColeta: "",
+    lat: 0,
+    lon: 0,
+    status: true
   })
   const [loadingCep, setLoadingCep] = useState(false)
   const [errorCep, setErrorCep] = useState(false)

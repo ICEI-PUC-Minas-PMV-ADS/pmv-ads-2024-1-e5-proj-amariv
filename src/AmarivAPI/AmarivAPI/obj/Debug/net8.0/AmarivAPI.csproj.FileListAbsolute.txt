@@ -242,9 +242,9 @@ C:\Users\jluca\OneDrive\Documents\GitHub\pmv-ads-2024-1-e5-proj-amariv\src\Amari
 C:\Users\jluca\OneDrive\Documents\GitHub\pmv-ads-2024-1-e5-proj-amariv\src\AmarivAPI\AmarivAPI\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.AmarivAPI.props
 C:\Users\jluca\OneDrive\Documents\GitHub\pmv-ads-2024-1-e5-proj-amariv\src\AmarivAPI\AmarivAPI\obj\Debug\net8.0\staticwebassets.pack.json
 C:\Users\jluca\OneDrive\Documents\GitHub\pmv-ads-2024-1-e5-proj-amariv\src\AmarivAPI\AmarivAPI\obj\Debug\net8.0\scopedcss\bundle\AmarivAPI.styles.css
+C:\Users\jluca\OneDrive\Documents\GitHub\pmv-ads-2024-1-e5-proj-amariv\src\AmarivAPI\AmarivAPI\obj\Debug\net8.0\AmarivAPI.csproj.Up2Date
 C:\Users\jluca\OneDrive\Documents\GitHub\pmv-ads-2024-1-e5-proj-amariv\src\AmarivAPI\AmarivAPI\obj\Debug\net8.0\AmarivAPI.dll
 C:\Users\jluca\OneDrive\Documents\GitHub\pmv-ads-2024-1-e5-proj-amariv\src\AmarivAPI\AmarivAPI\obj\Debug\net8.0\refint\AmarivAPI.dll
 C:\Users\jluca\OneDrive\Documents\GitHub\pmv-ads-2024-1-e5-proj-amariv\src\AmarivAPI\AmarivAPI\obj\Debug\net8.0\AmarivAPI.pdb
 C:\Users\jluca\OneDrive\Documents\GitHub\pmv-ads-2024-1-e5-proj-amariv\src\AmarivAPI\AmarivAPI\obj\Debug\net8.0\AmarivAPI.genruntimeconfig.cache
 C:\Users\jluca\OneDrive\Documents\GitHub\pmv-ads-2024-1-e5-proj-amariv\src\AmarivAPI\AmarivAPI\obj\Debug\net8.0\ref\AmarivAPI.dll
-C:\Users\jluca\OneDrive\Documents\GitHub\pmv-ads-2024-1-e5-proj-amariv\src\AmarivAPI\AmarivAPI\obj\Debug\net8.0\AmarivAPI.csproj.Up2Date

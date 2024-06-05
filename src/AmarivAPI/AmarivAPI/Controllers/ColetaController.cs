@@ -16,6 +16,8 @@ namespace AmarivAPI.Controllers
             _coletaService = coletaService;
         }
 
+
+
         [HttpGet]
         [Route("/RecuperaColeta")]
         public IActionResult RecuperaColeta(int id)
@@ -40,7 +42,7 @@ namespace AmarivAPI.Controllers
 
         [HttpPost]
         [Route("/SalvarColeta")]
-        public IActionResult SalvarColeta([FromBody] CreateColetaDto coletaDto, string funcionarioId)
+        public IActionResult SalvarColeta([FromBody] CreateColetaDto coletaDto, string? funcionarioId)
         {
             var result = _coletaService.SalvarColeta(coletaDto, funcionarioId);
             if (result.IsSuccess)

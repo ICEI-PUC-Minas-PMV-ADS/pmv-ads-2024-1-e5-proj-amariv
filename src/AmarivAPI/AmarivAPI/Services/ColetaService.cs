@@ -55,7 +55,7 @@ namespace AmarivAPI.Services
                 else
                 {
                     roteiro = new RoteiroDeColetas();
-                    roteiro.FuncionarioId = funcionarioId;
+                    roteiro.FuncionarioId = funcionarioId == null ? "adm" : funcionarioId;
                     roteiro.DataCadastro = DateTime.Now;
                     roteiro.Status = true;
                     roteiro.DataRoteiro = dataColeta;

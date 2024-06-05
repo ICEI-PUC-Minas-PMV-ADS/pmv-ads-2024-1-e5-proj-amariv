@@ -7,14 +7,16 @@ import { Material } from "../../types/Material";
 import { UpdateUsuarioForm } from "../../types/UpdateUsuarioForm";
 
 export type AuthContextType = {
-  user: User | null;
-  login: (form: LoginForm) => Promise<boolean>;
+  user: User | null
+  login: (form: LoginForm) => Promise<boolean>
   logout: () => Promise<boolean>;
-  signup: (form: RegisterForm) => Promise<boolean>;
+  signup: (form: RegisterForm) => Promise<boolean>
   enderecos: Endereco[]
   atualizarEnderecos: () => Promise<void>
   materiais: Material[]
-  updateUsuario: (form: UpdateUsuarioForm) => Promise<boolean>;
+  updateUsuario: (form: UpdateUsuarioForm) => Promise<boolean>
+  setSnackBarOpen: React.Dispatch<React.SetStateAction<boolean>>
+  setMessageSnackBar: React.Dispatch<React.SetStateAction<string>>
 };
 
 export const AuthContext = createContext<AuthContextType>(null!);

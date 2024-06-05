@@ -6,5 +6,8 @@ export type CreateColetaForm = {
   clienteTel: string | null,
   dataCadastro: string,
   dataDeColeta: string,
-  listaItensColeta: string
+  listaItensColeta: string,
+  lat: number,
+  lon: number,
+  status: boolean
 }

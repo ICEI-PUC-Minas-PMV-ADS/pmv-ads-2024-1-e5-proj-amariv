@@ -10,6 +10,7 @@ import { EnderecoService } from '../../services/EnderecoService';
 import { Material } from '../../types/Material';
 import { MaterialService } from '../../services/MaterialService';
 import { UpdateUsuarioForm } from '../../types/UpdateUsuarioForm';
+import { Snackbar } from '@mui/material';
 
 export const AuthProvider = ({ children }: { children: JSX.Element }) => {
 
@@ -17,6 +18,8 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
   const [enderecos, setEnderecos] = useState<Endereco[]>([])
   const [infosLoaded, setInfosLoaded] = useState(false)
   const [materiais, setMateriais] = useState<Material[]>([])
+  const [snackBarOpen, setSnackBarOpen] = useState(false)
+  const [messageSnackBar, setMessageSnackBar] = useState("")
 
   useEffect(() => {
     const validarToken = async () => {
@@ -107,8 +110,15 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
 
   return (
     <>
+      <Snackbar
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+        open={snackBarOpen}
+        onClose={() => { setSnackBarOpen(false) }}
+        autoHideDuration={3000}
+        message={messageSnackBar}
+      />
       <LoadingScreen open={!infosLoaded} />
-      <AuthContext.Provider value={{ user, login, logout, signup, enderecos, atualizarEnderecos, materiais, updateUsuario }}>
+      <AuthContext.Provider value={{ user, login, logout, signup, enderecos, atualizarEnderecos, materiais, updateUsuario, setSnackBarOpen, setMessageSnackBar }}>
         {children}
       </AuthContext.Provider>
     </>

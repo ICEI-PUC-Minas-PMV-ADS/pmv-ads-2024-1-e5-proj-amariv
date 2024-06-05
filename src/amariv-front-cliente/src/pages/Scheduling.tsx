@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import TopBar from "../components/TopBar";
 import Input from "../components/Inputs/Input";
@@ -18,17 +18,22 @@ import SelectInput from "../components/Inputs/SelectInput";
 import DatePicker from "../components/DatePicker";
 import dataUtils from "../utils/dataUtils";
 import dayjs from "dayjs";
-import { Snackbar } from "@mui/material";
+import { Alert, Snackbar } from "@mui/material";
+import { GoogleService } from "../services/GoogleService";
+import LoadingScreen from "../components/LoadingScreen";
+import { ColetaService } from "../services/ColetaService";
 
 function Scheduling() {
   const location = useLocation()
+  const navigate = useNavigate()
   const authContext = useContext(AuthContext)
+  const [loading, setLoading] = useState(false)
+  const [serverError, setServerError] = useState(false)
 
   const [modalEnderecoOpen, setModalEnderecoOpen] = useState(false)
   const [modalUsuarioOpen, setModalUsuarioOpen] = useState(false)
   const [modalMaterialOpen, setModalMaterialOpen] = useState(false)
   const [modalDataOpen, setModalDataOpen] = useState(false)
-  const [snackBarOpen, setSnackBarOpen] = useState(false)
 
   const [materiaisAdicionados, setMateriaisAdicionados] = useState<any[]>([])
 
@@ -44,7 +49,10 @@ function Scheduling() {
     clienteTel: authContext.user?.telefone ? authContext.user?.telefone : null,
     dataCadastro: new Date().toISOString(),
     dataDeColeta: "Selecionar",
-    listaItensColeta: ""
+    listaItensColeta: "",
+    lat: 0,
+    lon: 0,
+    status: true
   })
 
 
@@ -83,12 +91,11 @@ function Scheduling() {
 
   const ItemEndereco = (endereco: Endereco, index: number) => {
     const { fundo } = style()
-
     return (
       <div
         key={index}
         className={fundo({ bordaAtiva: index != authContext.enderecos.length - 1 })}
-        onClick={() => {
+        onClick={async () => {
           setErrorEndereco(false)
           let copia = { ...form }
           copia.enderecoId = endereco.id
@@ -141,17 +148,33 @@ function Scheduling() {
     }
   )
 
+  const handleSave = async () => {
+    setLoading(true)
+    let endereco = authContext.enderecos.find(x => x.id == form.enderecoId)
+    let location = await GoogleService.buscarLatitudeLongitude(endereco as Endereco)
+    let copyForm = { ...form }
+    if (location != "erro") {
+      copyForm.lat = location.lat
+      copyForm.lon = location.lng
+    }
+    let materiaisString: string = ""
+    materiaisAdicionados.forEach(x => {
+      materiaisString = materiaisString + `${x.idMaterial}:${x.peso};`
+    })
+    copyForm.listaItensColeta = materiaisString
+    setForm(copyForm)
+    await ColetaService.cadastrarColeta(copyForm).then(x => {
+      authContext.setMessageSnackBar("Agendamento de coleta realizado com sucesso!")
+      authContext.setSnackBarOpen(true)
+      navigate("/")
+    }).catch(x => setServerError(true))
+    setLoading(false)
+  }
 
 
   return (
     <>
-      <Snackbar
-        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-        open={snackBarOpen}
-        onClose={() => { setSnackBarOpen(false) }}
-        autoHideDuration={3000}
-        message="Preencha todos os campos obrigatórios"
-      />
+      <LoadingScreen open={loading} />
       <DatePicker
         value={dayjs(form.dataDeColeta)}
         isOpen={modalDataOpen}
@@ -270,14 +293,22 @@ function Scheduling() {
                 <p className="text-sm text-red-500 mt-2">*É necessário informar pelo menos um material para a coleta. Clique no botão "Adicionar material" para registrar um novo</p>
               }
             </div>
+            {
+              serverError &&
+              <div className="w-full mt-4 px-6 max-w-[420px]">
+                <Alert severity="error">Erro ao comunicar com o servidor. Tente novamente mais tarde.</Alert>
+              </div>
+            }
+
             <div className="w-full flex items-center justify-center">
               <div className="w-2/3 mt-6 max-w-[250px] mb-16">
                 <PrimaryButton title="Agendar coleta" leftIcon="IconCheck" onClick={() => {
                   if (validarCampos()) {
-
+                    handleSave()
                   }
                   else {
-                    setSnackBarOpen(true)
+                    authContext.setMessageSnackBar("Preencha todos os campos obrigatórios")
+                    authContext.setSnackBarOpen(true)
                   }
                 }} />
               </div>
