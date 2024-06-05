@@ -5,15 +5,29 @@ import reportWebVitals from './reportWebVitals';
 import { RouterProvider } from 'react-router-dom';
 import router from './Router';
 import { AuthProvider } from './contexts/AuthContext/AuthProvider';
+import { ThemeProvider, createTheme } from '@mui/material';
+import { ptBR } from "@mui/x-date-pickers/locales";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
+const theme = createTheme(
+  {
+    palette: {
+      primary: { main: '#53735B' },
+    },
+  },
+  ptBR
+);
+
 root.render(
   <React.StrictMode>
-    <AuthProvider>
-      <RouterProvider router={router} />
-    </AuthProvider>
+    <ThemeProvider theme={theme}>
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
+    </ThemeProvider>
   </React.StrictMode>
 );
 

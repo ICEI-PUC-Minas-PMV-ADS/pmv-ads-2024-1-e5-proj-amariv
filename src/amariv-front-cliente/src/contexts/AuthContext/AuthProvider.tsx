@@ -21,28 +21,27 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
   useEffect(() => {
     const validarToken = async () => {
       const tokenLocalStorage = localStorage.getItem('authToken')
-      if (tokenLocalStorage) {
-        const userData: User = await UserService.getUser().catch(e => {
+      if (tokenLocalStorage != null) {
+
+        await UserService.getUser().then(async (e) => {
+          setUser(e)
+          await EnderecoService.buscarEnderecos().then(e => {
+            setEnderecos(e.data)
+          })
+        }).catch(e => {
           alert('Sessão expirada!')
           localStorage.removeItem('authToken')
           setUser(null)
           setInfosLoaded(true)
         })
-
-        if (userData) {
-          await EnderecoService.buscarEnderecos().then(e => {
-            setEnderecos(e.data)
-          })
-          setUser(userData)
-          setInfosLoaded(true)
-        }
-      } else setInfosLoaded(true)
+        setInfosLoaded(true)
+      }
+      await MaterialService.getAll().then(x => {
+        setMateriais(x.data)
+      })
     }
     validarToken()
-
-    MaterialService.getAll().then(x => {
-      setMateriais(x.data)
-    })
+    setInfosLoaded(true)
   }, []);
 
   const atualizarEnderecos = async () => {

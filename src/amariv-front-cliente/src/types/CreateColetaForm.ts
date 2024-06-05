@@ -1,5 +1,5 @@
 export type CreateColetaForm = {
-  userId: string,
+  userId?: string,
   enderecoId: number,
   clienteNome: string,
   clienteCel: string,

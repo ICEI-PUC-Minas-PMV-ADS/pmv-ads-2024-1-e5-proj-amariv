@@ -50,7 +50,7 @@ function SelectModal({ isOpen, onConfirmSelection, onCancelSelection, itens, lab
     const { fundo } = style()
 
     return (
-      <div className={fundo({ bordaAtiva: index != itens.length - 1 })} onClick={() => {
+      <div key={Math.random() * (20000 - 10000) + 10000} className={fundo({ bordaAtiva: index != itens.length - 1 })} onClick={() => {
         if (onConfirmSelection)
           onConfirmSelection(item)
       }}>

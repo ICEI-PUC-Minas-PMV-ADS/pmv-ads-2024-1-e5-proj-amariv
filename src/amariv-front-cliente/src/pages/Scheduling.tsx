@@ -14,6 +14,11 @@ import UpdateUsuario from "../components/UpdateUsuario";
 import { UpdateUsuarioForm } from "../types/UpdateUsuarioForm";
 import { CreateColetaForm } from "../types/CreateColetaForm";
 import { Endereco } from "../types/Endereco";
+import SelectInput from "../components/Inputs/SelectInput";
+import DatePicker from "../components/DatePicker";
+import dataUtils from "../utils/dataUtils";
+import dayjs from "dayjs";
+import { Snackbar } from "@mui/material";
 
 function Scheduling() {
   const location = useLocation()
@@ -22,12 +27,18 @@ function Scheduling() {
   const [modalEnderecoOpen, setModalEnderecoOpen] = useState(false)
   const [modalUsuarioOpen, setModalUsuarioOpen] = useState(false)
   const [modalMaterialOpen, setModalMaterialOpen] = useState(false)
+  const [modalDataOpen, setModalDataOpen] = useState(false)
+  const [snackBarOpen, setSnackBarOpen] = useState(false)
 
   const [materiaisAdicionados, setMateriaisAdicionados] = useState<any[]>([])
 
+  const [errorData, setErrorData] = useState(false)
+  const [errorMaterial, setErrorMaterial] = useState(false)
+  const [errorEndereco, setErrorEndereco] = useState(false)
+
   const [form, setForm] = useState<CreateColetaForm>({
     userId: authContext.user?.id as string,
-    enderecoId: authContext.enderecos[0] ? authContext.enderecos[0].id : 0,
+    enderecoId: authContext.enderecos.length == 0 ? 0 : authContext.enderecos[0].id,
     clienteNome: authContext.user?.nome as string,
     clienteCel: authContext.user?.celular as string,
     clienteTel: authContext.user?.telefone ? authContext.user?.telefone : null,
@@ -36,6 +47,22 @@ function Scheduling() {
     listaItensColeta: ""
   })
 
+
+  const validarCampos = () => {
+    if (form.enderecoId == 0) {
+      setErrorEndereco(true)
+      return false
+    }
+    if (form.dataDeColeta == "Selecionar") {
+      setErrorData(true)
+      return false
+    }
+    if (materiaisAdicionados.length == 0) {
+      setErrorMaterial(true)
+      return false
+    }
+    return true
+  }
 
 
   const ItemMaterial = (material: any, index: number) => {
@@ -55,33 +82,18 @@ function Scheduling() {
   }
 
   const ItemEndereco = (endereco: Endereco, index: number) => {
-    let style = tv(
-      {
-        slots: {
-          fundo: "px-4 py-2 text-sm flex items-center gap-4 cursor-pointer"
-        },
-        variants: {
-          bordaAtiva: {
-            true: {
-              fundo: "border-b-[1px] border-dark-green"
-            },
-            false: {
-              fundo: ""
-            }
-          }
-
-        }
-      }
-    )
-
     const { fundo } = style()
 
     return (
-      <div className={fundo({ bordaAtiva: index != authContext.enderecos.length - 1 })} onClick={() => {
-        let copia = { ...form }
-        copia.enderecoId = endereco.id
-        setForm(copia)
-      }}>
+      <div
+        key={index}
+        className={fundo({ bordaAtiva: index != authContext.enderecos.length - 1 })}
+        onClick={() => {
+          setErrorEndereco(false)
+          let copia = { ...form }
+          copia.enderecoId = endereco.id
+          setForm(copia)
+        }}>
         <DynamicIcon iconName={form.enderecoId == endereco.id ? "IconCircleCheck" : "IconCircle"} size={20} className="text-dark-green" />
         <div>
           <p>{endereco.logradouro}, {endereco.numero}</p>
@@ -92,8 +104,66 @@ function Scheduling() {
     )
   }
 
+  const style = tv(
+    {
+      slots: {
+        fundo: "px-4 py-2 text-sm flex items-center gap-4 cursor-pointer",
+        enderecoContainer: "w-full max-h-64 border-[1px] border-solid rounded-md bg-input-color overflow-y-scroll",
+        materialContainer: " bg-light-green border-[1px] rounded-xl w-full items-center justify-center flex py-6 max-w-[420px]"
+      },
+      variants: {
+        bordaAtiva: {
+          true: {
+            fundo: "border-b-[1px] border-dark-green"
+          },
+          false: {
+            fundo: ""
+          }
+        },
+        errorEndereco: {
+          true: {
+            enderecoContainer: "border-red-500"
+          },
+          false: {
+            enderecoContainer: "border-dark-green"
+          }
+        },
+        errorMaterial: {
+          true: {
+            materialContainer: "border-red-500"
+          },
+          false: {
+            materialContainer: "md:border-dark-green"
+          }
+        }
+
+      }
+    }
+  )
+
+
+
   return (
     <>
+      <Snackbar
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+        open={snackBarOpen}
+        onClose={() => { setSnackBarOpen(false) }}
+        autoHideDuration={3000}
+        message="Preencha todos os campos obrigatórios"
+      />
+      <DatePicker
+        value={dayjs(form.dataDeColeta)}
+        isOpen={modalDataOpen}
+        onAccept={(d) => {
+          let copyForm = { ...form }
+          if (d) {
+            copyForm.dataDeColeta = d.toISOString()
+            setForm(copyForm)
+          }
+          setModalDataOpen(false)
+        }
+        } onClose={() => setModalDataOpen(false)} />
       <UpdateUsuario isOpen={modalUsuarioOpen} onClose={() => { setModalUsuarioOpen(false) }} />
       <CreateEndereco isOpen={modalEnderecoOpen}
         onConfirm={(id) => {
@@ -124,7 +194,7 @@ function Scheduling() {
         <div className="w-full min-h-screen flex items-center justify-center lg:py-6 bg-light-backgroud">
           <div className="w-full min-h-screen flex bg-light-backgroud lg:bg-light-green items-center flex-col lg:w-[550px] lg:rounded-2xl lg:mt-4 mb-20">
             <div className="w-full flex flex-col gap-2 max-w-[420px] px-6">
-              <text className="text-3xl font-bold text-primary-green mb-2 mt-8">Seus dados</text>
+              <p className="text-3xl font-bold text-primary-green mb-2 mt-8">Seus dados</p>
               <div>
                 <p>Nome: {authContext.user?.nome}</p>
                 <p>Celular: {authContext.user?.celular}</p>
@@ -136,8 +206,8 @@ function Scheduling() {
               <div className="w-1/2 self-end mt-2">
                 <PrimaryButton color="secondary" title="Editar dados" onClick={() => setModalUsuarioOpen(true)} />
               </div>
-              <text className="text-3xl font-bold text-primary-green mb-2 mt-6">Endereço</text>
-              <div className="w-full max-h-64 border-[1px] border-solid border-dark-green rounded-md bg-input-color overflow-y-scroll">
+              <p className="text-3xl font-bold text-primary-green mb-2 mt-6">Endereço</p>
+              <div className={style().enderecoContainer({ errorEndereco: errorEndereco })}>
                 {
                   authContext.enderecos.map((e, index) => ItemEndereco(e, index))
                 }
@@ -150,18 +220,36 @@ function Scheduling() {
                   </div>
                 }
               </div>
+              {
+                errorEndereco &&
+                <p className="text-sm text-red-500">*É necessário fornecer um endereço. Clique no botão "Novo Endereço" para registrar um novo</p>
+              }
               <div className="w-1/2 self-end mt-2">
                 <PrimaryButton color="secondary" title="Novo endereço" onClick={() => setModalEnderecoOpen(true)} />
               </div>
-              <text className="text-3xl font-bold text-primary-green mb-2 mt-6">Materiais da coleta</text>
+              <p className="text-3xl font-bold text-primary-green mb-2 mt-6">Sobre a coleta</p>
+              <SelectInput
+                errorMessage="É necessário fornecer uma data para a coleta"
+                error={errorData}
+                onClickSelectableInput={() => {
+                  setErrorData(false)
+                  setModalDataOpen(true)
+                }}
+                calendarIcon
+                value={form.dataDeColeta == "Selecionar" ? "Selecionar" : dataUtils.converterData(form.dataDeColeta)}
+                title="Data da coleta" />
+              <p className="text-3xl font-bold text-primary-green mb-2 mt-6">Materiais da coleta</p>
             </div>
-            <div className="w-full items-center justify-center flex py-6 max-w-[420px] px-3">
-              <div className=" bg-light-green md:border-[1px] border-dark-green rounded-xl w-full items-center justify-center flex py-6 max-w-[420px]">
+            <div className="w-full items-center justify-center flex py-6 max-w-[420px] px-3 flex-col">
+              <div className={style().materialContainer({ errorMaterial: errorMaterial })}>
                 <div className="w-full flex flex-col gap-6 max-w-[420px] px-3">
-                  <Input title="Descrição geral dos materiais" titleColor="dark" requiredField />
                   <div className="w-full flex justify-end">
                     <div className="w-2/3">
-                      <PrimaryButton title="Adicionar material" leftIcon="IconCirclePlus" onClick={() => { setModalMaterialOpen(true) }} />
+                      <PrimaryButton title="Adicionar material" leftIcon="IconCirclePlus"
+                        onClick={() => {
+                          setErrorMaterial(false)
+                          setModalMaterialOpen(true)
+                        }} />
                     </div>
                   </div>
                   {
@@ -177,10 +265,21 @@ function Scheduling() {
                   }
                 </div>
               </div>
+              {
+                errorMaterial &&
+                <p className="text-sm text-red-500 mt-2">*É necessário informar pelo menos um material para a coleta. Clique no botão "Adicionar material" para registrar um novo</p>
+              }
             </div>
             <div className="w-full flex items-center justify-center">
               <div className="w-2/3 mt-6 max-w-[250px] mb-16">
-                <PrimaryButton title="Agendar coleta" leftIcon="IconCheck" />
+                <PrimaryButton title="Agendar coleta" leftIcon="IconCheck" onClick={() => {
+                  if (validarCampos()) {
+
+                  }
+                  else {
+                    setSnackBarOpen(true)
+                  }
+                }} />
               </div>
             </div>
           </div>
