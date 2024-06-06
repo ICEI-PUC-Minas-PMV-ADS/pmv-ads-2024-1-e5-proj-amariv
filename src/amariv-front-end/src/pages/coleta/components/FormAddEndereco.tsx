@@ -1,13 +1,11 @@
-import { useContext, useState } from "react"
-import { AuthContext } from "../../../contexts/AuthContext/AuthContext"
-import { EnderecoForm } from "../../../types/EnderecoForm"
+import { useState } from "react"
 import Input from "../../../components/re_components/Inputs/Input"
 import { ViaCepService } from "../../../services/ViaCepService"
-import { CreateEnderecoDto } from "../../../models/EnderecoDtos/CreateEnderecoDto"
+import { Endereco } from "../../../types/Endereco"
 
 export type FormAddEnderecoProps ={    
-    endereco: CreateEnderecoDto,
-    salvarEndereco : (e :CreateEnderecoDto) => void
+    endereco: Endereco,
+    salvarEndereco : (e : Endereco) => void
     errorEndereco : Boolean
 }
 
@@ -22,39 +20,10 @@ export const FormAddEndereco = ({endereco, salvarEndereco, errorEndereco }: Form
     const [errorCidade, setErrorCidade] = useState(false)
 
     
-    /*
-    const validarCampos = () => {
-        if (form.cep == undefined || !cepRegex.test(form.cep)) {
-            setErrorCep(true)
-            return false
-        }
-
-        if (form.logradouro == null || form.logradouro == "" || form.logradouro == undefined) {
-            setErrorLogradouro(true)
-            return false
-        }
-
-        if (form.numero == null || form.numero == "" || form.numero == undefined) {
-            setErrorNumero(true)
-            return false
-        }
-
-        if (form.bairro == null || form.bairro == "" || form.bairro == undefined) {
-            setErrorBairro(true)
-            return false
-        }
-
-        if (form.cidade == null || form.cidade == "" || form.cidade == undefined) {
-            setErrorCidade(true)
-            return false
-        }
-
-        return true
-    }*/
-
     return (
-        <form>
-            <div className="w-full flex items-center justify-center ">
+    
+        <>      
+           <div className="w-full flex items-center justify-center ">
                 <div className="w-full min-h-screen lg:min-h-fit flex bg-light-backgroud items-center flex-col lg:min-w-max ">
                     <div className="w-full flex flex-row gap-2  px-6 mt-8 mb-4">
                         <Input title="CEP"
@@ -153,10 +122,9 @@ export const FormAddEndereco = ({endereco, salvarEndereco, errorEndereco }: Form
                                 salvarEndereco(copiaForm)
                             }} />
                     </div>
-
                 </div>
             </div>
-        </form>
+        </>
     );
 }
 

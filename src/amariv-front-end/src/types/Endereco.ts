@@ -1,5 +1,5 @@
 export type Endereco = {
-  id: number,
+  id?: number,
   logradouro?: string
   numero?: string
   bairro?: string

@@ -1,6 +1,6 @@
 import axios from 'axios'
-import { CreateColetaDto } from '../models/ColetaDtos/CreateColetaDto';
-import { UpdateColetaDto } from '../models/ColetaDtos/UpdateColetaDto';
+import { Coleta } from '../types/Coleta';
+
 
 const useApi = axios.create({
     baseURL: "http://localhost:5100"
@@ -9,7 +9,7 @@ const useApi = axios.create({
 export const coletaService = {
    
 
-    salvarColeta: async (coletaDto: CreateColetaDto) => {
+    salvarColeta: async (coletaDto: Coleta) => {
         const jsonBody = JSON.stringify(coletaDto) 
         const response = await useApi.post(`/SalvarColeta`, jsonBody ,{
           headers: {
@@ -19,9 +19,9 @@ export const coletaService = {
         return response.data
     },
 
-    updateColeta: async (updateDto: UpdateColetaDto, id: string) => {
-        const jsonBody = JSON.stringify(updateDto)
-        const response = await useApi.post(`/UpdateColeta/${id}`,jsonBody,{
+    updateColeta: async (col: Coleta) => {
+        const jsonBody = JSON.stringify(col)
+        const response = await useApi.post(`/UpdateColeta/${col.id}`,jsonBody,{
             headers :{
                 "Content-type": "application/json; chatset=utf-8"
             }
@@ -29,7 +29,7 @@ export const coletaService = {
         return response.data
     },
 
-    getColeta: async (id: string) => {
+    getColeta: async (id: number) => {
 
         const response = await useApi.get(`/RecuperaColeta/${id}`,{
             headers: {

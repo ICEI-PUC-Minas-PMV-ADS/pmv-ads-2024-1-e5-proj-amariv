@@ -32,7 +32,7 @@ namespace AmarivAPI.Models
         public bool IsSuccess { get; set; } = false;   // Define se a coleta ou feita ou se foi cancelada.
         [Required]
         public bool Delete { get; set; } = false;
-        public bool AprovacaoAdmin { get; set; } = false; /* sim, não*/
+        public bool Cancelada { get; set; } = false; /* sim, não*/
         [AllowNull]
         public double? Lat { get; set; }
         [AllowNull]

@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Button2 } from "../../../components/Button2"
 import { InputDate } from "../../../components/InputDate"
 import InputTime from "../../../components/InputTime"
@@ -8,11 +8,22 @@ export type FormVerificaDataProps = {
     setDataColetaFinal : (coleta : string) => void,
 }
 
-export const FormVerificaData = ({setDataColetaFinal}: FormVerificaDataProps) => {
+export const FormVerificaData = ({setDataColetaFinal }: FormVerificaDataProps) => {
     const [mensagem, setMensagem] = useState<any>()
     const [horarioColeta, setHorarioColeta] = useState(String)
     const [dataColeta, setDataColeta] = useState(String)
    
+    // const divideHorario = (dat : string) => {
+    //     debugger
+    //     let dataDividida : string[] = dat.split("T")
+    //     setHorarioColeta(dataDividida[1])
+    //     setDataColeta(dataDividida[0])
+    // } 
+    // useEffect( () => {        
+    //     divideHorario(dataColetaProp)
+    // },[dataColetaProp])
+    
+
     const formataNovoHorario = (hora: string, dia: string) => {   
        
         const [anoStr, mesStr, diaStr] = dia.split('-');
@@ -51,8 +62,7 @@ export const FormVerificaData = ({setDataColetaFinal}: FormVerificaDataProps) =>
                 mensagem  
             }
             <div className="w-10/12 min-h-screen lg:min-h-fit flex bg-light-backgroud items-center justify-center flex-row lg:min-w-80% ">
-              
-              
+                          
                 <div>
                     <InputDate
                         label="Data da coleta"

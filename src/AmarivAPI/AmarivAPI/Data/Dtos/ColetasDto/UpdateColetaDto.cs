@@ -15,6 +15,7 @@ namespace AmarivAPI.Data.Dtos.ColetasDto
         public string? ClienteNome { get; set; }
         public string? ClienteCel { get; set; }
         public string? ClienteTel { get; set; }
+        public bool Cancelada { get; set; }
         public bool? Status { get; set; }
         public bool? Delete { get; set; }
         public double? Lat { get; set; }

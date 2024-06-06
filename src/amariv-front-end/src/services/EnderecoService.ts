@@ -1,5 +1,5 @@
+import { Endereco } from './../types/Endereco';
 import axios from "axios";
-import { CreateEnderecoDto } from "../models/EnderecoDtos/CreateEnderecoDto";
 import { EnderecoForm } from "../types/EnderecoForm";
 
 const useApi = axios.create({
@@ -7,7 +7,8 @@ const useApi = axios.create({
 });
 
 export const enderecoService = {
-    salvarEndereco: async (enderecoDto: CreateEnderecoDto) => {
+
+    salvarEndereco: async (enderecoDto: Endereco) => {
         const jsonBody = JSON.stringify(enderecoDto) 
         const response = await useApi.post(`/SalvarEndereco`, jsonBody ,{
           headers: {
@@ -16,6 +17,16 @@ export const enderecoService = {
         });
         return response.data       
     },
+
+    updateEndereco: async (end: Endereco) => {
+      const jsonBody = JSON.stringify(end) 
+      const response = await useApi.post(`/UpdateEndereco/${end.id}`, jsonBody ,{
+        headers: {
+          "Content-type": "application/json; chatset=utf-8"
+        }
+      });
+      return response.data       
+  },
 
     cadastrarEndereco: async (form: EnderecoForm) => {
       const json = JSON.stringify(form)
@@ -35,6 +46,17 @@ export const enderecoService = {
         },
       })
       return response;
+    },
+
+    buscarEndereco: async (id: number) => {
+      const token = localStorage.getItem('authToken')
+      const response = await useApi.get(`/RecuperaEndereco/${id}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        },
+      })
+      return response;
     }
+      
        
 }

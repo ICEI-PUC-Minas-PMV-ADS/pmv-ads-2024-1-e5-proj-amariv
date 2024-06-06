@@ -1,16 +1,18 @@
-import { useState  } from "react";
+import { useEffect, useState  } from "react";
 import Input from "../../components/re_components/Inputs/Input";
 import { Button2 } from "../../components/Button2";
 import { Form } from "../../components/Form";
 import "./index.css";
 import { FormAddMateriais } from "./components/FormAddMateriais";
-import { CreateColetaDto } from "../../models/ColetaDtos/CreateColetaDto";
-import { CreateEnderecoDto } from "../../models/EnderecoDtos/CreateEnderecoDto";
 import { coletaService } from "../../services/ColetaService";
 import { enderecoService } from "../../services/EnderecoService";
 import { FormAddEndereco } from "./components/FormAddEndereco";
 import { FormVerificaData } from "./components/FormVerificaData";
 import { GoogleGeocodingService } from "../../services/GoogleGeocodingService";
+import { Endereco } from "../../types/Endereco";
+import { Coleta } from "../../types/Coleta";
+import { useSearchParams } from "react-router-dom";
+
 
 export interface local {
   latitude: Number,
@@ -19,7 +21,7 @@ export interface local {
 }
 
 export function ColetaPage() {
-  
+  const [searchParams]= useSearchParams();
   const [errorNome, setErrorNome] = useState(false)
   const [errorTel, setErrorTel] = useState(false)
   const [errorCel, setErrorCel] = useState(false)
@@ -29,11 +31,43 @@ export function ColetaPage() {
   const [tel, setTel] = useState(String)
   const [listaMateriais, setListaMateriais ]  = useState<string>("")
   const [dataColeta, setDataColeta ] = useState(String)
-  const [enderecoDto, setEnderecoDto] = useState<CreateEnderecoDto>()
+  const [enderecoDto, setEnderecoDto] = useState<any>()
   const [mensagemErro ,setMensagemErro] = useState()
+  const [coletaUpdate, setColetaUpdate] = useState<Coleta>()
+  const [isUpdate , setIsUpdate] = useState<boolean>(false) 
+  
+  useEffect( () => {
+    const idColeta = searchParams.get("id");
+    if (idColeta != undefined){
+      CarregaColetaCadastrada(Number.parseInt(idColeta))
+      setIsUpdate(true)
+    }
+  },[])
 
-  const consultaLocal  = async ( endereco : CreateEnderecoDto ) => {
 
+  const CarregaColetaCadastrada = async (id : number) => {
+      let coleta : Coleta = {}    
+    try
+    {
+      coleta = await coletaService.getColeta(id)
+      if (coleta != undefined) {
+        let endereco = await enderecoService.buscarEndereco(coleta.enderecoId!)
+        setColetaUpdate(coleta)    
+        setEnderecoDto(endereco)
+        setListaMateriais(coleta.listaItensColeta != undefined ? coleta.listaItensColeta : "")  
+        setNome(coleta.clienteNome ? coleta.clienteNome : "")
+        setCel(coleta.clienteCel ? coleta.clienteCel : "")
+        setTel(coleta.clienteTel ? coleta.clienteTel : "")
+        setDataColeta(coleta.dataDeColeta ? coleta.dataDeColeta.toString : "")
+
+      }
+    }catch(err){
+      alert(err)
+    }
+  } 
+
+
+  const consultaLocal  = async ( endereco : Endereco ) => {
     const geometry =  await GoogleGeocodingService.buscarLocalizacao(endereco)
      const local : local = {
       latitude:  parseFloat(geometry.location.lat),
@@ -101,10 +135,9 @@ const consultaLocalidadeExata = (local: local) => {
     try {
       
       if (enderecoDto !== undefined) {
-
         const endereco = await enderecoService.salvarEndereco(enderecoDto);
         const local = await consultaLocal(enderecoDto)       
-        var coletaDto: CreateColetaDto = {            
+        var coletaDto: Coleta = {            
           enderecoId: endereco.successes[0].message,
           clienteNome: nome,
           clienteCel: cel,
@@ -118,9 +151,33 @@ const consultaLocalidadeExata = (local: local) => {
           status: false
         };
         const coleta = await coletaService.salvarColeta(coletaDto);
-
+        window.alert("A coleta foi salva com sucesso!!")
       }
+    } catch (e: any) {
+      console.log(e);
+    }
+  }
 
+  async function AlterarAgendamentoColeta(): Promise<void> {
+    try {
+      
+      if (enderecoDto !== undefined) {
+        const endereco = await enderecoService.updateEndereco(enderecoDto);
+        const local = await consultaLocal(enderecoDto)       
+        var coletaDto: Coleta = {
+          id: coletaUpdate?.id,                   
+          clienteNome: nome,
+          clienteCel: cel,
+          clienteTel: tel,
+          lat: local.latitude,
+          lon: local.longitude,
+          localidadeExata: consultaLocalidadeExata(local),
+          dataDeColeta: new Date(dataColeta),
+          listaItensColeta: listaMateriais,     
+        };
+        const col = await coletaService.updateColeta(coletaDto);
+        window.alert("A coleta foi salva com sucesso!!")
+      }
     } catch (e: any) {
       console.log(e);
     }
@@ -195,7 +252,7 @@ const consultaLocalidadeExata = (local: local) => {
             />
                  
            <FormVerificaData
-              setDataColetaFinal ={ (coleta) =>{ setDataColeta(coleta)}}           
+              setDataColetaFinal ={ (coleta) =>{ setDataColeta(coleta)}}          
             />
 
             <FormAddMateriais 
@@ -208,12 +265,15 @@ const consultaLocalidadeExata = (local: local) => {
               label="Criar agendamento"
               className="w-[40%] mt-[15px]"
               onClick={() => {
-               if(validarCampos()){
-                CriarAgendamentoColeta()            
+               if(validarCampos()){ 
+                debugger
+                if(!isUpdate)            
+                  CriarAgendamentoColeta()
+                else
+                  AlterarAgendamentoColeta()            
                }               
               }}
             />
-
           </Form>
         </div>
       </div>
