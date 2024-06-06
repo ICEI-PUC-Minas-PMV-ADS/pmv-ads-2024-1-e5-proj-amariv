@@ -10,5 +10,14 @@ export const ColetaService = {
       },
     });
     return response;
+  },
+  buscarColetas: async (page: number) => {
+    const token = localStorage.getItem('authToken')
+    const response = await useApi.get(`/coletasusuario?page=${page}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      },
+    })
+    return response;
   }
 }

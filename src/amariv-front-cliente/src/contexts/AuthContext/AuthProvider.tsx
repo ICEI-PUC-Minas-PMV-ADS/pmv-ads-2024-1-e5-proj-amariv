@@ -11,6 +11,9 @@ import { Material } from '../../types/Material';
 import { MaterialService } from '../../services/MaterialService';
 import { UpdateUsuarioForm } from '../../types/UpdateUsuarioForm';
 import { Snackbar } from '@mui/material';
+import { ColetaService } from '../../services/ColetaService';
+import { Pagination } from '../../types/Pagination';
+import { Coleta } from '../../types/Colete';
 
 export const AuthProvider = ({ children }: { children: JSX.Element }) => {
 
@@ -20,6 +23,10 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
   const [materiais, setMateriais] = useState<Material[]>([])
   const [snackBarOpen, setSnackBarOpen] = useState(false)
   const [messageSnackBar, setMessageSnackBar] = useState("")
+  const [totalPagesColetas, setTotalPagesColetas] = useState(0)
+  const [pageNumberColetas, setPageNumberColetas] = useState(1)
+  const [coletas, setColetas] = useState<Coleta[]>([])
+
 
   useEffect(() => {
     const validarToken = async () => {
@@ -31,6 +38,13 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
           await EnderecoService.buscarEnderecos().then(e => {
             setEnderecos(e.data)
           })
+          await ColetaService.buscarColetas(pageNumberColetas).then(r => {
+            let result: Pagination<Coleta> = r.data
+            setColetas(result.items)
+            setTotalPagesColetas(result.pageCount)
+            setPageNumberColetas(result.pageNumber)
+          })
+
         }).catch(e => {
           alert('Sessão expirada!')
           localStorage.removeItem('authToken')
@@ -53,6 +67,28 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
     })
   }
 
+  const fetchMoreColetas = async () => {
+    if (pageNumberColetas < totalPagesColetas) {
+      await ColetaService.buscarColetas(pageNumberColetas + 1).then(
+        r => {
+          let result: Pagination<Coleta> = r.data
+          setColetas(coletas.concat(result.items))
+          setTotalPagesColetas(result.pageCount)
+          setPageNumberColetas(result.pageNumber)
+        }
+      )
+    }
+  }
+
+  const resetColetas = async () => {
+    await ColetaService.buscarColetas(1).then(r => {
+      let result: Pagination<Coleta> = r.data
+      setColetas(result.items)
+      setTotalPagesColetas(result.pageCount)
+      setPageNumberColetas(result.pageNumber)
+    })
+  }
+
   const login = async (form: LoginForm): Promise<boolean> => {
     const result = await UserService.login(form).then(async (e) => {
       localStorage.setItem('authToken', e.data[0].message)
@@ -61,6 +97,7 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
         await EnderecoService.buscarEnderecos().then(e => {
           setEnderecos(e.data)
         })
+        await resetColetas()
       }
       setUser(userData)
       return true
@@ -118,7 +155,7 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
         message={messageSnackBar}
       />
       <LoadingScreen open={!infosLoaded} />
-      <AuthContext.Provider value={{ user, login, logout, signup, enderecos, atualizarEnderecos, materiais, updateUsuario, setSnackBarOpen, setMessageSnackBar }}>
+      <AuthContext.Provider value={{ user, login, logout, signup, enderecos, atualizarEnderecos, materiais, updateUsuario, setSnackBarOpen, setMessageSnackBar, coletas, fetchMoreColetas, resetColetas, totalPagesColetas, pageNumberColetas }}>
         {children}
       </AuthContext.Provider>
     </>

@@ -1,7 +1,9 @@
 ﻿using AmarivAPI.Data.Dtos;
 using AmarivAPI.Data.Dtos.ColetasDto;
+using AmarivAPI.Data.Dtos.PaginationDto;
 using AmarivAPI.Data.Dtos.RoteiroDeColetasDtos;
 using AmarivAPI.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AmarivAPI.Controllers
@@ -16,7 +18,13 @@ namespace AmarivAPI.Controllers
             _coletaService = coletaService;
         }
 
-
+        [Authorize]
+        [HttpGet("/coletasUsuario")]
+        public ActionResult ColetasUsuario(int page = 1, int pageSize = 15) {
+            string userId = User.FindFirst("id").Value;
+            var coletas = _coletaService.ColetasUsuario(userId, page, pageSize);
+            return Ok(coletas);
+        }
 
         [HttpGet]
         [Route("/RecuperaColeta")]

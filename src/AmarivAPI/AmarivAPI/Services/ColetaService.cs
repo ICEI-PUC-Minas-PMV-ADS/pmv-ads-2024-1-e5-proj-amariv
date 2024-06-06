@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http.HttpResults;
 using AmarivAPI.Data.Dtos.ColetasDto;
 using System.Reflection.Metadata.Ecma335;
+using AmarivAPI.Data.Dtos.PaginationDto;
 
 
 namespace AmarivAPI.Services
@@ -191,6 +192,22 @@ namespace AmarivAPI.Services
             {
                 return _mapper.Map<List<ReadColetaDto>>(lista);
             }
+        }
+
+        public PaginationDto<ReadColetaDto> ColetasUsuario(string userId, int page = 1, int pageSize = 25)
+        {
+            int coletasCount = _context.Coletas.Where(x => x.UserId == userId).Count();
+            int totalPages = (int)Math.Ceiling((decimal)coletasCount / pageSize);
+            var coletas = _context.Coletas.Where(x => x.UserId == userId).OrderBy(x => x.DataDeColeta).ToList().Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+            return new PaginationDto<ReadColetaDto>()
+            {
+                TotalItems = coletasCount,
+                PageCount = totalPages,
+                PageSize = pageSize,
+                PageNumber = page,
+                Items = _mapper.Map<List<ReadColetaDto>>(coletas)
+            };
         }
 
         public Result DeletarColeta(int id) 
