@@ -3794,11 +3794,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\AmarivAPI.csproj",
+      "projectUniqueName": "D:\\OneDrive\\Documentos\\git\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\AmarivAPI.csproj",
       "projectName": "AmarivAPI",
-      "projectPath": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\AmarivAPI.csproj",
+      "projectPath": "D:\\OneDrive\\Documentos\\git\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\AmarivAPI.csproj",
       "packagesPath": "C:\\Users\\Eduardo\\.nuget\\packages\\",
-      "outputPath": "D:\\OneDrive\\Documentos\\GitHub\\src\\AmarivAPI\\AmarivAPI\\obj\\",
+      "outputPath": "D:\\OneDrive\\Documentos\\git\\pmv-ads-2024-1-e5-proj-amariv\\src\\AmarivAPI\\AmarivAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Eduardo\\AppData\\Roaming\\NuGet\\NuGet.Config",
