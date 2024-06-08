@@ -42,8 +42,6 @@ export function NextRouteItem({ route, position, onClickItem }: NextRouteItemPro
 
   const formatDate = React.useCallback((date: Date | undefined): string => {
     if (date) {
-      console.log('Date: ' + date);
-      console.log('ISO Date: ' + DateConvert.getIsoHour(date));
       return DateConvert.getIsoHour(date);
     }
     return "";

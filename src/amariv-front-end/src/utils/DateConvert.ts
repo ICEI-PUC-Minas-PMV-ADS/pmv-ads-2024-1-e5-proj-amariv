@@ -18,7 +18,7 @@ export class DateConvert {
   }
 
   static getLocalDateTime(date: string | Date): string {
-    return moment.utc(date).local().format('YYYY-MM-DDTHH:mm');
+    return moment.utc(date).local().format('DD/MM/YYYYTHH:mm');
   }
 
   static getLocalHour(date: string | Date): string {
@@ -26,6 +26,6 @@ export class DateConvert {
   }
 
   static getLocalDate(date: string | Date): string {
-    return moment.utc(date).local().format('YYYY-MM-DD');
+    return moment.utc(date).local().format('DD/MM/YYYY');
   }
 }
