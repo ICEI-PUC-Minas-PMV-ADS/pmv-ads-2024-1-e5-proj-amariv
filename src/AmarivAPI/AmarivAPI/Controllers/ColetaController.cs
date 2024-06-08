@@ -5,6 +5,7 @@ using AmarivAPI.Data.Dtos.RoteiroDeColetasDtos;
 using AmarivAPI.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace AmarivAPI.Controllers
 {
@@ -59,9 +60,9 @@ namespace AmarivAPI.Controllers
 
         [HttpPost]
         [Route("/SalvarColeta")]
-        public IActionResult SalvarColeta([FromBody] CreateColetaDto coletaDto, string? funcionarioId)
+        public IActionResult SalvarColeta([FromBody] CreateColetaDto coletaDto)
         {
-            var result = _coletaService.SalvarColeta(coletaDto, funcionarioId);
+            var result = _coletaService.SalvarColeta(coletaDto);
             if (result.IsSuccess)
                 return Ok(result);
             else
@@ -89,7 +90,6 @@ namespace AmarivAPI.Controllers
                 return Ok(result);
             else
                 return NotFound();
-
         }
 
         [HttpPost]
@@ -113,8 +113,14 @@ namespace AmarivAPI.Controllers
                 return Ok(result);
             else
                 return NotFound();
-
-        }
-
     }
+
+[HttpPost]
+    [Route("/VerificaDisponibilidadeColeta")]
+        public IActionResult VerificaDisponibilidadeRoteiroColeta([FromBody] string data)
+        {
+            var result = _coletaService.ConsultaDisponibilidadeColeta(DateTime.Parse(data));
+            return Json(result);
+        }
+}
 }

@@ -2,7 +2,7 @@
 {
     public class StartPosition
     {
-        public static readonly double lat = -20.023420422539655;
-        public static readonly double lon = -44.03434894706644;
+        public static readonly double lat = -20.262649089041158;
+        public static readonly double lon = -40.30160650425453;
     }
 }

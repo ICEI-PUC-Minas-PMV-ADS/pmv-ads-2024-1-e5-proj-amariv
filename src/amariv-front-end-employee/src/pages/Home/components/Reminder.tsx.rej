@@ -1,0 +1,10 @@
+diff a/src/amariv-front-end-employee/src/pages/Home/components/Reminder.tsx b/src/amariv-front-end-employee/src/pages/Home/components/Reminder.tsx	(rejected hunks)
+@@ -45,7 +45,7 @@ export const Reminder = ({ duration, gatheringItinerary }: ReminderProps) => {
+             Existem {getGatheringDesc(gatheringCount?.current ?? 0)} disponíveis para serem realizadas.
+           </p>
+           <p className="text-[.85rem]">
+-            <strong>Tempo estimado: {Math.ceil(duration)}min</strong>
++            <strong>Tempo estimado: {Math.ceil(duration * 1.6)}min</strong>
+           </p>
+         </div>}
+     </>

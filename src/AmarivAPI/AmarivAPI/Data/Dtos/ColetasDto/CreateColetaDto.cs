@@ -13,12 +13,14 @@ namespace AmarivAPI.Data.Dtos.ColetasDto
         public int? PosicaoLista { get; set; }
         public string? ClienteNome { get; set; }
         public string? ClienteCel { get; set; }
-        public string? ClienteTel { get; set; }     
-        public bool? Status { get; set; }       
+        public string? ClienteTel { get; set; }
+        public bool Cancelada { get; set; }
+        public bool Status { get; set; }       
         public double? Lat { get; set; }
         public double? Lon { get; set; }
-        public DateTime? DataCadastro { get; set; }      
-        public DateTime? DataDeColeta { get; set; }   
+        public bool? LocalidadeExata { get; set; }
+        public DateTime DataCadastro { get; set; }      
+        public DateTime DataDeColeta { get; set; }   
         public string? ListaItensColeta { get; set; }
     }
 }

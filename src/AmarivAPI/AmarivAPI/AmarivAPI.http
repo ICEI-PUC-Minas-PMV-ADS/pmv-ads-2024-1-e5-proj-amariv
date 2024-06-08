@@ -5,26 +5,13 @@ Accept: application/json
 
 ###
 
-POST {{AmarivAPI_HostAddress}}/RecuperaMaterial
-Content-Type: application/json
+GET {{AmarivAPI_HostAddress}}/RecuperaMaterial?id=2
 Accept: application/json
-
-{
-   "id": "1"
-}
 
 ###
 
-POST {{AmarivAPI_HostAddress}}/signin
-Content-Type: application/json
+GET {{AmarivAPI_HostAddress}}/RecuperaMateriais
 Accept: application/json
-
-{
-   "Nome": "Mike",
-   "Email": "mike@email.com",
-   "Password": "Test@123",
-   "RePassword": "Test@123"
-}
 
 ###
 
@@ -39,6 +26,84 @@ Accept: application/json
 }
 
 ###
+
+POST {{AmarivAPI_HostAddress}}/UpdateMaterial?id=1
+Content-Type: application/json
+Accept: application/json
+
+{
+   "Descricao": "Aço",
+   "Tipo": "Metal",
+   "Peso": "Médio"
+}
+
+###
+
+DELETE {{AmarivAPI_HostAddress}}/DeletarMaterial?id=5
+Accept: application/json
+
+###
+
+POST {{AmarivAPI_HostAddress}}/signin
+Content-Type: application/json
+Accept: application/json
+
+{
+   "Nome": "Mike",
+   "Email": "mike@email.com",
+   "Password": "Test@123",
+   "RePassword": "Test@123",
+   "celular": "00087978"
+}
+
+
+###
+POST {{AmarivAPI_HostAddress}}/signin
+Content-Type: application/json
+Accept: application/json
+
+{
+   "Nome": "Teste",
+   "Email": "teste@email.com",
+   "Password": "Test@123",
+   "RePassword": "Test@123",
+   "celular": "7898877"
+}
+###
+
+POST {{AmarivAPI_HostAddress}}/signin
+Content-Type: application/json
+Accept: application/json
+
+{
+   "Nome": "John",
+   "Email": "john@email.com",
+   "Password": "Test@123",
+   "RePassword": "Test@123",
+   "Celular": "(11) 90000-0001",
+   "Telefone": "(11) 20000-0001"
+}
+
+###
+
+POST {{AmarivAPI_HostAddress}}/Emp/SignIn
+Content-Type: application/json
+Accept: application/json
+
+{
+   "Email": "john@email.com",
+   "Password": "Test@123"
+}
+
+###
+
+GET {{AmarivAPI_HostAddress}}/Emp/CreateGatheringItinerary
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer 
+
+###
+
 POST {{AmarivAPI_HostAddress}}/login
 Content-Type: application/json
 Accept: application/json
@@ -49,3 +114,83 @@ Accept: application/json
 }
 
 ###
+
+POST {{AmarivAPI_HostAddress}}/api/notificacao
+Content-Type: application/json
+Accept: application/json
+
+{
+   "UserId": "30ad6015-d6c6-495f-a57c-d205267d77c9",
+   "Titulo": "ff22fft",
+   "Corpo": "fffftification."
+}
+
+###
+
+GET {{AmarivAPI_HostAddress}}/api/notificacao?userId=30ad6015-d6c6-495f-a57c-d205267d77c9
+Accept: application/json
+
+###
+
+PUT {{AmarivAPI_HostAddress}}/api/notificacao/2
+Content-Type: application/json
+Accept: application/json
+
+{
+   "Titulo": "3 Notification",
+   "Corpo": "This notification has been updated."
+}
+
+###
+
+DELETE {{AmarivAPI_HostAddress}}/api/notificacao/2
+Accept: application/json
+
+
+###
+GET {{AmarivAPI_HostAddress}}/api/funcionario
+Accept: application/json
+
+
+
+###
+GET {{AmarivAPI_HostAddress}}/api/funcionario/5
+Accept: application/json
+
+
+
+###
+POST {{AmarivAPI_HostAddress}}/api/funcionario
+Content-Type: application/json
+Accept: application/json
+
+{
+    "Nome": "Marisssa Sosuza",
+    "Email": "mfgarfssfffia.@gmail.com",
+    "Sexo": "Feminino",
+    "Telefone": "11987654321",
+    "Cargo": "Analista",
+    "Senha": "SenhaSegura123",
+    "SuportaPeso": true
+}
+
+###
+PUT {{AmarivAPI_HostAddress}}/api/funcionario/1
+Content-Type: application/json
+Accept: application/json
+
+{
+   "Nome": "Maria Souza",
+    "Email": "marssffia.soufffsszas@example.com",
+    "Cpf": "98765432109",
+    "Sexo": "Feminino",
+    "Telefone": "11987654321",
+    "Cargo": "Analista",
+    "Senha": "SenhaSegura123",
+    "SuportaPeso": true
+}
+
+
+###
+DELETE {{AmarivAPI_HostAddress}}/api/funcionario/1
+Accept: application/json

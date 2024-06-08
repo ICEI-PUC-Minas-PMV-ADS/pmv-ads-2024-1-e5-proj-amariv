@@ -1,5 +1,6 @@
 ﻿#nullable enable
 
+using AmarivAPI.Data;
 using AmarivAPI.EmployeeAPI.Data.DTOs;
 using AmarivAPI.Models;
 using AmarivAPI.Services;
@@ -15,13 +16,16 @@ namespace AmarivAPI.EmployeeAPI.Services
         private IMapper _mapper;
         private SignInManager<Usuario> _signInManager;
         private TokenService _tokenService;
+        private AmarivContext _context;
 
         public UserService(
             IMapper mapper,
+            AmarivContext context,
             SignInManager<Usuario> signInManager,
             TokenService tokenService
         ) {
             _mapper = mapper;
+            _context = context;
             _signInManager = signInManager;
             _tokenService = tokenService;
         }
@@ -77,6 +81,21 @@ namespace AmarivAPI.EmployeeAPI.Services
                 return Task.FromResult(Result.Ok<string?>(null));
             }
             return Task.FromResult(Result.Fail<string?>("Logout falhou"));
+        }
+
+        public Task<Result<List<Usuario>>> GetFuncionarios()
+        {
+            var role = _context.Roles
+                .Where(x => x.NormalizedName == "FUNCIONARIO")
+                .FirstOrDefault();
+            var funcionariosIds = _context.UserRoles
+                .Where(x => x.RoleId == role.Id)
+                .ToList()
+                .Select(x => x.UserId);
+            var funcionarios = _context.Users
+                .Where(x => funcionariosIds.Contains(x.Id))
+                .ToList();
+            return Task.FromResult(Result.Ok(funcionarios));
         }
     }
 }

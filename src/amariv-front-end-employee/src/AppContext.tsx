@@ -15,7 +15,11 @@ export type AppContextState = {
  * AppContext
  */
 export const AppContext = React.createContext<AppContextState>({
-  state: { gatheringItinerary: null, currentGathering: null },
+  state: {
+    gatheringItinerary: null,
+    currentGathering: null,
+    showLogoutConfirmation: false,
+  },
   dispatch: () => { },
 });
 
@@ -27,13 +31,14 @@ export type AppState = {
   startPosition?: { lat: number, lon: number },
   gatheringItinerary: GatheringItinerary | null,
   currentGathering: Gathering | null,
+  showLogoutConfirmation: boolean,
 };
 
 /**
  * AppAction
  */
 export type AppAction = {
-  type: 'login' | 'logout' | 'set_gathering_itinerary',
+  type: 'login' | 'logout' | 'set_gathering_itinerary' | 'set_show_logout_confirmation',
   payload?: any,
 };
 
@@ -56,7 +61,9 @@ const AppReducer = (
       const sortedAndFilteredGatherings = filteredGatherings.sort((a, b) => a.posicaoLista - b.posicaoLista);
       return { ...state, gatheringItinerary, currentGathering: sortedAndFilteredGatherings[0] };
     case 'logout':
-      return { ...state, token: undefined };
+      return { ...state, token: undefined, showLogoutConfirmation: false };
+    case 'set_show_logout_confirmation':
+      return { ...state, showLogoutConfirmation: action.payload };
   }
 };
 
@@ -76,6 +83,7 @@ export const AppContextProvider = (props: React.PropsWithChildren) => {
     token: localUserData,
     gatheringItinerary: null,
     currentGathering: null,
+    showLogoutConfirmation: false,
   });
 
   return (

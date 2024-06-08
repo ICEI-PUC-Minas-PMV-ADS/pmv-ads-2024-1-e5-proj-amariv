@@ -12,7 +12,7 @@ namespace AmarivAPI.Models
         [Required]
         public int Id { get; set; }
         [AllowNull]
-        public string? UserId { get; set; } = null;
+        public string? UserId { get; set; } = null;    
         [AllowNull]
         public int? EnderecoId { get; set; }
         [AllowNull]
@@ -31,13 +31,18 @@ namespace AmarivAPI.Models
         public bool IsSuccess { get; set; } = false;   // Define se a coleta ou feita ou se foi cancelada.
         [Required]
         public bool Delete { get; set; } = false;
-        public bool AprovacaoAdmin { get; set; } = false; /* sim, não*/
+        public bool Cancelada { get; set; } = false; /* sim, não*/
         [AllowNull]
         public double? Lat { get; set; }
         [AllowNull]
         public double? Lon { get; set; }
+        /// <summary>
+        ///  Define se a localidade passado por latitude e longitude é exata ou aproximada.
+        /// </summary>
+        [AllowNull]
+        public bool? LocalidadeExata {get; set;} 
         [Required]
-        public DateTime DataCadastro { get; set; } =DateTime.Now;
+        public DateTime DataCadastro { get; set; } = DateTime.Now;
         [Required]
         public DateTime DataDeColeta { get; set; }
         /// <summary>

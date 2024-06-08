@@ -4,16 +4,13 @@ import { Spacer } from "../../components/Spacer";
 import { HistoryGatheringViewer } from "./components/HistoryGatheringViewer";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "src/AppContext";
-import { UserService } from "src/services/UserService";
-import { useNotification } from "src/components/NotificationProvider";
 
 /**
  * History page desktop
  */
 
 export function HistoryDesktopPage() {
-  const { state: { token, gatheringItinerary }, dispatch } = React.useContext(AppContext);
-  const notification = useNotification();
+  const { state: { gatheringItinerary }, dispatch } = React.useContext(AppContext);
   const navigate = useNavigate();
 
   /**
@@ -29,15 +26,8 @@ export function HistoryDesktopPage() {
   }, [navigate]);
 
   const handleMenuExitClick = React.useCallback(async (): Promise<void> => {
-    try {
-      if (token) {
-        await UserService.logout(token);
-        dispatch({ type: 'logout' });
-      }
-    } catch (e: any) {
-      notification(e);
-    }
-  }, [token, dispatch, notification]);
+    dispatch({ type: 'set_show_logout_confirmation', payload: true });
+  }, [dispatch]);
 
   /**
    * Layout

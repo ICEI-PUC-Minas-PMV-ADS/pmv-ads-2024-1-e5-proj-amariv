@@ -46,6 +46,11 @@ const Sidebar: React.FC = () => {
                 Funcionários
               </Link>
             </li>
+            <li>
+              <Link to="/historico-coleta" className="hover:bg-gray-700 rounded p-2 block">
+                Histórico
+              </Link>
+            </li>
           </ul>
         </nav>
       )}

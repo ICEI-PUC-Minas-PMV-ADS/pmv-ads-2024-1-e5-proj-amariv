@@ -1,4 +1,4 @@
-import { getApiUrl } from "src/AppConstants";
+import { TOKEN_KEY, getApiUrl } from "src/AppConstants";
 import { GatheringItinerary } from "src/models/GatheringItinerary";
 
 /**
@@ -30,7 +30,12 @@ export class GatheringService {
     if (response.ok) {
       return await response.json();
     } else {
-      throw await response.json();
+      const error = await response.json();
+      if (error.reset === true) {
+        window.localStorage.removeItem(TOKEN_KEY);
+        window.location.reload();
+      }
+      throw error;
     }
   }
 }

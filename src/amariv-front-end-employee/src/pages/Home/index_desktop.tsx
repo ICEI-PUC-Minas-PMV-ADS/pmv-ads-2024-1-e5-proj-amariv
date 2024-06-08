@@ -9,7 +9,6 @@ import { DefaultMap } from "src/components/DefaultMap";
 import { AppContext } from "src/AppContext";
 import { useNotification } from "src/components/NotificationProvider";
 import { Gathering } from "src/models/Gathering";
-import { UserService } from "src/services/UserService";
 
 /**
  * Home page desktop
@@ -17,7 +16,7 @@ import { UserService } from "src/services/UserService";
 
 export function HomeDesktopPage() {
   const ctrl = HomeContext.usePageController();
-  const { state: { token, gatheringItinerary }, dispatch } = React.useContext(AppContext);
+  const { state: { gatheringItinerary }, dispatch } = React.useContext(AppContext);
   const { userName, startPosition } = HomeContext.usePageState();
   const [routeItems, setRouteItems] = React.useState<Gathering[] | null>(null);
   const [map, setMap] = React.useState<google.maps.Map | null>(null);
@@ -68,15 +67,8 @@ export function HomeDesktopPage() {
   }, [navigate]);
 
   const handleMenuExitClick = React.useCallback(async (): Promise<void> => {
-    try {
-      if (token) {
-        await UserService.logout(token);
-        dispatch({ type: 'logout' });
-      }
-    } catch (e: any) {
-      notification(e);
-    }
-  }, [token, dispatch, notification]);
+    dispatch({ type: 'set_show_logout_confirmation', payload: true });
+  }, [dispatch]);
 
   /**
    * Layout

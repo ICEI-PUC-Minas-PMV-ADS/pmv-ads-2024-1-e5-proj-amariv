@@ -22,19 +22,19 @@ export function RouteViewer({ canEdit, onFinishGathering }: RouteViewerProps) {
    */
 
   const handleNavigate = React.useCallback((event: React.MouseEvent<HTMLDivElement, MouseEvent>): void => {
-    if (currentGathering) {
+    if (currentGathering && canEdit) {
       window.open(`google.navigation:q=${currentGathering.lat},${currentGathering.lon}&mode=d`, '_system');
     }
-  }, [currentGathering]);
+  }, [currentGathering, canEdit]);
 
   const handleStartFinishGathering = React.useCallback((event: React.MouseEvent<HTMLDivElement, MouseEvent>): void => {
-    if (currentGathering) {
+    if (currentGathering && canEdit) {
       onFinishGathering(currentGathering.id)
     }
-  }, [onFinishGathering, currentGathering]);
+  }, [onFinishGathering, currentGathering, canEdit]);
 
   const handleCelCall = React.useCallback((event: React.MouseEvent<HTMLDivElement, MouseEvent>): void => {
-    if (currentGathering) {
+    if (currentGathering && canEdit) {
       let tel = currentGathering.clienteCel;
       if (tel && tel.length > 0) {
         tel = tel.replaceAll('(', '');
@@ -44,10 +44,10 @@ export function RouteViewer({ canEdit, onFinishGathering }: RouteViewerProps) {
         window.open('tel:' + tel);
       }
     }
-  }, [currentGathering]);
+  }, [currentGathering, canEdit]);
 
   const handleTelCall = React.useCallback((event: React.MouseEvent<HTMLDivElement, MouseEvent>): void => {
-    if (currentGathering) {
+    if (currentGathering && canEdit) {
       let tel = currentGathering.usuario?.telefone ?? currentGathering.clienteTel;
       if (tel && tel.length > 0) {
         tel = tel.replaceAll('(', '');
@@ -57,7 +57,7 @@ export function RouteViewer({ canEdit, onFinishGathering }: RouteViewerProps) {
         window.open('tel:' + tel);
       }
     }
-  }, [currentGathering]);
+  }, [currentGathering, canEdit]);
 
   /**
    * Layout
@@ -81,7 +81,10 @@ export function RouteViewer({ canEdit, onFinishGathering }: RouteViewerProps) {
             Celular: {currentGathering?.clienteCel}
           </div>
           {!isDesktop &&
-            <div className="py-4 px-[2rem] border-s border-[#ffffff30] text-[#CADDA8] font-bold" onClick={handleCelCall}>
+            <div
+              className="py-4 px-[2rem] border-s border-[#ffffff30] font-bold"
+              style={{ color: canEdit ? "#CADDA8" : "#9AAD78" }}
+              onClick={handleCelCall}>
               Ligar
             </div>}
         </div>
@@ -91,26 +94,34 @@ export function RouteViewer({ canEdit, onFinishGathering }: RouteViewerProps) {
             Telefone: {currentGathering?.usuario?.telefone ?? currentGathering?.clienteTel}
           </div>
           {!isDesktop &&
-            <div className="py-4 px-[2rem] border-s border-[#ffffff40] text-[#CADDA8] font-bold" onClick={handleTelCall}>
+            <div
+              className="py-4 px-[2rem] border-s border-[#ffffff40] font-bold"
+              style={{ color: canEdit ? "#CADDA8" : "#9AAD78" }}
+              onClick={handleTelCall}>
               Ligar
             </div>}
         </div>
 
-        <div className="w-full p-3 text-white">
+        <div className="w-full h-[6rem] p-3 text-white">
           <strong>Materiais:</strong> {currentGathering?.listaItensColeta ?? ""}.
         </div>
 
-        {canEdit &&
-          <div className="w-full flex items-stretch flex-row border-t border-[#ffffff40] text-white font-bold">
-            {!isDesktop && <div className="flex-1 text-[#CADDA8] text-xl font-bold flex justify-center items-center" onClick={handleNavigate}>
-              <div className="py-4">Navegar</div>
-            </div>}
+        <div className="w-full flex items-stretch flex-row border-t border-[#ffffff40] text-white font-bold">
+          {!isDesktop &&
             <div
-              className="flex-1  text-xl text-[#CADDA8] font-bold flex justify-center items-center border-s border-[#ffffff40] cursor-pointer"
-              onClick={handleStartFinishGathering}>
-              <div className="py-4">Finalizar</div>
+              className="flex-1 text-xl font-bold flex justify-center items-center"
+              style={{ color: canEdit ? "#CADDA8" : "#9AAD78" }}
+              onClick={handleNavigate}>
+              <div className="py-4">Navegar</div>
             </div>
-          </div>}
+          }
+          <div
+            className="flex-1  text-xl font-bold flex justify-center items-center border-s border-[#ffffff40] cursor-pointer"
+            style={{ color: canEdit ? "#CADDA8" : "#9AAD78" }}
+            onClick={handleStartFinishGathering}>
+            <div className="py-4">Finalizar</div>
+          </div>
+        </div>
       </div>
     </>
   );

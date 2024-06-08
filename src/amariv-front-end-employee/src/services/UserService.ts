@@ -1,4 +1,4 @@
-import { getApiUrl } from "../AppConstants";
+import { TOKEN_KEY, getApiUrl } from "../AppConstants";
 
 /**
  * UserService
@@ -24,7 +24,12 @@ export class UserService {
       const json = await response.json() as { name: string };
       return { userName: json.name };
     } else {
-      throw await response.json();
+      const error = await response.json();
+      if (error.reset === true) {
+        window.localStorage.removeItem(TOKEN_KEY);
+        window.location.reload();
+      }
+      throw error;
     }
   }
 
@@ -55,7 +60,12 @@ export class UserService {
     if (response.ok) {
       return await response.json() as { token: string };
     } else {
-      throw await response.json();
+      const error = await response.json();
+      if (error.reset === true) {
+        window.localStorage.removeItem(TOKEN_KEY);
+        window.location.reload();
+      }
+      throw error;
     }
   }
 

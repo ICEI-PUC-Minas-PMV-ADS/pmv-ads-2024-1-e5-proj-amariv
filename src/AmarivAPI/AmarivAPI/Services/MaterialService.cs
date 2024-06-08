@@ -1,16 +1,18 @@
-﻿﻿using AmarivAPI.Data;
+﻿using AmarivAPI.Data;
 using AmarivAPI.Data.Dtos.MaterialDtos;
 using AmarivAPI.Models;
 using AutoMapper;
 using FluentResults;
-
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace AmarivAPI.Services
 {
     public class MaterialService
     {
-        public IMapper _mapper;
-        public AmarivContext _context;
+        private readonly IMapper _mapper;
+        private readonly AmarivContext _context;
 
         public MaterialService(IMapper mapper, AmarivContext context)
         {
@@ -28,8 +30,9 @@ namespace AmarivAPI.Services
 
                 return Result.Ok();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 return Result.Fail("Falha ao criar material");
             }
         }
@@ -38,28 +41,31 @@ namespace AmarivAPI.Services
         {
             try
             {
-
                 Material material = _context.Materiais.FirstOrDefault(m => m.Id == id_material);
+
                 if (material != null)
-                    _mapper.Map(materialDto,material);
+                {
+                    _mapper.Map(materialDto, material);
+                    _context.Update(material);
+                    _context.SaveChanges();
+                    return Result.Ok();
+                }
                 else
-                    return Result.Fail("Não Foi possivel encontrar o Material!!!");
-
-                _context.Update<Material>(material);
-                _context.SaveChanges();
-                return Result.Ok();
-
+                {
+                    return Result.Fail("Não foi possível encontrar o Material!!!");
+                }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                return Result.Fail("Erro ao Atualizar o material cadastrado.");
+                Console.WriteLine(ex.Message);
+                return Result.Fail("Erro ao atualizar o material cadastrado.");
             }
         }
 
         public ReadMaterialDto RecuperaMaterial(int id_material)
         {
-            return _mapper.Map<ReadMaterialDto>(_context.Materiais.FirstOrDefault(m => m.Id == id_material));
+            Material material = _context.Materiais.FirstOrDefault(m => m.Id == id_material);
+            return _mapper.Map<ReadMaterialDto>(material);
         }
 
         public Result DeletaMaterial(int id_material)
@@ -67,37 +73,43 @@ namespace AmarivAPI.Services
             try
             {
                 Material material = _context.Materiais.FirstOrDefault(m => m.Id == id_material);
-                _context.Remove(material);
-                _context.SaveChanges();
 
-                return Result.Ok();
+                if (material != null)
+                {
+                    _context.Remove(material);
+                    _context.SaveChanges();
+                    return Result.Ok();
+                }
+                else
+                {
+                    return Result.Fail("Material não encontrado para exclusão!");
+                }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return Result.Fail("Erro ao Excluir Material!");
-
+                Console.WriteLine(ex.Message);
+                return Result.Fail("Erro ao excluir material!");
             }
-
         }
 
         public List<ReadMaterialDto> RecuperarTodosMateriais()
         {
             try
             {
-                var materiaisDB = _context.Materiais.ToList();
-                List<ReadMaterialDto> materiais = _mapper.Map<List<ReadMaterialDto>>(materiaisDB);
-                if (materiais == null)
-                    return null;
+                List<Material> materiais = _context.Materiais.ToList();
 
-                return materiais;
+                if (materiais.Count == 0)
+                {
+                    return null;
+                }
+
+                return _mapper.Map<List<ReadMaterialDto>>(materiais);
             }
             catch (Exception ex)
             {
-                Console.Write(ex.Message);
+                Console.WriteLine(ex.Message);
                 return null;
             }
         }
-
-
     }
 }

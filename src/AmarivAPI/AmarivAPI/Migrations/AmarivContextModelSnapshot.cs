@@ -33,7 +33,7 @@ namespace AmarivAPI.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<bool>("AprovacaoAdmin")
+                    b.Property<bool>("Cancelada")
                         .HasColumnType("tinyint(1)");
 
                     b.Property<string>("ClienteCel")
@@ -65,6 +65,9 @@ namespace AmarivAPI.Migrations
 
                     b.Property<string>("ListaItensColeta")
                         .HasColumnType("longtext");
+
+                    b.Property<bool?>("LocalidadeExata")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<double?>("Lon")
                         .HasColumnType("double");
@@ -128,6 +131,46 @@ namespace AmarivAPI.Migrations
                     b.ToTable("Enderecos");
                 });
 
+            modelBuilder.Entity("AmarivAPI.Models.Funcionario", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Cargo")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Senha")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Sexo")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<bool>("SuportaPeso")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("Telefone")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Funcionarios");
+                });
+
             modelBuilder.Entity("AmarivAPI.Models.Material", b =>
                 {
                     b.Property<int>("Id")
@@ -180,6 +223,31 @@ namespace AmarivAPI.Migrations
                             Descricao = "Vidro",
                             Tipo = "Vidro"
                         });
+                });
+
+            modelBuilder.Entity("AmarivAPI.Models.Notificacao", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Corpo")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Titulo")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Notificacao");
                 });
 
             modelBuilder.Entity("AmarivAPI.Models.RoteiroDeColetas", b =>
@@ -248,6 +316,7 @@ namespace AmarivAPI.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Nome")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("NormalizedEmail")
@@ -296,16 +365,16 @@ namespace AmarivAPI.Migrations
                         {
                             Id = "adm",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ccbe241b-a036-440f-9573-246a35266d38",
+                            ConcurrencyStamp = "88cef0f5-e63d-4254-8837-e9cbd29076c1",
                             Email = "amarivadm@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             Nome = "Administrador",
                             NormalizedEmail = "AMARIVADM@GMAIL.COM",
                             NormalizedUserName = "AMARIVADM@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAELjo08LifoNe9Ld4Q9UsdcaCHwLb7ynJZAesq7HptAK1cI7iU7N+vbNeg9z0SlhEfw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEAa+ainw2Hh0y/PaJLpjVa0yLJJvv1/1aJJKX7YUb/mWtXkTRGDMIkQ7tH5fgYjlkw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "eeffb46a-59ef-449c-b32f-e495490d4631",
+                            SecurityStamp = "aef373fe-1813-42bf-9b3d-dbaeb6b38e51",
                             TwoFactorEnabled = false,
                             UserName = "amarivadm@gmail.com"
                         });

@@ -1,6 +1,6 @@
 import axios from 'axios'
-import { CreateColetaDto } from '../models/ColetaDtos/CreateColetaDto';
-import { UpdateColetaDto } from '../models/ColetaDtos/UpdateColetaDto';
+import { Coleta } from '../types/Coleta';
+
 
 const useApi = axios.create({
     baseURL: "http://localhost:5100"
@@ -8,10 +8,9 @@ const useApi = axios.create({
 
 export const coletaService = {
    
-
-    salvarColeta: async (coletaDto: CreateColetaDto, id : string) => {
+    salvarColeta: async (coletaDto: Coleta) => {
         const jsonBody = JSON.stringify(coletaDto) 
-        const response = await useApi.post(`/SalvarColeta/?funcionarioId=${id}`, jsonBody ,{
+        const response = await useApi.post(`/SalvarColeta`, jsonBody ,{
           headers: {
             "Content-type": "application/json; chatset=utf-8"
           }
@@ -19,9 +18,9 @@ export const coletaService = {
         return response.data
     },
 
-    updateColeta: async (updateDto: UpdateColetaDto, id: string) => {
-        const jsonBody = JSON.stringify(updateDto)
-        const response = await useApi.post(`/UpdateColeta/${id}`,jsonBody,{
+    updateColeta: async (col: Coleta) => {
+        const jsonBody = JSON.stringify(col)
+        const response = await useApi.post(`/UpdateColeta?id=${col.id}`,jsonBody,{
             headers :{
                 "Content-type": "application/json; chatset=utf-8"
             }
@@ -29,12 +28,10 @@ export const coletaService = {
         return response.data
     },
 
-    getColeta: async (id: string) => {
-
-        const response = await useApi.get(`/RecuperaColeta/${id}`,{
+    getColeta: async (id: number) => {       
+        const response = await useApi.get(`/RecuperaColeta?id=${id}`,{
             headers: {
-
-                "Content-type": "application/json; chatset=utf-8"
+          "Content-type": "application/json; chatset=utf-8"
             }
         });
         return response.data
@@ -63,7 +60,7 @@ export const coletaService = {
 
     DeleteColeta: async (id: string) => {
 
-        const response = await useApi.post(`/DeletarColeta/${id}`,{
+        const response = await useApi.post(`/DeletarColeta?id=${id}`,{
             headers: {
                 "Content-type": "application/json; chatset=utf-8"
             }
@@ -71,5 +68,14 @@ export const coletaService = {
         return response.data
     },
 
+    VerificaDisponibilidadeColeta : async (data : Date) => {
+        const jsonBody = JSON.stringify(data);
+        const response = await useApi.post(`/VerificaDisponibilidadeColeta`, jsonBody,{
+            headers :{
+                "Content-type": "application/json; chatset=utf-8"
+            }
+        });
+        return response.data
+    }
 
 }

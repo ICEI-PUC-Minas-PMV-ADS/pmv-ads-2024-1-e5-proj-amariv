@@ -10,7 +10,6 @@ import { Gathering } from "src/models/Gathering";
 import { GatheringItineraryService } from "src/services/GatheringItineraryService";
 import { RoutesContext } from "./context";
 import { useNotification } from "src/components/NotificationProvider";
-import { UserService } from "src/services/UserService";
 
 /**
  * Routes page mobile
@@ -142,15 +141,8 @@ export function RoutesMobilePage() {
   }, []);
 
   const handleMenuExitClick = React.useCallback(async (): Promise<void> => {
-    try {
-      if (token) {
-        await UserService.logout(token);
-        dispatch({ type: 'logout' });
-      }
-    } catch (e: any) {
-      notification(e);
-    }
-  }, [token, dispatch, notification]);
+    dispatch({ type: 'set_show_logout_confirmation', payload: true });
+  }, [dispatch]);
 
   /**
    * Layout

@@ -8,32 +8,34 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using AmarivAPI.Data.Dtos.ColetasDto;
 using System.Reflection.Metadata.Ecma335;
 using AmarivAPI.Data.Dtos.PaginationDto;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace AmarivAPI.Services
 {
     public class ColetaService
-    {        
+    {
         public IMapper _mapper;
-        public AmarivContext _context {  get; set; }    
+        public AmarivContext _context {  get; set; }
         public ColetaService(IMapper mapper, AmarivContext context)
         {
             _mapper = mapper;
             _context = context;
         }
        
-        public Result<string> SalvarColeta(CreateColetaDto dto, string funcionarioId)
+        public Result<string> SalvarColeta(CreateColetaDto dto )
         {
             RoteiroDeColetas roteiro;
             DateTime dataColeta;
           
             try
             {
+                
                 Coleta coleta = _mapper.Map<Coleta>(dto);
-                dataColeta = coleta.DataDeColeta.ToUniversalTime();
+                dataColeta =  coleta.DataDeColeta;
 
-                var roteiroId = ConsultaDisponibilidadeRoteiroDeColeta(dataColeta);
-                //var roteiroId = 0;
+                var roteiroId = ConsultaDisponibilidadeRoteiroDeColeta(dataColeta);              
                 if (roteiroId != 0)
                 {
                      roteiro = _context.RoteiroDeColetas.FirstOrDefault(r => r.Id == roteiroId && r.NumeroDeColetas < r.NumeroMaxColetas);
@@ -54,23 +56,12 @@ namespace AmarivAPI.Services
                     }                                                      
                 }
                 else
-                {
-                    roteiro = new RoteiroDeColetas();
-                    roteiro.FuncionarioId = funcionarioId == null ? "adm" : funcionarioId;
-                    roteiro.DataCadastro = DateTime.Now;
-                    roteiro.Status = true;
-                    roteiro.DataRoteiro = dataColeta;
-                    roteiro.Delete = false;
-                    roteiro.NumeroDeColetas = 1;
-                    roteiro.NumeroMaxColetas = 10;
-                    _context.RoteiroDeColetas.Add(roteiro);
-                    _context.SaveChanges();
-                                       
-                    coleta.RoteiroColetaId = roteiro.Id;
+                {                 
+                    coleta.RoteiroColetaId = null;
                     _context.Add(coleta);
                     _context.SaveChanges();
 
-                    return Result.Ok("A Coleta e o Roteiro foram criados com sucesso!!");
+                    return Result.Ok("A Coleta foi Criada mas não foi atribuida a nenhum roteiro!!!");
                 }
             }
             catch (Exception)
@@ -95,6 +86,13 @@ namespace AmarivAPI.Services
             {
                 return 0;
             }
+        }
+
+        public bool ConsultaDisponibilidadeColeta(DateTime novaData)
+        {
+            var dataFinal = novaData.AddHours(1);
+            List<Coleta> lista = _context.Coletas.ToList();
+            return lista.Any(r => r.DataDeColeta.Date >= novaData && r.DataDeColeta.Date <= dataFinal);
         }
 
         public Result UpdateColeta(UpdateColetaDto coletaDto, int id)
@@ -230,8 +228,7 @@ namespace AmarivAPI.Services
         {
             try
             {
-                Coleta coleta = _context.Coletas.FirstOrDefault(c => c.Id == id);
-                
+                Coleta coleta = _context.Coletas.FirstOrDefault(c => c.Id == id);            
                 if (coleta != null)
                 {
                     coleta.Delete = true;
@@ -240,9 +237,7 @@ namespace AmarivAPI.Services
                     {
                         roteiro.NumeroDeColetas -= 1;
                         _context.Update(roteiro);
-                    }              
-
-                    
+                    }                                
                 }
                 else
                 {
@@ -294,6 +289,104 @@ namespace AmarivAPI.Services
                 return Result.Fail("Não foi possivel cancelar a coleta");
 
             }
+        public List<object> GetColetasByRoteiroDeColeta(int roteiroDeColetaId)
+        {
+            return ToJson(
+                _context.Coletas
+                    .Include(x => x.Usuario)
+                    .Include(x => x.Endereco)
+                    .Where(x => x.RoteiroColetaId == roteiroDeColetaId)
+                    .ToList()
+            );
+        }
+
+        public List<object>  GetColetasByDateWithoutRoteiroDeColeta(DateTime date)
+        {
+            return ToJson(_context.Coletas
+                .Include(x => x.Usuario)
+                .Include(x => x.Endereco)
+                .Where(x =>
+                    x.DataDeColeta.Date == date.Date &&
+                    x.RoteiroColetaId == null &&
+                    x.Status == true
+                ).ToList()
+            );
+        }
+
+        public List<object> ToJson(List<Coleta> listaColetas)
+        {
+            var coletas = new List<object>();
+            foreach (var coleta in listaColetas)
+            {
+                var ListaItensColeta = "";
+                var ListaItensColetaArr = coleta.ListaItensColeta.Split(';');
+
+                foreach (var mat in ListaItensColetaArr)
+                {
+                    try
+                    {
+                        var matArr = mat.Split(":");
+                        var matId = Int32.Parse(matArr[0]);
+                        var matPeso = matArr[1];
+                        var material = _context.Materiais.Where(x => x.Id == matId).FirstOrDefault();
+                        ListaItensColeta += material.Tipo + "(" + matPeso + "), ";
+                    }
+                    catch (Exception)
+                    {
+                    }
+                }
+                if (ListaItensColeta.Length > 0)
+                {
+                    ListaItensColeta = ListaItensColeta.Substring(0, ListaItensColeta.Length - 2);
+                }
+
+                if (coleta.Usuario != null)
+                {
+                    coletas.Add(new
+                    {
+                        Id = coleta.Id,
+                        RoteiroDeColetaId = coleta.RoteiroColetaId,
+                        PosicaoLista = coleta.PosicaoLista,
+                        ClienteNome = coleta.Usuario.Nome,
+                        ClienteCel = coleta.Usuario.Celular,
+                        ClienteTel = coleta.Usuario.PhoneNumber,
+                        Status = coleta.Status,
+                        Cancelada = coleta.Cancelada,
+                        Delete = coleta.Delete,
+                        LocalidadeExata = coleta.LocalidadeExata,
+                        Lat = coleta.Lat,
+                        Lon = coleta.Lon,
+                        DataCadastro = coleta.DataCadastro,
+                        DataDeColeta = coleta.DataDeColeta,
+                        Endereco = coleta.Endereco,
+                        ListaItensColeta = ListaItensColeta,
+                    });
+                }
+                else
+                {
+                    coletas.Add(new
+                    {
+                        Id = coleta.Id,
+                        RoteiroDeColetaId = coleta.RoteiroColetaId,
+                        PosicaoLista = coleta.PosicaoLista,
+                        ClienteNome = coleta.ClienteNome,
+                        ClienteCel = coleta.ClienteCel,
+                        ClienteTel = coleta.ClienteTel,
+                        Cancelada = coleta.Cancelada,
+                        LocalidadeExata = coleta.LocalidadeExata,
+                        Status = coleta.Status,
+                        Delete = coleta.Delete,
+                        Lat = coleta.Lat,
+                        Lon = coleta.Lon,
+                        DataCadastro = coleta.DataCadastro,
+                        DataDeColeta = coleta.DataDeColeta,
+                        Endereco = coleta.Endereco,
+                        ListaItensColeta = ListaItensColeta,
+                    });
+                }
+            }
+            return coletas;
         }
     }
+}
 }
