@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AmarivAPI.Migrations
 {
     [DbContext(typeof(AmarivContext))]
-    [Migration("20240605094640_teste")]
-    partial class teste
+    [Migration("20240606203231_henrMigration")]
+    partial class henrMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -36,7 +36,7 @@ namespace AmarivAPI.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<bool>("AprovacaoAdmin")
+                    b.Property<bool>("Cancelada")
                         .HasColumnType("tinyint(1)");
 
                     b.Property<string>("ClienteCel")
@@ -368,16 +368,16 @@ namespace AmarivAPI.Migrations
                         {
                             Id = "adm",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4c24babb-c451-47ea-af05-02fa1fac5464",
+                            ConcurrencyStamp = "fe599eeb-8a88-4e60-8a61-68e6a0bcf1a1",
                             Email = "amarivadm@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             Nome = "Administrador",
                             NormalizedEmail = "AMARIVADM@GMAIL.COM",
                             NormalizedUserName = "AMARIVADM@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEOCjtq7D/w5jyqc4U3NoAGOeHlnp4XeSQfiPxrHiBd4o2CLNOATBKiAa2coJWR+pzQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMvPZM/DP+1yufIx7RlFP0BNxiddzCu8jYG3tv84joYcV+JWexyKfWnthX6PLvQklQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b27cd65d-c108-41b0-abe4-91168693005c",
+                            SecurityStamp = "cd1989ae-c578-4f26-98d6-5d6224ac1f9c",
                             TwoFactorEnabled = false,
                             UserName = "amarivadm@gmail.com"
                         });

@@ -29,8 +29,9 @@ namespace AmarivAPI.Services
           
             try
             {
+                
                 Coleta coleta = _mapper.Map<Coleta>(dto);
-                dataColeta = coleta.DataDeColeta.ToUniversalTime();
+                dataColeta =  coleta.DataDeColeta;
 
                 var roteiroId = ConsultaDisponibilidadeRoteiroDeColeta(dataColeta);              
                 if (roteiroId != 0)
@@ -189,16 +190,12 @@ namespace AmarivAPI.Services
                 return _mapper.Map<List<ReadColetaDto>>(lista);
             }
         }
-
-       
-
-
+    
         public Result DeletarColeta(int id) 
         {
             try
             {
-                Coleta coleta = _context.Coletas.FirstOrDefault(c => c.Id == id);
-                
+                Coleta coleta = _context.Coletas.FirstOrDefault(c => c.Id == id);            
                 if (coleta != null)
                 {
                     coleta.Delete = true;
@@ -207,9 +204,7 @@ namespace AmarivAPI.Services
                     {
                         roteiro.NumeroDeColetas -= 1;
                         _context.Update(roteiro);
-                    }              
-
-                    
+                    }                                
                 }
                 else
                 {

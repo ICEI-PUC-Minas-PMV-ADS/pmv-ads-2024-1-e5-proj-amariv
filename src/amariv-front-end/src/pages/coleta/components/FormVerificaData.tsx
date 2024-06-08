@@ -6,22 +6,25 @@ import { coletaService } from "../../../services/ColetaService"
 
 export type FormVerificaDataProps = {
     setDataColetaFinal : (coleta : string) => void,
+    dataColeta : string
 }
 
-export const FormVerificaData = ({setDataColetaFinal }: FormVerificaDataProps) => {
+export const FormVerificaData = ({setDataColetaFinal, dataColeta }: FormVerificaDataProps) => {
     const [mensagem, setMensagem] = useState<any>()
     const [horarioColeta, setHorarioColeta] = useState(String)
-    const [dataColeta, setDataColeta] = useState(String)
+    const [dataColetaDia, setDataColetaDia] = useState(String)
    
-    // const divideHorario = (dat : string) => {
-    //     debugger
-    //     let dataDividida : string[] = dat.split("T")
-    //     setHorarioColeta(dataDividida[1])
-    //     setDataColeta(dataDividida[0])
-    // } 
-    // useEffect( () => {        
-    //     divideHorario(dataColetaProp)
-    // },[dataColetaProp])
+    const divideHorario = (dat: string) => {        
+        if (dat !== "") {
+            let dataDividida: string[] = dat.split("T")
+            setHorarioColeta(dataDividida[1])
+            setDataColetaDia(dataDividida[0])
+        }
+    }
+
+    useEffect(() => {
+        divideHorario(dataColeta)
+    }, [])
     
 
     const formataNovoHorario = (hora: string, dia: string) => {   
@@ -57,18 +60,18 @@ export const FormVerificaData = ({setDataColetaFinal }: FormVerificaDataProps) =
 
     return (
         <>
-            <h4>Verificação de disponibilidade da coleta </h4>        
+            <h4 className="text-[#666666] text-m my-1"> Verificação de disponibilidade da coleta </h4>        
             {
                 mensagem  
             }
-            <div className="w-10/12 min-h-screen lg:min-h-fit flex bg-light-backgroud items-center justify-center flex-row lg:min-w-80% ">
+            <div className="w-[80%] min-h-screen lg:min-h-fit flex bg-light-backgroud items-center justify-center flex-row lg:min-w-80% ">
                           
                 <div>
                     <InputDate
                         label="Data da coleta"
                         type="date"
-                        value={dataColeta}
-                        onChange={(evt) => setDataColeta(evt.target.value)}
+                        value={dataColetaDia}
+                        onChange={(evt) => setDataColetaDia(evt.target.value)}
                     />
                 </div>
                 <div>
@@ -84,8 +87,8 @@ export const FormVerificaData = ({setDataColetaFinal }: FormVerificaDataProps) =
                         type="button"
                         label="Verificar disponibilidade"
                         className="w-[90%] mt-[15px]"
-                        onClick={ async () => {                          
-                            const data = formataNovoHorario(horarioColeta, dataColeta)  
+                        onClick={ async () => {                                                     
+                            const data = formataNovoHorario(horarioColeta, dataColetaDia)  
                             const resultado = await coletaService.VerificaDisponibilidadeColeta(data)
                             if (!resultado) {
                                 setDataColetaFinal(data.toISOString());
@@ -96,7 +99,7 @@ export const FormVerificaData = ({setDataColetaFinal }: FormVerificaDataProps) =
                     />
                 </div>
             </div>
-
         </>
+
     )
 }

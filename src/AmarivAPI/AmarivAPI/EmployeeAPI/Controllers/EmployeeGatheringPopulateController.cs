@@ -50,8 +50,7 @@ namespace AmarivAPI.EmployeeAPI.Controllers
 
                         var gOne = new Coleta()
                         {
-                            RoteiroColetaId = gIt.Id,
-                            AprovacaoAdmin = true,
+                            RoteiroColetaId = gIt.Id,                       
                             PosicaoLista = 1,
                             Status = false,
                             ClienteCel = "31 90000-0001",
@@ -82,8 +81,7 @@ namespace AmarivAPI.EmployeeAPI.Controllers
 
                         var gOne = new Coleta()
                         {
-                            RoteiroColetaId = gIt.Id,
-                            AprovacaoAdmin = true,
+                            RoteiroColetaId = gIt.Id,                       
                             PosicaoLista = 2,
                             Status = true,
                             ClienteCel = "31 90000-0002",
@@ -114,8 +112,7 @@ namespace AmarivAPI.EmployeeAPI.Controllers
 
                         var gOne = new Coleta()
                         {
-                            RoteiroColetaId = gIt.Id,
-                            AprovacaoAdmin = true,
+                            RoteiroColetaId = gIt.Id,             
                             PosicaoLista = 3,
                             Status = true,
                             ClienteCel = "31 90000-0003",
@@ -146,8 +143,7 @@ namespace AmarivAPI.EmployeeAPI.Controllers
 
                         var gOne = new Coleta()
                         {
-                            RoteiroColetaId = gIt.Id,
-                            AprovacaoAdmin = true,
+                            RoteiroColetaId = gIt.Id,                       
                             PosicaoLista = 4,
                             Status = true,
                             ClienteCel = "31 90000-0004",

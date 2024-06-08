@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AmarivAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class teste : Migration
+    public partial class henrMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -347,7 +347,7 @@ namespace AmarivAPI.Migrations
                     Status = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     IsSuccess = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     Delete = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    AprovacaoAdmin = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    Cancelada = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     Lat = table.Column<double>(type: "double", nullable: true),
                     Lon = table.Column<double>(type: "double", nullable: true),
                     LocalidadeExata = table.Column<bool>(type: "tinyint(1)", nullable: true),
@@ -390,7 +390,7 @@ namespace AmarivAPI.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Celular", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "Nome", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "Telefone", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "adm", 0, null, "4c24babb-c451-47ea-af05-02fa1fac5464", "amarivadm@gmail.com", true, false, null, "Administrador", "AMARIVADM@GMAIL.COM", "AMARIVADM@GMAIL.COM", "AQAAAAIAAYagAAAAEOCjtq7D/w5jyqc4U3NoAGOeHlnp4XeSQfiPxrHiBd4o2CLNOATBKiAa2coJWR+pzQ==", null, false, "b27cd65d-c108-41b0-abe4-91168693005c", null, false, "amarivadm@gmail.com" });
+                values: new object[] { "adm", 0, null, "fe599eeb-8a88-4e60-8a61-68e6a0bcf1a1", "amarivadm@gmail.com", true, false, null, "Administrador", "AMARIVADM@GMAIL.COM", "AMARIVADM@GMAIL.COM", "AQAAAAIAAYagAAAAEMvPZM/DP+1yufIx7RlFP0BNxiddzCu8jYG3tv84joYcV+JWexyKfWnthX6PLvQklQ==", null, false, "cd1989ae-c578-4f26-98d6-5d6224ac1f9c", null, false, "amarivadm@gmail.com" });
 
             migrationBuilder.InsertData(
                 table: "Materiais",

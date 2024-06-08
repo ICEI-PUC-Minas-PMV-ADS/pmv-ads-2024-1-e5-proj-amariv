@@ -66,7 +66,7 @@ export function FormAddMateriais({listaMateriais, salvarMateriaislista}: FormAdd
       </div>
 
       <div className="dados-cliente" >
-        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 w-full gap-2 lg:max-w-[1220px] md:max-w-[810px]">
+        <div className="p-5 grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 w-full gap-2 lg:max-w-[1220px] md:max-w-[810px]">
           {
             materiaisAdicionados.length == 0 &&
             <div className="flex flex-col gap-4 items-center justify-center p-8">
@@ -107,9 +107,8 @@ export function FormAddMateriais({listaMateriais, salvarMateriaislista}: FormAdd
           type="button"
           label="Adicionar material"
           onClick={ () => { setModalMaterialOpen(true) }}
-          className="w-[80%] mt-[15px]"
+          className="w-[30%] mt-[15px] mb-3"
         />
-
       </div>
 
     </>

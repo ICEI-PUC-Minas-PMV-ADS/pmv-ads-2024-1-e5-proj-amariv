@@ -66,7 +66,6 @@ export function ColetaPage() {
     }
   } 
 
-
   const consultaLocal  = async ( endereco : Endereco ) => {
     const geometry =  await GoogleGeocodingService.buscarLocalizacao(endereco)
      const local : local = {
@@ -196,8 +195,8 @@ const consultaLocalidadeExata = (local: local) => {
           </div>
 
           <Form>
-            <div className="dados-cliente">
-              <div>
+            <div  className="w-[80%] justify-between p-8 items-center lg:min-h-fit flex bg-light-backgroud  flex-row lg:min-w-max ">
+              <div className="w-[40%]">
                 <Input 
                   title="Nome Cliente"
                   error = {errorNome}
@@ -252,7 +251,8 @@ const consultaLocalidadeExata = (local: local) => {
             />
                  
            <FormVerificaData
-              setDataColetaFinal ={ (coleta) =>{ setDataColeta(coleta)}}          
+              setDataColetaFinal ={ (coleta) =>{ setDataColeta(coleta)}}
+              dataColeta={dataColeta}          
             />
 
             <FormAddMateriais 
@@ -263,7 +263,7 @@ const consultaLocalidadeExata = (local: local) => {
             <Button2
               type="button"
               label="Criar agendamento"
-              className="w-[40%] mt-[15px]"
+              className="w-[40%] mt-[15px] mb-5"
               onClick={() => {
                if(validarCampos()){ 
                 debugger

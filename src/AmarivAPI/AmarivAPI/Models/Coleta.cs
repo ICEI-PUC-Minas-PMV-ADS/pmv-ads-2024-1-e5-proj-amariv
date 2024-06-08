@@ -12,8 +12,7 @@ namespace AmarivAPI.Models
         [Required]
         public int Id { get; set; }
         [AllowNull]
-        public string? UserId { get; set; } = null;
-       
+        public string? UserId { get; set; } = null;    
         [AllowNull]
         public int? EnderecoId { get; set; }
         [AllowNull]
