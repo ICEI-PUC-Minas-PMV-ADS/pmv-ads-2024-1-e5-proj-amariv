@@ -1,10 +1,13 @@
-﻿using AmarivAPI.Data.Dtos;
+﻿using AmarivAPI.Data;
+using AmarivAPI.Data.Dtos.UsuarioDtos;
 using AmarivAPI.Data.Requests;
 using AmarivAPI.Models;
 using AutoMapper;
 using FluentResults;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.Data;
+using Microsoft.IdentityModel.Tokens;
 using System.Web;
 
 namespace AmarivAPI.Services
@@ -17,9 +20,9 @@ namespace AmarivAPI.Services
         private TokenService _tokenService;
         private EmailService _emailService;
         private RoleManager<IdentityRole> _roleManager;
+        private AmarivContext _context;
 
-
-        public UsuarioService(IMapper mapper, UserManager<Usuario> userManager, SignInManager<Usuario> signInManager, TokenService tokenService, EmailService emailService, RoleManager<IdentityRole> roleManager)
+        public UsuarioService(IMapper mapper, UserManager<Usuario> userManager, SignInManager<Usuario> signInManager, TokenService tokenService, EmailService emailService, RoleManager<IdentityRole> roleManager, AmarivContext context)
         {
             _mapper = mapper;
             _userManager = userManager;
@@ -27,7 +30,7 @@ namespace AmarivAPI.Services
             _tokenService = tokenService;
             _emailService = emailService;
             _roleManager = roleManager;
-          
+            _context = context;
         }
 
         public Usuario RecuperaUsuarioPorEmail(string email)
@@ -36,6 +39,29 @@ namespace AmarivAPI.Services
                     .UserManager
                     .Users
                     .FirstOrDefault(usuario => usuario.NormalizedUserName == email.ToUpper());
+        }
+
+        public Boolean EmailDisponivel(ValidaEmailRequest request)
+        {
+            var user = _context.Users.FirstOrDefault(x => x.Email == request.Email);
+            
+            if(user == null)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public ReadUsuarioDto RecuperaReadUsuarioDtoPorId (string id)
+        {
+           var usuario = _signInManager
+                    .UserManager
+                    .Users
+                    .FirstOrDefault(usuario => usuario.Id == id);
+
+            var map = _mapper.Map<ReadUsuarioDto>(usuario);
+
+            return map;
         }
 
         public async Task<Result> CadastraCliente(CreateUsuarioDto createDto)
@@ -48,7 +74,8 @@ namespace AmarivAPI.Services
                 var identityUser = RecuperaUsuarioPorEmail(createDto.Email);
                 var code = await _userManager.GenerateEmailConfirmationTokenAsync(identityUser);
                 _emailService.EnviarEmailConfirmacao(new[] {identityUser.Email}, "Confirme seu email", identityUser.Id, code);
-                return Result.Ok().WithSuccess("Usuário cadastrado com sucesso!");
+                Token token = _tokenService.CreateToken(identityUser, _signInManager.UserManager.GetRolesAsync(identityUser).Result.FirstOrDefault());
+                return Result.Ok().WithSuccess(token.Value);
             }
             return Result.Fail("Falha ao cadastrar usuário");
         }
@@ -82,6 +109,7 @@ namespace AmarivAPI.Services
             return Result.Fail("Falha ao logar");
         }
 
+        [Authorize]
         public Result Logout()
         {
             var resultado = _signInManager.SignOutAsync();
@@ -144,6 +172,30 @@ namespace AmarivAPI.Services
                 return Result.Ok().WithSuccess("Senha redefinida com sucesso!");
             }
             return Result.Fail("Falha ao recuperar senha");
+        }
+
+        public Result AlteraUsuario(UpdateUsuarioDto dto, String userId)
+        {
+            try
+            {
+                var identityUser = _signInManager
+                    .UserManager
+                    .Users
+                    .FirstOrDefault(usuario => usuario.Id == userId);
+                
+                    identityUser.Nome = dto.Nome;
+                    identityUser.Celular = dto.Celular;
+                    identityUser.Telefone = dto.Telefone;
+                
+                _context.Users.Update(identityUser);
+                _context.SaveChanges();
+                return Result.Ok().WithSuccess("Usuario atualizado com sucesso!");
+            }
+            catch
+            {
+                return Result.Fail("Falha ao atualizar usuario!");
+            }
+            
         }
     }
 }

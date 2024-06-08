@@ -3,6 +3,7 @@ using AmarivAPI.Data.Dtos.MaterialDtos;
 using AmarivAPI.Data.Dtos.RoteiroDeColetasDtos;
 using AmarivAPI.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Globalization;
 
 namespace AmarivAPI.Controllers
 {
@@ -12,12 +13,10 @@ namespace AmarivAPI.Controllers
     {
 
         private RoteiroDeColetasService _roteiroService;
-        private ItensRoteiroDeColetasService _itensService;
 
-        public RoteiroDeColetasController(RoteiroDeColetasService roteiroService, ItensRoteiroDeColetasService itensService)
+        public RoteiroDeColetasController(RoteiroDeColetasService roteiroService )
         {
-            _roteiroService = roteiroService;
-            _itensService = itensService;
+            _roteiroService = roteiroService;         
         }
 
 
@@ -43,7 +42,7 @@ namespace AmarivAPI.Controllers
                 return NotFound();
         }
 
-
+      
         [HttpPost]
         [Route("/SalvarRoteiroDeColetas")]
         public IActionResult SalvarRoteiroDeColetas([FromBody] CreateRoteiroDeColetasDto roteiroDto)
@@ -67,6 +66,29 @@ namespace AmarivAPI.Controllers
 
         }
 
+        [HttpPost]
+        [Route("/UpdateNumMaxRoteiroDeColetas")]
+        public IActionResult UpdateRoteiroDeColetas([FromBody]  int numeroMaxColetas, int id)
+        {
+            var result = _roteiroService.UpdateRoteiroDeColeta(numeroMaxColetas , id);
+            if (result.IsSuccess)
+                return Ok(result);
+            else
+                return NotFound();
+        }
+
+
+        [HttpPost]
+        [Route("/AdicionaColetaRoteiroDeColetas")]
+        public IActionResult UpdateRoteiroDeColetas(int id)
+        {
+            var result = _roteiroService.UpdateRoteiroDeColeta(id);
+            if (result.IsSuccess)
+                return Ok(result);
+            else
+                return NotFound();
+        }
+
 
         [HttpPost]
         [Route("/DeletaRoteiroDeColetas")]
@@ -78,8 +100,6 @@ namespace AmarivAPI.Controllers
             else
                 return NotFound();
         }
-
-
 
     }
 }

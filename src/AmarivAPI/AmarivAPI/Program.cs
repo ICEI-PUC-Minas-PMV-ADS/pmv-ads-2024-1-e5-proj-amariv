@@ -1,4 +1,5 @@
 using AmarivAPI.Data;
+using AmarivAPI.EmployeeAPI.Services;
 using AmarivAPI.Models;
 using AmarivAPI.Profiles;
 using AmarivAPI.Services;
@@ -13,19 +14,27 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Text;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
-
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("_allowDevelopmentDomain", policy =>
-    {
-        policy.WithOrigins("http://localhost:3000", "http://10.0.2.2:3000")
-              .AllowAnyHeader()
-              .AllowAnyMethod();
-    });
+builder.Services.AddCors(options => {
+    options.AddPolicy(name: "_allowDevelopmentDomain",
+        policy => {
+            policy
+            .AllowAnyOrigin()
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+        }
+    );
 });
 
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+    });
+
+// Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("AmarivConnection");
 
 builder.Services.AddDbContext<AmarivContext>(opts =>
@@ -52,7 +61,7 @@ builder.Services.AddAuthentication(auth =>
     {
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes("fglzdrUAYU2S1wL2G4jXbtlXhVa2AG35")),
+                        Encoding.UTF8.GetBytes("fglzdrUAYU2S1wL2G4jXbtlXhVa2AG35")),
         ValidateIssuer = false,
         ValidateAudience = false,
         ClockSkew = TimeSpan.Zero
@@ -60,11 +69,13 @@ builder.Services.AddAuthentication(auth =>
 });
 
 builder.Services.AddScoped<UsuarioService, UsuarioService>();
+builder.Services.AddScoped<EnderecoService, EnderecoService>();
 builder.Services.AddScoped<MaterialService, MaterialService>();
+builder.Services.AddScoped<ColetaService, ColetaService>();
 builder.Services.AddScoped<TokenService, TokenService>();
-builder.Services.AddScoped<ItensRoteiroDeColetasService, ItensRoteiroDeColetasService>();
 builder.Services.AddScoped<RoteiroDeColetasService, RoteiroDeColetasService>();
 builder.Services.AddScoped<EmailService, EmailService>();
+builder.Services.AddScoped<UserService, UserService>();
 builder.Services.AddScoped<NotificacaoService, NotificacaoService>();
 builder.Services.AddScoped<FuncionarioService>();
 builder.Services.AddAutoMapper(typeof(NotificacaoProfile).Assembly);

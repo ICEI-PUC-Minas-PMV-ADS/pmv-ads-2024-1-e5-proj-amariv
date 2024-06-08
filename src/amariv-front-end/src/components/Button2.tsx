@@ -26,3 +26,5 @@ export function Button2({ label, ...props }: ButtonProps) {
     </button>
   );
 }
+
+

@@ -19,8 +19,5 @@ namespace AmarivAPI.Models
         public string Tipo { get; set; }
 
         public DateTime Data_criacao { get; set; }
-
-        [AllowNull]
-        public string Peso { get; set; }
     }
 }

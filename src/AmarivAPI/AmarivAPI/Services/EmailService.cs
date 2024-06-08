@@ -19,6 +19,7 @@ namespace AmarivAPI.Services
             string conteudo = $"Olá, bem vindo a Amariv!\n\rCodigo de ativacao: {codigo} \n\rId de usuario: {usuarioId}";
 
             var mensagemDeEmail = new MimeMessage();
+
             mensagemDeEmail.From.Add(new MailboxAddress("Amariv", _configuration.GetValue<string>("EmailSettings:From")));
             mensagemDeEmail.To.AddRange(destinatario);
             mensagemDeEmail.Subject = assunto;

@@ -4,7 +4,8 @@ import Modal from '../../components/Modal';
 import { Button2 } from '../../components/Button2';
 import Filter from '../../components/Filter';
 import { Material } from '../../models/Material';
-import { fetchMaterials, updateMaterial, saveMaterial, deleteMaterial } from '../../services/MaterialService';
+import { materialService } from '../../services/MaterialService';
+
 
 const MaterialPage: React.FC = () => {
   const [materials, setMaterials] = useState<Material[]>([]);
@@ -38,7 +39,7 @@ const MaterialPage: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await fetchMaterials();
+        const data = await materialService.fetchMaterials();
         setMaterials(data);
       } catch (error) {
         console.error("Erro ao buscar materiais:", error);
@@ -62,14 +63,14 @@ const MaterialPage: React.FC = () => {
   const handleAddMaterial = async () => {
     try {
       if (editingIndex !== null) {
-        await updateMaterial(editingIndex, materialInfo);
+        await materialService.updateMaterial(editingIndex, materialInfo);
       } else {
-        await saveMaterial(materialInfo);
+        await materialService.saveMaterial(materialInfo);
       }
 
       setMaterialInfo({ id: 0, descricao: "", tipo: "", peso: "" });
       setShowModal(false);
-      const updatedMaterials = await fetchMaterials();
+      const updatedMaterials = await materialService.fetchMaterials();
       setMaterials(updatedMaterials);
     } catch (error) {
       console.error("Erro ao adicionar/atualizar material:", error);
@@ -84,7 +85,7 @@ const MaterialPage: React.FC = () => {
 
   const handleDeleteMaterial = async (id: number) => {
     try {
-      await deleteMaterial(id);
+      await materialService.deleteMaterial(id);
       const updatedMaterials = materials.filter(material => material.id !== id);
       setMaterials(updatedMaterials);
     } catch (error) {
