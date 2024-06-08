@@ -44,7 +44,6 @@ function Profile() {
 
     return (
       <div className={fundo({ bordaAtiva: index != authContext.enderecos.length - 1 })} key={index}>
-
         <div>
           <p>{endereco.logradouro}, {endereco.numero}</p>
           <p>{endereco.bairro}</p>

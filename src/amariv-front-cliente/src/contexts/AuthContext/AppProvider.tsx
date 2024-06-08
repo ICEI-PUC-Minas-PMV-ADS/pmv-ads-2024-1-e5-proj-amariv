@@ -15,6 +15,7 @@ import { ColetaService } from '../../services/ColetaService';
 import { Pagination } from '../../types/Pagination';
 import { Coleta } from '../../types/Coleta';
 import DialogComponent from '../../components/DialogComponent';
+import { RoteiroColetaService } from '../../services/RoteiroColetaService';
 
 export const AppProvider = ({ children }: { children: JSX.Element }) => {
 
@@ -36,7 +37,11 @@ export const AppProvider = ({ children }: { children: JSX.Element }) => {
   const [dialogOnAccept, setDialogOnAccept] = useState<() => void>(() => () => {
     setDialogOpen(false);
   })
+  const [dialogOnClose, setDialogOnClose] = useState<() => void>(() => () => {
+    setDialogOpen(false);
+  })
   const [dialogAlert, setDialogAlert] = useState(false)
+  const [unavailableDates, setUnavailableDates] = useState<string[]>([])
 
   useEffect(() => {
     const validarToken = async () => {
@@ -51,7 +56,6 @@ export const AppProvider = ({ children }: { children: JSX.Element }) => {
           await ColetaService.coletasAberto(pageNumberColetasAberto).then(r => {
             let result: Pagination<Coleta> = r.data
             setColetasAberto(result.items)
-            console.log(result.items)
             setTotalPagesColetasAberto(result.pageCount)
             setPageNumberColetasAberto(result.pageNumber)
           })
@@ -73,6 +77,10 @@ export const AppProvider = ({ children }: { children: JSX.Element }) => {
       }
       await MaterialService.getAll().then(x => {
         setMateriais(x.data)
+      })
+
+      await RoteiroColetaService.datasIndisponiveis().then(x => {
+        setUnavailableDates(x.data)
       })
     }
     validarToken()
@@ -112,12 +120,18 @@ export const AppProvider = ({ children }: { children: JSX.Element }) => {
       await ColetaService.coletasFinalizado(pageNumberColetasAberto + 1).then(
         r => {
           let result: Pagination<Coleta> = r.data
-          setColetasFinalizado(coletasAberto.concat(result.items))
+          setColetasFinalizado(coletasFinalizado.concat(result.items))
           setTotalPagesColetasFinalizado(result.pageCount)
           setPageNumberColetasFinalizado(result.pageNumber)
         }
       )
     }
+  }
+
+  const resetUnavailableDates = async () => {
+    await RoteiroColetaService.datasIndisponiveis().then(x => {
+      setUnavailableDates(x.data)
+    })
   }
 
   const resetColetasFinalizado = async () => {
@@ -138,6 +152,7 @@ export const AppProvider = ({ children }: { children: JSX.Element }) => {
           setEnderecos(e.data)
         })
         await resetColetasAberto()
+        await resetColetasFinalizado()
       }
       setUser(userData)
       return true
@@ -189,6 +204,9 @@ export const AppProvider = ({ children }: { children: JSX.Element }) => {
     setDialogMessage("Você deseja realmente cancelar essa coleta?")
     setDialogTitle("")
     setDialogOpen(true)
+    setDialogOnClose((() => () => {
+      setDialogOpen(false);
+    }))
     setDialogOnAccept(() => {
       const handleAccept = async () => {
         setInfosLoaded(false);
@@ -196,6 +214,7 @@ export const AppProvider = ({ children }: { children: JSX.Element }) => {
           await ColetaService.cancelarColeta(coletaId);
           await resetColetasAberto();
           await resetColetasFinalizado();
+          await resetUnavailableDates()
           setDialogOpen(false);
           setSnackBarOpen(true);
           setMessageSnackBar("Coleta cancelada com sucesso!");
@@ -211,6 +230,16 @@ export const AppProvider = ({ children }: { children: JSX.Element }) => {
     })
   }
 
+  const useAlert = (message: string, onClose: () => void) => {
+    setDialogTitle("")
+    setDialogMessage(message)
+    setDialogAlert(true)
+    setDialogOnClose((() => () => {
+      onClose()
+      setDialogOpen(false)
+    }))
+    setDialogOpen(true)
+  }
 
   return (
     <>
@@ -220,9 +249,7 @@ export const AppProvider = ({ children }: { children: JSX.Element }) => {
         text={dialogMessage}
         title={dialogTitle}
         onAccept={dialogOnAccept}
-        onClose={() => {
-          setDialogOpen(false)
-        }}
+        onClose={dialogOnClose}
       />
       <Snackbar
         anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
@@ -232,7 +259,7 @@ export const AppProvider = ({ children }: { children: JSX.Element }) => {
         message={messageSnackBar}
       />
       <LoadingScreen open={!infosLoaded} />
-      <AppContext.Provider value={{ user, login, logout, signup, enderecos, atualizarEnderecos, materiais, updateUsuario, setSnackBarOpen, setMessageSnackBar, coletasAberto, fetchMoreColetasAberto, resetColetasAberto, totalPagesColetasAberto, pageNumberColetasAberto, coletasFinalizado, fetchMoreColetasFinalizado, resetColetasFinalizado, totalPagesColetasFinalizado, pageNumberColetasFinalizado, cancelarColeta }}>
+      <AppContext.Provider value={{ user, login, logout, signup, enderecos, atualizarEnderecos, materiais, updateUsuario, setSnackBarOpen, setMessageSnackBar, coletasAberto, fetchMoreColetasAberto, resetColetasAberto, totalPagesColetasAberto, pageNumberColetasAberto, coletasFinalizado, fetchMoreColetasFinalizado, resetColetasFinalizado, totalPagesColetasFinalizado, pageNumberColetasFinalizado, cancelarColeta, useAlert, unavailableDates, resetUnavailableDates }}>
         {children}
       </AppContext.Provider>
     </>

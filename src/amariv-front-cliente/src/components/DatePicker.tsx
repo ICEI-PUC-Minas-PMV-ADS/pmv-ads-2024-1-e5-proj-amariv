@@ -1,7 +1,6 @@
 import { LocalizationProvider, StaticDatePicker, } from "@mui/x-date-pickers";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import "dayjs/locale/pt-br";
-import { ptBR } from '@mui/x-date-pickers/locales';
 import dayjs from "dayjs";
 
 type props = {
@@ -9,12 +8,16 @@ type props = {
   onClose: () => void
   isOpen: boolean
   value: dayjs.Dayjs
+  unavailableDates: string[]
 }
 
-function DatePicker({ onAccept, isOpen, onClose, value }: props) {
+function DatePicker({ onAccept, isOpen, onClose, value, unavailableDates }: props) {
+
   function disableWeekends(date: dayjs.Dayjs) {
     const dayOfWeek = date.day();
-    return dayOfWeek === 0 || dayOfWeek === 6;
+    const dateString = date.format('YYYY-MM-DD');
+
+    return dayOfWeek === 0 || dayOfWeek === 6 || unavailableDates.some((disabledDate) => disabledDate.startsWith(dateString))
   }
 
   return (

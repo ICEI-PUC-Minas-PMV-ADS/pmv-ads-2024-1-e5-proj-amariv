@@ -20,7 +20,7 @@ function CreateEndereco({ isOpen, onClose, onConfirm }: props) {
   const cepRegex = /^[0-9]{8}$/
   const [serverError, setServerError] = useState(false)
   const [loading, setLoading] = useState(false)
-  const authContext = useContext(AppContext)
+  const appContext = useContext(AppContext)
   const [form, setForm] = useState<EnderecoForm>({
     logradouro: "",
     numero: "",
@@ -28,9 +28,8 @@ function CreateEndereco({ isOpen, onClose, onConfirm }: props) {
     cep: "",
     cidade: "",
     referencia: "",
-    userId: authContext.user?.id
+    userId: appContext.user?.id
   })
-  const [snackBarOpen, setSnackBarOpen] = useState(false)
 
   const [loadingCep, setLoadingCep] = useState(false)
   const [errorCep, setErrorCep] = useState(false)
@@ -71,8 +70,9 @@ function CreateEndereco({ isOpen, onClose, onConfirm }: props) {
   const handleEndereco = async () => {
     setLoading(true)
     await EnderecoService.cadastrarEndereco(form).then(async (r) => {
-      await authContext.atualizarEnderecos()
-      setSnackBarOpen(true)
+      await appContext.atualizarEnderecos()
+      appContext.setMessageSnackBar("Endereço salvo com sucesso!")
+      appContext.setSnackBarOpen(true)
       onClose()
       if (onConfirm)
         onConfirm(Number.parseInt(r.data.successes[0].message))
@@ -84,13 +84,6 @@ function CreateEndereco({ isOpen, onClose, onConfirm }: props) {
 
   return (
     <>
-      <Snackbar
-        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-        open={snackBarOpen}
-        onClose={() => { setSnackBarOpen(false) }}
-        autoHideDuration={3000}
-        message="Endereço salvo com sucesso!"
-      />
       <Modal open={isOpen} className=" overflow-y-scroll" onClose={onClose}>
         <div>
           <LoadingScreen open={loading} />

@@ -1,5 +1,4 @@
 import Input from "../components/Inputs/Input";
-import PasswordInput from "../components/Inputs/PasswordInput";
 import PrimaryButton from "../components/PrimaryButton";
 import { useNavigate } from "react-router-dom";
 import TopBar from "../components/TopBar";
@@ -15,31 +14,34 @@ import SelectInput from "../components/Inputs/SelectInput";
 import dataUtils from "../utils/dataUtils";
 import { tv } from "tailwind-variants";
 import AddMaterial from "../components/AddMaterial";
-import { Snackbar } from "@mui/material";
-import { set } from "date-fns";
+import { Alert } from "@mui/material";
+import LoadingScreen from "../components/LoadingScreen";
+import { EnderecoService } from "../services/EnderecoService";
+import { GoogleService } from "../services/GoogleService";
+import { Endereco } from "../types/Endereco";
+import { ColetaService } from "../services/ColetaService";
 
 function SchedulingLoggedOut() {
   const cepRegex = /^[0-9]{8}$/
   const navigate = useNavigate()
-  const authContext = useContext(AppContext)
+  const appContext = useContext(AppContext)
   const [formEndereco, setFormEndereco] = useState<EnderecoForm>({
     logradouro: "",
     numero: "",
     bairro: "",
     cep: "",
     cidade: "",
-    referencia: "",
-    userId: authContext.user?.id
+    referencia: ""
   })
 
-  const [snackBarOpen, setSnackBarOpen] = useState(false)
   const [modalMaterialOpen, setModalMaterialOpen] = useState(false)
   const [modalDataOpen, setModalDataOpen] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   const [materiaisAdicionados, setMateriaisAdicionados] = useState<any[]>([])
 
   const [form, setForm] = useState<CreateColetaForm>({
-    enderecoId: authContext.enderecos.length == 0 ? 0 : authContext.enderecos[0].id,
+    enderecoId: 0,
     clienteNome: "",
     clienteCel: "",
     clienteTel: "",
@@ -61,6 +63,7 @@ function SchedulingLoggedOut() {
   const [celularError, setCelularError] = useState(false)
   const [telefoneError, setTelefoneError] = useState(false)
   const [nomeError, setNomeError] = useState(false)
+  const [serverError, setServerError] = useState(false)
 
   const validarCampos = () => {
     if (form.clienteNome == null || form.clienteNome == "" || form.clienteNome == undefined) {
@@ -117,8 +120,10 @@ function SchedulingLoggedOut() {
 
   const ItemMaterial = (material: any, index: number) => {
     return (
-      <div className=" bg-input-color w-full flex flex-col p-4 rounded-lg">
-        <p className="">Material: {authContext.materiais.find(x => x.id == material.idMaterial)?.descricao}</p>
+      <div
+        key={index}
+        className=" bg-input-color w-full flex flex-col p-4 rounded-lg">
+        <p className="">Material: {appContext.materiais.find(x => x.id == material.idMaterial)?.descricao}</p>
         <p className="">Peso: {material.peso}</p>
         <div className="flex gap-2 mt-4">
           <PrimaryButton color="red" title="Excluir" onClick={() => {
@@ -159,17 +164,43 @@ function SchedulingLoggedOut() {
     }
   )
 
+  const handleSave = async () => {
+    setLoading(true)
+    await EnderecoService.cadastrarEndereco(formEndereco).then(async (r) => {
+      let copyForm = { ...form }
+      copyForm.enderecoId = r.data.successes[0].message
+      let copyEnderecoForm = { ...formEndereco }
+      copyEnderecoForm.id = r.data.successes[0].message
+
+      let location = await GoogleService.buscarLatitudeLongitude(copyEnderecoForm as Endereco)
+      if (location != "erro") {
+        copyForm.lat = location.lat
+        copyForm.lon = location.lng
+      }
+      let materiaisString: string = ""
+      materiaisAdicionados.forEach(x => {
+        materiaisString = materiaisString + `${x.idMaterial}:${x.peso};`
+      })
+      copyForm.listaItensColeta = materiaisString
+      setForm(copyForm)
+      setFormEndereco(copyEnderecoForm)
+      await ColetaService.cadastrarColeta(copyForm).then(async (x) => {
+        await appContext.resetUnavailableDates()
+        appContext.useAlert("Agendamento de coleta realizado com sucesso! Para mais detalhes sobre seu agendamento entre em contato com a AMARIV pelo telefone (27)3317-3366.", () => { navigate("/") })
+      }).catch(x => setServerError(true))
+
+    }).catch(e => {
+      setServerError(true)
+    })
+    setLoading(false)
+  }
+
 
   return (
     <>
-      <Snackbar
-        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-        open={snackBarOpen}
-        onClose={() => { setSnackBarOpen(false) }}
-        autoHideDuration={3000}
-        message="Preencha todos os campos obrigatórios"
-      />
+      <LoadingScreen open={loading} />
       <DatePicker
+        unavailableDates={appContext.unavailableDates}
         value={dayjs(form.dataDeColeta)}
         isOpen={modalDataOpen}
         onAccept={(d) => {
@@ -199,7 +230,7 @@ function SchedulingLoggedOut() {
         <div className="w-full min-h-screen flex bg-light-backgroud items-center flex-col lg:w-[550px] lg:rounded-2xl ">
           <TopBar title="Novo agendamento" OnClickBack={() => { navigate("/login") }} />
           <div className="w-full flex flex-col gap-2 max-w-[420px] px-6">
-            <text className="text-3xl font-bold text-primary-green mb-2 mt-8">Seus dados</text>
+            <p className="text-3xl font-bold text-primary-green mb-2 mt-8">Seus dados</p>
             <Input title="Nome" titleColor="dark" value={form.clienteNome}
               requiredField
               error={nomeError}
@@ -230,7 +261,7 @@ function SchedulingLoggedOut() {
                 copiaForm.clienteTel = v.target.value.replace(/\D/g, '')
                 setForm(copiaForm)
               }} />
-            <text className="text-3xl font-bold text-primary-green mb-2 mt-6">Endereço</text>
+            <p className="text-3xl font-bold text-primary-green mb-2 mt-6">Endereço</p>
             <Input title="CEP"
               titleColor="dark"
               mask="99999-999"
@@ -367,14 +398,21 @@ function SchedulingLoggedOut() {
               <p className="text-sm text-red-500 mt-2">*É necessário informar pelo menos um material para a coleta. Clique no botão "Adicionar material" para registrar um novo</p>
             }
           </div>
+          {
+            serverError &&
+            <div className="w-full mt-4 px-6 max-w-[420px]">
+              <Alert severity="error">Erro ao comunicar com o servidor. Tente novamente mais tarde.</Alert>
+            </div>
+          }
           <div className="w-full flex items-center justify-center">
             <div className="w-2/3 mt-6 max-w-[250px] mb-16">
               <PrimaryButton title="Agendar coleta" leftIcon="IconCheck" onClick={() => {
                 if (validarCampos()) {
-
+                  handleSave()
                 }
                 else {
-                  setSnackBarOpen(true)
+                  appContext.setMessageSnackBar("Preencha todos os campos obrigatórios")
+                  appContext.setSnackBarOpen(true)
                 }
               }} />
             </div>

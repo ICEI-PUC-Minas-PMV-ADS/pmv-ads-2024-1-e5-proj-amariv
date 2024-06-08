@@ -29,6 +29,9 @@ export type AppContextType = {
   totalPagesColetasFinalizado: number
   pageNumberColetasFinalizado: number
   cancelarColeta: (coletaId: number) => void
+  useAlert: (message: string, onClose: () => void) => void
+  unavailableDates: string[]
+  resetUnavailableDates: () => Promise<void>
 };
 
 export const AppContext = createContext<AppContextType>(null!);

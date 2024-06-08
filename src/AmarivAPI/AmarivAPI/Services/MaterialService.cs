@@ -84,7 +84,8 @@ namespace AmarivAPI.Services
         {
             try
             {
-                List<ReadMaterialDto> materiais = _mapper.Map<List<ReadMaterialDto>>(_context.Materiais.ToList());
+                var materiaisDB = _context.Materiais.ToList();
+                List<ReadMaterialDto> materiais = _mapper.Map<List<ReadMaterialDto>>(materiaisDB);
                 if (materiais == null)
                     return null;
 

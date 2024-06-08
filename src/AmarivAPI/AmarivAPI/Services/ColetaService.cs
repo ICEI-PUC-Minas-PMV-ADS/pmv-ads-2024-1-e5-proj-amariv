@@ -268,14 +268,16 @@ namespace AmarivAPI.Services
 
                 if (coleta != null)
                 {
+                    var roteiro = _context.RoteiroDeColetas.FirstOrDefault(r => r.Id == coleta.RoteiroColetaId);
                     coleta.IsSuccess = false;
                     coleta.Status = false;
                     coleta.RoteiroColetaId = null;
-                    var roteiro = _context.RoteiroDeColetas.FirstOrDefault(r => r.Id == coleta.RoteiroColetaId);
                     if (roteiro != null)
                     {
                         roteiro.NumeroDeColetas -= 1;
+                        roteiro.Delete = true;
                         _context.Update(roteiro);
+                        _context.SaveChanges();
                     }
                 }
                 else

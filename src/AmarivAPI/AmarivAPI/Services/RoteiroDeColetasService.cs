@@ -190,5 +190,19 @@ namespace AmarivAPI.Services
             else
                 return true;                         
         }
+
+        public List<DateTime> DatasIndisponiveisAPartirDeHoje()
+        {
+                var hoje = DateTime.Today;
+
+            var datasIndisponiveis = _context.RoteiroDeColetas
+                .Where(r => r.DataRoteiro >= hoje && r.Delete == false)
+                    .GroupBy(r => r.DataRoteiro)
+                    .Where(g => g.Count() >= g.First().NumeroMaxColetas)
+                    .Select(g => g.Key)
+                    .ToList();
+
+                return datasIndisponiveis;
+        }
     }
 }

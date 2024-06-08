@@ -26,7 +26,7 @@ import { ColetaService } from "../services/ColetaService";
 function Scheduling() {
   const location = useLocation()
   const navigate = useNavigate()
-  const authContext = useContext(AppContext)
+  const appContext = useContext(AppContext)
   const [loading, setLoading] = useState(false)
   const [serverError, setServerError] = useState(false)
 
@@ -42,11 +42,11 @@ function Scheduling() {
   const [errorEndereco, setErrorEndereco] = useState(false)
 
   const [form, setForm] = useState<CreateColetaForm>({
-    userId: authContext.user?.id as string,
-    enderecoId: authContext.enderecos.length == 0 ? 0 : authContext.enderecos[0].id,
-    clienteNome: authContext.user?.nome as string,
-    clienteCel: authContext.user?.celular as string,
-    clienteTel: authContext.user?.telefone ? authContext.user?.telefone : null,
+    userId: appContext.user?.id as string,
+    enderecoId: appContext.enderecos.length == 0 ? 0 : appContext.enderecos[0].id,
+    clienteNome: appContext.user?.nome as string,
+    clienteCel: appContext.user?.celular as string,
+    clienteTel: appContext.user?.telefone ? appContext.user?.telefone : null,
     dataCadastro: new Date().toISOString(),
     dataDeColeta: "Selecionar",
     listaItensColeta: "",
@@ -75,8 +75,10 @@ function Scheduling() {
 
   const ItemMaterial = (material: any, index: number) => {
     return (
-      <div className=" bg-input-color w-full flex flex-col p-4 rounded-lg">
-        <p className="">Material: {authContext.materiais.find(x => x.id == material.idMaterial)?.descricao}</p>
+      <div 
+      key={index}
+      className=" bg-input-color w-full flex flex-col p-4 rounded-lg">
+        <p className="">Material: {appContext.materiais.find(x => x.id == material.idMaterial)?.descricao}</p>
         <p className="">Peso: {material.peso}</p>
         <div className="flex gap-2 mt-4">
           <PrimaryButton color="red" title="Excluir" onClick={() => {
@@ -94,7 +96,7 @@ function Scheduling() {
     return (
       <div
         key={index}
-        className={fundo({ bordaAtiva: index != authContext.enderecos.length - 1 })}
+        className={fundo({ bordaAtiva: index != appContext.enderecos.length - 1 })}
         onClick={async () => {
           setErrorEndereco(false)
           let copia = { ...form }
@@ -150,7 +152,7 @@ function Scheduling() {
 
   const handleSave = async () => {
     setLoading(true)
-    let endereco = authContext.enderecos.find(x => x.id == form.enderecoId)
+    let endereco = appContext.enderecos.find(x => x.id == form.enderecoId)
     let location = await GoogleService.buscarLatitudeLongitude(endereco as Endereco)
     let copyForm = { ...form }
     if (location != "erro") {
@@ -164,10 +166,11 @@ function Scheduling() {
     copyForm.listaItensColeta = materiaisString
     setForm(copyForm)
     await ColetaService.cadastrarColeta(copyForm).then(async (x) => {
-      await authContext.resetColetasFinalizado()
-      await authContext.resetColetasAberto()
-      authContext.setMessageSnackBar("Agendamento de coleta realizado com sucesso!")
-      authContext.setSnackBarOpen(true)
+      await appContext.resetColetasFinalizado()
+      await appContext.resetColetasAberto()
+      await appContext.resetUnavailableDates()
+      appContext.setMessageSnackBar("Agendamento de coleta realizado com sucesso!")
+      appContext.setSnackBarOpen(true)
       navigate("/")
     }).catch(x => setServerError(true))
     setLoading(false)
@@ -178,6 +181,7 @@ function Scheduling() {
     <>
       <LoadingScreen open={loading} />
       <DatePicker
+      unavailableDates={appContext.unavailableDates}
         value={dayjs(form.dataDeColeta)}
         isOpen={modalDataOpen}
         onAccept={(d) => {
@@ -221,11 +225,11 @@ function Scheduling() {
             <div className="w-full flex flex-col gap-2 max-w-[420px] px-6">
               <p className="text-3xl font-bold text-primary-green mb-2 mt-8">Seus dados</p>
               <div>
-                <p>Nome: {authContext.user?.nome}</p>
-                <p>Celular: {authContext.user?.celular}</p>
+                <p>Nome: {appContext.user?.nome}</p>
+                <p>Celular: {appContext.user?.celular}</p>
                 {
-                  authContext.user?.telefone &&
-                  <p>Telefone: {authContext.user?.telefone}</p>
+                  appContext.user?.telefone &&
+                  <p>Telefone: {appContext.user?.telefone}</p>
                 }
               </div>
               <div className="w-1/2 self-end mt-2">
@@ -234,10 +238,10 @@ function Scheduling() {
               <p className="text-3xl font-bold text-primary-green mb-2 mt-6">Endereço</p>
               <div className={style().enderecoContainer({ errorEndereco: errorEndereco })}>
                 {
-                  authContext.enderecos.map((e, index) => ItemEndereco(e, index))
+                  appContext.enderecos.map((e, index) => ItemEndereco(e, index))
                 }
                 {
-                  authContext.enderecos.length == 0 &&
+                  appContext.enderecos.length == 0 &&
                   <div className=" flex flex-col items-center justify-center p-8 text-center">
                     <img src={img} className="w-1/3 mb-2" />
                     <p className="text-lg">Nenhum endereco cadastrado</p>
@@ -309,8 +313,8 @@ function Scheduling() {
                     handleSave()
                   }
                   else {
-                    authContext.setMessageSnackBar("Preencha todos os campos obrigatórios")
-                    authContext.setSnackBarOpen(true)
+                    appContext.setMessageSnackBar("Preencha todos os campos obrigatórios")
+                    appContext.setSnackBarOpen(true)
                   }
                 }} />
               </div>

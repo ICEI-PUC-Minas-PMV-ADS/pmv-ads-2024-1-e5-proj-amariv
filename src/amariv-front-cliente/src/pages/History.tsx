@@ -6,7 +6,7 @@ import { AppContext } from "../contexts/AuthContext/AppContext";
 import InfiniteScroll from "react-infinite-scroll-component";
 import dataUtils from "../utils/dataUtils";
 import { coletaUtils } from "../utils/coletaUtils";
-import { Chip } from "@mui/material";
+import { Chip, CircularProgress } from "@mui/material";
 import img from "../assets/sem-dados.png"
 import PrimaryButton from "../components/PrimaryButton";
 
@@ -17,11 +17,8 @@ function History() {
   return (
     <div>
       <NavBar path={location.pathname} />
-      <div className="w-full min-h-screen flex bg-light-backgroud items-center lg:items-start flex-col">
+      <div className="w-full min-h-screen flex bg-light-backgroud items-center lg:items-start flex-col pb-20">
         <TopBar title="Histórico" backButton={false} />
-        <div>
-        </div>
-
         {
           appContext.coletasAberto.length > 0 &&
           <div className="w-full flex flex-col gap-2 px-6 items-center mt-8">
@@ -33,17 +30,30 @@ function History() {
                 dataLength={appContext.coletasAberto.length}
                 next={appContext.fetchMoreColetasAberto}
                 hasMore={appContext.pageNumberColetasAberto < appContext.totalPagesColetasAberto}
-                loader={<h4>Loading...</h4>}
+                loader={
+                  <div className="w-full flex items-center justify-center mt-6">
+                    <CircularProgress
+                      size={40}
+                      sx={
+                        {
+                          color: "#53735B"
+                        }
+                      } />
+                  </div>
+                }
                 className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-2"
                 scrollableTarget="scrollableDiv"
               >
                 {appContext.coletasAberto.map((coleta) => (
-                  <div className="w-full rounded-lg p-4 flex flex-col text-black max-w-[400px] border-2 border-black min-h-[148px]">
-                    <div className="w-2/3 mb-2">
-                      <Chip label="Coleta agendada" color="success" />
+                  <div key={coleta.id}
+                    className="w-full rounded-lg p-4 flex flex-col text-black max-w-[400px] border-2 border-black min-h-[148px] justify-between">
+                    <div>
+                      <div className="w-2/3 mb-2">
+                        <Chip label="Coleta agendada" color="success" />
+                      </div>
+                      <p>Data da coleta: {dataUtils.converterData(coleta.dataDeColeta)}</p>
+                      <p>Materiais: {coletaUtils.stringMateriais(coleta.listaItensColeta, appContext.materiais)}</p>
                     </div>
-                    <p>Data da coleta: {dataUtils.converterData(coleta.dataDeColeta)}</p>
-                    <p>Materiais: {coletaUtils.stringMateriais(coleta.listaItensColeta, appContext.materiais)}</p>
                     <div className="w-full flex justify-end">
                       <div className="w-1/2 mt-3">
                         <PrimaryButton color="red" title="Cancelar coleta" onClick={() => appContext.cancelarColeta(coleta.id)} />
@@ -70,12 +80,24 @@ function History() {
                 dataLength={appContext.coletasFinalizado.length}
                 next={appContext.fetchMoreColetasFinalizado}
                 hasMore={appContext.pageNumberColetasFinalizado < appContext.totalPagesColetasFinalizado}
-                loader={<h4>Loading...</h4>}
+                loader={
+                  <div className="w-full flex items-center justify-center mt-6">
+                    <CircularProgress
+                      size={40}
+                      sx={
+                        {
+                          color: "#53735B"
+                        }
+                      } />
+                  </div>
+                }
                 className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-2"
                 scrollableTarget="scrollableDiv"
               >
                 {appContext.coletasFinalizado.map((coleta) => (
-                  <div className="w-full rounded-lg p-4 flex flex-col text-black max-w-[400px] border-2 border-black min-h-[148px]">
+                  <div
+                    key={coleta.id}
+                    className="w-full rounded-lg p-4 flex flex-col text-black max-w-[400px] border-2 border-black min-h-[148px]">
                     <div className="w-2/3 mb-2">
                       {
                         (coleta.status == false && coleta.isSuccess == false) &&
