@@ -1,6 +1,5 @@
 import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
-
 import { RegisterPage } from "./pages/Register";
 import { LoginPage } from "./pages/Login";
 import { PasswordRecoveryPage } from "./pages/password-recovery";
