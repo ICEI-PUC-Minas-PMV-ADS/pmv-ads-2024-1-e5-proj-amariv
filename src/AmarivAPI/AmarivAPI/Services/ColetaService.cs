@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http.HttpResults;
 using AmarivAPI.Data.Dtos.ColetasDto;
 using System.Reflection.Metadata.Ecma335;
+using AmarivAPI.Data.Dtos.PaginationDto;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -55,8 +56,7 @@ namespace AmarivAPI.Services
                     }                                                      
                 }
                 else
-                {
-                                          
+                {                 
                     coleta.RoteiroColetaId = null;
                     _context.Add(coleta);
                     _context.SaveChanges();
@@ -191,7 +191,39 @@ namespace AmarivAPI.Services
                 return _mapper.Map<List<ReadColetaDto>>(lista);
             }
         }
-    
+
+        public PaginationDto<ReadColetaDto> ColetasAberto(string userId, int page = 1, int pageSize = 25)
+        {
+            int coletasCount = _context.Coletas.Where(x => x.UserId == userId).Count();
+            int totalPages = (int)Math.Ceiling((decimal)coletasCount / pageSize);
+            var coletas = _context.Coletas.Where(x => x.UserId == userId && x.Status == true).OrderBy(x => x.DataDeColeta).ToList().Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+            return new PaginationDto<ReadColetaDto>()
+            {
+                TotalItems = coletasCount,
+                PageCount = totalPages,
+                PageSize = pageSize,
+                PageNumber = page,
+                Items = _mapper.Map<List<ReadColetaDto>>(coletas)
+            };
+        }
+
+        public PaginationDto<ReadColetaDto> ColetasFinalizado(string userId, int page = 1, int pageSize = 25)
+        {
+            int coletasCount = _context.Coletas.Where(x => x.UserId == userId).Count();
+            int totalPages = (int)Math.Ceiling((decimal)coletasCount / pageSize);
+            var coletas = _context.Coletas.Where(x => x.UserId == userId && x.Status == false).OrderByDescending(x => x.DataDeColeta).ToList().Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+            return new PaginationDto<ReadColetaDto>()
+            {
+                TotalItems = coletasCount,
+                PageCount = totalPages,
+                PageSize = pageSize,
+                PageNumber = page,
+                Items = _mapper.Map<List<ReadColetaDto>>(coletas)
+            };
+        }
+
         public Result DeletarColeta(int id) 
         {
             try
@@ -219,6 +251,42 @@ namespace AmarivAPI.Services
             catch (Exception)
             {
                 return Result.Fail("Não foi possivel salvar o Roteiro de coleta");
+
+            }
+        }
+
+        public Result CancelarColeta(int id)
+        {
+            try
+            {
+                Coleta coleta = _context.Coletas.FirstOrDefault(c => c.Id == id);
+
+                if (coleta != null)
+                {
+                    var roteiro = _context.RoteiroDeColetas.FirstOrDefault(r => r.Id == coleta.RoteiroColetaId);
+                    coleta.IsSuccess = false;
+                    coleta.Status = false;
+                    coleta.RoteiroColetaId = null;
+                    if (roteiro != null)
+                    {
+                        roteiro.NumeroDeColetas -= 1;
+                        roteiro.Delete = true;
+                        _context.Update(roteiro);
+                        _context.SaveChanges();
+                    }
+                }
+                else
+                {
+                    return Result.Fail("Não foi possivel salvar o Roteiro de coleta");
+                }
+                _context.Update(coleta);
+                _context.SaveChanges();
+
+                return Result.Ok();
+            }
+            catch (Exception)
+            {
+                return Result.Fail("Não foi possivel cancelar a coleta");
 
             }
         }

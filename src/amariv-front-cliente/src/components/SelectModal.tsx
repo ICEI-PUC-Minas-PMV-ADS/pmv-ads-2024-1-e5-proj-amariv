@@ -5,7 +5,7 @@ import TopBar from "./TopBar";
 import { useContext, useState } from "react";
 import { EnderecoForm } from "../types/EnderecoForm";
 import { ViaCepService } from "../services/ViaCepService";
-import { AuthContext } from "../contexts/AuthContext/AuthContext";
+import { AppContext } from "../contexts/AuthContext/AppContext";
 import { EnderecoService } from "../services/EnderecoService";
 import LoadingScreen from "./LoadingScreen";
 import { Alert, Modal } from "@mui/material";
@@ -50,7 +50,7 @@ function SelectModal({ isOpen, onConfirmSelection, onCancelSelection, itens, lab
     const { fundo } = style()
 
     return (
-      <div className={fundo({ bordaAtiva: index != itens.length - 1 })} onClick={() => {
+      <div key={Math.random() * (20000 - 10000) + 10000} className={fundo({ bordaAtiva: index != itens.length - 1 })} onClick={() => {
         if (onConfirmSelection)
           onConfirmSelection(item)
       }}>

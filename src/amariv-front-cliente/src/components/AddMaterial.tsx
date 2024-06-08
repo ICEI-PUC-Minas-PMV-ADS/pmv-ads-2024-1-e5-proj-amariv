@@ -5,7 +5,7 @@ import TopBar from "./TopBar";
 import { useContext, useState } from "react";
 import { EnderecoForm } from "../types/EnderecoForm";
 import { ViaCepService } from "../services/ViaCepService";
-import { AuthContext } from "../contexts/AuthContext/AuthContext";
+import { AppContext } from "../contexts/AuthContext/AppContext";
 import { EnderecoService } from "../services/EnderecoService";
 import LoadingScreen from "./LoadingScreen";
 import { Alert, Modal } from "@mui/material";
@@ -22,7 +22,7 @@ type props = {
 
 function AddMaterial({ isOpen, onCancel, onConfirm }: props) {
 
-  const authContext = useContext(AuthContext)
+  const authContext = useContext(AppContext)
 
   const [modalMaterialOpen, setModalMaterialOpen] = useState(false)
   const [modalPesoOpen, setModalPesoOpen] = useState(false)

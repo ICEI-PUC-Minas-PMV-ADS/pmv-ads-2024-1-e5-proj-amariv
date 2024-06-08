@@ -1,9 +1,9 @@
 import { useContext } from "react";
-import { AuthContext } from "./AuthContext";
+import { AppContext } from "./AppContext";
 import { Navigate, Route } from "react-router-dom";
 
 const UnprotectedRoute = ({ element, ...rest }: { element: React.ReactNode }) => {
-  const { user } = useContext(AuthContext);
+  const { user } = useContext(AppContext);
 
   return !user ? (
     <>

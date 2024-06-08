@@ -1,7 +1,9 @@
 ﻿using AmarivAPI.Data.Dtos;
 using AmarivAPI.Data.Dtos.ColetasDto;
+using AmarivAPI.Data.Dtos.PaginationDto;
 using AmarivAPI.Data.Dtos.RoteiroDeColetasDtos;
 using AmarivAPI.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,6 +17,23 @@ namespace AmarivAPI.Controllers
         public ColetaController (ColetaService coletaService)
         {
             _coletaService = coletaService;
+        }
+
+        [Authorize]
+        [HttpGet("/coletasAberto")]
+        public ActionResult ColetasAberto(int page = 1, int pageSize = 15) {
+            string userId = User.FindFirst("id").Value;
+            var coletas = _coletaService.ColetasAberto(userId, page, pageSize);
+            return Ok(coletas);
+        }
+
+        [Authorize]
+        [HttpGet("/coletasFinalizado")]
+        public ActionResult ColetasFinalizado(int page = 1, int pageSize = 15)
+        {
+            string userId = User.FindFirst("id").Value;
+            var coletas = _coletaService.ColetasFinalizado(userId, page, pageSize);
+            return Ok(coletas);
         }
 
         [HttpGet]
@@ -86,12 +105,22 @@ namespace AmarivAPI.Controllers
         }
 
         [HttpPost]
-        [Route("/VerificaDisponibilidadeColeta")]
+        [Route("/cancelarcoleta")]
+        public IActionResult CancelarColeta(int idColeta)
+        {
+            var result = _coletaService.CancelarColeta(idColeta);
+            if (result.IsSuccess)
+                return Ok(result);
+            else
+                return NotFound();
+    }
+
+[HttpPost]
+    [Route("/VerificaDisponibilidadeColeta")]
         public IActionResult VerificaDisponibilidadeRoteiroColeta([FromBody] string data)
         {
             var result = _coletaService.ConsultaDisponibilidadeColeta(DateTime.Parse(data));
             return Json(result);
         }
-
-    }
+}
 }

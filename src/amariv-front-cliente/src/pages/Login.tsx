@@ -7,7 +7,7 @@ import PasswordInput from "../components/Inputs/PasswordInput";
 import Input from "../components/Inputs/Input";
 import { useNavigate } from "react-router-dom";
 import LoadingScreen from "../components/LoadingScreen";
-import { AuthContext } from "../contexts/AuthContext/AuthContext";
+import { AppContext } from "../contexts/AuthContext/AppContext";
 import { LoginForm } from "../types/LoginForm";
 import { Alert } from "@mui/material";
 
@@ -17,7 +17,7 @@ function Login() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [loading, setLoading] = useState(false)
-  const authContext = useContext(AuthContext)
+  const authContext = useContext(AppContext)
   const [errorEmail, setErrorEmail] = useState(false)
   const [errorPassword, setErrorPassword] = useState(false)
   const [invalidFields, setInvalidFields] = useState(false)

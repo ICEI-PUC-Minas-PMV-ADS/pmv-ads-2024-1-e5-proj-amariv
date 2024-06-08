@@ -13,6 +13,8 @@ namespace AmarivAPI.Data.Dtos.ColetasDto
         public int? EnderecoId { get; set; }
         public int? RoteiroColetaId { get; set; }
         public int? PosicaoLista { get; set; }
+        public bool IsSuccess { get; set; }
+        public bool AprovacaoAdmin { get; set; }
         public string? ClienteNome { get; set; }
         public string? ClienteCel { get; set; }
         public string? ClienteTel { get; set; }

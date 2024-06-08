@@ -1,5 +1,8 @@
-export type CreateColetaForm = {
+export type Coleta = {
+  id: number,
   userId?: string,
+  roteiroColetaId?: number,
+  posicaoLista?: number,
   enderecoId: number,
   clienteNome: string,
   clienteCel: string,
@@ -9,5 +12,8 @@ export type CreateColetaForm = {
   listaItensColeta: string,
   lat: number,
   lon: number,
-  status: boolean
+  status: boolean,
+  delete: boolean,
+  isSuccess: boolean,
+  aprovacaoAdmin: boolean
 }
