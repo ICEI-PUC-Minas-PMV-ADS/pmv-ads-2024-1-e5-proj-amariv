@@ -8,14 +8,15 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using AmarivAPI.Data.Dtos.ColetasDto;
 using System.Reflection.Metadata.Ecma335;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace AmarivAPI.Services
 {
     public class ColetaService
-    {        
+    {
         public IMapper _mapper;
-        public AmarivContext _context {  get; set; }    
+        public AmarivContext _context {  get; set; }
         public ColetaService(IMapper mapper, AmarivContext context)
         {
             _mapper = mapper;
@@ -222,6 +223,103 @@ namespace AmarivAPI.Services
             }
         }
 
+        public List<object> GetColetasByRoteiroDeColeta(int roteiroDeColetaId)
+        {
+            return ToJson(
+                _context.Coletas
+                    .Include(x => x.Usuario)
+                    .Include(x => x.Endereco)
+                    .Where(x => x.RoteiroColetaId == roteiroDeColetaId)
+                    .ToList()
+            );
+        }
 
+        public List<object>  GetColetasByDateWithoutRoteiroDeColeta(DateTime date)
+        {
+            return ToJson(_context.Coletas
+                .Include(x => x.Usuario)
+                .Include(x => x.Endereco)
+                .Where(x =>
+                    x.DataDeColeta.Date == date.Date &&
+                    x.RoteiroColetaId == null &&
+                    x.Status == true
+                ).ToList()
+            );
+        }
+
+        public List<object> ToJson(List<Coleta> listaColetas)
+        {
+            var coletas = new List<object>();
+            foreach (var coleta in listaColetas)
+            {
+                var ListaItensColeta = "";
+                var ListaItensColetaArr = coleta.ListaItensColeta.Split(';');
+
+                foreach (var mat in ListaItensColetaArr)
+                {
+                    try
+                    {
+                        var matArr = mat.Split(":");
+                        var matId = Int32.Parse(matArr[0]);
+                        var matPeso = matArr[1];
+                        var material = _context.Materiais.Where(x => x.Id == matId).FirstOrDefault();
+                        ListaItensColeta += material.Tipo + "(" + matPeso + "), ";
+                    }
+                    catch (Exception)
+                    {
+                    }
+                }
+                if (ListaItensColeta.Length > 0)
+                {
+                    ListaItensColeta = ListaItensColeta.Substring(0, ListaItensColeta.Length - 2);
+                }
+
+                if (coleta.Usuario != null)
+                {
+                    coletas.Add(new
+                    {
+                        Id = coleta.Id,
+                        RoteiroDeColetaId = coleta.RoteiroColetaId,
+                        PosicaoLista = coleta.PosicaoLista,
+                        ClienteNome = coleta.Usuario.Nome,
+                        ClienteCel = coleta.Usuario.Celular,
+                        ClienteTel = coleta.Usuario.PhoneNumber,
+                        Status = coleta.Status,
+                        Cancelada = coleta.Cancelada,
+                        Delete = coleta.Delete,
+                        LocalidadeExata = coleta.LocalidadeExata,
+                        Lat = coleta.Lat,
+                        Lon = coleta.Lon,
+                        DataCadastro = coleta.DataCadastro,
+                        DataDeColeta = coleta.DataDeColeta,
+                        Endereco = coleta.Endereco,
+                        ListaItensColeta = ListaItensColeta,
+                    });
+                }
+                else
+                {
+                    coletas.Add(new
+                    {
+                        Id = coleta.Id,
+                        RoteiroDeColetaId = coleta.RoteiroColetaId,
+                        PosicaoLista = coleta.PosicaoLista,
+                        ClienteNome = coleta.ClienteNome,
+                        ClienteCel = coleta.ClienteCel,
+                        ClienteTel = coleta.ClienteTel,
+                        Cancelada = coleta.Cancelada,
+                        LocalidadeExata = coleta.LocalidadeExata,
+                        Status = coleta.Status,
+                        Delete = coleta.Delete,
+                        Lat = coleta.Lat,
+                        Lon = coleta.Lon,
+                        DataCadastro = coleta.DataCadastro,
+                        DataDeColeta = coleta.DataDeColeta,
+                        Endereco = coleta.Endereco,
+                        ListaItensColeta = ListaItensColeta,
+                    });
+                }
+            }
+            return coletas;
+        }
     }
 }

@@ -16,7 +16,7 @@ namespace AmarivAPI.Controllers
 
         public RoteiroDeColetasController(RoteiroDeColetasService roteiroService )
         {
-            _roteiroService = roteiroService;         
+            _roteiroService = roteiroService;
         }
 
 

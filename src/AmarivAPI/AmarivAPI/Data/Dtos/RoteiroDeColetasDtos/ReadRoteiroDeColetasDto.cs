@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using AmarivAPI.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace AmarivAPI.Data.Dtos.RoteiroDeColetasDtos
 {
@@ -13,7 +14,6 @@ namespace AmarivAPI.Data.Dtos.RoteiroDeColetasDtos
         public Boolean Delete { get; set; }
         public int? NumeroDeColetas { get; set; }
         public int? NumeroMaxColetas { get; set; }
-
-
+        public Usuario? funcionario { get; set; }
     }
 }

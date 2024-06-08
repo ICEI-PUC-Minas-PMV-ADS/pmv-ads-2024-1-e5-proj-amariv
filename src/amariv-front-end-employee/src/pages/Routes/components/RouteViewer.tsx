@@ -102,7 +102,7 @@ export function RouteViewer({ canEdit, onFinishGathering }: RouteViewerProps) {
             </div>}
         </div>
 
-        <div className="w-full h-[4.5rem] p-3 text-white">
+        <div className="w-full h-[6rem] p-3 text-white">
           <strong>Materiais:</strong> {currentGathering?.listaItensColeta ?? ""}.
         </div>
 

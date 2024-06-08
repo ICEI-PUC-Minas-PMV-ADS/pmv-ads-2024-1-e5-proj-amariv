@@ -2,6 +2,7 @@
 
 using AmarivAPI.Models;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AmarivAPI.Data.Dtos.ColetasDto
 {
@@ -24,6 +25,7 @@ namespace AmarivAPI.Data.Dtos.ColetasDto
         public DateTime DataCadastro { get; set; }
         public DateTime DataDeColeta { get; set; }
         public string? ListaItensColeta { get; set; }
-
+        public virtual Usuario? Usuario { get; set; }
+        public virtual Endereco? Endereco { get; set; }
     }
 }

@@ -1,0 +1,850 @@
+diff --git a/src/AmarivAPI/AmarivAPI/AmarivAPI.csproj.user b/src/AmarivAPI/AmarivAPI/AmarivAPI.csproj.user
+index 983ecfc..b2208ee 100644
+--- a/src/AmarivAPI/AmarivAPI/AmarivAPI.csproj.user
++++ b/src/AmarivAPI/AmarivAPI/AmarivAPI.csproj.user
+@@ -2,6 +2,8 @@
+ <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <PropertyGroup>
+     <ActiveDebugProfile>http</ActiveDebugProfile>
++    <Controller_SelectedScaffolderID>MvcControllerEmptyScaffolder</Controller_SelectedScaffolderID>
++    <Controller_SelectedScaffolderCategoryPath>root/Common/MVC/Controller</Controller_SelectedScaffolderCategoryPath>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+     <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
+diff --git a/src/AmarivAPI/AmarivAPI/Controllers/RoteiroDeColetasController.cs b/src/AmarivAPI/AmarivAPI/Controllers/RoteiroDeColetasController.cs
+index 5f99181..aa8ae35 100644
+--- a/src/AmarivAPI/AmarivAPI/Controllers/RoteiroDeColetasController.cs
++++ b/src/AmarivAPI/AmarivAPI/Controllers/RoteiroDeColetasController.cs
+@@ -16,7 +16,7 @@ namespace AmarivAPI.Controllers
+ 
+         public RoteiroDeColetasController(RoteiroDeColetasService roteiroService )
+         {
+-            _roteiroService = roteiroService;         
++            _roteiroService = roteiroService;
+         }
+ 
+ 
+diff --git a/src/AmarivAPI/AmarivAPI/Data/Dtos/ColetasDto/ReadColetaDto.cs b/src/AmarivAPI/AmarivAPI/Data/Dtos/ColetasDto/ReadColetaDto.cs
+index 4bb0fa9..dab138f 100644
+--- a/src/AmarivAPI/AmarivAPI/Data/Dtos/ColetasDto/ReadColetaDto.cs
++++ b/src/AmarivAPI/AmarivAPI/Data/Dtos/ColetasDto/ReadColetaDto.cs
+@@ -2,6 +2,7 @@
+ 
+ using AmarivAPI.Models;
+ using System.ComponentModel.DataAnnotations;
++using System.ComponentModel.DataAnnotations.Schema;
+ 
+ namespace AmarivAPI.Data.Dtos.ColetasDto
+ {
+@@ -22,6 +23,7 @@ namespace AmarivAPI.Data.Dtos.ColetasDto
+         public DateTime DataCadastro { get; set; }
+         public DateTime DataDeColeta { get; set; }
+         public string? ListaItensColeta { get; set; }
+-
++        public virtual Usuario? Usuario { get; set; }
++        public virtual Endereco? Endereco { get; set; }
+     }
+ }
+\ No newline at end of file
+diff --git a/src/AmarivAPI/AmarivAPI/Data/Dtos/RoteiroDeColetasDtos/ReadRoteiroDeColetasDto.cs b/src/AmarivAPI/AmarivAPI/Data/Dtos/RoteiroDeColetasDtos/ReadRoteiroDeColetasDto.cs
+index af9fe3d..a89b7a5 100644
+--- a/src/AmarivAPI/AmarivAPI/Data/Dtos/RoteiroDeColetasDtos/ReadRoteiroDeColetasDto.cs
++++ b/src/AmarivAPI/AmarivAPI/Data/Dtos/RoteiroDeColetasDtos/ReadRoteiroDeColetasDto.cs
+@@ -1,4 +1,5 @@
+-﻿using System.ComponentModel.DataAnnotations;
++﻿using AmarivAPI.Models;
++using System.ComponentModel.DataAnnotations;
+ 
+ namespace AmarivAPI.Data.Dtos.RoteiroDeColetasDtos
+ {
+@@ -13,7 +14,6 @@ namespace AmarivAPI.Data.Dtos.RoteiroDeColetasDtos
+         public Boolean Delete { get; set; }
+         public int? NumeroDeColetas { get; set; }
+         public int? NumeroMaxColetas { get; set; }
+-
+-
++        public Usuario? funcionario { get; set; }
+     }
+ }
+\ No newline at end of file
+diff --git a/src/AmarivAPI/AmarivAPI/EmployeeAPI/Services/UserService.cs b/src/AmarivAPI/AmarivAPI/EmployeeAPI/Services/UserService.cs
+index 9b29ed4..9d3b411 100644
+--- a/src/AmarivAPI/AmarivAPI/EmployeeAPI/Services/UserService.cs
++++ b/src/AmarivAPI/AmarivAPI/EmployeeAPI/Services/UserService.cs
+@@ -1,5 +1,6 @@
+ ﻿#nullable enable
+ 
++using AmarivAPI.Data;
+ using AmarivAPI.EmployeeAPI.Data.DTOs;
+ using AmarivAPI.Models;
+ using AmarivAPI.Services;
+@@ -15,13 +16,16 @@ namespace AmarivAPI.EmployeeAPI.Services
+         private IMapper _mapper;
+         private SignInManager<Usuario> _signInManager;
+         private TokenService _tokenService;
++        private AmarivContext _context;
+ 
+         public UserService(
+             IMapper mapper,
++            AmarivContext context,
+             SignInManager<Usuario> signInManager,
+             TokenService tokenService
+         ) {
+             _mapper = mapper;
++            _context = context;
+             _signInManager = signInManager;
+             _tokenService = tokenService;
+         }
+@@ -78,5 +82,20 @@ namespace AmarivAPI.EmployeeAPI.Services
+             }
+             return Task.FromResult(Result.Fail<string?>("Logout falhou"));
+         }
++
++        public Task<Result<List<Usuario>>> GetFuncionarios()
++        {
++            var role = _context.Roles
++                .Where(x => x.NormalizedName == "FUNCIONARIO")
++                .FirstOrDefault();
++            var funcionariosIds = _context.UserRoles
++                .Where(x => x.RoleId == role.Id)
++                .ToList()
++                .Select(x => x.UserId);
++            var funcionarios = _context.Users
++                .Where(x => funcionariosIds.Contains(x.Id))
++                .ToList();
++            return Task.FromResult(Result.Ok(funcionarios));
++        }
+     }
+ }
+diff --git a/src/AmarivAPI/AmarivAPI/Program.cs b/src/AmarivAPI/AmarivAPI/Program.cs
+index 20177aa..ae847e3 100644
+--- a/src/AmarivAPI/AmarivAPI/Program.cs
++++ b/src/AmarivAPI/AmarivAPI/Program.cs
+@@ -78,6 +78,7 @@ builder.Services.AddScoped<EmailService, EmailService>();
+ builder.Services.AddScoped<UserService, UserService>();
+ builder.Services.AddScoped<NotificacaoService, NotificacaoService>();
+ builder.Services.AddScoped<FuncionarioService>();
++builder.Services.AddScoped<RoteiroDeColetaPageService>();
+ builder.Services.AddAutoMapper(typeof(NotificacaoProfile).Assembly);
+ builder.Services.AddAutoMapper(typeof(FuncionarioProfile).Assembly);
+ 
+diff --git a/src/AmarivAPI/AmarivAPI/Services/ColetaService.cs b/src/AmarivAPI/AmarivAPI/Services/ColetaService.cs
+index 40e8b33..05411da 100644
+--- a/src/AmarivAPI/AmarivAPI/Services/ColetaService.cs
++++ b/src/AmarivAPI/AmarivAPI/Services/ColetaService.cs
+@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http.HttpResults;
+ using AmarivAPI.Data.Dtos.ColetasDto;
+ using System.Reflection.Metadata.Ecma335;
+ using Microsoft.AspNetCore.Mvc;
++using Microsoft.EntityFrameworkCore;
+ 
+ 
+ namespace AmarivAPI.Services
+@@ -15,7 +16,7 @@ namespace AmarivAPI.Services
+     public class ColetaService
+     {        
+         public IMapper _mapper;
+-        public AmarivContext _context {  get; set; }    
++        public AmarivContext _context {  get; set; }
+         public ColetaService(IMapper mapper, AmarivContext context)
+         {
+             _mapper = mapper;
+@@ -190,9 +191,6 @@ namespace AmarivAPI.Services
+             }
+         }
+ 
+-       
+-
+-
+         public Result DeletarColeta(int id) 
+         {
+             try
+@@ -227,6 +225,101 @@ namespace AmarivAPI.Services
+             }
+         }
+ 
++        public List<object> GetColetasByRoteiroDeColeta(int roteiroDeColetaId)
++        {
++            return ToJson(
++                _context.Coletas
++                    .Include(x => x.Usuario)
++                    .Include(x => x.Endereco)
++                    .Where(x => x.RoteiroColetaId == roteiroDeColetaId)
++                    .ToList()
++            );
++        }
++
++        public List<object>  GetColetasByDateWithoutRoteiroDeColeta(DateTime date)
++        {
++            return ToJson(_context.Coletas
++                .Include(x => x.Usuario)
++                .Include(x => x.Endereco)
++                .Where(x =>
++                    x.DataDeColeta.Date == date.Date &&
++                    x.RoteiroColetaId == null &&
++                    x.Status == true
++                ).ToList()
++            );
++        }
+ 
++        public List<object> ToJson(List<Coleta> listaColetas)
++        {
++            var coletas = new List<object>();
++            foreach (var coleta in listaColetas)
++            {
++                var ListaItensColeta = "";
++                var ListaItensColetaArr = coleta.ListaItensColeta.Split(';');
++
++                foreach (var mat in ListaItensColetaArr)
++                {
++                    try
++                    {
++                        var matArr = mat.Split(":");
++                        var matId = Int32.Parse(matArr[0]);
++                        var matPeso = matArr[1];
++                        var material = _context.Materiais.Where(x => x.Id == matId).FirstOrDefault();
++                        ListaItensColeta += material.Tipo + "(" + matPeso + "), ";
++                    }
++                    catch (Exception)
++                    {
++                    }
++                }
++                if (ListaItensColeta.Length > 0)
++                {
++                    ListaItensColeta = ListaItensColeta.Substring(0, ListaItensColeta.Length - 2);
++                }
++
++                if (coleta.Usuario != null)
++                {
++                    coletas.Add(new
++                    {
++                        Id = coleta.Id,
++                        RoteiroDeColetaId = coleta.RoteiroColetaId,
++                        PosicaoLista = coleta.PosicaoLista,
++                        ClienteNome = coleta.Usuario.Nome,
++                        ClienteCel = coleta.Usuario.Celular,
++                        ClienteTel = coleta.Usuario.PhoneNumber,
++                        Status = coleta.Status,
++                        Delete = coleta.Delete,
++                        AprovacaoAdmin = coleta.AprovacaoAdmin,
++                        Lat = coleta.Lat,
++                        Lon = coleta.Lon,
++                        DataCadastro = coleta.DataCadastro,
++                        DataDeColeta = coleta.DataDeColeta,
++                        Endereco = coleta.Endereco,
++                        ListaItensColeta = ListaItensColeta,
++                    });
++                }
++                else
++                {
++                    coletas.Add(new
++                    {
++                        Id = coleta.Id,
++                        RoteiroDeColetaId = coleta.RoteiroColetaId,
++                        PosicaoLista = coleta.PosicaoLista,
++                        ClienteNome = coleta.ClienteNome,
++                        ClienteCel = coleta.ClienteCel,
++                        ClienteTel = coleta.ClienteTel,
++                        Status = coleta.Status,
++                        Delete = coleta.Delete,
++                        AprovacaoAdmin = coleta.AprovacaoAdmin,
++                        Lat = coleta.Lat,
++                        Lon = coleta.Lon,
++                        DataCadastro = coleta.DataCadastro,
++                        DataDeColeta = coleta.DataDeColeta,
++                        Endereco = coleta.Endereco,
++                        ListaItensColeta = ListaItensColeta,
++                    });
++                }
++            }
++            return coletas;
++        }
+     }
+ }
+diff --git a/src/AmarivAPI/AmarivAPI/Services/RoteiroDeColetasService.cs b/src/AmarivAPI/AmarivAPI/Services/RoteiroDeColetasService.cs
+index daf4ec2..bb9eabd 100644
+--- a/src/AmarivAPI/AmarivAPI/Services/RoteiroDeColetasService.cs
++++ b/src/AmarivAPI/AmarivAPI/Services/RoteiroDeColetasService.cs
+@@ -1,11 +1,14 @@
+ ﻿using AmarivAPI.Data;
+ using AmarivAPI.Data.Dtos.MaterialDtos;
+ using AmarivAPI.Data.Dtos.RoteiroDeColetasDtos;
++using AmarivAPI.EmployeeAPI.Data.DTOs;
++using AmarivAPI.EmployeeAPI.Mappers;
+ using AmarivAPI.Models;
+ using AutoMapper;
+ using FluentResults;
+ using Microsoft.AspNetCore.Mvc.TagHelpers;
+ using Microsoft.EntityFrameworkCore;
++using System.Runtime.InteropServices;
+ 
+ namespace AmarivAPI.Services
+ {
+@@ -20,6 +23,79 @@ namespace AmarivAPI.Services
+             _context = context;
+         }
+ 
++        public List<RoteiroDeColetas> GetValidRoteiroDeColetas()
++        {
++            return _context.RoteiroDeColetas
++                .Where(x => x.DataRoteiro.Date >= DateTime.Now.Date)
++                .ToList();
++        }
++
++        public bool GetRoteiroDeColetaByDate(DateTime dataRoteiro)
++        {
++            return _context.RoteiroDeColetas
++                .Where(x => x.DataRoteiro.Date == dataRoteiro.Date)
++                .Any();
++        }
++        
++        public RoteiroDeColetas SaveRoteiroDeColeta(SaveRoteiroDeColetaDto dto)
++        {
++            var t = _context.Database.BeginTransaction();
++            try
++            {
++                RoteiroDeColetas? ro = _context.RoteiroDeColetas.Where(x => x.Id == dto.RoteiroDeColetaId).FirstOrDefault();
++                if (ro == null)
++                {
++                    throw new Exception("Falha ao recuperar roteiro de coleta!");
++                }
++                if (ro.NumeroDeColetas > dto.MaxNumColeta)
++                {
++                    throw new Exception("Não foi possivel alterar o numero maximo de coletas, pois, entra em conflito com as coletas existentes!");
++                }
++
++                ro.NumeroMaxColetas = dto.MaxNumColeta;
++                ro.DataRoteiro = dto.DataRoteiro;
++                ro.FuncionarioId = dto.FuncionarioId;
++
++                _context.RoteiroDeColetas.Entry(ro).CurrentValues.SetValues(ro);
++                _context.SaveChanges();
++
++                t.Commit();
++
++                return ro;
++            }
++            catch (Exception)
++            {
++                throw new Exception("Falha ao criar roteiro de coleta!");
++            }
++        }
++
++        public RoteiroDeColetas CreateRoteiroDeColeta(CriarRoteiroDeColetaDto dto)
++        {
++            var t = _context.Database.BeginTransaction();
++            try
++            {
++                RoteiroDeColetas ro = new RoteiroDeColetas();
++
++                ro.FuncionarioId = dto.FuncionarioId;
++                ro.Delete = false;
++                ro.Status = true;
++                ro.NumeroDeColetas = 0;
++                ro.NumeroMaxColetas = dto.MaxNumColeta;
++                ro.DataRoteiro = dto.DataRoteiro;
++
++                _context.RoteiroDeColetas.Add(ro);
++                _context.SaveChanges();
++
++                t.Commit();
++
++                return ro;
++            }
++            catch(Exception)
++            {
++                throw new Exception("Falha ao criar roteiro de coleta!");
++            }
++        }
++
+ 
+         public Result SalvarRoteiroDeColeta(CreateRoteiroDeColetasDto RoteiroDto)
+         {
+@@ -49,9 +125,6 @@ namespace AmarivAPI.Services
+             return lista.Any(r => r.DataCadastro.Date == roteiro.DataCadastro.Date && r.Delete == false);
+         }
+ 
+-       
+-
+-
+         #region Updates_RoteiroDeColetas
+ 
+         /// <summary>
+@@ -147,7 +220,11 @@ namespace AmarivAPI.Services
+ 
+         public ReadRoteiroDeColetasDto RecuperaRoteiroDeColetas(int id)
+         {
+-            return _mapper.Map<ReadRoteiroDeColetasDto>(_context.RoteiroDeColetas.FirstOrDefault(r => r.Id == id));
++            var roteiroDeColeta = _context.RoteiroDeColetas
++                .Include(x => x.Funcionario)
++                .Where(x => x.Id == id)
++                .FirstOrDefault();
++            return _mapper.Map<ReadRoteiroDeColetasDto>(roteiroDeColeta);
+         }
+ 
+         public List<ReadRoteiroDeColetasDto> RecuperaTodosRoteiroColetas()
+@@ -191,5 +268,140 @@ namespace AmarivAPI.Services
+             else
+                 return true;                         
+         }
++
++        public object OrdenaRoteiroDeColeta(OrdenaRoteiroDeColetasDto dto)
++        {
++            try
++            {
++                var gatheringItinerary = _context.RoteiroDeColetas.Where(x => x.Id == dto.Id).FirstOrDefault();
++                if (gatheringItinerary == null)
++                {
++                    throw new Exception("Falha ao recuperar roteiro de coleta.");
++                }
++
++                var affectedRoutesList = dto.RouteIdMap.Select(x => {
++                    int value = -1;
++                    if (!x.TryGetValue("id", out value))
++                    {
++                        throw new Exception();
++                    }
++                    return value;
++                }).ToList();
++
++                var coletas = _context.Coletas.Where(x => affectedRoutesList.Contains(x.Id)).ToList();
++                if (coletas.Count() == 0 || coletas.Count() != affectedRoutesList.Count)
++                {
++                    throw new Exception("Falha ao recuperar registro de coletas.");
++                }
++                using (var t = _context.Database.BeginTransaction())
++                {
++                    for (int i = 0; i < affectedRoutesList.Count; i++)
++                    {
++                        var coletaId = affectedRoutesList.ElementAt(i);
++                        var coleta = coletas.Where(x => x.Id == coletaId).FirstOrDefault();
++                        if (coleta == null)
++                        {
++                            throw new Exception("Falha ao recuperar registro de coletas");
++                        }
++
++                        var item = dto.RouteIdMap.Single(x => {
++                            int value = -1;
++                            if (!x.TryGetValue("id", out value))
++                            {
++                                throw new Exception();
++                            }
++                            return value == coletaId;
++                        });
++
++                        var newPosicaoLista = -1;
++                        if (!item.TryGetValue("posicaoLista", out newPosicaoLista))
++                        {
++                            throw new Exception();
++                        }
++                        coleta.PosicaoLista = newPosicaoLista + 1;
++
++                        _context.Coletas.Entry(coleta).CurrentValues.SetValues(coleta);
++                        _context.SaveChanges();
++                    }
++                    t.Commit();
++                }
++                return ToJson(coletas);
++            }
++            catch (Exception ex)
++            {
++                throw new Exception("Falha ao recuperar registro de coletas");
++            }
++        }
++
++        public List<object> ToJson(List<Coleta> listaColetas)
++        {
++            var coletas = new List<object>();
++            foreach (var coleta in listaColetas)
++            {
++                var ListaItensColeta = "";
++                var ListaItensColetaArr = coleta.ListaItensColeta.Split(';');
++
++                foreach (var mat in ListaItensColetaArr)
++                {
++                    try
++                    {
++                        var matArr = mat.Split(":");
++                        var matId = Int32.Parse(matArr[0]);
++                        var matPeso = matArr[1];
++                        var material = _context.Materiais.Where(x => x.Id == matId).FirstOrDefault();
++                        ListaItensColeta += material.Tipo + "(" + matPeso + "), ";
++                    }
++                    catch (Exception)
++                    {
++                    }
++                }
++                if (ListaItensColeta.Length > 0)
++                {
++                    ListaItensColeta = ListaItensColeta.Substring(0, ListaItensColeta.Length - 2);
++                }
++
++                if (coleta.Usuario != null)
++                {
++                    coletas.Add(new
++                    {
++                        Id = coleta.Id,
++                        PosicaoLista = coleta.PosicaoLista,
++                        ClienteNome = coleta.Usuario.Nome,
++                        ClienteCel = coleta.Usuario.Celular,
++                        ClienteTel = coleta.Usuario.PhoneNumber,
++                        Status = coleta.Status,
++                        Delete = coleta.Delete,
++                        AprovacaoAdmin = coleta.AprovacaoAdmin,
++                        Lat = coleta.Lat,
++                        Lon = coleta.Lon,
++                        DataCadastro = coleta.DataCadastro,
++                        DataDeColeta = coleta.DataDeColeta,
++                        Endereco = coleta.Endereco,
++                        ListaItensColeta = ListaItensColeta,
++                    });
++                }
++                else
++                {
++                    coletas.Add(new
++                    {
++                        Id = coleta.Id,
++                        PosicaoLista = coleta.PosicaoLista,
++                        ClienteNome = coleta.ClienteNome,
++                        ClienteCel = coleta.ClienteCel,
++                        ClienteTel = coleta.ClienteTel,
++                        Status = coleta.Status,
++                        Delete = coleta.Delete,
++                        AprovacaoAdmin = coleta.AprovacaoAdmin,
++                        Lat = coleta.Lat,
++                        Lon = coleta.Lon,
++                        DataCadastro = coleta.DataCadastro,
++                        DataDeColeta = coleta.DataDeColeta,
++                        Endereco = coleta.Endereco,
++                        ListaItensColeta = ListaItensColeta,
++                    });
++                }
++            }
++            return coletas;
++        }
+     }
+ }
+\ No newline at end of file
+diff --git a/src/amariv-front-end-employee/src/pages/Home/components/Reminder.tsx b/src/amariv-front-end-employee/src/pages/Home/components/Reminder.tsx
+index eaeabf6..e434258 100644
+--- a/src/amariv-front-end-employee/src/pages/Home/components/Reminder.tsx
++++ b/src/amariv-front-end-employee/src/pages/Home/components/Reminder.tsx
+@@ -45,7 +45,7 @@ export const Reminder = ({ duration, gatheringItinerary }: ReminderProps) => {
+             Existem {getGatheringDesc(gatheringCount?.current ?? 0)} disponíveis para serem realizadas.
+           </p>
+           <p className="text-[.85rem]">
+-            <strong>Tempo estimado: {Math.ceil(duration)}min</strong>
++            <strong>Tempo estimado: {Math.ceil(duration * 1.6)}min</strong>
+           </p>
+         </div>}
+     </>
+diff --git a/src/amariv-front-end-employee/src/pages/Routes/components/RouteViewer.tsx b/src/amariv-front-end-employee/src/pages/Routes/components/RouteViewer.tsx
+index 7b285ee..39ec0a7 100644
+--- a/src/amariv-front-end-employee/src/pages/Routes/components/RouteViewer.tsx
++++ b/src/amariv-front-end-employee/src/pages/Routes/components/RouteViewer.tsx
+@@ -102,7 +102,7 @@ export function RouteViewer({ canEdit, onFinishGathering }: RouteViewerProps) {
+             </div>}
+         </div>
+ 
+-        <div className="w-full h-[4.5rem] p-3 text-white">
++        <div className="w-full h-[6rem] p-3 text-white">
+           <strong>Materiais:</strong> {currentGathering?.listaItensColeta ?? ""}.
+         </div>
+ 
+diff --git a/src/amariv-front-end/package-lock.json b/src/amariv-front-end/package-lock.json
+index 3ce6ea3..b10b895 100644
+--- a/src/amariv-front-end/package-lock.json
++++ b/src/amariv-front-end/package-lock.json
+@@ -8,8 +8,12 @@
+       "name": "amariv-front-end",
+       "version": "0.1.0",
+       "dependencies": {
++        "@dnd-kit/core": "^6.1.0",
++        "@dnd-kit/modifiers": "^7.0.0",
++        "@dnd-kit/sortable": "^8.0.0",
+         "@emotion/react": "^11.11.4",
+         "@emotion/styled": "^11.11.5",
++        "@googlemaps/js-api-loader": "^1.16.6",
+         "@mui/icons-material": "^5.15.19",
+         "@mui/material": "^5.15.19",
+         "@tabler/icons-react": "^3.5.0",
+@@ -34,6 +38,9 @@
+         "tailwindcss": "^3.4.3",
+         "typescript": "^4.9.5",
+         "web-vitals": "^2.1.4"
++      },
++      "devDependencies": {
++        "@types/google.maps": "^3.55.8"
+       }
+     },
+     "node_modules/@aashutoshrathi/word-wrap": {
+@@ -2318,6 +2325,68 @@
+         "postcss-selector-parser": "^6.0.10"
+       }
+     },
++    "node_modules/@dnd-kit/accessibility": {
++      "version": "3.1.0",
++      "resolved": "https://registry.npmjs.org/@dnd-kit/accessibility/-/accessibility-3.1.0.tgz",
++      "integrity": "sha512-ea7IkhKvlJUv9iSHJOnxinBcoOI3ppGnnL+VDJ75O45Nss6HtZd8IdN8touXPDtASfeI2T2LImb8VOZcL47wjQ==",
++      "dependencies": {
++        "tslib": "^2.0.0"
++      },
++      "peerDependencies": {
++        "react": ">=16.8.0"
++      }
++    },
++    "node_modules/@dnd-kit/core": {
++      "version": "6.1.0",
++      "resolved": "https://registry.npmjs.org/@dnd-kit/core/-/core-6.1.0.tgz",
++      "integrity": "sha512-J3cQBClB4TVxwGo3KEjssGEXNJqGVWx17aRTZ1ob0FliR5IjYgTxl5YJbKTzA6IzrtelotH19v6y7uoIRUZPSg==",
++      "dependencies": {
++        "@dnd-kit/accessibility": "^3.1.0",
++        "@dnd-kit/utilities": "^3.2.2",
++        "tslib": "^2.0.0"
++      },
++      "peerDependencies": {
++        "react": ">=16.8.0",
++        "react-dom": ">=16.8.0"
++      }
++    },
++    "node_modules/@dnd-kit/modifiers": {
++      "version": "7.0.0",
++      "resolved": "https://registry.npmjs.org/@dnd-kit/modifiers/-/modifiers-7.0.0.tgz",
++      "integrity": "sha512-BG/ETy3eBjFap7+zIti53f0PCLGDzNXyTmn6fSdrudORf+OH04MxrW4p5+mPu4mgMk9kM41iYONjc3DOUWTcfg==",
++      "dependencies": {
++        "@dnd-kit/utilities": "^3.2.2",
++        "tslib": "^2.0.0"
++      },
++      "peerDependencies": {
++        "@dnd-kit/core": "^6.1.0",
++        "react": ">=16.8.0"
++      }
++    },
++    "node_modules/@dnd-kit/sortable": {
++      "version": "8.0.0",
++      "resolved": "https://registry.npmjs.org/@dnd-kit/sortable/-/sortable-8.0.0.tgz",
++      "integrity": "sha512-U3jk5ebVXe1Lr7c2wU7SBZjcWdQP+j7peHJfCspnA81enlu88Mgd7CC8Q+pub9ubP7eKVETzJW+IBAhsqbSu/g==",
++      "dependencies": {
++        "@dnd-kit/utilities": "^3.2.2",
++        "tslib": "^2.0.0"
++      },
++      "peerDependencies": {
++        "@dnd-kit/core": "^6.1.0",
++        "react": ">=16.8.0"
++      }
++    },
++    "node_modules/@dnd-kit/utilities": {
++      "version": "3.2.2",
++      "resolved": "https://registry.npmjs.org/@dnd-kit/utilities/-/utilities-3.2.2.tgz",
++      "integrity": "sha512-+MKAJEOfaBe5SmV6t34p80MMKhjvUz0vRrvVJbPT0WElzaOJ/1xs+D+KDv+tD/NE5ujfrChEcshd4fLn0wpiqg==",
++      "dependencies": {
++        "tslib": "^2.0.0"
++      },
++      "peerDependencies": {
++        "react": ">=16.8.0"
++      }
++    },
+     "node_modules/@emotion/babel-plugin": {
+       "version": "11.11.0",
+       "resolved": "https://registry.npmjs.org/@emotion/babel-plugin/-/babel-plugin-11.11.0.tgz",
+@@ -3114,6 +3183,14 @@
+       "resolved": "https://registry.npmjs.org/@floating-ui/utils/-/utils-0.2.2.tgz",
+       "integrity": "sha512-J4yDIIthosAsRZ5CPYP/jQvUAQtlZTTD/4suA08/FEnlxqW3sKS9iAhgsa9VYLZ6vDHn/ixJgIqRQPotoBjxIw=="
+     },
++    "node_modules/@googlemaps/js-api-loader": {
++      "version": "1.16.6",
++      "resolved": "https://registry.npmjs.org/@googlemaps/js-api-loader/-/js-api-loader-1.16.6.tgz",
++      "integrity": "sha512-V8p5W9DbPQx74jWUmyYJOerhiB4C+MHekaO0ZRmc6lrOYrvY7+syLhzOWpp55kqSPeNb+qbC2h8i69aLIX6krQ==",
++      "dependencies": {
++        "fast-deep-equal": "^3.1.3"
++      }
++    },
+     "node_modules/@grpc/grpc-js": {
+       "version": "1.9.14",
+       "resolved": "https://registry.npmjs.org/@grpc/grpc-js/-/grpc-js-1.9.14.tgz",
+@@ -5236,6 +5313,12 @@
+         "@types/send": "*"
+       }
+     },
++    "node_modules/@types/google.maps": {
++      "version": "3.55.9",
++      "resolved": "https://registry.npmjs.org/@types/google.maps/-/google.maps-3.55.9.tgz",
++      "integrity": "sha512-phaOMtezbT3NaXPKiI3m0OosUS7Nly0auw3Be5s/CgMWLVoDAUP1Yb/Ld0TRoRp8ibrlT4VqM5kmzfvUA0UNLQ==",
++      "dev": true
++    },
+     "node_modules/@types/graceful-fs": {
+       "version": "4.1.9",
+       "resolved": "https://registry.npmjs.org/@types/graceful-fs/-/graceful-fs-4.1.9.tgz",
+diff --git a/src/amariv-front-end/package.json b/src/amariv-front-end/package.json
+index c4b4c1b..2888aa1 100644
+--- a/src/amariv-front-end/package.json
++++ b/src/amariv-front-end/package.json
+@@ -3,8 +3,12 @@
+   "version": "0.1.0",
+   "private": true,
+   "dependencies": {
++    "@dnd-kit/core": "^6.1.0",
++    "@dnd-kit/modifiers": "^7.0.0",
++    "@dnd-kit/sortable": "^8.0.0",
+     "@emotion/react": "^11.11.4",
+     "@emotion/styled": "^11.11.5",
++    "@googlemaps/js-api-loader": "^1.16.6",
+     "@mui/icons-material": "^5.15.19",
+     "@mui/material": "^5.15.19",
+     "@tabler/icons-react": "^3.5.0",
+@@ -53,5 +57,8 @@
+       "last 1 firefox version",
+       "last 1 safari version"
+     ]
++  },
++  "devDependencies": {
++    "@types/google.maps": "^3.55.8"
+   }
+-}
++}
+\ No newline at end of file
+diff --git a/src/amariv-front-end/src/AppRoutes.tsx b/src/amariv-front-end/src/AppRoutes.tsx
+index f1fbc4b..6e982dd 100644
+--- a/src/amariv-front-end/src/AppRoutes.tsx
++++ b/src/amariv-front-end/src/AppRoutes.tsx
+@@ -8,6 +8,7 @@ import { ColetaPage } from "./pages/coleta";
+ import { FuncionarioPage } from "./pages/funcionarios";
+ import { AuthUtils } from "./utils/AuthUtils";
+ import { AppContext } from "./AppContext";
++import { RoteiroDeColetaPage } from "./pages/Roteiro_de_coleta";
+ import MaterialPage from "./pages/materiais/Material";
+ 
+ interface AuthAppRoutesProps {
+@@ -27,6 +28,7 @@ export const AuthAppRoutes: React.FC<AuthAppRoutesProps> = ({ children }) => {
+       <Route path="/home" element={<div>Home</div>} />
+       <Route path="/coleta" element={<ColetaPage />} />
+       <Route path="/materiais" element={<MaterialPage />} />
++      <Route path="/roteiro_de_coleta" element={<RoteiroDeColetaPage />} />
+       {/* <Route path="/Funcionarios" element={<FuncionariosPage />} /> */}
+       <Route path="/*" element={<React.Fragment>{children}</React.Fragment>} />
+     </Routes>
+@@ -46,6 +48,7 @@ export const AppRoutes: React.FC = () => {
+       <Route path="/coleta" element={<ColetaPage />} />
+       <Route path="/materiais" element={<MaterialPage />} />
+       <Route path="/funcionarios" element={<FuncionarioPage />} />
++      <Route path="/roteiro_de_coleta" element={<RoteiroDeColetaPage />} />
+       <Route path="/*" element={<AuthAppRoutes children={undefined} />} />
+       {/* <Route
+         path="/*"
+@@ -59,6 +62,6 @@ export const AppRoutes: React.FC = () => {
+     </Routes>
+   );
+ };
+-     
++
+ 
+ 
+diff --git a/src/amariv-front-end/src/components/Button.tsx b/src/amariv-front-end/src/components/Button.tsx
+index 14f01e0..0ecf4a5 100644
+--- a/src/amariv-front-end/src/components/Button.tsx
++++ b/src/amariv-front-end/src/components/Button.tsx
+@@ -1,6 +1,6 @@
+ import React from 'react';
+-import {VariantProps, tv} from 'tailwind-variants';
+-import {twMerge} from 'tailwind-merge';
++import { VariantProps, tv } from 'tailwind-variants';
++import { twMerge } from 'tailwind-merge';
+ 
+ /**
+  * Variants
+@@ -9,12 +9,18 @@ import {twMerge} from 'tailwind-merge';
+ const button = tv({
+   base: 'w-full rounded-lg',
+   variants: {
++    fontSize: {
++      "small": 'py-2 px-4 text-[.65rem]',
++      "medium": 'py-2 px-4 text-[.85rem]',
++      "default": 'py-4',
++    },
+     color: {
+-      primary: 'py-4 bg-[#CADDA8] text-[#53735B] active:bg-[#AABD88] rounded-lg',
+-      secondary: 'py-4 bg-[#53735B] text-[#CADDA8] active:bg-[#43634B] rounded-2xl',
++      primary: 'bg-[#CADDA8] text-[#53735B] active:bg-[#AABD88] disabled:bg-[#666666] rounded-lg',
++      secondary: 'bg-[#53735B] text-[#CADDA8] active:bg-[#43634B] disabled:bg-[#666666] rounded-2xl',
+     }
+   },
+   defaultVariants: {
++    fontSize: 'default',
+     color: 'primary',
+   }
+ });
+@@ -31,10 +37,10 @@ export type ButtonProps = React.ComponentProps<'button'> & VariantProps<typeof b
+  * Button
+  */
+ 
+-export function Button({ label, color = 'primary', ...props}: ButtonProps) {
++export function Button({ label, color, fontSize, ...props }: ButtonProps) {
+   return (
+     <button {...props}
+-      className={twMerge(button({color}), props.className)}
++      className={twMerge(button({ color, fontSize }), props.className)}
+     >{label}</button>
+   );
+ }
+\ No newline at end of file
+diff --git a/src/amariv-front-end/src/components/re_components/Inputs/SelectInput.tsx b/src/amariv-front-end/src/components/re_components/Inputs/SelectInput.tsx
+index c4062f4..3fdd5ba 100644
+--- a/src/amariv-front-end/src/components/re_components/Inputs/SelectInput.tsx
++++ b/src/amariv-front-end/src/components/re_components/Inputs/SelectInput.tsx
+@@ -26,7 +26,7 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
+ const SelectInput: React.FC<Props> = ({ title, onClickSelectableInput, error, errorMessage, color, value, internalTitle, calendarIcon, iconOpen, disabled, requiredField, titleColor = "dark", ...props }) => {
+ 
+   return (
+-    <div className=" cursor-pointer">
++    <div className="w-full cursor-pointer">
+       <Input color={color} title={title} selectableInput={true} rightIcon={calendarIcon ? "IconCalendarEvent" : (iconOpen ? "IconChevronUp" : "IconChevronDown")} readOnly error={error} errorMessage={errorMessage} value={value} internalTitle={internalTitle} titleColor={titleColor}
+         disabled={disabled} requiredField={requiredField} onClickSelectableInput={onClickSelectableInput}{...props} />
+     </div>
+diff --git a/src/amariv-front-end/src/models/ColetaDtos/ReadColetaDto.tsx b/src/amariv-front-end/src/models/ColetaDtos/ReadColetaDto.tsx
+index c87a1e3..277bbd4 100644
+--- a/src/amariv-front-end/src/models/ColetaDtos/ReadColetaDto.tsx
++++ b/src/amariv-front-end/src/models/ColetaDtos/ReadColetaDto.tsx
+@@ -1,19 +1,24 @@
++/**
++ * ReadColetaDto
++ */
++
++import { EnderecoDto } from "../EnderecoDto";
+ 
+ export interface ReadColetaDto {
+-       
+-id? : number,
+-userId?: string,
+-enderecoId?: number,
+-roteiroColetaId?: number,
+-posicaoLista?: number,
+-clienteNome?: string,
+-clienteCel?: string,
+-clienteTel?: string,
+-status?: string,
+-lat?: number,
+-lon?: number,
+-dataCadastro?: Date,
+-dataDeColeta?: Date,
+-listaItensColeta?: string
+-     
+-}
+\ No newline at end of file
++  id?: number,
++  userId?: string,
++  enderecoId?: number,
++  roteiroDeColetaId?: number,
++  posicaoLista?: number,
++  clienteNome?: string,
++  clienteCel?: string,
++  clienteTel?: string,
++  status?: boolean,
++  delete?: boolean,
++  lat?: number,
++  lon?: number,
++  dataCadastro?: Date,
++  dataDeColeta?: Date,
++  listaItensColeta?: string
++  endereco: EnderecoDto,
++};
+\ No newline at end of file
