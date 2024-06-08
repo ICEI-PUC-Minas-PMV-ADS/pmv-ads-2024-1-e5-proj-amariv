@@ -34,7 +34,7 @@ export function RoutesDesktopPage() {
 
   React.useEffect(() => {
     if (gatheringItinerary && routeItems === null) {
-      const filteredGatherings = gatheringItinerary.coletas.filter((i) => i.status === false && i.delete === false);
+      const filteredGatherings = gatheringItinerary.coletas.filter((i) => i.status === true && i.isSuccess === false && i.delete === false);
       const sortedAndFilteredGatherings = filteredGatherings.sort((a, b) => a.posicaoLista - b.posicaoLista);
       if (sortedAndFilteredGatherings.length > 0) {
         ctrl.setCurrentRoute(sortedAndFilteredGatherings[0]);

@@ -1,8 +1,10 @@
 import React from "react";
 import IcHandle from './../assets/ic_handle.svg';
+import moment from "moment";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { ReadColetaDto } from "../../../models/ColetaDtos/ReadColetaDto";
+import { DateConvert } from "../../../utils/DateConvert";
 
 
 /**
@@ -34,17 +36,15 @@ export function NextRouteItem({ route, position, onClickItem }: NextRouteItemPro
     transition
   };
 
-  console.log(route);
-
   /**
    * Aux functions
    */
 
   const formatDate = React.useCallback((date: Date | undefined): string => {
     if (date) {
-      const tmStr = new Date(date).toISOString().split('T')[1];
-      const [hr, mt] = tmStr.split(':');
-      return `${hr}:${mt}`;
+      console.log('Date: ' + date);
+      console.log('ISO Date: ' + DateConvert.getIsoHour(date));
+      return DateConvert.getIsoHour(date);
     }
     return "";
   }, []);

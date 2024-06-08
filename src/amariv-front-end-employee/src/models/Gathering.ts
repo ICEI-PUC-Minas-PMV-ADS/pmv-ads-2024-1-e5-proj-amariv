@@ -17,7 +17,7 @@ export interface Gathering {
   clienteTel: string,
   status: boolean,
   delete: boolean,
-  aprovacaoAdmin: boolean,
+  isSuccess: boolean,
   lat: number,
   lon: number,
   dataCadastro: string,
