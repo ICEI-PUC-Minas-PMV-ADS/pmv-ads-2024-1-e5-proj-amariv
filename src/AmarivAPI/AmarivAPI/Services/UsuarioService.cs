@@ -27,6 +27,7 @@ namespace AmarivAPI.Services
             _tokenService = tokenService;
             _emailService = emailService;
             _roleManager = roleManager;
+          
         }
 
         public Usuario RecuperaUsuarioPorEmail(string email)
