@@ -271,7 +271,7 @@ namespace AmarivAPI.Services
 
         public List<DateTime> DatasIndisponiveisAPartirDeHoje()
         {
-                var hoje = DateTime.Today;
+            var hoje = DateTime.Today;
 
             var datasIndisponiveis = _context.RoteiroDeColetas
                 .Where(r => r.DataRoteiro >= hoje && r.Delete == false)
@@ -280,7 +280,8 @@ namespace AmarivAPI.Services
                     .Select(g => g.Key)
                     .ToList();
 
-                return datasIndisponiveis;
+            return datasIndisponiveis;
+        }
 
         public object OrdenaRoteiroDeColeta(OrdenaRoteiroDeColetasDto dto)
         {
@@ -419,5 +420,4 @@ namespace AmarivAPI.Services
             return coletas;
         }
     }
-}
 }

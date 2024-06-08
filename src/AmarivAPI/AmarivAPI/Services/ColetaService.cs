@@ -289,6 +289,8 @@ namespace AmarivAPI.Services
                 return Result.Fail("Não foi possivel cancelar a coleta");
 
             }
+        }
+
         public List<object> GetColetasByRoteiroDeColeta(int roteiroDeColetaId)
         {
             return ToJson(
@@ -388,5 +390,4 @@ namespace AmarivAPI.Services
             return coletas;
         }
     }
-}
 }
