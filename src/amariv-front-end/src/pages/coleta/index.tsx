@@ -36,14 +36,16 @@ export function ColetaPage() {
   const [coletaUpdate, setColetaUpdate] = useState<Coleta>()
   const [isUpdate , setIsUpdate] = useState<boolean>(false) 
   
-  useEffect( () => {
+  useEffect( () => {    
     const idColeta = searchParams.get("id");
-    if (idColeta != undefined){
+    
+    if (idColeta != null){   
       CarregaColetaCadastrada(Number.parseInt(idColeta))
       setIsUpdate(true)
+    }else{
+      setIsUpdate(false)
     }
   },[])
-
 
   const CarregaColetaCadastrada = async (id : number) => {
       let coleta : Coleta = {}    
@@ -58,8 +60,7 @@ export function ColetaPage() {
         setNome(coleta.clienteNome ? coleta.clienteNome : "")
         setCel(coleta.clienteCel ? coleta.clienteCel : "")
         setTel(coleta.clienteTel ? coleta.clienteTel : "")
-        setDataColeta(coleta.dataDeColeta ? coleta.dataDeColeta.toString : "")
-
+        setDataColeta(coleta.dataDeColeta ? coleta.dataDeColeta.toString() : "")
       }
     }catch(err){
       alert(err)
@@ -266,7 +267,6 @@ const consultaLocalidadeExata = (local: local) => {
               className="w-[40%] mt-[15px] mb-5"
               onClick={() => {
                if(validarCampos()){ 
-                debugger
                 if(!isUpdate)            
                   CriarAgendamentoColeta()
                 else

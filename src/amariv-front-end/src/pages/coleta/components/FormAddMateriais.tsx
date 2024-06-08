@@ -100,8 +100,7 @@ export function FormAddMateriais({listaMateriais, salvarMateriaislista}: FormAdd
             setModalMaterialOpen(false)
             
         }} />
-
-        
+     
         </div>
         <Button2
           type="button"

@@ -20,7 +20,7 @@ export const coletaService = {
 
     updateColeta: async (col: Coleta) => {
         const jsonBody = JSON.stringify(col)
-        const response = await useApi.post(`/UpdateColeta/${col.id}`,jsonBody,{
+        const response = await useApi.post(`/UpdateColeta?id=${col.id}`,jsonBody,{
             headers :{
                 "Content-type": "application/json; chatset=utf-8"
             }
@@ -28,12 +28,10 @@ export const coletaService = {
         return response.data
     },
 
-    getColeta: async (id: number) => {
-
-        const response = await useApi.get(`/RecuperaColeta/${id}`,{
+    getColeta: async (id: number) => {       
+        const response = await useApi.get(`/RecuperaColeta?id=${id}`,{
             headers: {
-
-                "Content-type": "application/json; chatset=utf-8"
+          "Content-type": "application/json; chatset=utf-8"
             }
         });
         return response.data
@@ -62,7 +60,7 @@ export const coletaService = {
 
     DeleteColeta: async (id: string) => {
 
-        const response = await useApi.post(`/DeletarColeta/${id}`,{
+        const response = await useApi.post(`/DeletarColeta?id=${id}`,{
             headers: {
                 "Content-type": "application/json; chatset=utf-8"
             }

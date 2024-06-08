@@ -14,7 +14,8 @@ export const FormVerificaData = ({setDataColetaFinal, dataColeta }: FormVerifica
     const [horarioColeta, setHorarioColeta] = useState(String)
     const [dataColetaDia, setDataColetaDia] = useState(String)
    
-    const divideHorario = (dat: string) => {        
+    const divideHorario = (dat: string) => {   
+             
         if (dat !== "") {
             let dataDividida: string[] = dat.split("T")
             setHorarioColeta(dataDividida[1])
@@ -24,7 +25,7 @@ export const FormVerificaData = ({setDataColetaFinal, dataColeta }: FormVerifica
 
     useEffect(() => {
         divideHorario(dataColeta)
-    }, [])
+    }, [dataColeta])
     
 
     const formataNovoHorario = (hora: string, dia: string) => {   

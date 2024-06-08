@@ -20,7 +20,7 @@ export const enderecoService = {
 
     updateEndereco: async (end: Endereco) => {
       const jsonBody = JSON.stringify(end) 
-      const response = await useApi.post(`/UpdateEndereco/${end.id}`, jsonBody ,{
+      const response = await useApi.post(`/UpdateEndereco?id=${end.id}`, jsonBody ,{
         headers: {
           "Content-type": "application/json; chatset=utf-8"
         }
@@ -45,17 +45,17 @@ export const enderecoService = {
           'Authorization': `Bearer ${token}`
         },
       })
-      return response;
+      return response.data;
     },
 
     buscarEndereco: async (id: number) => {
       const token = localStorage.getItem('authToken')
-      const response = await useApi.get(`/RecuperaEndereco/${id}`, {
+      const response = await useApi.get(`/RecuperaEndereco?id=${id}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         },
       })
-      return response;
+      return response.data;
     }
       
        
