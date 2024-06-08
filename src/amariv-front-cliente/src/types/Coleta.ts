@@ -13,5 +13,7 @@ export type Coleta = {
   lat: number,
   lon: number,
   status: boolean,
-  delete: boolean
+  delete: boolean,
+  isSuccess: boolean,
+  aprovacaoAdmin: boolean
 }

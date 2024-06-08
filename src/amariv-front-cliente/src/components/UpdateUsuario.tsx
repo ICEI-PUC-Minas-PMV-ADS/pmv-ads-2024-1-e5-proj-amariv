@@ -5,7 +5,7 @@ import TopBar from "./TopBar";
 import { useContext, useState } from "react";
 import { EnderecoForm } from "../types/EnderecoForm";
 import { ViaCepService } from "../services/ViaCepService";
-import { AuthContext } from "../contexts/AuthContext/AuthContext";
+import { AppContext } from "../contexts/AuthContext/AppContext";
 import { EnderecoService } from "../services/EnderecoService";
 import LoadingScreen from "./LoadingScreen";
 import { Alert, Modal, Snackbar } from "@mui/material";
@@ -22,7 +22,7 @@ type props = {
 
 function UpdateUsuario({ isOpen, onClose }: props) {
 
-  const authContext = useContext(AuthContext)
+  const authContext = useContext(AppContext)
   const [loading, setLoading] = useState(false)
 
   const [form, setForm] = useState<UpdateUsuarioForm>({

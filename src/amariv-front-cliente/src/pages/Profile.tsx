@@ -7,13 +7,13 @@ import img from "../assets/sem-dados.png"
 import { tv } from "tailwind-variants";
 import DynamicIcon from "../components/DynamicIcon";
 import { useContext, useState } from "react";
-import { AuthContext } from "../contexts/AuthContext/AuthContext";
+import { AppContext } from "../contexts/AuthContext/AppContext";
 import CreateEndereco from "../components/CreateEndereco";
 import UpdateUsuario from "../components/UpdateUsuario";
 
 function Profile() {
   const location = useLocation()
-  const authContext = useContext(AuthContext)
+  const authContext = useContext(AppContext)
   const navigate = useNavigate()
   const [modalEnderecoOpen, setModalEnderecoOpen] = useState(false)
   const [modalUsuarioOpen, setModalUsuarioOpen] = useState(false)
@@ -50,7 +50,7 @@ function Profile() {
           <p>{endereco.bairro}</p>
           <p>{endereco.cidade}</p>
         </div>
-        <DynamicIcon iconName="IconEdit" size={25} className="text-dark-green" />
+        {/* <DynamicIcon iconName="IconEdit" size={25} className="text-dark-green" /> */}
       </div>
     )
   }
@@ -61,7 +61,7 @@ function Profile() {
       <CreateEndereco isOpen={modalEnderecoOpen} onClose={() => { setModalEnderecoOpen(false) }} />
       <NavBar path={location.pathname} />
       <TopBar title="Meu perfil" backButton={false} />
-      <div className="w-full min-h-screen flex items-center justify-center lg:py-6 bg-light-backgroud">
+      <div className="w-full min-h-screen flex md:items-center justify-center lg:py-6 bg-light-backgroud">
         <div className="w-full flex bg-light-backgroud lg:bg-light-green items-center flex-col lg:w-[550px] lg:rounded-2xl lg:mt-4 mb-20">
           <div className="w-full flex flex-col gap-2 max-w-[420px] px-6">
             <p className="text-3xl font-bold text-primary-green mt-8">{authContext.user?.nome}</p>

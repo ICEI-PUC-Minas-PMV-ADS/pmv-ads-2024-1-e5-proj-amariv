@@ -5,9 +5,9 @@ import { User } from "../../types/User";
 import { Endereco } from "../../types/Endereco";
 import { Material } from "../../types/Material";
 import { UpdateUsuarioForm } from "../../types/UpdateUsuarioForm";
-import { Coleta } from "../../types/Colete";
+import { Coleta } from "../../types/Coleta";
 
-export type AuthContextType = {
+export type AppContextType = {
   user: User | null
   login: (form: LoginForm) => Promise<boolean>
   logout: () => Promise<boolean>;
@@ -18,11 +18,17 @@ export type AuthContextType = {
   updateUsuario: (form: UpdateUsuarioForm) => Promise<boolean>
   setSnackBarOpen: React.Dispatch<React.SetStateAction<boolean>>
   setMessageSnackBar: React.Dispatch<React.SetStateAction<string>>
-  coletas: Coleta[]
-  fetchMoreColetas: () => Promise<void>
-  resetColetas: () => Promise<void>
-  totalPagesColetas: number
-  pageNumberColetas: number
+  coletasAberto: Coleta[]
+  fetchMoreColetasAberto: () => Promise<void>
+  resetColetasAberto: () => Promise<void>
+  totalPagesColetasAberto: number
+  pageNumberColetasAberto: number
+  coletasFinalizado: Coleta[]
+  fetchMoreColetasFinalizado: () => Promise<void>
+  resetColetasFinalizado: () => Promise<void>
+  totalPagesColetasFinalizado: number
+  pageNumberColetasFinalizado: number
+  cancelarColeta: (coletaId: number) => void
 };
 
-export const AuthContext = createContext<AuthContextType>(null!);
+export const AppContext = createContext<AppContextType>(null!);

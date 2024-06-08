@@ -194,11 +194,27 @@ namespace AmarivAPI.Services
             }
         }
 
-        public PaginationDto<ReadColetaDto> ColetasUsuario(string userId, int page = 1, int pageSize = 25)
+        public PaginationDto<ReadColetaDto> ColetasAberto(string userId, int page = 1, int pageSize = 25)
         {
             int coletasCount = _context.Coletas.Where(x => x.UserId == userId).Count();
             int totalPages = (int)Math.Ceiling((decimal)coletasCount / pageSize);
-            var coletas = _context.Coletas.Where(x => x.UserId == userId).OrderBy(x => x.DataDeColeta).ToList().Skip((page - 1) * pageSize).Take(pageSize).ToList();
+            var coletas = _context.Coletas.Where(x => x.UserId == userId && x.Status == true).OrderBy(x => x.DataDeColeta).ToList().Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+            return new PaginationDto<ReadColetaDto>()
+            {
+                TotalItems = coletasCount,
+                PageCount = totalPages,
+                PageSize = pageSize,
+                PageNumber = page,
+                Items = _mapper.Map<List<ReadColetaDto>>(coletas)
+            };
+        }
+
+        public PaginationDto<ReadColetaDto> ColetasFinalizado(string userId, int page = 1, int pageSize = 25)
+        {
+            int coletasCount = _context.Coletas.Where(x => x.UserId == userId).Count();
+            int totalPages = (int)Math.Ceiling((decimal)coletasCount / pageSize);
+            var coletas = _context.Coletas.Where(x => x.UserId == userId && x.Status == false).OrderByDescending(x => x.DataDeColeta).ToList().Skip((page - 1) * pageSize).Take(pageSize).ToList();
 
             return new PaginationDto<ReadColetaDto>()
             {
@@ -244,6 +260,38 @@ namespace AmarivAPI.Services
             }
         }
 
+        public Result CancelarColeta(int id)
+        {
+            try
+            {
+                Coleta coleta = _context.Coletas.FirstOrDefault(c => c.Id == id);
 
+                if (coleta != null)
+                {
+                    coleta.IsSuccess = false;
+                    coleta.Status = false;
+                    coleta.RoteiroColetaId = null;
+                    var roteiro = _context.RoteiroDeColetas.FirstOrDefault(r => r.Id == coleta.RoteiroColetaId);
+                    if (roteiro != null)
+                    {
+                        roteiro.NumeroDeColetas -= 1;
+                        _context.Update(roteiro);
+                    }
+                }
+                else
+                {
+                    return Result.Fail("Não foi possivel salvar o Roteiro de coleta");
+                }
+                _context.Update(coleta);
+                _context.SaveChanges();
+
+                return Result.Ok();
+            }
+            catch (Exception)
+            {
+                return Result.Fail("Não foi possivel cancelar a coleta");
+
+            }
+        }
     }
 }

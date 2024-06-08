@@ -1,10 +1,10 @@
 // ProtectedRoute.js
 import React, { useContext } from 'react';
 import { Route, Navigate, Router } from 'react-router-dom';
-import { AuthContext } from './AuthContext';
+import { AppContext } from './AppContext';
 
 const ProtectedRoute = ({ element }: { element: React.ReactNode }) => {
-  const { user } = useContext(AuthContext);
+  const { user } = useContext(AppContext);
 
   return user ? (
 

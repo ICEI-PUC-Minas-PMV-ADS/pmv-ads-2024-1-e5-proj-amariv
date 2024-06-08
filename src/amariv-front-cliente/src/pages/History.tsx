@@ -2,12 +2,17 @@ import { useLocation } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import TopBar from "../components/TopBar";
 import { useContext } from "react";
-import { AuthContext } from "../contexts/AuthContext/AuthContext";
+import { AppContext } from "../contexts/AuthContext/AppContext";
 import InfiniteScroll from "react-infinite-scroll-component";
+import dataUtils from "../utils/dataUtils";
+import { coletaUtils } from "../utils/coletaUtils";
+import { Chip } from "@mui/material";
+import img from "../assets/sem-dados.png"
+import PrimaryButton from "../components/PrimaryButton";
 
 function History() {
   const location = useLocation()
-  const authContext = useContext(AuthContext)
+  const appContext = useContext(AppContext)
 
   return (
     <div>
@@ -16,66 +21,93 @@ function History() {
         <TopBar title="Histórico" backButton={false} />
         <div>
         </div>
-        <div className="w-full flex flex-col gap-2 px-6 items-center mt-8 mb-6">
-          <div className="w-full flex justify-between mb-6 items-center">
-            <p className="text-2xl font-bold text-black">Coletas em aberto</p>
-          </div>
-          <div className="w-full lg:max-w-[1220px] md:max-w-[810px]">
-            <InfiniteScroll
-              dataLength={authContext.coletas.length}
-              next={authContext.fetchMoreColetas}
-              hasMore={authContext.pageNumberColetas < authContext.totalPagesColetas}
-              loader={<h4>Loading...</h4>}
-              className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-2"
-              scrollableTarget="scrollableDiv"
-            >
-              {authContext.coletas.map((coleta) => (
-                <div className="w-full rounded-lg p-4 flex flex-col text-black max-w-[400px] border-2 border-black">
-                  <p className="font-bold">Coleta agendada</p>
-                  <p>Dia: 00/00/00</p>
-                  <p>Horário: 12:00</p>
-                  <p>Materiais: Ferro (pesado), Plastico (leve)</p>
-                </div>
-              ))}
-            </InfiniteScroll>
-          </div>
 
-
-        </div>
-        <div className="w-full h-[0.3px] my-8 bg-[#B5C8BA] " />
-        <div className="w-full flex flex-col gap-2 px-6 items-center mb-24 lg:mb-16">
-          <div className="w-full flex justify-between mb-6 items-center">
-            <p className="text-2xl font-bold text-black">Coletas finalizadas</p>
-            <div className="w-2/3 max-w-[235px] hidden md:block">
+        {
+          appContext.coletasAberto.length > 0 &&
+          <div className="w-full flex flex-col gap-2 px-6 items-center mt-8">
+            <div className="w-full flex justify-between mb-6 items-center">
+              <p className="text-2xl font-bold text-black">Coletas em aberto</p>
+            </div>
+            <div className="w-full lg:max-w-[1220px] md:max-w-[810px] mb-12">
+              <InfiniteScroll
+                dataLength={appContext.coletasAberto.length}
+                next={appContext.fetchMoreColetasAberto}
+                hasMore={appContext.pageNumberColetasAberto < appContext.totalPagesColetasAberto}
+                loader={<h4>Loading...</h4>}
+                className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-2"
+                scrollableTarget="scrollableDiv"
+              >
+                {appContext.coletasAberto.map((coleta) => (
+                  <div className="w-full rounded-lg p-4 flex flex-col text-black max-w-[400px] border-2 border-black min-h-[148px]">
+                    <div className="w-2/3 mb-2">
+                      <Chip label="Coleta agendada" color="success" />
+                    </div>
+                    <p>Data da coleta: {dataUtils.converterData(coleta.dataDeColeta)}</p>
+                    <p>Materiais: {coletaUtils.stringMateriais(coleta.listaItensColeta, appContext.materiais)}</p>
+                    <div className="w-full flex justify-end">
+                      <div className="w-1/2 mt-3">
+                        <PrimaryButton color="red" title="Cancelar coleta" onClick={() => appContext.cancelarColeta(coleta.id)} />
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </InfiniteScroll>
             </div>
           </div>
-          <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 w-full gap-2 lg:max-w-[1220px] md:max-w-[810px]">
-            <div className="w-full rounded-lg p-4 flex flex-col text-black max-w-[400px] border-2 border-black">
-              <p className="font-bold">Coleta finalizada</p>
-              <p>Dia: 00/00/00</p>
-              <p>Horário: 12:00</p>
-              <p>Materiais: Ferro (pesado), Plastico (leve)</p>
+        }
+        {
+          (appContext.coletasFinalizado.length > 0 && appContext.coletasAberto.length > 0) &&
+          <div className="w-full h-[0.3px] my-8 bg-[#B5C8BA] " />
+        }
+        {
+          appContext.coletasFinalizado.length > 0 &&
+          <div className="w-full flex flex-col gap-2 px-6 items-center mt-8 mb-6">
+            <div className="w-full flex justify-between mb-6 items-center">
+              <p className="text-2xl font-bold text-black">Coletas finalizadas</p>
             </div>
-            <div className="w-full rounded-lg p-4 flex flex-col text-black max-w-[400px] border-2 border-black">
-              <p className="font-bold">Coleta finalizada</p>
-              <p>Dia: 00/00/00</p>
-              <p>Horário: 12:00</p>
-              <p>Materiais: Ferro (pesado), Plastico (leve)</p>
-            </div>
-            <div className="w-full rounded-lg p-4 flex flex-col text-black max-w-[400px] border-2 border-black">
-              <p className="font-bold">Coleta finalizada</p>
-              <p>Dia: 00/00/00</p>
-              <p>Horário: 12:00</p>
-              <p>Materiais: Ferro (pesado), Plastico (leve)</p>
-            </div>
-            <div className="w-full rounded-lg p-4 flex flex-col text-black max-w-[400px] border-2 border-black">
-              <p className="font-bold">Coleta finalizada</p>
-              <p>Dia: 00/00/00</p>
-              <p>Horário: 12:00</p>
-              <p>Materiais: Ferro (pesado), Plastico (leve)</p>
+            <div className="w-full lg:max-w-[1220px] md:max-w-[810px] mb-20">
+              <InfiniteScroll
+                dataLength={appContext.coletasFinalizado.length}
+                next={appContext.fetchMoreColetasFinalizado}
+                hasMore={appContext.pageNumberColetasFinalizado < appContext.totalPagesColetasFinalizado}
+                loader={<h4>Loading...</h4>}
+                className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-2"
+                scrollableTarget="scrollableDiv"
+              >
+                {appContext.coletasFinalizado.map((coleta) => (
+                  <div className="w-full rounded-lg p-4 flex flex-col text-black max-w-[400px] border-2 border-black min-h-[148px]">
+                    <div className="w-2/3 mb-2">
+                      {
+                        (coleta.status == false && coleta.isSuccess == false) &&
+                        <Chip label="Coleta cancelada" color="error" />
+                      }
+                      {
+                        (coleta.status == false && coleta.isSuccess == true) &&
+                        <Chip label="Coleta finalizada" color="warning" />
+                      }
+                    </div>
+                    <p>Data da coleta: {dataUtils.converterData(coleta.dataDeColeta)}</p>
+                    <p>Materiais: {coletaUtils.stringMateriais(coleta.listaItensColeta, appContext.materiais)}</p>
+                    {
+                      (coleta.status == false && coleta.isSuccess == false) &&
+                      <p className="text-[12px] font-extralight mt-2">*Essa coleta foi cancelada, para mais detalhes entre em contato com a AMARIV pelo telefone (27) 3317-3366</p>
+                    }
+                  </div>
+                ))}
+              </InfiniteScroll>
             </div>
           </div>
-        </div>
+        }
+        {
+          (appContext.coletasAberto.length == 0 && appContext.coletasFinalizado.length == 0) &&
+          <div className="w-full flex items-center justify-center mt-32">
+            <div className="p-8 text-center flex items-center flex-col justify-center">
+              <img src={img} className="w-1/3 mb-2 max-w-[150px]" />
+              <p className="text-lg">Você ainda não realizou nenhum agendamento de coleta.</p>
+              <p className=" font-extralight text-[14px]">Clique em "Agendamento" na barra de navegação para criar um novo agendamento de coleta.</p>
+            </div>
+          </div>
+        }
       </div>
     </div>
   );

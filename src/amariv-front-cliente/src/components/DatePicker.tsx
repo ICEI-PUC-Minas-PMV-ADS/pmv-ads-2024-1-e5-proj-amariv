@@ -12,6 +12,11 @@ type props = {
 }
 
 function DatePicker({ onAccept, isOpen, onClose, value }: props) {
+  function disableWeekends(date: dayjs.Dayjs) {
+    const dayOfWeek = date.day();
+    return dayOfWeek === 0 || dayOfWeek === 6;
+  }
+
   return (
     <>
       {
@@ -19,6 +24,8 @@ function DatePicker({ onAccept, isOpen, onClose, value }: props) {
         <div className="w-full h-screen bg-[rgb(0,0,0,0.6)] flex items-center justify-center z-50 fixed">
           <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="pt-br">
             <StaticDatePicker
+              disablePast
+              shouldDisableDate={disableWeekends}
               value={value}
               onAccept={onAccept}
               onClose={onClose}

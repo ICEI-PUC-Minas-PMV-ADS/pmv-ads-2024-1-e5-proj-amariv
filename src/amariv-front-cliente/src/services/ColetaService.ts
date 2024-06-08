@@ -11,13 +11,26 @@ export const ColetaService = {
     });
     return response;
   },
-  buscarColetas: async (page: number) => {
+  coletasAberto: async (page: number) => {
     const token = localStorage.getItem('authToken')
-    const response = await useApi.get(`/coletasusuario?page=${page}`, {
+    const response = await useApi.get(`/coletasaberto?page=${page}`, {
       headers: {
         'Authorization': `Bearer ${token}`
       },
     })
     return response;
-  }
+  },
+  coletasFinalizado: async (page: number) => {
+    const token = localStorage.getItem('authToken')
+    const response = await useApi.get(`/coletasfinalizado?page=${page}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      },
+    })
+    return response;
+  },
+  cancelarColeta: async (idColeta: number) => {
+    const response = await useApi.post(`/cancelarcoleta?idColeta=${idColeta}`)
+    return response;
+  },
 }

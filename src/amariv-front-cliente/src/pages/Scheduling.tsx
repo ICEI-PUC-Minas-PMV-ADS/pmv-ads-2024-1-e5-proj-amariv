@@ -7,7 +7,7 @@ import img from "../assets/sem-dados.png"
 import { tv } from "tailwind-variants";
 import DynamicIcon from "../components/DynamicIcon";
 import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../contexts/AuthContext/AuthContext";
+import { AppContext } from "../contexts/AuthContext/AppContext";
 import CreateEndereco from "../components/CreateEndereco";
 import AddMaterial from "../components/AddMaterial";
 import UpdateUsuario from "../components/UpdateUsuario";
@@ -26,7 +26,7 @@ import { ColetaService } from "../services/ColetaService";
 function Scheduling() {
   const location = useLocation()
   const navigate = useNavigate()
-  const authContext = useContext(AuthContext)
+  const authContext = useContext(AppContext)
   const [loading, setLoading] = useState(false)
   const [serverError, setServerError] = useState(false)
 
@@ -163,7 +163,9 @@ function Scheduling() {
     })
     copyForm.listaItensColeta = materiaisString
     setForm(copyForm)
-    await ColetaService.cadastrarColeta(copyForm).then(x => {
+    await ColetaService.cadastrarColeta(copyForm).then(async (x) => {
+      await authContext.resetColetasFinalizado()
+      await authContext.resetColetasAberto()
       authContext.setMessageSnackBar("Agendamento de coleta realizado com sucesso!")
       authContext.setSnackBarOpen(true)
       navigate("/")

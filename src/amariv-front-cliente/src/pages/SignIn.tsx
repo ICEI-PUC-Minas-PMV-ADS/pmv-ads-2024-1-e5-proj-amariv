@@ -6,14 +6,14 @@ import { useNavigate } from "react-router-dom";
 import { RegisterForm } from "../types/RegisterForm";
 import { useContext, useState } from "react";
 import DynamicIcon from "../components/DynamicIcon";
-import { AuthContext } from "../contexts/AuthContext/AuthContext";
+import { AppContext } from "../contexts/AuthContext/AppContext";
 import LoadingScreen from "../components/LoadingScreen";
 import { Alert, CircularProgress } from "@mui/material";
 import { UserService } from "../services/UserService";
 
 function SignIn() {
   const navigate = useNavigate()
-  const authContext = useContext(AuthContext)
+  const authContext = useContext(AppContext)
   const [loading, setLoading] = useState(false)
   const [signupError, setSignupError] = useState(false)
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/

@@ -19,10 +19,19 @@ namespace AmarivAPI.Controllers
         }
 
         [Authorize]
-        [HttpGet("/coletasUsuario")]
-        public ActionResult ColetasUsuario(int page = 1, int pageSize = 15) {
+        [HttpGet("/coletasAberto")]
+        public ActionResult ColetasAberto(int page = 1, int pageSize = 15) {
             string userId = User.FindFirst("id").Value;
-            var coletas = _coletaService.ColetasUsuario(userId, page, pageSize);
+            var coletas = _coletaService.ColetasAberto(userId, page, pageSize);
+            return Ok(coletas);
+        }
+
+        [Authorize]
+        [HttpGet("/coletasFinalizado")]
+        public ActionResult ColetasFinalizado(int page = 1, int pageSize = 15)
+        {
+            string userId = User.FindFirst("id").Value;
+            var coletas = _coletaService.ColetasFinalizado(userId, page, pageSize);
             return Ok(coletas);
         }
 
@@ -95,6 +104,17 @@ namespace AmarivAPI.Controllers
 
         }
 
+        [HttpPost]
+        [Route("/cancelarcoleta")]
+        public IActionResult CancelarColeta(int idColeta)
+        {
+            var result = _coletaService.CancelarColeta(idColeta);
+            if (result.IsSuccess)
+                return Ok(result);
+            else
+                return NotFound();
+
+        }
 
     }
 }

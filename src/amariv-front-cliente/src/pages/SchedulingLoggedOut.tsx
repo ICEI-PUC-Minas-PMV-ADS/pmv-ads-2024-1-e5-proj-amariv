@@ -6,7 +6,7 @@ import TopBar from "../components/TopBar";
 import img from "../assets/sem-dados.png"
 import { useContext, useState } from "react";
 import { EnderecoForm } from "../types/EnderecoForm";
-import { AuthContext } from "../contexts/AuthContext/AuthContext";
+import { AppContext } from "../contexts/AuthContext/AppContext";
 import { ViaCepService } from "../services/ViaCepService";
 import { CreateColetaForm } from "../types/CreateColetaForm";
 import dayjs from "dayjs";
@@ -21,7 +21,7 @@ import { set } from "date-fns";
 function SchedulingLoggedOut() {
   const cepRegex = /^[0-9]{8}$/
   const navigate = useNavigate()
-  const authContext = useContext(AuthContext)
+  const authContext = useContext(AppContext)
   const [formEndereco, setFormEndereco] = useState<EnderecoForm>({
     logradouro: "",
     numero: "",
