@@ -89,10 +89,9 @@ namespace AmarivAPI.Services
         }
 
         public bool ConsultaDisponibilidadeColeta(DateTime novaData)
-        {
-            var dataFinal = novaData.AddHours(1);
-            List<Coleta> lista = _context.Coletas.ToList();
-            return lista.Any(r => r.DataDeColeta.Date >= novaData && r.DataDeColeta.Date <= dataFinal);
+        {          
+            List<Coleta> lista = _context.Coletas.Where(x => x.Delete == false && x.DataDeColeta.Date == novaData.Date && x.Cancelada == false).ToList();
+            return lista.Any(r => novaData > r.DataDeColeta.AddMinutes(-30) && novaData < r.DataDeColeta.AddMinutes(30));
         }
 
         public Result UpdateColeta(UpdateColetaDto coletaDto, int id)

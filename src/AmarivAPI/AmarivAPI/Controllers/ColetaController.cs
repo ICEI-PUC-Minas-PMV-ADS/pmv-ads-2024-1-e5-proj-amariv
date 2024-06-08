@@ -117,9 +117,9 @@ namespace AmarivAPI.Controllers
 
 [HttpPost]
     [Route("/VerificaDisponibilidadeColeta")]
-        public IActionResult VerificaDisponibilidadeRoteiroColeta([FromBody] string data)
+        public IActionResult VerificaDisponibilidadeRoteiroColeta([FromBody] DateTime data)
         {
-            var result = _coletaService.ConsultaDisponibilidadeColeta(DateTime.Parse(data));
+            var result = _coletaService.ConsultaDisponibilidadeColeta(data);
             return Json(result);
         }
 }

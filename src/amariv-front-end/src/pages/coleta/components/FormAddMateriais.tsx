@@ -1,4 +1,4 @@
-import {  useState } from "react";
+import {  useEffect, useState } from "react";
 import { Button2 } from "../../../components/Button2";
 import { materialService } from "../../../services/MaterialService";
 import React from "react";
@@ -13,8 +13,11 @@ salvarMateriaislista: (materiais : string) => void
 }
 
 export function FormAddMateriais({listaMateriais, salvarMateriaislista}: FormAddMateriaisProps) {
-  
+
   const [materiais, setMateriais] = useState<any[]>([])
+  const [modalMaterialOpen, setModalMaterialOpen] = useState(false)
+  const [materiaisAdicionados, setMateriaisAdicionados] = useState<any[]>([])
+  
 
   React.useEffect(() => {
     materialService.recuperaMateriais()
@@ -22,9 +25,21 @@ export function FormAddMateriais({listaMateriais, salvarMateriaislista}: FormAdd
       .catch((err) => console.log(err));
   },[])
 
-  const [modalMaterialOpen, setModalMaterialOpen] = useState(false)
-  const [materiaisAdicionados, setMateriaisAdicionados] = useState<any[]>([])
- 
+  useEffect( () => {
+     if (listaMateriais !== "" ) {
+      const novaListaMaterial: {idMaterial: string, peso: string}[] = [];
+      const novaLista: string[] = listaMateriais.split(";");
+      novaLista.forEach( item => {  
+        let material = item.split(":");
+        novaListaMaterial.push({
+          idMaterial: material[0],
+          peso: material[1]
+        });
+      }); 
+      setMateriaisAdicionados(novaListaMaterial);
+     }
+  },[listaMateriais]) 
+  
   const ItemMaterial = (material: any, index: number) => {
     return (
       <div key={index} className=" bg-input-color w-full flex flex-col p-4 rounded-lg">
@@ -52,13 +67,14 @@ export function FormAddMateriais({listaMateriais, salvarMateriaislista}: FormAdd
                 numeroItensIncluidos += 1;
               }              
             }
-            salvarMateriaislista(novaListaMateriais);
+            
           }} />
         </div>
       </div>
     )
   }
 
+ 
   return (
     <>
       <div className="title">
@@ -88,6 +104,7 @@ export function FormAddMateriais({listaMateriais, salvarMateriaislista}: FormAdd
               idMaterial: idMaterial,
               peso: peso
             }
+
             let copiaMateriais = [...materiaisAdicionados]
             copiaMateriais.unshift(novoMaterial)
 

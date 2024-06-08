@@ -3,6 +3,7 @@ import { Button2 } from "../../../components/Button2"
 import { InputDate } from "../../../components/InputDate"
 import InputTime from "../../../components/InputTime"
 import { coletaService } from "../../../services/ColetaService"
+import { DateConvert } from "../../../utils/DateConvert"
 
 export type FormVerificaDataProps = {
     setDataColetaFinal : (coleta : string) => void,
@@ -18,7 +19,8 @@ export const FormVerificaData = ({setDataColetaFinal, dataColeta }: FormVerifica
              
         if (dat !== "") {
             let dataDividida: string[] = dat.split("T")
-            setHorarioColeta(dataDividida[1])
+            const [h, m] = dataDividida[1].split(":");
+            setHorarioColeta(`${h}:${m}`)
             setDataColetaDia(dataDividida[0])
         }
     }
@@ -51,7 +53,7 @@ export const FormVerificaData = ({setDataColetaFinal, dataColeta }: FormVerifica
             )
         } else {
             return (
-                <div className=" bg-input-color w-full flex flex-col p-4 rounded-lg">
+                <div className=" bg-[#f5d6d6]  w-[60%] flex flex-row justify-between p-4 rounded-lg">
                     <p className=""> O Horário da coleta não se encontra disponível, por favor escolha outro horario!!</p>
                     <button onClick={() => {setMensagem(undefined)}} className="w-[1.5rem] h-[1.5rem] flex justify-center items-center text-[1.5rem] text-red-600">X</button>
                 </div>
@@ -88,15 +90,14 @@ export const FormVerificaData = ({setDataColetaFinal, dataColeta }: FormVerifica
                         type="button"
                         label="Verificar disponibilidade"
                         className="w-[90%] mt-[15px]"
-                        onClick={ async () => {                                                     
+                        onClick={ async () => {                                                                                
                             const data = formataNovoHorario(horarioColeta, dataColetaDia)  
                             const resultado = await coletaService.VerificaDisponibilidadeColeta(data)
                             if (!resultado) {
-                                setDataColetaFinal(data.toISOString());
+                                setDataColetaFinal(DateConvert.getIsoDateTime(data));
                             }
                             setMensagem(mensagemDisponibilidade(resultado))
-                        }}                      
-                       
+                        }}                                            
                     />
                 </div>
             </div>

@@ -12,6 +12,7 @@ import { GoogleGeocodingService } from "../../services/GoogleGeocodingService";
 import { Endereco } from "../../types/Endereco";
 import { Coleta } from "../../types/Coleta";
 import { useSearchParams } from "react-router-dom";
+import { DateConvert } from "../../utils/DateConvert";
 
 
 export interface local {
@@ -60,7 +61,7 @@ export function ColetaPage() {
         setNome(coleta.clienteNome ? coleta.clienteNome : "")
         setCel(coleta.clienteCel ? coleta.clienteCel : "")
         setTel(coleta.clienteTel ? coleta.clienteTel : "")
-        setDataColeta(coleta.dataDeColeta ? coleta.dataDeColeta.toString() : "")
+        setDataColeta(coleta.dataDeColeta ? DateConvert.getIsoDateTime(coleta.dataDeColeta.toString()) : "")
       }
     }catch(err){
       alert(err)
