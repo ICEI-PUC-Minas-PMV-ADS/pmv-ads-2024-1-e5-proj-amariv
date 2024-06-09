@@ -37,6 +37,7 @@ export function HomeDesktopPage() {
           setPrevTime(estimatedTime);
         }
       } catch (e: any) {
+        console.log(e);
         notification(e);
       }
     })();
@@ -44,7 +45,8 @@ export function HomeDesktopPage() {
 
   React.useEffect(() => {
     if (gatheringItinerary && routeItems === null) {
-      const filteredGatherings = gatheringItinerary.coletas.filter((i) => i.status === true && i.isSuccess === false && i.delete === false);
+      const filteredGatherings = gatheringItinerary.coletas.filter((i) =>
+        i.status === true && i.delete === false && i.isSuccess === false && i.cancelada === false);
       const sortedAndFilteredGatherings = filteredGatherings.sort((a, b) => a.posicaoLista - b.posicaoLista);
       setRouteItems(sortedAndFilteredGatherings);
     }

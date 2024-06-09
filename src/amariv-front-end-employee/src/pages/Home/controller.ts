@@ -83,7 +83,8 @@ export class HomeController extends PageBaseController<HomeState, HomeAction> {
     gatheringItinerary: GatheringItinerary,
   ): Promise<number> {
     const { AdvancedMarkerElement } = await loader.importLibrary("marker");
-    const filteredGatherings = gatheringItinerary.coletas.filter((i) => i.status === false && i.delete === false);
+    const filteredGatherings = gatheringItinerary.coletas.filter((i) =>
+      i.status === true && i.delete === false && i.isSuccess === false && i.cancelada === false);
     const sortedAndFilteredGatherings = filteredGatherings.sort((a, b) => a.posicaoLista - b.posicaoLista);
     const targetPosition = sortedAndFilteredGatherings[0];
 
