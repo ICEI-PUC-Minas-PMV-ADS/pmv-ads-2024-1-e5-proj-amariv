@@ -66,7 +66,7 @@ Segue abaixa a tabela com as tecnologia utilizadas.
 |---------------------|----------------------------------------------------------------------|
 |IDE						            | Visual Studio Code(Frontend), Eclipse PHP(Backend)	                  |
 |Linguagem Frontend			| Typescript											                                                |
-|Linguagem Backend			 | PHP													                                                     |
+|Linguagem Backend			 | C#													                                                     |
 |Framework Frontend			| React													                                                   |
 |Framework Backend			 | Laravel												                                                  |
 |Banco de dados				   | MySQL													                                                   |
@@ -110,10 +110,8 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 |RF-17|	Filtro do histórico de coletas por data, material, status ou funcionário |	Alta | 
 |RF-18|	Permitir o usuário administrador ou funcionário o cadastro de materiais na base de dados |	Alta | 
 |RF-19|	Permitir que os usuários cadastrem materiais que estarão em uma coleta especifica |	Alta | 
-|RF-20|	O sistema deverá gerar alerta e enviar notificação para os usuários em qualquer alteração feita no cadastro de coletas |	Média |
-|RF-21|	O sistema deverá gerar alerta e enviar notificação para os usuários em qualquer alteração feita na rota de coletas |	Média |
-|RF-22|	Gerar relatório com os materiais coletados, filtrando por data, tipo e funcionário |	Baixa |
-|RF-23|	Gerar relatório com a quantidade de entregas , filtrando por data, status e funcionário e material |	Baixa |
+|RF-20|	Permitir o usuário recuperar sua senha através do e-mail cadastrado. |	Alta |
+
 
 ### Requisitos não Funcionais
 
