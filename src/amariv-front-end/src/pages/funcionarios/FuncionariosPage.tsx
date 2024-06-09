@@ -43,7 +43,7 @@ const FuncionariosPage = () => {
 
   const handleAddFuncionario = (event: React.FormEvent) => {
     event.preventDefault();
-
+    debugger
     if (editingIndex !== null) {
       updateFuncionario(editingIndex, FuncionarioMapper.mapFuncionarioToApi(funcionarioInfo)).then(() => {
         fetchFuncionarios().then(data => {
