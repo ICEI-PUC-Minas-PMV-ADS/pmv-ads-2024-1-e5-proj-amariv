@@ -25,7 +25,7 @@ const HistoricoColeta: React.FC<HistoricoColetaProps> = ({ title }) => {
       .then((response) => response.json())
       .then((data) => {
         setColetas(data);
-        setFilteredColetas(data); // Definindo coletas filtradas inicialmente iguais a todas as coletas
+        setFilteredColetas(data ?? []); // Definindo coletas filtradas inicialmente iguais a todas as coletas
       });
   }, []);
 

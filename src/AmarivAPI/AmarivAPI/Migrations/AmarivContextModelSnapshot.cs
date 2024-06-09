@@ -131,46 +131,6 @@ namespace AmarivAPI.Migrations
                     b.ToTable("Enderecos");
                 });
 
-            modelBuilder.Entity("AmarivAPI.Models.Funcionario", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Cargo")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Senha")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Sexo")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<bool>("SuportaPeso")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<string>("Telefone")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Funcionarios");
-                });
-
             modelBuilder.Entity("AmarivAPI.Models.Material", b =>
                 {
                     b.Property<int>("Id")
@@ -295,6 +255,9 @@ namespace AmarivAPI.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
+                    b.Property<string>("Cargo")
+                        .HasColumnType("longtext");
+
                     b.Property<string>("Celular")
                         .HasColumnType("longtext");
 
@@ -339,6 +302,12 @@ namespace AmarivAPI.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("longtext");
 
+                    b.Property<string>("Sexo")
+                        .HasColumnType("longtext");
+
+                    b.Property<bool?>("SuportaPeso")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<string>("Telefone")
                         .HasColumnType("longtext");
 
@@ -365,16 +334,16 @@ namespace AmarivAPI.Migrations
                         {
                             Id = "adm",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "88cef0f5-e63d-4254-8837-e9cbd29076c1",
+                            ConcurrencyStamp = "9d1451df-7ab7-4981-81fe-e5023fba08c2",
                             Email = "amarivadm@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             Nome = "Administrador",
                             NormalizedEmail = "AMARIVADM@GMAIL.COM",
                             NormalizedUserName = "AMARIVADM@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEAa+ainw2Hh0y/PaJLpjVa0yLJJvv1/1aJJKX7YUb/mWtXkTRGDMIkQ7tH5fgYjlkw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDV1jh1gMcnzPLunGKYRmDB9xnKvbmuzLWsVw93eZYy9viytkFLn2rLdaGh6t+Jeyw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "aef373fe-1813-42bf-9b3d-dbaeb6b38e51",
+                            SecurityStamp = "60213d8a-1b16-4602-bae3-79f5a406322b",
                             TwoFactorEnabled = false,
                             UserName = "amarivadm@gmail.com"
                         });

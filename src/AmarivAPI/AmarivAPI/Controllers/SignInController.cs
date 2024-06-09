@@ -1,5 +1,6 @@
 ﻿using AmarivAPI.Data.Dtos.UsuarioDtos;
 using AmarivAPI.Data.Requests;
+using AmarivAPI.DTOs.FuncionarioDtos;
 using AmarivAPI.Services;
 using FluentResults;
 using Microsoft.AspNetCore.Authorization;
@@ -72,6 +73,17 @@ namespace AmarivAPI.Controllers
                 return Ok();
             }
             return StatusCode(StatusCodes.Status302Found);
+        }
+
+        [HttpPost("/CadastrarFuncionario")]
+        public async Task<IActionResult> CadastrarFuncionarioCarlos(FuncionarioDto dto)
+        {
+            Result resultado = await _usuarioService.CadastrarFuncionarioCarlos(dto);
+            if (resultado.IsFailed)
+            {
+                return StatusCode(500);
+            }
+            return Ok(resultado.Successes);
         }
     }
 }

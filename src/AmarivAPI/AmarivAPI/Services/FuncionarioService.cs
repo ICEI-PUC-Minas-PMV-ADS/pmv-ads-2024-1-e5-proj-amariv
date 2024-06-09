@@ -15,48 +15,48 @@ namespace AmarivAPI.Services
         }
 
         // Retorna todos os funcionários existentes
-        public IQueryable<Funcionario> GetAll()
+        public IQueryable<Usuario> GetAll()
         {
-            return _context.Funcionarios;
+            return _context.Users.Where(x => x.Id != "adm");
         }
 
         // Retorna um funcionário com base no ID fornecido
-        public Funcionario GetById(int id)
+        public Usuario GetById(string id)
         {
-            return _context.Funcionarios.FirstOrDefault(f => f.Id == id);
+            return _context.Users.FirstOrDefault(f => f.Id == id);
         }
 
         // Cria um novo funcionário
-        public void Create(Funcionario funcionario)
+        public void Create(Usuario funcionario)
         {
             // Verifica se já existe um funcionário com o mesmo email
-            var existingFuncionario = _context.Funcionarios.FirstOrDefault(f => f.Email == funcionario.Email);
+            var existingFuncionario = _context.Users.FirstOrDefault(f => f.Email == funcionario.Email);
             if (existingFuncionario != null)
             {
                 throw new Exception("Já existe um funcionário com o mesmo email.");
             }
 
             // Adiciona o novo funcionário ao contexto e salva as alterações
-            _context.Funcionarios.Add(funcionario);
+            _context.Users.Add(funcionario);
             _context.SaveChanges();
         }
 
         // Atualiza as informações de um funcionário
-        public void Update(Funcionario funcionario)
+        public void Update(Usuario funcionario)
         {
             // Atualiza o funcionário no contexto e salva as alterações
-            _context.Funcionarios.Update(funcionario);
+            _context.Users.Update(funcionario);
             _context.SaveChanges();
         }
 
         // Exclui um funcionário com base no ID fornecido
-        public void Delete(int id)
+        public void Delete(string id)
         {
             var funcionario = GetById(id);
             if (funcionario != null)
             {
                 // Remove o funcionário do contexto e salva as alterações
-                _context.Funcionarios.Remove(funcionario);
+                _context.Users.Remove(funcionario);
                 _context.SaveChanges();
             }
         }

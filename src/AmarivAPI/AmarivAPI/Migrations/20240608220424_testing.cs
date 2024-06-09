@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AmarivAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class startMigration : Migration
+    public partial class testing : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -48,6 +48,11 @@ namespace AmarivAPI.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Telefone = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    Sexo = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    SuportaPeso = table.Column<bool>(type: "tinyint(1)", nullable: true),
+                    Cargo = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     UserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     NormalizedUserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
@@ -74,32 +79,6 @@ namespace AmarivAPI.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "Funcionarios",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Nome = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Email = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Sexo = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    SuportaPeso = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    Senha = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Cargo = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Telefone = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Funcionarios", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -389,8 +368,8 @@ namespace AmarivAPI.Migrations
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "Celular", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "Nome", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "Telefone", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "adm", 0, null, "db1b44bf-6a2d-48d6-8ec0-a0320c5aec2f", "amarivadm@gmail.com", true, false, null, "Administrador", "AMARIVADM@GMAIL.COM", "AMARIVADM@GMAIL.COM", "AQAAAAIAAYagAAAAEHwK/Kme1JIzjt0jTxiFW0K2ltMwBOI3FrnCW0dvPC9xoUifXh7Y/yPi0Q76oBLFgw==", null, false, "715f97d5-6334-47e3-b3a2-bc05604c3ee1", null, false, "amarivadm@gmail.com" });
+                columns: new[] { "Id", "AccessFailedCount", "Cargo", "Celular", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "Nome", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "Sexo", "SuportaPeso", "Telefone", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "adm", 0, null, null, "9d1451df-7ab7-4981-81fe-e5023fba08c2", "amarivadm@gmail.com", true, false, null, "Administrador", "AMARIVADM@GMAIL.COM", "AMARIVADM@GMAIL.COM", "AQAAAAIAAYagAAAAEDV1jh1gMcnzPLunGKYRmDB9xnKvbmuzLWsVw93eZYy9viytkFLn2rLdaGh6t+Jeyw==", null, false, "60213d8a-1b16-4602-bae3-79f5a406322b", null, null, null, false, "amarivadm@gmail.com" });
 
             migrationBuilder.InsertData(
                 table: "Materiais",
@@ -491,9 +470,6 @@ namespace AmarivAPI.Migrations
 
             migrationBuilder.DropTable(
                 name: "Coletas");
-
-            migrationBuilder.DropTable(
-                name: "Funcionarios");
 
             migrationBuilder.DropTable(
                 name: "Materiais");

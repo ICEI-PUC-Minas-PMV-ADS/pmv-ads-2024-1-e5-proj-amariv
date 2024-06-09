@@ -182,13 +182,7 @@ namespace AmarivAPI.Services
         public List<ReadColetaDto> RecuperaTodasColetas() 
         { 
             var lista = _context.Coletas.ToList();
-            if (lista.Count == 0)
-            {
-                return null;
-            }else
-            {
-                return _mapper.Map<List<ReadColetaDto>>(lista);
-            }
+            return _mapper.Map<List<ReadColetaDto>>(lista);
         }
 
         public PaginationDto<ReadColetaDto> ColetasAberto(string userId, int page = 1, int pageSize = 25)

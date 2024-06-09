@@ -1,20 +1,19 @@
 import React, { useState } from 'react';
 
 interface Funcionario {
-  id: number;
+  id: string;
   nome: string;
   email: string;
   cargo: string;
   sexo: string;
   telefone: string;
-  senha: string;
   suportaPeso: boolean;
 }
 
 interface FuncionarioCardProps {
   funcionario: Funcionario;
   onEdit: () => void;
-  onDelete: (id: number) => void;
+  onDelete: (id: string) => void;
 }
 
 const FuncionarioCard: React.FC<FuncionarioCardProps> = ({ funcionario, onEdit, onDelete }) => {
@@ -33,7 +32,6 @@ const FuncionarioCard: React.FC<FuncionarioCardProps> = ({ funcionario, onEdit, 
         <div>
           <p className="text-sm text-gray-600 mb-1">Sexo: {funcionario.sexo}</p>
           <p className="text-sm text-gray-600 mb-1">Telefone: {funcionario.telefone}</p>
-          <p className="text-sm text-gray-600 mb-1">Senha: {funcionario.senha}</p>
           <p className="text-sm text-gray-600 mb-1">Suporta Peso: {funcionario.suportaPeso ? 'Sim' : 'Não'}</p>
         </div>
       )}

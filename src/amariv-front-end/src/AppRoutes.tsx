@@ -7,7 +7,8 @@ import { ColetaPage } from "./pages/coleta";
 import { AuthUtils } from "./utils/AuthUtils";
 import { AppContext } from "./AppContext";
 import { RoteiroDeColetaPage } from "./pages/Roteiro_de_coleta";
-import MaterialPage from "./pages/materiais/Material";
+import FuncionariosPage from "./pages/funcionarios/FuncionariosPage";
+import MaterialPage from "./pages/materiais/MaterialPage";
 import HistoricoColeta from './pages/historicocoleta/HistoricoColeta';
 interface AuthAppRoutesProps {
   children: React.ReactNode;
@@ -36,6 +37,7 @@ export const AppRoutes: React.FC = () => {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/recovery" element={<PasswordRecoveryPage />} />
       <Route path="/coleta" element={<ColetaPage />} />
+      <Route path="/funcionarios" element={<FuncionariosPage />} />
       <Route path="/materiais" element={<MaterialPage />} />
       <Route path="/roteiro_de_coleta" element={<RoteiroDeColetaPage />} />
       <Route path="/historico-coleta" element={<HistoricoColeta title="Historico Coleta" />} />

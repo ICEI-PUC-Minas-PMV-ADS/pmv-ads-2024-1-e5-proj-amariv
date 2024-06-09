@@ -76,7 +76,6 @@ namespace AmarivAPI.Data
         }
         
         public DbSet<Notificacao> Notificacao { get; set; }
-        public DbSet<Funcionario> Funcionarios { get; set; }
         public DbSet<Coleta> Coletas { get; set; }
         public DbSet<Endereco> Enderecos { get; set; }
         public DbSet<Material> Materiais { get; set; }

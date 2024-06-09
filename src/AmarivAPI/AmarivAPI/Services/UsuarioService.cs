@@ -1,6 +1,7 @@
 ﻿using AmarivAPI.Data;
 using AmarivAPI.Data.Dtos.UsuarioDtos;
 using AmarivAPI.Data.Requests;
+using AmarivAPI.DTOs.FuncionarioDtos;
 using AmarivAPI.Models;
 using AutoMapper;
 using FluentResults;
@@ -197,5 +198,21 @@ namespace AmarivAPI.Services
             }
             
         }
+        public async Task<Result> CadastrarFuncionarioCarlos(FuncionarioDto dto)
+        {
+            Usuario usuario = _mapper.Map<Usuario>(dto);
+            usuario.UserName = dto.Email;
+            IdentityResult resultado = await _userManager.CreateAsync(usuario, dto.Senha);
+            await _userManager.AddToRoleAsync(usuario, "funcionario");
+            if (resultado.Succeeded)
+            {
+                /*var identityUser = RecuperaUsuarioPorEmail(dto.Email);
+                var code = await _userManager.GenerateEmailConfirmationTokenAsync(identityUser);
+                _emailService.EnviarEmailConfirmacao(new[] { identityUser.Email }, "Confirme seu email", identityUser.Id, code);*/
+                return Result.Ok().WithSuccess("Usuário cadastrado com sucesso!");
+            }
+            return Result.Fail("Falha ao cadastrar usuário");
+        }
+        
     }
 }
