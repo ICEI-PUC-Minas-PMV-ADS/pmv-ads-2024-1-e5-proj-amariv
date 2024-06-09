@@ -526,7 +526,7 @@ const RoteiroDeColetaPageImpl = () => {
         value={roteiroDeColetaId} />
 
       <div className="w-full min-h-full bg-[#F4FAF6]">
-        <div className="ms-[20rem] me-[4rem] flex">
+        <div className="ms-[4rem] me-[4rem] flex">
           <div className="flex flex-col w-[90%]">
 
             {/*

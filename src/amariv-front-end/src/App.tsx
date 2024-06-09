@@ -13,16 +13,9 @@ export function App() {
 };
 
 function AppImpl() {
-  const location = useLocation();
-
-  // Verifica se a rota atual é diferente de '/login' e '/register' para exibir a Sidebar
-  const shouldDisplaySidebar = location.pathname !== '/login' && location.pathname !== '/register';
-
-
-
   return (
-    <div className="App">
-      {shouldDisplaySidebar && <Sidebar />}
+    <div className="w-screen min-h-screen flex flex-row bg-[#F4FAF6]">
+      <Sidebar />
       <AppRoutes />
     </div>
   );
