@@ -14,6 +14,7 @@ import { Coleta } from "../../types/Coleta";
 import { useSearchParams } from "react-router-dom";
 import { DateConvert } from "../../utils/DateConvert";
 import { Alert } from "@mui/material";
+import { Button } from "../../components/Button";
 
 
 export interface local {
@@ -101,7 +102,7 @@ const consultaLocalidadeExata = (local: local) => {
             </div>
         )
     }
-}
+  }
 
   const validarCampos = () => {
 
@@ -152,7 +153,7 @@ const consultaLocalidadeExata = (local: local) => {
           dataCadastro: new Date(Date.now()),
           dataDeColeta: new Date(dataColeta),
           listaItensColeta: listaMateriais,
-          status: false
+          status: true
         };
         const coleta = await coletaService.salvarColeta(coletaDto);
         window.alert("A coleta foi salva com sucesso!!")
@@ -178,13 +179,28 @@ const consultaLocalidadeExata = (local: local) => {
           lon: local.longitude,
           localidadeExata: consultaLocalidadeExata(local),
           dataDeColeta: new Date(dataColeta),
-          listaItensColeta: listaMateriais,     
+          listaItensColeta: listaMateriais,
         };
         const col = await coletaService.updateColeta(coletaDto);
         window.alert("A coleta foi salva com sucesso!!")
       }
     } catch (e: any) {
       window.alert(e)
+    }
+  }
+
+  const deletarAgendamento = async () => {
+    try {
+      var confirmar: boolean = window.confirm("Você realmente gostária de deletar essa coleta?")
+      if (confirmar) {
+        if (coletaUpdate !== undefined) {
+          var newColeta: Coleta = coletaUpdate;
+          newColeta.delete = true
+          coletaService.updateColeta(newColeta)
+        }
+      }
+    } catch (err) {
+
     }
   }
 
@@ -264,21 +280,59 @@ const consultaLocalidadeExata = (local: local) => {
               listaMateriais = {listaMateriais}
               salvarMateriaislista = { (materiais) => setListaMateriais(materiais)}             
             /> 
-                     
-            <Button2
-              type="button"
-              label="Enviar agendamento"
-              className="w-[40%] mt-[15px] mb-5"
-              onClick={ () => {
-                
-               if(validarCampos()){ 
-                if(!isUpdate)            
-                  CriarAgendamentoColeta()
-                else
-                  AlterarAgendamentoColeta()       
-               }               
-              }}
-            />
+
+           
+            <div className="flex w-full justify-center">
+              <div className="flex w-fit">
+                {
+                  isUpdate === true &&
+                  <>
+                    <div className="w-[14rem] me-10">
+                      <Button
+                        type="button"
+                        color="info"
+                        label="Cancelar"
+                        className="w-full mt-[15px] mb-5"
+                        onClick={() => {
+
+                        }}
+                      />
+                    </div>
+                    <div className="w-[14rem] me-40">
+                      <Button
+                        type="button"
+                        label="Excluir agendamento"
+                        color="danger"
+
+                        className="w-full mt-[15px] mb-5"
+                        onClick={() => {
+                          if (isUpdate) {
+                            deletarAgendamento()
+                          }
+                        }}
+                      />
+                    </div>
+                  </>
+                }
+              
+                <div className="w-[16rem] me-2">
+                  <Button2
+                    type="button"
+                    label="Enviar agendamento"
+                    className="w-full mt-[15px] mb-5"
+                    onClick={() => {
+
+                      if (validarCampos()) {
+                        if (!isUpdate)
+                          CriarAgendamentoColeta()
+                        else
+                          AlterarAgendamentoColeta()
+                      }
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
           </Form>
         </div>
       </div>

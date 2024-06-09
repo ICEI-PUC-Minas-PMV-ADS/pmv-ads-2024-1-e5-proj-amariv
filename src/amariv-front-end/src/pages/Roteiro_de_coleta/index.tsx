@@ -429,6 +429,8 @@ const RoteiroDeColetaPageImpl = () => {
     return `${ro.funcionario?.nome} (${dtArr[2]}/${dtArr[1]}/${dtArr[0]})`;
   }, [state.availableRoteiroDeColetas, roteiroDeColetaId]);
 
+  console.log(funcionarioId);
+
   /**
    * Layout
    */
