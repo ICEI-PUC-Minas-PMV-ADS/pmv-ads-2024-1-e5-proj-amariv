@@ -76,7 +76,7 @@ namespace AmarivAPI.Controllers
         }
 
         [HttpPost("/CadastrarFuncionario")]
-        public async Task<IActionResult> CadastrarFuncionarioCarlos(FuncionarioDto dto)
+        public async Task<IActionResult> CadastrarFuncionarioCarlos(CreateFuncionarioDto dto)
         {
             Result resultado = await _usuarioService.CadastrarFuncionarioCarlos(dto);
             if (resultado.IsFailed)

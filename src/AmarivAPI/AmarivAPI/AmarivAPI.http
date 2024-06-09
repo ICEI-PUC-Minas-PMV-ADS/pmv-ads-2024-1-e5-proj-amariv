@@ -160,7 +160,7 @@ Accept: application/json
 
 
 ###
-POST {{AmarivAPI_HostAddress}}/api/funcionario
+POST {{AmarivAPI_HostAddress}}/CadastrarFuncionario
 Content-Type: application/json
 Accept: application/json
 
@@ -170,7 +170,7 @@ Accept: application/json
     "Sexo": "Feminino",
     "Telefone": "11987654321",
     "Cargo": "Analista",
-    "Senha": "SenhaSegura123",
+    "Senha": "@Test123",
     "SuportaPeso": true
 }
 

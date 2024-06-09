@@ -198,10 +198,9 @@ namespace AmarivAPI.Services
             }
             
         }
-        public async Task<Result> CadastrarFuncionarioCarlos(FuncionarioDto dto)
+        public async Task<Result> CadastrarFuncionarioCarlos(CreateFuncionarioDto dto)
         {
             Usuario usuario = _mapper.Map<Usuario>(dto);
-            usuario.UserName = dto.Email;
             IdentityResult resultado = await _userManager.CreateAsync(usuario, dto.Senha);
             await _userManager.AddToRoleAsync(usuario, "funcionario");
             if (resultado.Succeeded)

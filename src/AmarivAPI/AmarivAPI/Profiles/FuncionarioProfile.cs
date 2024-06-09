@@ -9,8 +9,9 @@ namespace AmarivAPI.Profiles
         public FuncionarioProfile()
         {
             // Mapeia os dados de FuncionarioDto para Funcionario
-            CreateMap<FuncionarioDto, Usuario>()
+            CreateMap<CreateFuncionarioDto, Usuario>()
                 .ForMember(dest => dest.Nome, opt => opt.MapFrom(src => src.Nome))
+                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.Email))
                 .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
                 .ForMember(dest => dest.Sexo, opt => opt.MapFrom(src => src.Sexo))
                 .ForMember(dest => dest.SuportaPeso, opt => opt.MapFrom(src => src.SuportaPeso))
