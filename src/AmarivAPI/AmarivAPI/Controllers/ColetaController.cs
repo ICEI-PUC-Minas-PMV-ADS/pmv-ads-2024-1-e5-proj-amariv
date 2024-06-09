@@ -21,6 +21,7 @@ namespace AmarivAPI.Controllers
 
         [Authorize]
         [HttpGet("/coletasAberto")]
+        [Authorize(Roles = "admin")]
         public ActionResult ColetasAberto(int page = 1, int pageSize = 15) {
             string userId = User.FindFirst("id").Value;
             var coletas = _coletaService.ColetasAberto(userId, page, pageSize);
@@ -29,6 +30,7 @@ namespace AmarivAPI.Controllers
 
         [Authorize]
         [HttpGet("/coletasFinalizado")]
+        [Authorize(Roles = "admin")]
         public ActionResult ColetasFinalizado(int page = 1, int pageSize = 15)
         {
             string userId = User.FindFirst("id").Value;
@@ -38,6 +40,7 @@ namespace AmarivAPI.Controllers
 
         [HttpGet]
         [Route("/RecuperaColeta")]
+        [Authorize(Roles = "admin")]
         public IActionResult RecuperaColeta(int id)
         {
             var result = _coletaService.RecuperaColeta(id);
@@ -49,6 +52,7 @@ namespace AmarivAPI.Controllers
 
         [HttpGet]
         [Route("/RecuperaTodasColetas")]
+        [Authorize(Roles = "admin")]
         public IActionResult RecuperaTodasColetas()
         {
             var result = _coletaService.RecuperaTodasColetas();
@@ -60,6 +64,7 @@ namespace AmarivAPI.Controllers
 
         [HttpPost]
         [Route("/SalvarColeta")]
+        [Authorize(Roles = "admin")]
         public IActionResult SalvarColeta([FromBody] CreateColetaDto coletaDto)
         {
             var result = _coletaService.SalvarColeta(coletaDto);
@@ -71,6 +76,7 @@ namespace AmarivAPI.Controllers
 
         [HttpPost]
         [Route("/UpdateColeta")]
+        [Authorize(Roles = "admin")]
         public IActionResult UpdateColeta([FromBody] UpdateColetaDto coletaDto, int id)
         {
             var result = _coletaService.UpdateColeta(coletaDto, id);
@@ -83,6 +89,7 @@ namespace AmarivAPI.Controllers
 
         [HttpPost]
         [Route("/InserirColetaEmRoteiro")]
+        [Authorize(Roles = "admin")]
         public IActionResult InserirColetaEmRoteiro(int idColeta , int idRoteiro)
         {
             var result = _coletaService.InserirColetaEmRoteiro(idColeta, idRoteiro);
@@ -94,6 +101,7 @@ namespace AmarivAPI.Controllers
 
         [HttpPost]
         [Route("/DeletarColeta")]
+        [Authorize(Roles = "admin")]
         public IActionResult DeletarColeta(int idColeta)
         {
             var result = _coletaService.DeletarColeta(idColeta);
@@ -106,6 +114,7 @@ namespace AmarivAPI.Controllers
 
         [HttpPost]
         [Route("/cancelarcoleta")]
+        [Authorize(Roles = "admin")]
         public IActionResult CancelarColeta(int idColeta)
         {
             var result = _coletaService.CancelarColeta(idColeta);
@@ -117,6 +126,7 @@ namespace AmarivAPI.Controllers
 
         [HttpPost]
         [Route("/VerificaDisponibilidadeColeta")]
+        [Authorize(Roles = "admin")]
         public IActionResult VerificaDisponibilidadeRoteiroColeta([FromBody] DateTime data)
         {
             var result = _coletaService.ConsultaDisponibilidadeColeta(data);
