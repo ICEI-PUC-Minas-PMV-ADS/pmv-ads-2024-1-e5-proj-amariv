@@ -3,6 +3,7 @@ using AmarivAPI.EmployeeAPI.Data.DTOs;
 using AmarivAPI.EmployeeAPI.Mappers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace AmarivAPI.EmployeeAPI.Controllers
 {
@@ -33,22 +34,35 @@ namespace AmarivAPI.EmployeeAPI.Controllers
                             message = "Coleta não localizado!",
                         });
                     }
-                    if (DateTime.Now.Date != gathering.DataDeColeta)
+                    if (DateTime.Now.Date != gathering.DataDeColeta.Date)
                     {
                         return NotFound(new
                         {
                             message = "Não é possivel finalizar a coleta pois não esta na data da coleta!",
                         });
+                    }                    
+                    if (dto.isSuccess)
+                    {
+                        gathering.IsSuccess = true;
+                    }
+                    else
+                    {
+                        gathering.Cancelada = true;
                     }
                     gathering.Status = true;
-                    gathering.IsSuccess = dto.isSuccess;
 
                     _context.Coletas.Entry(gathering).CurrentValues.SetValues(gathering);
                     _context.SaveChanges();
 
                     _t.Commit();
 
-                    var gatheringItinerary = _context.RoteiroDeColetas.Where(x => x.Id == dto.gatheringItineraryId).FirstOrDefault();
+                    var gatheringItinerary = _context.RoteiroDeColetas
+                        .Include("Funcionario")
+                        .Include("Coletas")
+                        .Include("Coletas.Endereco")
+                        .Where(x => x.Id == dto.gatheringItineraryId)
+                        .FirstOrDefault();
+
                     if (gatheringItinerary == null)
                     {
                         return NotFound(new
@@ -56,14 +70,13 @@ namespace AmarivAPI.EmployeeAPI.Controllers
                             message = "Roteiro de coleta não localizado!",
                         });
                     }
-                    var remainGatherings = _context.Coletas.Where(x => x.RoteiroColetaId == dto.gatheringItineraryId && x.Status == false).ToList();
-                    if (remainGatherings.Count == 0)
+                    /*if (gatheringItinerary.Coletas.Count == 0)
                     {
                         gatheringItinerary.Status = true;
 
                         _context.RoteiroDeColetas.Entry(gatheringItinerary).CurrentValues.SetValues(gatheringItinerary);
                         _context.SaveChanges();
-                    }                    
+                    }*/                  
                     return Ok(new RoteiroDeColetaMapper(_context, gatheringItinerary).ToJson());
                 }                
             }
