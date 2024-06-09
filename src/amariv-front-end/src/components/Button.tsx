@@ -17,8 +17,6 @@ const button = tv({
     color: {
       primary: 'bg-[#CADDA8] text-[#53735B] active:bg-[#AABD88] disabled:bg-[#666666] rounded-lg',
       secondary: 'bg-[#53735B] text-[#CADDA8] active:bg-[#43634B] disabled:bg-[#666666] rounded-2xl',
-      danger : 'bg-[#c25b5b] text-white active:bg-[#43634B] disabled:bg-[#666666] rounded-2xl',
-      info : 'bg-[#afabab] text-black active:bg-[#43634B] disabled:bg-[#666666] rounded-2xl',
     }
   },
   defaultVariants: {

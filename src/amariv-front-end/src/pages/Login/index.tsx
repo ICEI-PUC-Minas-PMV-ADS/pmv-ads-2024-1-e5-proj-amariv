@@ -8,25 +8,26 @@ import { Button } from "../../components/Button";
 import { Form } from "../../components/Form";
 import { AuthUtils } from "../../utils/AuthUtils";
 import { User } from "../../models/User";
+import "./index.css";
 
 const API_BASE_URL = 'http://localhost:5100';
 
 export function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  
   // Usa o hook useNavigate para redirecionar o usuário após o login
   const navigate = useNavigate();
-
+  
   // Usa o hook useAppContext para acessar o contexto da aplicação
   const { state, dispatch } = useAppContext();
 
   const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    e.preventDefault(); 
 
     try {
       console.log('Enviando solicitação de login...');
-
+      
       const response = await fetch(`${API_BASE_URL}/login`, {
         method: "POST",
         headers: {
@@ -40,10 +41,10 @@ export function LoginPage() {
 
       if (response.ok) {
         console.log('Login bem-sucedido!');
-
+        
         // Extrai os dados do usuário da resposta JSON
         const responseData = await response.json();
-
+        
         // Exibir o token retornado no console
         console.log('Token retornado:', responseData.token);
 
@@ -54,17 +55,17 @@ export function LoginPage() {
           email: responseData.email,
           telefone: responseData.telefone || undefined,
         };
-
+        
         // Chama a função login do AuthUtils passando o contexto da aplicação e o objeto user PODE GERAR UM ERRO!!!
         AuthUtils.login({ state, dispatch }, responseData.token);
-
+        
         navigate("/home");
       } else {
         console.log('Login falhou.');
-
+        
         // Extrai a mensagem de erro da resposta JSON
         const errorData = await response.json();
-
+        
         alert(errorData.message || "Usuário ou senha inválidos");
       }
     } catch (error) {
@@ -93,7 +94,7 @@ export function LoginPage() {
 
             <div className="login-form">
               <div className="entrar-message">Entrar</div>
-
+              
               <Form onSubmit={handleLogin}>
                 <div>
                   <Input

@@ -6,12 +6,11 @@ interface FilterHistoricoProps {
 
 const FilterHistorico: React.FC<FilterHistoricoProps> = ({ onFilterChange }) => {
   const [filterValues, setFilterValues] = useState({
-    funcionario: '',
+    pesquisa: '',
     peso: '',
     status: '',
     material: '',
-    dataDeColetaDe: '',
-    dataDeColetaAte: ''
+    dataDeColeta: ''
   });
 
   const handleFilterChange = (value: string, field: string) => {
@@ -24,25 +23,27 @@ const FilterHistorico: React.FC<FilterHistoricoProps> = ({ onFilterChange }) => 
       <h2 className="text-xl font-bold mb-4 text-[#666666]">Filtro</h2>
       <div className="w-full p-9 px-20 border rounded-lg bg-[#E8F4EB] md:flex md:flex-wrap md:gap-10">
         <div className="col-span-1 md:col-span-2 lg:col-span-2 xl:col-span-1">
-          <label className="block mb-2 text-gray-600">Funcionário </label>
+          <label className="block mb-2 text-gray-600">Pesquisa</label>
           <input
             type="text"
-            value={filterValues.funcionario}
-            onChange={(e) => handleFilterChange(e.target.value, 'funcionario')}
+            value={filterValues.pesquisa}
+            onChange={(e) => handleFilterChange(e.target.value, 'pesquisa')}
             className="w-full px-20 py-3 border rounded-full focus:outline-none focus:ring focus:border-blue-500"
-           />
+          />
         </div>
-
-        <div className="col-span-1 md:col-span-2 lg:col-span-2 xl:col-span-1">
-          <label className="block mb-2 text-gray-600">Material </label>
-          <input
-            type="text"
-            value={filterValues.material}
-            onChange={(e) => handleFilterChange(e.target.value, 'material')}
-            className="w-full px-20 py-3 border rounded-full focus:outline-none focus:ring focus:border-blue-500"
-           />
+        <div className="col-span-1 md:col-span-1 lg:col-span-1 xl:col-span-1">
+          <label className="block mb-2 text-gray-600">Peso</label>
+          <select
+            value={filterValues.peso}
+            onChange={(e) => handleFilterChange(e.target.value, 'peso')}
+            className="w-full px-10 py-3 border rounded-full focus:outline-none focus:ring focus:border-blue-500"
+          >
+            <option value="">Todos</option>
+            <option value="Leve">Leve</option>
+            <option value="Médio">Médio</option>
+            <option value="Pesado">Pesado</option>
+          </select>
         </div>
-
         <div className="col-span-1 md:col-span-1 lg:col-span-1 xl:col-span-1">
           <label className="block mb-2 text-gray-600">Status</label>
           <select
@@ -51,29 +52,17 @@ const FilterHistorico: React.FC<FilterHistoricoProps> = ({ onFilterChange }) => 
             className="w-full px-10 py-3 border rounded-full focus:outline-none focus:ring focus:border-blue-500"
           >
             <option value="">Todos</option>
-            <option value="0">Em Aberto</option>
-            <option value="1">Concluídas</option>
-            <option value="2">Canceladas</option>
+            <option value="false">Ativo</option>
+            <option value="true">Inativo</option>
           </select>
         </div>
-
         <div className="col-span-1 md:col-span-2 lg:col-span-2 xl:col-span-1">
-          <label className="block mb-2 text-gray-600">Data de Início</label>
+          <label className="block mb-2 text-gray-600">Data de Coleta</label>
           <input
             type="date"
-            value={filterValues.dataDeColetaDe}
-            onChange={(e) => handleFilterChange(e.target.value, 'dataDeColetaDe')}
-            className="w-full px-10 py-3 border rounded-full focus:outline-none focus:ring focus:border-blue-500 me-1"
-          />      
-        </div>
-
-        <div className="col-span-1 md:col-span-2 lg:col-span-2 xl:col-span-1">
-          <label className="block mb-2 text-gray-600">Data de Término</label>         
-          <input
-            type="date"
-            value={filterValues.dataDeColetaAte}
-            onChange={(e) => handleFilterChange(e.target.value, 'dataDeColetaAte')}
-            className="w-full px-10 py-3 border rounded-full focus:outline-none focus:ring focus:border-blue-500 me-1"
+            value={filterValues.dataDeColeta}
+            onChange={(e) => handleFilterChange(e.target.value, 'dataDeColeta')}
+            className="w-full px-10 py-3 border rounded-full focus:outline-none focus:ring focus:border-blue-500"
           />
         </div>
       </div>

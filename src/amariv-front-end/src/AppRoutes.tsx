@@ -7,14 +7,13 @@ import { ColetaPage } from "./pages/coleta";
 import { AuthUtils } from "./utils/AuthUtils";
 import { AppContext } from "./AppContext";
 import { RoteiroDeColetaPage } from "./pages/Roteiro_de_coleta";
-import { ListaDeColetasPendentesPage } from "./pages/Lista_de_coletas_pendentes";
 import FuncionariosPage from "./pages/funcionarios/FuncionariosPage";
 import MaterialPage from "./pages/materiais/MaterialPage";
 import HistoricoColeta from './pages/historicocoleta/HistoricoColeta';
-
 interface AuthAppRoutesProps {
   children: React.ReactNode;
 }
+
 
 export const AuthAppRoutes: React.FC<AuthAppRoutesProps> = ({ children }) => {
   const appContext = React.useContext(AppContext);
@@ -40,10 +39,10 @@ export const AppRoutes: React.FC = () => {
       <Route path="/coleta" element={<ColetaPage />} />
       <Route path="/funcionarios" element={<FuncionariosPage />} />
       <Route path="/materiais" element={<MaterialPage />} />
-      <Route path="/lista_de_coletas_pendentes" element={<ListaDeColetasPendentesPage />} />
       <Route path="/roteiro_de_coleta" element={<RoteiroDeColetaPage />} />
       <Route path="/historico-coleta" element={<HistoricoColeta title="Historico Coleta" />} />
       <Route path="/*" element={<AuthAppRoutes children={undefined} />} />
+
     </Routes>
   );
 };

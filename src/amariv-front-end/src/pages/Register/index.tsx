@@ -8,6 +8,7 @@ import { UserService } from "../../services/UserService";
 import { AuthUtils } from "./../../utils/AuthUtils";
 import { AppContext } from "../../AppContext";
 import { Navigate, useNavigate } from "react-router-dom";
+import "./index.css";
 
 /**
  * Register page

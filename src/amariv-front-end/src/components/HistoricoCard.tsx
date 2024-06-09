@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { materialService } from '../services/MaterialService';
-import { DateConvert } from '../utils/DateConvert';
+import React from 'react';
 
 interface HistoricoCardProps {
   coleta: {
@@ -11,49 +9,28 @@ interface HistoricoCardProps {
     dataDeColeta: string;
     listaItensColeta: string;
     status: boolean;
-    isSuccess: boolean;
-    cancelada: boolean
   };
 }
 
 const HistoricoCard: React.FC<HistoricoCardProps> = ({ coleta }) => {
   const statusColor = coleta.status ? 'text-red-600' : 'text-green-600';
- 
-  const validaStatus = () => {
-    if (coleta.isSuccess === true){
-      if(coleta.cancelada === false)
-         return <span className="bg-[green] text-[white] p-1 rounded ms-4" >Concluída </span>
-      else
-         return <span className="bg-[red] text-[white] p-1 rounded ms-4">Cancelada</span>
-    }else
-    {
-      if(coleta.cancelada === true)
-        return <span className="bg-[red] text-[white] p-1 rounded ms-4">Cancelada</span>
-      else
-      return <span className="bg-[#c08e31] text-[white] p-1 rounded ms-4">Em Aberto</span>
-    }
-  }
 
   return (
     <div className="block p-4 border rounded-lg bg-[#E8F4EB]">
-      <p className="text-base mb-2 text-[#666666] ">
-        <span className="font-bold me-1">Data de Coleta:</span> { DateConvert.getLocalDate(coleta.dataDeColeta)} {validaStatus()}
-      </p>
-      <hr className='mb-3'/>
       <p className="text-base mb-2 text-[#666666]">
-        <span className="font-bold">Nome do Cliente:</span> {coleta.clienteNome}
+        <span className="font-semibold">Data de Coleta:</span> {coleta.dataDeColeta} | <span className={statusColor}>{coleta.status ? 'Inativo' : 'Ativo'}</span>
       </p>
       <p className="text-base mb-2 text-[#666666]">
-        <span className="font-bold">Horário da coleta:</span> {DateConvert.getLocalHour(coleta.dataDeColeta)}
+        <span className="font-semibold">Nome do Cliente:</span> {coleta.clienteNome}
       </p>
       <p className="text-base mb-2 text-[#666666]">
-        <span className="font-bold">Celular:</span> {coleta.clienteCel}
+        <span className="font-semibold">Celular:</span> {coleta.clienteCel}
       </p>
       <p className="text-base mb-2 text-[#666666]">
-        <span className="font-bold">Telefone:</span> {coleta.clienteTel}
+        <span className="font-semibold">Telefone:</span> {coleta.clienteTel}
       </p>
       <p className="text-base mb-2 text-[#666666]">
-        <span className="font-bold">Materiais:</span> { coleta.listaItensColeta }
+        <span className="font-semibold">Materiais:</span> {coleta.listaItensColeta}
       </p>
     </div>
   );

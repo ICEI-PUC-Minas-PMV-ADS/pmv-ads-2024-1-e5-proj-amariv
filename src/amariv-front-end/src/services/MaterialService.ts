@@ -4,28 +4,12 @@ import { Material } from '../models/Material';
 const useApi = axios.create({
   baseURL: "http://localhost:5100"
 });
+
 const API_BASE_URL = 'http://localhost:5100';
 
 
+
 export const materialService = {
-
-  
-  stringMateriais: (string: string, listaMateriais: Material[]) => {
-    // Dividir a string em pares de "idMaterial:Peso"
-    const pares: string[] = string.split(';');
-    const resultado: string[] = [];
-
-    pares.forEach(par => {
-      const [idMaterial, peso] = par.split(':');
-      if (idMaterial) {
-        const nomeMaterial = listaMateriais.find(x => x.id == parseInt(idMaterial))?.descricao
-        resultado.push(`${nomeMaterial} (${peso})`);
-      }
-    });
-
-    return resultado.join(', ');
-  },
-
   recuperaMateriais : async () => {
      const response = await useApi.get("/RecuperaMateriais", {
          headers: {
@@ -73,7 +57,7 @@ saveMaterial : (materialInfo: Material): Promise<void> => {
 
   getAll : async () => {
   let result = await useApi.get("/recuperaMateriais")
-  return result.data
+  return result
 }
 
 }

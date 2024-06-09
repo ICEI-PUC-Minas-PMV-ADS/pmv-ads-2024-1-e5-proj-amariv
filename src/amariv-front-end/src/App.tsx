@@ -1,8 +1,8 @@
-import Sidebar from './components/Sidebar';
 import { AppContextProvider } from './AppContext';
 import { AppRoutes } from './AppRoutes';
-import { useLocation } from 'react-router-dom';
 import './App.css';
+import Sidebar from './components/Sidebar'; 
+import { useLocation } from 'react-router-dom';
 
 export function App() {
   return (
@@ -22,7 +22,7 @@ function AppImpl() {
 
   return (
     <div className="App">
-      {shouldDisplaySidebar && <Sidebar />}
+      {shouldDisplaySidebar && <Sidebar />} 
       <AppRoutes />
     </div>
   );

@@ -334,16 +334,16 @@ namespace AmarivAPI.Migrations
                         {
                             Id = "adm",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e3b5f554-0fdc-4a02-b9b9-f924538ab4f7",
+                            ConcurrencyStamp = "9d1451df-7ab7-4981-81fe-e5023fba08c2",
                             Email = "amarivadm@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             Nome = "Administrador",
                             NormalizedEmail = "AMARIVADM@GMAIL.COM",
                             NormalizedUserName = "AMARIVADM@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEC8d93Sf1kK1BrVgLrSVo7W3nqlRh2iCuIDAOrva5PcVeRhov7PR1FrRUZZrfK0tnQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDV1jh1gMcnzPLunGKYRmDB9xnKvbmuzLWsVw93eZYy9viytkFLn2rLdaGh6t+Jeyw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "5636a529-5229-46d1-92f8-d073a91cd387",
+                            SecurityStamp = "60213d8a-1b16-4602-bae3-79f5a406322b",
                             TwoFactorEnabled = false,
                             UserName = "amarivadm@gmail.com"
                         });

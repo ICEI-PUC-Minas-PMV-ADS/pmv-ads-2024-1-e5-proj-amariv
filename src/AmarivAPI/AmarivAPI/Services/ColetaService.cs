@@ -179,14 +179,10 @@ namespace AmarivAPI.Services
             return _mapper.Map<ReadColetaDto>(_context.Coletas.FirstOrDefault(c => c.Id == id));
         }
 
-        public List<dynamic> RecuperaTodasColetas() 
+        public List<ReadColetaDto> RecuperaTodasColetas() 
         { 
-            return ToJson(_context.Coletas
-                .Include(x => x.RoteiroDeColetas)
-                .Include(x => x.RoteiroDeColetas.Funcionario)
-                .Where(x => x.Delete == false)
-                .ToList()
-            );
+            var lista = _context.Coletas.ToList();
+            return _mapper.Map<List<ReadColetaDto>>(lista);
         }
 
         public PaginationDto<ReadColetaDto> ColetasAberto(string userId, int page = 1, int pageSize = 25)
@@ -345,7 +341,6 @@ namespace AmarivAPI.Services
                     {
                         Id = coleta.Id,
                         RoteiroDeColetaId = coleta.RoteiroColetaId,
-                        RoteiroDeColetas = coleta.RoteiroDeColetas,
                         PosicaoLista = coleta.PosicaoLista,
                         ClienteNome = coleta.Usuario.Nome,
                         ClienteCel = coleta.Usuario.Celular,
@@ -368,7 +363,6 @@ namespace AmarivAPI.Services
                     {
                         Id = coleta.Id,
                         RoteiroDeColetaId = coleta.RoteiroColetaId,
-                        RoteiroDeColetas = coleta.RoteiroDeColetas,
                         PosicaoLista = coleta.PosicaoLista,
                         ClienteNome = coleta.ClienteNome,
                         ClienteCel = coleta.ClienteCel,
