@@ -1,14 +1,13 @@
 import React from 'react';
 import logo from './logo.png';
-import './Login.css'; 
 
 const Login = () => {
   return (<>
-    
+
     <body className='body'>
       <header className="header">
-      <div>
-        <img src={logo} alt="Logo" className="logo" />
+        <div>
+          <img src={logo} alt="Logo" className="logo" />
         </div>
         <nav>
           <ul className="nav">
@@ -45,9 +44,9 @@ const Login = () => {
         </div>
       </div>
     </body>
-    
-  
-  
+
+
+
   </>
   );
 };

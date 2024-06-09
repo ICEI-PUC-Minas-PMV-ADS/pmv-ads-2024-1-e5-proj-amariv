@@ -40,4 +40,8 @@ export class DateConvert {
     const outDT = new Date(parseInt(y), parseInt(m) - 1, parseInt(d), 0, 0, 0);
     return outDT;
   }
+
+  static getLocalDateTimeFormatted(date: string | Date): string {
+    return moment.utc(date).local().format('DD/MM/YYYY - HH:mm');
+  }
 }
