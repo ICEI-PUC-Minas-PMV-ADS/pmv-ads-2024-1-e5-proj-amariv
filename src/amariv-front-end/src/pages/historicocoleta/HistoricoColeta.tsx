@@ -59,7 +59,7 @@ const HistoricoColeta: React.FC<HistoricoColetaProps> = ({ title }) => {
       } else if (statusFilter === '1') {
         filteredContent = filteredContent.filter((x) => x.status === true && x.cancelada === false && x.isSuccess === true && x.delete === false);
       } else if (statusFilter === '2') {
-        filteredContent = filteredContent.filter((x) => x.cancelada === true && x.isSuccess === false && x.delete === false) ;
+        filteredContent = filteredContent.filter((x) => x.cancelada === true && x.isSuccess === false && x.delete === false);
       }
     }
     if (startDateFilter.length > 0 && endDateFilter.length > 0) {
@@ -72,8 +72,8 @@ const HistoricoColeta: React.FC<HistoricoColetaProps> = ({ title }) => {
     } else if (endDateFilter.length > 0) {
       const endDate = DateConvert.getLocalDateObject(endDateFilter);
       filteredContent = filteredContent.filter((x) => DateConvert.getUTCDateObject(x.dataDeColeta).getTime() <= endDate.getTime());
-    }   
-    setFilteredColetas(filteredContent); 
+    }
+    setFilteredColetas(filteredContent);
   }, [
     coletas,
     fucionarioFilter,
@@ -108,14 +108,14 @@ const HistoricoColeta: React.FC<HistoricoColetaProps> = ({ title }) => {
   return (
     <div className="container mx-auto p-4 flex flex-col min-h-screen">
       <div className="flex-none text-left">
-        <h1 className="text-3xl font-bold mb-4 mt-10 text-[#666666]">{title}</h1> 
+        <h1 className="text-3xl font-bold mb-4 mt-10 text-[#666666]">{title}</h1>
       </div>
 
       <div className="flex-none mb-4">
         <FilterHistorico onFilterChange={handleFilterChange} />
       </div>
 
-      <div className="flex-grow mt-4 overflow-y-auto "> 
+      <div className="flex-grow mt-4 overflow-y-auto ">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {filteredColetas.map((coleta) => (
             <HistoricoCard key={coleta.id} coleta={coleta} />
