@@ -38,7 +38,7 @@ const ListaDeColetasPendentesPageImpl = () => {
 
   return (
     <div className="w-full min-h-screen bg-[#F4FAF6]">
-      <div className="flex ms-[20rem] me-[4rem]">
+      <div className="flex ms-[4rem] me-[4rem]">
         <div className="w-full">
 
           {/*
