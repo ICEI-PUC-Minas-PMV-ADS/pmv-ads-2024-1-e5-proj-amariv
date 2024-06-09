@@ -177,6 +177,7 @@ export function ColetaPage() {
           localidadeExata: consultaLocalidadeExata(local),
           dataDeColeta: new Date(dataColeta),
           listaItensColeta: listaMateriais,
+          status: true
         };
         const col = await coletaService.updateColeta(coletaDto);
         window.alert("A coleta foi salva com sucesso!!")

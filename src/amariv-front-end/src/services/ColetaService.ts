@@ -9,6 +9,7 @@ const useApi = axios.create({
 export const coletaService = {
    
     salvarColeta: async (coletaDto: Coleta) => {
+        
         const jsonBody = JSON.stringify(coletaDto) 
         const response = await useApi.post(`/SalvarColeta`, jsonBody ,{
           headers: {

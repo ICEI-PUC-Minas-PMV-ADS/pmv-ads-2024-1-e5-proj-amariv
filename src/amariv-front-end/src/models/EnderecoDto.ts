@@ -6,4 +6,5 @@ export interface EnderecoDto {
   cidade: string,
   cep: string,
   referencia: string,
+  cidade: string
 }

@@ -42,6 +42,7 @@ export const AppRoutes: React.FC = () => {
       <Route path="/materiais" element={<MaterialPage />} />
       <Route path="/lista_de_coletas_pendentes" element={<ListaDeColetasPendentesPage />} />
       <Route path="/roteiro_de_coleta" element={<RoteiroDeColetaPage />} />
+      <Route path="/lista_coletas_pendentes" element={<ListaDeColetasPendentesPage />} />
       <Route path="/historico-coleta" element={<HistoricoColeta title="Historico Coleta" />} />
       <Route path="/*" element={<AuthAppRoutes children={undefined} />} />
     </Routes>

@@ -1,6 +1,3 @@
-/**
- * ReadColetaDto
- */
 
 import { EnderecoDto } from "../EnderecoDto";
 
