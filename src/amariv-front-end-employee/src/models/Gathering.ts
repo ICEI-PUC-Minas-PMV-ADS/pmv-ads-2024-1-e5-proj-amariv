@@ -18,6 +18,7 @@ export interface Gathering {
   status: boolean,
   delete: boolean,
   isSuccess: boolean,
+  cancelada: boolean,
   lat: number,
   lon: number,
   dataCadastro: string,

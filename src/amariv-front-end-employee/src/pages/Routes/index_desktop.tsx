@@ -34,7 +34,8 @@ export function RoutesDesktopPage() {
 
   React.useEffect(() => {
     if (gatheringItinerary && routeItems === null) {
-      const filteredGatherings = gatheringItinerary.coletas.filter((i) => i.status === true && i.isSuccess === false && i.delete === false);
+      const filteredGatherings = gatheringItinerary.coletas.filter((i) =>
+        i.status === true && i.delete === false && i.isSuccess === false && i.cancelada === false);
       const sortedAndFilteredGatherings = filteredGatherings.sort((a, b) => a.posicaoLista - b.posicaoLista);
       if (sortedAndFilteredGatherings.length > 0) {
         ctrl.setCurrentRoute(sortedAndFilteredGatherings[0]);
@@ -63,7 +64,8 @@ export function RoutesDesktopPage() {
           setIsSuccess(null);
           setGatheringId(null);
 
-          const filteredGatherings = updatedGatheringItinerary.coletas.filter((i) => i.status === false && i.delete === false);
+          const filteredGatherings = updatedGatheringItinerary.coletas.filter((i) =>
+            i.status === true && i.delete === false && i.isSuccess === false && i.cancelada === false);
           const sortedAndFilteredGatherings = filteredGatherings.sort((a, b) => a.posicaoLista - b.posicaoLista);
           if (sortedAndFilteredGatherings.length > 0) {
             ctrl.setCurrentRoute(sortedAndFilteredGatherings[0]);
@@ -73,6 +75,7 @@ export function RoutesDesktopPage() {
           setRouteItems(sortedAndFilteredGatherings);
         }
       } catch (e: any) {
+        console.log(e);
         setShowConfirm(false);
         setIsSuccess(null);
         notification(e);

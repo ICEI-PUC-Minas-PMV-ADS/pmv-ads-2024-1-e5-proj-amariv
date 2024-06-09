@@ -35,11 +35,23 @@ namespace AmarivAPI.EmployeeAPI.Controllers
             var userId = User.Claims.FirstOrDefault(x => x.Type == "id").Value;
             var gatheringItinerary = _context.RoteiroDeColetas
                 .Include("Funcionario")
-                .Include("Coletas")
-                .Include("Coletas.Endereco")
-                .Where(x => x.FuncionarioId == userId && x.DataRoteiro.Date >= DateTime.Today.Date)
+                .Where(x =>
+                    x.FuncionarioId == userId &&
+                    x.DataRoteiro.Date >= DateTime.Today.Date &&
+                    x.Delete == false
+                )
                 .OrderBy(x => x.DataRoteiro)
                 .FirstOrDefault();
+            gatheringItinerary.Coletas = _context.Coletas
+                .Include("Endereco")
+                .Where(x =>
+                    x.RoteiroColetaId == gatheringItinerary.Id &&
+                    x.DataDeColeta.Date >= DateTime.Today.Date &&
+                    x.Status == true &&
+                    x.Delete == false &&
+                    x.Cancelada == false &&
+                    x.IsSuccess == false
+                ).ToList();
             if (gatheringItinerary != null)
             {
                 result.Add(new RoteiroDeColetaMapper(_context, gatheringItinerary).ToJson());
