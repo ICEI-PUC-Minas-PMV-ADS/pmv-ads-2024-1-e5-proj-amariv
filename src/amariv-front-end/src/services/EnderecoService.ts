@@ -26,7 +26,7 @@ export const enderecoService = {
         }
       });
       return response.data       
-  },
+    },
 
     cadastrarEndereco: async (form: EnderecoForm) => {
       const json = JSON.stringify(form)

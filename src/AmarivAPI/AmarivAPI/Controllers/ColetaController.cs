@@ -115,12 +115,12 @@ namespace AmarivAPI.Controllers
                 return NotFound();
     }
 
-[HttpPost]
-    [Route("/VerificaDisponibilidadeColeta")]
+        [HttpPost]
+        [Route("/VerificaDisponibilidadeColeta")]
         public IActionResult VerificaDisponibilidadeRoteiroColeta([FromBody] DateTime data)
         {
             var result = _coletaService.ConsultaDisponibilidadeColeta(data);
             return Json(result);
         }
-}
+    }
 }

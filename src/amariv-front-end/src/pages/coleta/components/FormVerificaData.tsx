@@ -7,7 +7,7 @@ import { DateConvert } from "../../../utils/DateConvert"
 
 export type FormVerificaDataProps = {
     setDataColetaFinal : (coleta : string) => void,
-    dataColeta : string
+    dataColeta : string,
 }
 
 export const FormVerificaData = ({setDataColetaFinal, dataColeta }: FormVerificaDataProps) => {
@@ -30,8 +30,23 @@ export const FormVerificaData = ({setDataColetaFinal, dataColeta }: FormVerifica
     }, [dataColeta])
     
 
-    const formataNovoHorario = (hora: string, dia: string) => {   
-       
+    const formataNovoHorario = (hora: string, dia: string) => {
+        if (hora.length === 0 || dia.length === 0) {
+            alert("Data invalida!");
+            return;
+        }
+
+        let isValid = true;
+        try {
+            new Date(dia +'T'+hora);
+        } catch (e) {
+            isValid = false;
+        }
+        if (!isValid) {
+            alert("Data invalida!");
+            return;
+        }
+
         const [anoStr, mesStr, diaStr] = dia.split('-');
         const diaNum = parseInt(diaStr, 10);
         const mesNum = parseInt(mesStr, 10) - 1; // Mês em JavaScript é zero-indexado
@@ -73,6 +88,7 @@ export const FormVerificaData = ({setDataColetaFinal, dataColeta }: FormVerifica
                     <InputDate
                         label="Data da coleta"
                         type="date"
+                        required
                         value={dataColetaDia}
                         onChange={(evt) => setDataColetaDia(evt.target.value)}
                     />
@@ -81,6 +97,7 @@ export const FormVerificaData = ({setDataColetaFinal, dataColeta }: FormVerifica
                     <InputTime
                         label="Horário de Coleta"
                         type="time"
+                        required
                         value={horarioColeta}
                         onChange={(evt) => setHorarioColeta(evt.target.value)}
                     />
@@ -90,13 +107,16 @@ export const FormVerificaData = ({setDataColetaFinal, dataColeta }: FormVerifica
                         type="button"
                         label="Verificar disponibilidade"
                         className="w-[90%] mt-[15px]"
-                        onClick={ async () => {                                                                                
+                        onClick={ async () => {
+                                                      
                             const data = formataNovoHorario(horarioColeta, dataColetaDia)  
-                            const resultado = await coletaService.VerificaDisponibilidadeColeta(data)
-                            if (!resultado) {
-                                setDataColetaFinal(DateConvert.getIsoDateTime(data));
+                            if (data) {
+                                const resultado = await coletaService.VerificaDisponibilidadeColeta(data)
+                                if (!resultado) {
+                                    setDataColetaFinal(DateConvert.getIsoDateTime(data));
+                                }
+                                setMensagem(mensagemDisponibilidade(resultado))
                             }
-                            setMensagem(mensagemDisponibilidade(resultado))
                         }}                                            
                     />
                 </div>

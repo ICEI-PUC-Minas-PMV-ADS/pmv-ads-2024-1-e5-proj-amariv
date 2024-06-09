@@ -13,6 +13,7 @@ import { Endereco } from "../../types/Endereco";
 import { Coleta } from "../../types/Coleta";
 import { useSearchParams } from "react-router-dom";
 import { DateConvert } from "../../utils/DateConvert";
+import { Alert } from "@mui/material";
 
 
 export interface local {
@@ -24,7 +25,6 @@ export interface local {
 export function ColetaPage() {
   const [searchParams]= useSearchParams();
   const [errorNome, setErrorNome] = useState(false)
-  const [errorTel, setErrorTel] = useState(false)
   const [errorCel, setErrorCel] = useState(false)
   const [errorEndereco, setErrorEndereco] = useState(false)
   const [nome, setNome ] = useState(String)
@@ -104,6 +104,7 @@ const consultaLocalidadeExata = (local: local) => {
 }
 
   const validarCampos = () => {
+
     if ( nome == undefined || nome == "" || nome == null) {
       setErrorNome(true)
       return false
@@ -114,23 +115,25 @@ const consultaLocalidadeExata = (local: local) => {
       return false
     }
 
-    if ( tel == undefined || tel == "" || tel == null)  {
-      setErrorTel(true)
-      return false
-    }
-
     if ( listaMateriais == undefined || listaMateriais == "" || listaMateriais == null)  {
-      jogaMensagemErro(true)   
+      window.alert("Favor cadastrar material!")
       return false
     }
 
-    if (dataColeta == undefined || dataColeta == null ) {  
-      jogaMensagemErro(true)   
+    
+    if (errorEndereco){
+      window.alert("Favor Preencher os campos obrigatórios no endereço!") 
       return false
     }
-    
+
+    if (dataColeta == undefined || dataColeta == null || dataColeta == "") {  
+      window.alert("Favor Preencher os campos de data e hora!")
+      return false
+    }
+   
     return true
   }
+
 
   async function CriarAgendamentoColeta(): Promise<void> {
     try {
@@ -166,7 +169,8 @@ const consultaLocalidadeExata = (local: local) => {
         const endereco = await enderecoService.updateEndereco(enderecoDto);
         const local = await consultaLocal(enderecoDto)       
         var coletaDto: Coleta = {
-          id: coletaUpdate?.id,                   
+          id: coletaUpdate?.id,
+          enderecoId: coletaUpdate?.enderecoId,            
           clienteNome: nome,
           clienteCel: cel,
           clienteTel: tel,
@@ -180,7 +184,7 @@ const consultaLocalidadeExata = (local: local) => {
         window.alert("A coleta foi salva com sucesso!!")
       }
     } catch (e: any) {
-      console.log(e);
+      window.alert(e)
     }
   }
 
@@ -228,15 +232,12 @@ const consultaLocalidadeExata = (local: local) => {
               </div>
               <div>
                 <Input 
-                  title="Telefone Fixo"
-                  error = {errorTel}
+                  title="Telefone Fixo"                
                   mask="9999-9999"
                   errorMessage = "Digite o telefone Fixo"
-                  titleColor="dark"
-                  requiredField  
+                  titleColor="dark"          
                   value={tel}
-                  onChange={ (evt) => {
-                    setErrorTel(false)
+                  onChange={ (evt) => {                  
                     setTel(evt.target.value)}}                    
                   />
               </div>
@@ -249,29 +250,32 @@ const consultaLocalidadeExata = (local: local) => {
            <FormAddEndereco
             salvarEndereco = { (newEndereco) => { setEnderecoDto(newEndereco) }}
             endereco={enderecoDto ?? {} }
-            errorEndereco = {errorEndereco}
-            />
+            setErrorEndereco={ (e) => setErrorEndereco(e) }
+            
+          />
                  
            <FormVerificaData
               setDataColetaFinal ={ (coleta) =>{ setDataColeta(coleta)}}
-              dataColeta={dataColeta}          
+              dataColeta={dataColeta}
+                 
             />
 
-            <FormAddMateriais 
+            <FormAddMateriais
               listaMateriais = {listaMateriais}
               salvarMateriaislista = { (materiais) => setListaMateriais(materiais)}             
             /> 
                      
             <Button2
               type="button"
-              label="Criar agendamento"
+              label="Enviar agendamento"
               className="w-[40%] mt-[15px] mb-5"
-              onClick={() => {
+              onClick={ () => {
+                
                if(validarCampos()){ 
                 if(!isUpdate)            
                   CriarAgendamentoColeta()
                 else
-                  AlterarAgendamentoColeta()            
+                  AlterarAgendamentoColeta()       
                }               
               }}
             />
