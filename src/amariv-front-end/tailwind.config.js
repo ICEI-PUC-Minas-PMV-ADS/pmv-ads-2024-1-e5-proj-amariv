@@ -2,6 +2,21 @@
 module.exports = {
   content: ["./src/**/*.{html,js,ts,tsx}"],
   theme: {
+    /*
+    screens: {
+      'sm': '640px',
+      // => @media (min-width: 670px) { ... }
+
+      'md': '738px',
+      // => @media (min-width: 768px) { ... }
+
+      'lg': '994px',
+      // => @media (min-width: 1024px) { ... }
+
+      'xl': '1250px',
+      // => @media (min-width: 1280px) { ... }
+    },
+    */
     extend: {
       colors: {
         'amariv': '#F4FAF6',

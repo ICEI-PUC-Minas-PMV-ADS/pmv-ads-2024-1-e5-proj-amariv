@@ -79,6 +79,7 @@ builder.Services.AddScoped<UserService, UserService>();
 builder.Services.AddScoped<NotificacaoService, NotificacaoService>();
 builder.Services.AddScoped<FuncionarioService>();
 builder.Services.AddScoped<RoteiroDeColetaPageService>();
+builder.Services.AddScoped<ListaColetasService>();
 builder.Services.AddAutoMapper(typeof(NotificacaoProfile).Assembly);
 builder.Services.AddAutoMapper(typeof(FuncionarioProfile).Assembly);
 
