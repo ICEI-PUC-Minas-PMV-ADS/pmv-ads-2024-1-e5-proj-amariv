@@ -47,8 +47,6 @@
 | Lúcio Heleno Barbosa | Filtrar o histórico de coletas por data, material, status ou funcionário | Administrar as atividades da associação e planejar o emprego da equipe |
 | Lúcio Heleno Barbosa | Cadastrar materiais na base de dados | Gerar relatórios sobre o que foi coletado e auxiliar na tomada de decisões |
 | Klaus Ernst Müller | Cadastrar materiais que estarão em uma coleta específica | Auxiliar no planejamento das operações da associação |
-| Todas as personas | Receber notificações sobre alterações durante as coletas | Tomar ciência das alterações e tomar decisões corretivas | 
-| Todas as personas | Receber aletas e notificações sobre alterações nas rotas de coleta | Auxiliar na tomada de decisões frente a obstáculos não previstos| 
 | Lúcio Heleno Barbosa | Gerar relatórios com filtros de informações | Auxiliar na organização e tomada de decisões de planejamento|
 | Lúcio Heleno Barbosa | Gerar relatórios sobre a quantidade de entregas, filtrando por data, status, funcionário e material | Acompanhar o desempenho da equipe e planejar a coleta de material de modo que forneça o maior retorno financeiro possível |
 
@@ -110,10 +108,7 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 |RF-17|	Filtro do histórico de coletas por data, material, status ou funcionário |	Alta | 
 |RF-18|	Permitir o usuário administrador ou funcionário o cadastro de materiais na base de dados |	Alta | 
 |RF-19|	Permitir que os usuários cadastrem materiais que estarão em uma coleta especifica |	Alta | 
-|RF-20|	O sistema deverá gerar alerta e enviar notificação para os usuários em qualquer alteração feita no cadastro de coletas |	Média |
-|RF-21|	O sistema deverá gerar alerta e enviar notificação para os usuários em qualquer alteração feita na rota de coletas |	Média |
-|RF-22|	Gerar relatório com os materiais coletados, filtrando por data, tipo e funcionário |	Baixa |
-|RF-23|	Gerar relatório com a quantidade de entregas , filtrando por data, status e funcionário e material |	Baixa |
+
 
 ### Requisitos não Funcionais
 
