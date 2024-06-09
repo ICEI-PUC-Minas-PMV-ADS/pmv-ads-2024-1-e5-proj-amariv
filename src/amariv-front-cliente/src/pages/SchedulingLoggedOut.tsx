@@ -11,7 +11,6 @@ import { CreateColetaForm } from "../types/CreateColetaForm";
 import dayjs from "dayjs";
 import DatePicker from "../components/DatePicker";
 import SelectInput from "../components/Inputs/SelectInput";
-import dataUtils from "../utils/dataUtils";
 import { tv } from "tailwind-variants";
 import AddMaterial from "../components/AddMaterial";
 import { Alert } from "@mui/material";
@@ -20,6 +19,8 @@ import { EnderecoService } from "../services/EnderecoService";
 import { GoogleService } from "../services/GoogleService";
 import { Endereco } from "../types/Endereco";
 import { ColetaService } from "../services/ColetaService";
+import SelectHours from "../components/SelectHours";
+import { DateConvert } from "../utils/DateConvert";
 
 function SchedulingLoggedOut() {
   const cepRegex = /^[0-9]{8}$/
@@ -36,9 +37,12 @@ function SchedulingLoggedOut() {
 
   const [modalMaterialOpen, setModalMaterialOpen] = useState(false)
   const [modalDataOpen, setModalDataOpen] = useState(false)
+  const [modalHorariosOpen, setModalHorariosOpen] = useState(false)
   const [loading, setLoading] = useState(false)
 
+  const [horarioSelecionado, setHorarioSelecionado] = useState("Selecionar")
   const [materiaisAdicionados, setMateriaisAdicionados] = useState<any[]>([])
+  const [horariosDisponiveis, sethorariosDisponiveis] = useState<string[]>([])
 
   const [form, setForm] = useState<CreateColetaForm>({
     enderecoId: 0,
@@ -64,6 +68,7 @@ function SchedulingLoggedOut() {
   const [telefoneError, setTelefoneError] = useState(false)
   const [nomeError, setNomeError] = useState(false)
   const [serverError, setServerError] = useState(false)
+  const [errorHorario, setErrorHorario] = useState(false)
 
   const validarCampos = () => {
     if (form.clienteNome == null || form.clienteNome == "" || form.clienteNome == undefined) {
@@ -172,10 +177,11 @@ function SchedulingLoggedOut() {
       let copyEnderecoForm = { ...formEndereco }
       copyEnderecoForm.id = r.data.successes[0].message
 
-      let location = await GoogleService.buscarLatitudeLongitude(copyEnderecoForm as Endereco)
-      if (location != "erro") {
-        copyForm.lat = location.lat
-        copyForm.lon = location.lng
+      let google = await GoogleService.buscarLatitudeLongitude(copyEnderecoForm as Endereco)
+      if (google != "erro") {
+        copyForm.lat = google.geometry.location.lat
+        copyForm.lon = google.geometry.location.lng
+        copyForm.LocalidadeExata = google.geometry.location_type == "APPROXIMATE" ? false : true
       }
       let materiaisString: string = ""
       materiaisAdicionados.forEach(x => {
@@ -195,19 +201,45 @@ function SchedulingLoggedOut() {
     setLoading(false)
   }
 
+  const buscarHorarios = async (date: string) => {
+    setLoading(true)
+    console.log(date)
+    await ColetaService.horariosDisponiveis(date).then((r) => {
+      console.log(r.data)
+      sethorariosDisponiveis(r.data)
+    })
+    setLoading(false)
+  }
+
 
   return (
     <>
       <LoadingScreen open={loading} />
+      <SelectHours
+        value={horarioSelecionado}
+        isOpen={modalHorariosOpen}
+        availableHours={horariosDisponiveis}
+        onClose={() => setModalHorariosOpen(false)}
+        onConfirm={(d) => {
+          let copyForm = { ...form }
+          copyForm.dataDeColeta = d
+          setForm(copyForm)
+          setModalDataOpen(false)
+          setHorarioSelecionado(d)
+          setModalHorariosOpen(false)
+        }}
+      />
       <DatePicker
         unavailableDates={appContext.unavailableDates}
-        value={dayjs(form.dataDeColeta)}
+        value={form.dataDeColeta == "Selecionar" ? dayjs(new Date(form.dataDeColeta).toUTCString()) : dayjs(form.dataDeColeta)}
         isOpen={modalDataOpen}
-        onAccept={(d) => {
+        onAccept={async (d) => {
           let copyForm = { ...form }
           if (d) {
+            await buscarHorarios(d.toISOString())
             copyForm.dataDeColeta = d.toISOString()
             setForm(copyForm)
+            setHorarioSelecionado("Selecionar")
           }
           setModalDataOpen(false)
         }
@@ -364,8 +396,22 @@ function SchedulingLoggedOut() {
                 setModalDataOpen(true)
               }}
               calendarIcon
-              value={form.dataDeColeta == "Selecionar" ? "Selecionar" : dataUtils.converterData(form.dataDeColeta)}
+              value={form.dataDeColeta == "Selecionar" ? "Selecionar" : DateConvert.getLocalDate(form.dataDeColeta)}
               title="Data da coleta" />
+            {
+              form.dataDeColeta != "Selecionar" &&
+              <SelectInput
+                errorMessage="É necessário fornecer um horário para a coleta"
+                error={errorHorario}
+                rightIcon="IconClock"
+                onClickSelectableInput={() => {
+                  setErrorHorario(false)
+                  setModalHorariosOpen(true)
+                }}
+                calendarIcon
+                value={horarioSelecionado == "Selecionar" ? "Selecionar" : DateConvert.getLocalHour(horarioSelecionado)}
+                title="Horário da coleta" />
+            }
             <p className="text-3xl font-bold text-primary-green mb-2 mt-6">Materiais da coleta</p>
           </div>
           <div className="w-full items-center justify-center flex py-6 max-w-[420px] px-3 flex-col">
@@ -406,7 +452,7 @@ function SchedulingLoggedOut() {
           }
           <div className="w-full flex items-center justify-center">
             <div className="w-2/3 mt-6 max-w-[250px] mb-16">
-              <PrimaryButton title="Agendar coleta" leftIcon="IconCheck" onClick={() => {
+              <PrimaryButton title="Agendar coleta" leftIcon="IconCheck" onClick={async () => {
                 if (validarCampos()) {
                   handleSave()
                 }

@@ -14,6 +14,7 @@ export type Coleta = {
   lon: number,
   status: boolean,
   delete: boolean,
+  cancelada: boolean,
   isSuccess: boolean,
   aprovacaoAdmin: boolean
 }

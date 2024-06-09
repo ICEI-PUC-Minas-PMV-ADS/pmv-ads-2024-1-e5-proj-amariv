@@ -10,6 +10,7 @@ import LoadingScreen from "../components/LoadingScreen";
 import { AppContext } from "../contexts/AuthContext/AppContext";
 import { LoginForm } from "../types/LoginForm";
 import { Alert } from "@mui/material";
+import { GoogleService } from "../services/GoogleService";
 
 
 function Login() {
@@ -17,7 +18,7 @@ function Login() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [loading, setLoading] = useState(false)
-  const authContext = useContext(AppContext)
+  const appContext = useContext(AppContext)
   const [errorEmail, setErrorEmail] = useState(false)
   const [errorPassword, setErrorPassword] = useState(false)
   const [invalidFields, setInvalidFields] = useState(false)
@@ -43,7 +44,7 @@ function Login() {
       email: email,
       password: password
     }
-    let result = await authContext.login(form)
+    let result = await appContext.login(form)
     setLoading(false)
     if (result) {
       navigate("/home")
@@ -114,7 +115,9 @@ function Login() {
             <p className="text-sm text-white">Ou entrar com</p>
             <div className="w-[80px] bg-white h-[1px]" />
           </div>
-          <img src={google} alt="Imagem" className="md:w-[50px] mt-8 w-[40px] cursor-pointer" />
+          <div onClick={() => appContext.loginGoogle()}>
+            <img src={google} alt="Imagem" className="md:w-[50px] mt-8 w-[40px] cursor-pointer" />
+          </div>
         </div>
 
       </div>

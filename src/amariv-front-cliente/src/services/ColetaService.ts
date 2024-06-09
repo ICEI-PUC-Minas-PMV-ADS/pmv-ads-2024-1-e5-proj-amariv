@@ -29,8 +29,14 @@ export const ColetaService = {
     })
     return response;
   },
+
   cancelarColeta: async (idColeta: number) => {
-    const response = await useApi.post(`/cancelarcoleta?idColeta=${idColeta}`)
+    const response = await useApi.post(`/cancelarcoletausuario?idColeta=${idColeta}`)
     return response;
   },
+
+  horariosDisponiveis: async (date: string) => {
+    const response = await useApi.get(`/horariosdisponiveis?date=${date}`)
+    return response;
+  }
 }

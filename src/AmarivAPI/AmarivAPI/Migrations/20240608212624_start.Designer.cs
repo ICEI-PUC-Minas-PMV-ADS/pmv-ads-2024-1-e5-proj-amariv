@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AmarivAPI.Migrations
 {
     [DbContext(typeof(AmarivContext))]
-    [Migration("20240608144517_startMigration")]
-    partial class startMigration
+    [Migration("20240608212624_start")]
+    partial class start
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -368,16 +368,16 @@ namespace AmarivAPI.Migrations
                         {
                             Id = "adm",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "db1b44bf-6a2d-48d6-8ec0-a0320c5aec2f",
+                            ConcurrencyStamp = "f8e9bfce-d1a7-4f3a-976c-40435c284eb7",
                             Email = "amarivadm@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             Nome = "Administrador",
                             NormalizedEmail = "AMARIVADM@GMAIL.COM",
                             NormalizedUserName = "AMARIVADM@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHwK/Kme1JIzjt0jTxiFW0K2ltMwBOI3FrnCW0dvPC9xoUifXh7Y/yPi0Q76oBLFgw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHKeOTJr81z2fIyLZTo2xOvM5ZVqSnVdIYw2Wxons7Z4ssuL9h59874GLF57QVvTFw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "715f97d5-6334-47e3-b3a2-bc05604c3ee1",
+                            SecurityStamp = "90f6a09d-8e6b-4589-b4d9-00a407d36299",
                             TwoFactorEnabled = false,
                             UserName = "amarivadm@gmail.com"
                         });

@@ -16,6 +16,7 @@ import { Pagination } from '../../types/Pagination';
 import { Coleta } from '../../types/Coleta';
 import DialogComponent from '../../components/DialogComponent';
 import { RoteiroColetaService } from '../../services/RoteiroColetaService';
+import { GoogleService } from '../../services/GoogleService';
 
 export const AppProvider = ({ children }: { children: JSX.Element }) => {
 
@@ -163,6 +164,49 @@ export const AppProvider = ({ children }: { children: JSX.Element }) => {
     return result
   }
 
+  const loginGoogle = async (): Promise<boolean> => {
+    setInfosLoaded(false);
+    let result = await GoogleService.googleRedirectLogin().then(async (x) => {
+      if (x == "error") {
+        setDialogTitle("");
+        setDialogMessage("Não foi possível realizar o login com o Google, tente novamente mais tarde.");
+        setDialogAlert(true)
+        setDialogOpen(true)
+        return false
+      }
+      else {
+        const resultLogin = await GoogleService.loginGoogle(x).then(async (e) => {
+          localStorage.setItem('authToken', e.data[0].message)
+          const userData = await UserService.getUser()
+          if (userData) {
+            await EnderecoService.buscarEnderecos().then(e => {
+              setEnderecos(e.data)
+            })
+            await resetColetasAberto()
+            await resetColetasFinalizado()
+          }
+          setUser(userData)
+          return true
+        }).catch(e => {
+          setDialogTitle("")
+          setDialogMessage("Não foi possível realizar o login com o Google, tente novamente mais tarde.");
+          setDialogAlert(true)
+          setDialogOpen(true)
+          return false
+        })
+        return resultLogin
+      }
+    }).catch(() => {
+      setDialogTitle("")
+      setDialogMessage("Não foi possível realizar o login com o Google.");
+      setDialogAlert(true)
+      setDialogOpen(true)
+      return false
+    })
+    setInfosLoaded(true);
+    return result
+  }
+
   const logout = async () => {
     const data = await UserService.logout()
     if (data.status == 200) {
@@ -222,6 +266,7 @@ export const AppProvider = ({ children }: { children: JSX.Element }) => {
           setDialogTitle("");
           setDialogMessage("Não foi possível cancelar a coleta, tente novamente mais tarde.");
           setDialogAlert(true);
+          setDialogOpen(true)
         }
         setInfosLoaded(true);
       };
@@ -259,7 +304,7 @@ export const AppProvider = ({ children }: { children: JSX.Element }) => {
         message={messageSnackBar}
       />
       <LoadingScreen open={!infosLoaded} />
-      <AppContext.Provider value={{ user, login, logout, signup, enderecos, atualizarEnderecos, materiais, updateUsuario, setSnackBarOpen, setMessageSnackBar, coletasAberto, fetchMoreColetasAberto, resetColetasAberto, totalPagesColetasAberto, pageNumberColetasAberto, coletasFinalizado, fetchMoreColetasFinalizado, resetColetasFinalizado, totalPagesColetasFinalizado, pageNumberColetasFinalizado, cancelarColeta, useAlert, unavailableDates, resetUnavailableDates }}>
+      <AppContext.Provider value={{ user, login, logout, signup, enderecos, atualizarEnderecos, materiais, updateUsuario, setSnackBarOpen, setMessageSnackBar, coletasAberto, fetchMoreColetasAberto, resetColetasAberto, totalPagesColetasAberto, pageNumberColetasAberto, coletasFinalizado, fetchMoreColetasFinalizado, resetColetasFinalizado, totalPagesColetasFinalizado, pageNumberColetasFinalizado, cancelarColeta, useAlert, unavailableDates, resetUnavailableDates, loginGoogle }}>
         {children}
       </AppContext.Provider>
     </>

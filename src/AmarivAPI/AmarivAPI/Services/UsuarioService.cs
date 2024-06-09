@@ -1,12 +1,16 @@
 ﻿using AmarivAPI.Data;
+using AmarivAPI.Data.Dtos.TokenDto;
 using AmarivAPI.Data.Dtos.UsuarioDtos;
 using AmarivAPI.Data.Requests;
 using AmarivAPI.Models;
+using AmarivAPI.Utils;
 using AutoMapper;
 using FluentResults;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.Data;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.Web;
 
@@ -97,7 +101,7 @@ namespace AmarivAPI.Services
 
         public Result LogaUsuario(LoginRequest request)
         { 
-            Task<SignInResult> resultado = _signInManager.PasswordSignInAsync(request.Email, request.Password, false, false);
+            var resultado = _signInManager.PasswordSignInAsync(request.Email, request.Password, false, false);
             if(resultado.Result.Succeeded)
             {
                 var identityUser = RecuperaUsuarioPorEmail(request.Email);
@@ -197,5 +201,41 @@ namespace AmarivAPI.Services
             }
             
         }
+
+        public async Task<Result> Google(ExternalTokenDTO externalToken)
+        {
+            var email = ValidateToken.Authenticate(externalToken.Token);
+            if (email is not null)
+            {
+                var exist = await _userManager.FindByEmailAsync(email);
+
+                if (exist is null)
+                {
+                    var usuario = new Usuario
+                    {
+                        Nome = email.Split("@")[0],
+                        UserName = email,
+                        Email = email,
+                        EmailConfirmed = true
+                    };
+                    IdentityResult resultado = await _userManager.CreateAsync(usuario);
+                    await _userManager.AddToRoleAsync(usuario, "cliente");
+                    if (resultado.Succeeded)
+                    {
+                        var identityUser = RecuperaUsuarioPorEmail(email);
+                        var code = await _userManager.GenerateEmailConfirmationTokenAsync(identityUser);
+                        _emailService.EnviarEmailConfirmacao(new[] { identityUser.Email }, "Confirme seu email", identityUser.Id, code);
+                        Token token = _tokenService.CreateToken(identityUser, _signInManager.UserManager.GetRolesAsync(identityUser).Result.FirstOrDefault());
+                        return Result.Ok().WithSuccess(token.Value);
+                    }
+                }
+
+                Token tokenExist = _tokenService.CreateToken(exist, _signInManager.UserManager.GetRolesAsync(exist).Result.FirstOrDefault());
+                return Result.Ok().WithSuccess(tokenExist.Value);
+            }
+            return Result.Fail("Erro ao validar token recebido pelo Google!");
+        }
+            
+        }
     }
-}
+

@@ -10,6 +10,7 @@ using System.Reflection.Metadata.Ecma335;
 using AmarivAPI.Data.Dtos.PaginationDto;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 
 namespace AmarivAPI.Services
@@ -191,11 +192,68 @@ namespace AmarivAPI.Services
             }
         }
 
+        public List<DateTime> DatasIndisponiveisAPartirDeHoje()
+        {
+            var coletasPorData = _context.Coletas
+                .Where(c => !c.Cancelada && !c.IsSuccess) 
+                .GroupBy(c => c.DataDeColeta.Date)
+                .Select(g => new { Date = g.Key, Count = g.Count(), roteiroColetaId = g.FirstOrDefault(x=>x.DataDeColeta == g.Key).RoteiroColetaId})
+                .ToList();
+
+            var datasIndisponiveis = new List<DateTime>();
+
+            foreach (var coletaData in coletasPorData)
+            {
+                var roteiroColeta = _context.RoteiroDeColetas
+                    .FirstOrDefault(r => r.Id == coletaData.roteiroColetaId);
+
+                if (roteiroColeta != null && coletaData.Count >= roteiroColeta.NumeroMaxColetas)
+                {
+                    datasIndisponiveis.Add(coletaData.Date);
+                }
+                else if (coletaData.Count >= 10)
+                {
+                    datasIndisponiveis.Add(coletaData.Date);
+                }
+            }
+
+            return datasIndisponiveis;
+        }
+
+        public List<DateTime> VerificaHorariosDisponiveis(DateTime data)
+        {
+            DateTime inicioDoDia = data.ToLocalTime().Date;
+            DateTime fimDoDia = inicioDoDia.AddDays(1).AddTicks(-1);
+            List<Coleta> coletasNoDia = _context.Coletas
+                .Where(c => c.DataDeColeta >= inicioDoDia && c.DataDeColeta <= fimDoDia && c.Cancelada == false && c.IsSuccess == false)
+                .ToList();
+
+            TimeSpan intervaloEntreColetas = TimeSpan.FromMinutes(30);
+
+            List<DateTime> horariosDisponiveis = new List<DateTime>();
+
+            DateTime horarioAtual = inicioDoDia;
+
+            while (horarioAtual < fimDoDia)
+            {
+                bool horarioOcupado = coletasNoDia.Any(c => c.DataDeColeta.ToLocalTime() == horarioAtual);
+
+                if (!horarioOcupado)
+                {
+                    horariosDisponiveis.Add(horarioAtual);
+                }
+
+                horarioAtual = horarioAtual.Add(intervaloEntreColetas);
+            }
+
+            return horariosDisponiveis.Order().Select(x=>x.ToUniversalTime()).ToList();
+        }
+
         public PaginationDto<ReadColetaDto> ColetasAberto(string userId, int page = 1, int pageSize = 25)
         {
-            int coletasCount = _context.Coletas.Where(x => x.UserId == userId).Count();
+            int coletasCount = _context.Coletas.Where(x => x.UserId == userId && x.IsSuccess == false && x.Cancelada == false).Count();
             int totalPages = (int)Math.Ceiling((decimal)coletasCount / pageSize);
-            var coletas = _context.Coletas.Where(x => x.UserId == userId && x.Status == true).OrderBy(x => x.DataDeColeta).ToList().Skip((page - 1) * pageSize).Take(pageSize).ToList();
+            var coletas = _context.Coletas.Where(x => x.UserId == userId && x.IsSuccess == false && x.Cancelada == false).OrderBy(x => x.DataDeColeta).ToList().Skip((page - 1) * pageSize).Take(pageSize).ToList();
 
             return new PaginationDto<ReadColetaDto>()
             {
@@ -209,9 +267,9 @@ namespace AmarivAPI.Services
 
         public PaginationDto<ReadColetaDto> ColetasFinalizado(string userId, int page = 1, int pageSize = 25)
         {
-            int coletasCount = _context.Coletas.Where(x => x.UserId == userId).Count();
+            int coletasCount = _context.Coletas.Where(x => x.UserId == userId && (x.IsSuccess == true || x.Cancelada == true)).Count();
             int totalPages = (int)Math.Ceiling((decimal)coletasCount / pageSize);
-            var coletas = _context.Coletas.Where(x => x.UserId == userId && x.Status == false).OrderByDescending(x => x.DataDeColeta).ToList().Skip((page - 1) * pageSize).Take(pageSize).ToList();
+            var coletas = _context.Coletas.Where(x => x.UserId == userId && (x.IsSuccess == true || x.Cancelada == true)).OrderByDescending(x => x.DataDeColeta).ToList().Skip((page - 1) * pageSize).Take(pageSize).ToList();
 
             return new PaginationDto<ReadColetaDto>()
             {
@@ -264,19 +322,11 @@ namespace AmarivAPI.Services
                 {
                     var roteiro = _context.RoteiroDeColetas.FirstOrDefault(r => r.Id == coleta.RoteiroColetaId);
                     coleta.IsSuccess = false;
-                    coleta.Status = false;
-                    coleta.RoteiroColetaId = null;
-                    if (roteiro != null)
-                    {
-                        roteiro.NumeroDeColetas -= 1;
-                        roteiro.Delete = true;
-                        _context.Update(roteiro);
-                        _context.SaveChanges();
-                    }
+                    coleta.Cancelada = true;
                 }
                 else
                 {
-                    return Result.Fail("Não foi possivel salvar o Roteiro de coleta");
+                    return Result.Fail("Não foi possivel encontrar a coleta");
                 }
                 _context.Update(coleta);
                 _context.SaveChanges();

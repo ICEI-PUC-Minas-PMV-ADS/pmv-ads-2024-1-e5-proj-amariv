@@ -32,6 +32,7 @@ export type AppContextType = {
   useAlert: (message: string, onClose: () => void) => void
   unavailableDates: string[]
   resetUnavailableDates: () => Promise<void>
+  loginGoogle: () => Promise<boolean>
 };
 
 export const AppContext = createContext<AppContextType>(null!);
