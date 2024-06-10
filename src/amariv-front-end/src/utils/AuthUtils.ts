@@ -1,38 +1,34 @@
-import { AppContextState } from "../AppContext";
-import { User } from "../models/User";
 
-/**
- * Local constants
- */
-const USER_KEY = 'auth_user_key';
+import { AppContextState } from "../AppContext";
+import { TOKEN_KEY } from "../Constants";
 
 /**
  * AuthUtils
  */
 export class AuthUtils {
   static isAuth(appContext: AppContextState) {
-    return appContext.state.user !== undefined;
+    return appContext.state.token !== undefined;
   }
 
   static hasLocalUserData(): boolean {
-    return window.localStorage.getItem(USER_KEY) !== null;
+    return window.localStorage.getItem(TOKEN_KEY) !== null;
   }
 
-  static getLocalUserData(): User {
-    const localUserData = window.localStorage.getItem(USER_KEY);
+  static getLocalUserData(): string {
+    const localUserData = window.localStorage.getItem(TOKEN_KEY);
     if (localUserData === null) {
       throw new Error('Invalid local user data!');
     }
-    return JSON.parse(localUserData);
+    return localUserData;
   }
 
-  static login(appContext: AppContextState, user: User) {
-    window.localStorage.setItem(USER_KEY, JSON.stringify(user));
-    appContext.dispatch({ type: 'login', payload: user });
+  static login(appContext: AppContextState, token: string) {
+    window.localStorage.setItem(TOKEN_KEY, token);
+    appContext.dispatch({ type: 'login', payload: token });
   }
 
   static logout(appContext: AppContextState) {
-    window.localStorage.removeItem(USER_KEY);
+    window.localStorage.removeItem(TOKEN_KEY);
     appContext.dispatch({ type: 'logout' });
   }
 }

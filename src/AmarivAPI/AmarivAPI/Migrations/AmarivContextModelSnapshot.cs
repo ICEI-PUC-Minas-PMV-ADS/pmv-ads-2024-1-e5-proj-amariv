@@ -25,7 +25,7 @@ namespace AmarivAPI.Migrations
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
-            modelBuilder.Entity("AmarivAPI.Models.ItemRoteiroDeColeta", b =>
+            modelBuilder.Entity("AmarivAPI.Models.Coleta", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -33,18 +33,102 @@ namespace AmarivAPI.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Id_Coletas")
+                    b.Property<bool>("Cancelada")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("ClienteCel")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ClienteNome")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ClienteTel")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("DataCadastro")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime>("DataDeColeta")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("Delete")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<int?>("EnderecoId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Id_RoreiroDeColetas")
+                    b.Property<bool>("IsSuccess")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<double?>("Lat")
+                        .HasColumnType("double");
+
+                    b.Property<string>("ListaItensColeta")
+                        .HasColumnType("longtext");
+
+                    b.Property<bool?>("LocalidadeExata")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<double?>("Lon")
+                        .HasColumnType("double");
+
+                    b.Property<int?>("PosicaoLista")
                         .HasColumnType("int");
 
-                    b.Property<int>("PosicaoLista")
+                    b.Property<int?>("RoteiroColetaId")
                         .HasColumnType("int");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("ItensRoteiroDeColetas");
+                    b.HasIndex("EnderecoId");
+
+                    b.HasIndex("RoteiroColetaId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Coletas");
+                });
+
+            modelBuilder.Entity("AmarivAPI.Models.Endereco", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Bairro")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Cep")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Cidade")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Logradouro")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Numero")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Referencia")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Enderecos");
                 });
 
             modelBuilder.Entity("AmarivAPI.Models.Material", b =>
@@ -63,15 +147,67 @@ namespace AmarivAPI.Migrations
                         .HasMaxLength(250)
                         .HasColumnType("varchar(250)");
 
-                    b.Property<string>("Peso")
-                        .HasColumnType("longtext");
-
                     b.Property<string>("Tipo")
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
                     b.ToTable("Materiais");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Data_criacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Metal",
+                            Tipo = "Metal"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Data_criacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Plástico",
+                            Tipo = "Plástico"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Data_criacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Papel",
+                            Tipo = "Papel"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Data_criacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Vidro",
+                            Tipo = "Vidro"
+                        });
+                });
+
+            modelBuilder.Entity("AmarivAPI.Models.Notificacao", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Corpo")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Titulo")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Notificacao");
                 });
 
             modelBuilder.Entity("AmarivAPI.Models.RoteiroDeColetas", b =>
@@ -85,8 +221,15 @@ namespace AmarivAPI.Migrations
                     b.Property<DateTime>("DataCadastro")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<DateTime>("DataRoteiro")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<bool>("Delete")
                         .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("FuncionarioId")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
 
                     b.Property<int>("NumeroDeColetas")
                         .HasColumnType("int");
@@ -99,6 +242,8 @@ namespace AmarivAPI.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("FuncionarioId");
+
                     b.ToTable("RoteiroDeColetas");
                 });
 
@@ -109,6 +254,12 @@ namespace AmarivAPI.Migrations
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
+
+                    b.Property<string>("Cargo")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Celular")
+                        .HasColumnType("longtext");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -128,6 +279,7 @@ namespace AmarivAPI.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Nome")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("NormalizedEmail")
@@ -148,6 +300,15 @@ namespace AmarivAPI.Migrations
                         .HasColumnType("tinyint(1)");
 
                     b.Property<string>("SecurityStamp")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Sexo")
+                        .HasColumnType("longtext");
+
+                    b.Property<bool?>("SuportaPeso")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("Telefone")
                         .HasColumnType("longtext");
 
                     b.Property<bool>("TwoFactorEnabled")
@@ -173,16 +334,16 @@ namespace AmarivAPI.Migrations
                         {
                             Id = "adm",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a5e7cbc8-a2ed-462f-ad6c-bf0fa0fa0df1",
+                            ConcurrencyStamp = "4c38254a-934d-4393-b947-2c3a8601ee16",
                             Email = "amarivadm@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             Nome = "Administrador",
                             NormalizedEmail = "AMARIVADM@GMAIL.COM",
                             NormalizedUserName = "AMARIVADM@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEElr+28CQnR2YHj5GzC85Acb94FViDInudxcyEzeTuzm6i7XwbOcKijM9LoOhGvgDA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEId71DxTujhsKabXXzkCyiKFYRDOkpEZ7liV8zs418LhwH4raiU40XyCLwHOmQzx8A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "42032ea2-9e96-46e5-b079-6719e3409cf6",
+                            SecurityStamp = "7299e1b8-6d1d-4861-b3ae-cc2c80ce364b",
                             TwoFactorEnabled = false,
                             UserName = "amarivadm@gmail.com"
                         });
@@ -347,6 +508,47 @@ namespace AmarivAPI.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("AmarivAPI.Models.Coleta", b =>
+                {
+                    b.HasOne("AmarivAPI.Models.Endereco", "Endereco")
+                        .WithMany()
+                        .HasForeignKey("EnderecoId");
+
+                    b.HasOne("AmarivAPI.Models.RoteiroDeColetas", "RoteiroDeColetas")
+                        .WithMany("Coletas")
+                        .HasForeignKey("RoteiroColetaId");
+
+                    b.HasOne("AmarivAPI.Models.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Endereco");
+
+                    b.Navigation("RoteiroDeColetas");
+
+                    b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("AmarivAPI.Models.Endereco", b =>
+                {
+                    b.HasOne("AmarivAPI.Models.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("AmarivAPI.Models.RoteiroDeColetas", b =>
+                {
+                    b.HasOne("AmarivAPI.Models.Usuario", "Funcionario")
+                        .WithMany()
+                        .HasForeignKey("FuncionarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Funcionario");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -396,6 +598,11 @@ namespace AmarivAPI.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("AmarivAPI.Models.RoteiroDeColetas", b =>
+                {
+                    b.Navigation("Coletas");
                 });
 #pragma warning restore 612, 618
         }

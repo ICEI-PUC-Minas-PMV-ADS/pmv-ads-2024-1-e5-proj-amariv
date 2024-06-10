@@ -1,40 +1,48 @@
 import React from "react";
+import FuncionariosPage from "./pages/funcionarios/FuncionariosPage";
+import MaterialPage from "./pages/materiais/MaterialPage";
+import HistoricoColeta from './pages/historicocoleta/HistoricoColeta';
+
 import { Navigate, Route, Routes } from "react-router-dom";
-import { RegisterPage } from "./pages/Register";
+import { LoginPage } from "./pages/Login";
+import { ColetaPage } from "./pages/coleta";
 import { AuthUtils } from "./utils/AuthUtils";
 import { AppContext } from "./AppContext";
-import { LogoutPage } from "./pages/Logout";
-import { isDesktop } from "react-device-detect";
-import { StartPage } from "./pages/Start";
-import { LoginPage } from "./pages/Login";
-import Login from "./pages/Loginv2/Login";
+import { RoteiroDeColetaPage } from "./pages/Roteiro_de_coleta";
+import { ListaDeColetasPendentesPage } from "./pages/Lista_de_coletas_pendentes";
+import { Logout } from "./pages/Logout";
 
-/**
- * AuthAppRoutes
- */
-export const AuthAppRoutes = () => {
+interface AuthAppRoutesProps {
+  children: React.ReactNode;
+}
+
+export const AuthAppRoutes: React.FC<AuthAppRoutesProps> = ({ children }) => {
   const appContext = React.useContext(AppContext);
-  return (
-    !AuthUtils.isAuth(appContext)
-      ? <Navigate to="/" replace={true} />
-      : <Routes>
-        <Route path="/home" element={<div>Home</div>} />
-        <Route path="/logout" element={<LogoutPage />} />
-        <Route path="/*" element={<div>Erro 404</div>} />
-      </Routes>
-  );
-};
-
-/**
- * AppRoutes
- */
-export const AppRoutes = () => {
-  return (
+  return !AuthUtils.isAuth(appContext) ? (
+    <Navigate to="/login" replace={true} />
+  ) : (
     <Routes>
-      <Route path="/" element={!isDesktop ? <StartPage /> : <Login />} />
-      <Route path="/register" element={<RegisterPage />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/*" element={<AuthAppRoutes />} />
+      <Route path="/" element={<ListaDeColetasPendentesPage />} />
+      <Route path="/home" element={<ListaDeColetasPendentesPage />} />
+      <Route path="/coleta" element={<ColetaPage />} />
+      <Route path="/funcionarios" element={<FuncionariosPage />} />
+      <Route path="/materiais" element={<MaterialPage />} />
+      <Route path="/lista_de_coletas_pendentes" element={<ListaDeColetasPendentesPage />} />
+      <Route path="/roteiro_de_coleta" element={<RoteiroDeColetaPage />} />
+      <Route path="/historico-coleta" element={<HistoricoColeta title="Historico Coleta" />} />
+      <Route path="/logout" element={<Logout />} />
+      <Route path="/*" element={<React.Fragment>{children}</React.Fragment>} />
     </Routes>
   );
 };
+
+export const AppRoutes: React.FC = () => {
+  return (
+    <Routes>
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/*" element={<AuthAppRoutes children={undefined} />} />
+    </Routes>
+  );
+};
+
+

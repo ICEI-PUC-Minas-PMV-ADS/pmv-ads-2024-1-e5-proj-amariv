@@ -1,6 +1,5 @@
 import React from "react";
 import logo from "./logo.png";
-import "./registro-cliente.css";
 
 const ClientRegister = () => {
   return (

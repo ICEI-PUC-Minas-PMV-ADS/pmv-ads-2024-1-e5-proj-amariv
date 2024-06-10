@@ -14,3 +14,6 @@ namespace AmarivAPI.Models
         public DateTime CreatedAt { get; set; }
     }
 }
+
+
+// Representação da entidade de notificação.
