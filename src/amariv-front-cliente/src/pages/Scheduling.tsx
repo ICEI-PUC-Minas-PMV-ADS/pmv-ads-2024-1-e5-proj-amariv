@@ -1,17 +1,15 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import TopBar from "../components/TopBar";
-import Input from "../components/Inputs/Input";
 import PrimaryButton from "../components/PrimaryButton";
 import img from "../assets/sem-dados.png"
 import { tv } from "tailwind-variants";
 import DynamicIcon from "../components/DynamicIcon";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { AppContext } from "../contexts/AuthContext/AppContext";
 import CreateEndereco from "../components/CreateEndereco";
 import AddMaterial from "../components/AddMaterial";
 import UpdateUsuario from "../components/UpdateUsuario";
-import { UpdateUsuarioForm } from "../types/UpdateUsuarioForm";
 import { CreateColetaForm } from "../types/CreateColetaForm";
 import { Endereco } from "../types/Endereco";
 import SelectInput from "../components/Inputs/SelectInput";

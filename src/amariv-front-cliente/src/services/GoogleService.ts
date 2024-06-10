@@ -36,8 +36,7 @@ export const GoogleService = {
     let url = `https://maps.googleapis.com/maps/api/geocode/json?address=${searchString}&key=${GoogleService.key}`
 
     let result = await axios.get(url).then(r => {
-      if (r.data.results) {
-        console.log(r.data)
+      if (r.data.results.lenght > 0) {
         return r.data.results[0]
       }
       return "erro"
