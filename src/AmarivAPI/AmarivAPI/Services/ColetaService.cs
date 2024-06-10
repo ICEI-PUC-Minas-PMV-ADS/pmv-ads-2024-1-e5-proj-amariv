@@ -180,16 +180,14 @@ namespace AmarivAPI.Services
             return _mapper.Map<ReadColetaDto>(_context.Coletas.FirstOrDefault(c => c.Id == id));
         }
 
-        public List<ReadColetaDto> RecuperaTodasColetas() 
+        public List<dynamic> RecuperaTodasColetas() 
         { 
-            var lista = _context.Coletas.ToList();
-            if (lista.Count == 0)
-            {
-                return null;
-            }else
-            {
-                return _mapper.Map<List<ReadColetaDto>>(lista);
-            }
+            return ToJson(_context.Coletas
+                .Include(x => x.RoteiroDeColetas)
+                .Include(x => x.RoteiroDeColetas.Funcionario)
+                .Where(x => x.Delete == false)
+                .ToList()
+            );
         }
 
         public List<DateTime> DatasIndisponiveisAPartirDeHoje()
@@ -397,6 +395,7 @@ namespace AmarivAPI.Services
                     {
                         Id = coleta.Id,
                         RoteiroDeColetaId = coleta.RoteiroColetaId,
+                        RoteiroDeColetas = coleta.RoteiroDeColetas,
                         PosicaoLista = coleta.PosicaoLista,
                         ClienteNome = coleta.Usuario.Nome,
                         ClienteCel = coleta.Usuario.Celular,
@@ -404,6 +403,7 @@ namespace AmarivAPI.Services
                         Status = coleta.Status,
                         Cancelada = coleta.Cancelada,
                         Delete = coleta.Delete,
+                        IsSuccess = coleta.IsSuccess,
                         LocalidadeExata = coleta.LocalidadeExata,
                         Lat = coleta.Lat,
                         Lon = coleta.Lon,
@@ -419,11 +419,13 @@ namespace AmarivAPI.Services
                     {
                         Id = coleta.Id,
                         RoteiroDeColetaId = coleta.RoteiroColetaId,
+                        RoteiroDeColetas = coleta.RoteiroDeColetas,
                         PosicaoLista = coleta.PosicaoLista,
                         ClienteNome = coleta.ClienteNome,
                         ClienteCel = coleta.ClienteCel,
                         ClienteTel = coleta.ClienteTel,
                         Cancelada = coleta.Cancelada,
+                        IsSuccess = coleta.IsSuccess,
                         LocalidadeExata = coleta.LocalidadeExata,
                         Status = coleta.Status,
                         Delete = coleta.Delete,

@@ -1,9 +1,7 @@
-import axios, { AxiosResponse } from 'axios';
-
-const API_BASE_URL = 'http://localhost:5100';
+import { useApi } from "../hooks/useApi";
 
 interface Funcionario {
-  id: number;
+  id: string;
   nome: string;
   email: string;
   sexo: string;
@@ -14,7 +12,7 @@ interface Funcionario {
 }
 
 const fetchFuncionarios = (): Promise<Funcionario[]> => {
-  return axios.get(`${API_BASE_URL}/api/funcionario`)
+  return useApi.get(`api/funcionario`)
     .then(response => response.data)
     .catch(error => {
       console.error("Erro ao recuperar funcionários:", error);
@@ -23,20 +21,20 @@ const fetchFuncionarios = (): Promise<Funcionario[]> => {
 };
 
 const addFuncionario = (funcionarioInfo: Funcionario): Promise<void> => {
-  return axios.post(`${API_BASE_URL}/api/funcionario`, funcionarioInfo)
-    .then(() => {})
+  return useApi.post(`CadastrarFuncionario`, funcionarioInfo)
+    .then(() => { })
     .catch(error => console.error("Erro ao adicionar funcionário:", error));
 };
 
-const updateFuncionario = (id: number, funcionarioInfo: Funcionario): Promise<void> => {
-  return axios.put(`${API_BASE_URL}/api/funcionario/${id}`, funcionarioInfo)
-    .then(() => {})
+const updateFuncionario = (id: string, funcionarioInfo: Funcionario): Promise<void> => {
+  return useApi.put(`api/funcionario/${id}`, funcionarioInfo)
+    .then(() => { })
     .catch(error => console.error("Erro ao atualizar funcionário:", error));
 };
 
-const deleteFuncionario = (id: number): Promise<void> => {
-  return axios.delete(`${API_BASE_URL}/api/funcionario/${id}`)
-    .then(() => {})
+const deleteFuncionario = (id: string): Promise<void> => {
+  return useApi.delete(`api/funcionario/${id}`)
+    .then(() => { })
     .catch(error => console.error("Erro ao excluir funcionário:", error));
 };
 

@@ -1,8 +1,7 @@
-import { useEffect, useState  } from "react";
+import { useEffect, useState } from "react";
 import Input from "../../components/re_components/Inputs/Input";
 import { Button2 } from "../../components/Button2";
 import { Form } from "../../components/Form";
-import "./index.css";
 import { FormAddMateriais } from "./components/FormAddMateriais";
 import { coletaService } from "../../services/ColetaService";
 import { enderecoService } from "../../services/EnderecoService";
@@ -13,6 +12,7 @@ import { Endereco } from "../../types/Endereco";
 import { Coleta } from "../../types/Coleta";
 import { useSearchParams } from "react-router-dom";
 import { DateConvert } from "../../utils/DateConvert";
+import { Button } from "../../components/Button";
 
 
 export interface local {
@@ -22,123 +22,124 @@ export interface local {
 }
 
 export function ColetaPage() {
-  const [searchParams]= useSearchParams();
+  const [searchParams] = useSearchParams();
   const [errorNome, setErrorNome] = useState(false)
-  const [errorTel, setErrorTel] = useState(false)
   const [errorCel, setErrorCel] = useState(false)
   const [errorEndereco, setErrorEndereco] = useState(false)
-  const [nome, setNome ] = useState(String)
-  const [cel, setCel ] = useState(String)
+  const [nome, setNome] = useState(String)
+  const [cel, setCel] = useState(String)
   const [tel, setTel] = useState(String)
-  const [listaMateriais, setListaMateriais ]  = useState<string>("")
-  const [dataColeta, setDataColeta ] = useState(String)
+  const [listaMateriais, setListaMateriais] = useState<string>("")
+  const [dataColeta, setDataColeta] = useState(String)
   const [enderecoDto, setEnderecoDto] = useState<any>()
-  const [mensagemErro ,setMensagemErro] = useState()
+  const [mensagemErro, setMensagemErro] = useState()
   const [coletaUpdate, setColetaUpdate] = useState<Coleta>()
-  const [isUpdate , setIsUpdate] = useState<boolean>(false) 
-  
-  useEffect( () => {    
+  const [isUpdate, setIsUpdate] = useState<boolean>(false)
+
+  useEffect(() => {
     const idColeta = searchParams.get("id");
-    
-    if (idColeta != null){   
+
+    if (idColeta != null) {
       CarregaColetaCadastrada(Number.parseInt(idColeta))
       setIsUpdate(true)
-    }else{
+    } else {
       setIsUpdate(false)
     }
-  },[])
+  }, [])
 
-  const CarregaColetaCadastrada = async (id : number) => {
-      let coleta : Coleta = {}    
-    try
-    {
+  const CarregaColetaCadastrada = async (id: number) => {
+    let coleta: Coleta = {}
+    try {
       coleta = await coletaService.getColeta(id)
       if (coleta != undefined) {
         let endereco = await enderecoService.buscarEndereco(coleta.enderecoId!)
-        setColetaUpdate(coleta)    
+        setColetaUpdate(coleta)
         setEnderecoDto(endereco)
-        setListaMateriais(coleta.listaItensColeta != undefined ? coleta.listaItensColeta : "")  
+        setListaMateriais(coleta.listaItensColeta != undefined ? coleta.listaItensColeta : "")
         setNome(coleta.clienteNome ? coleta.clienteNome : "")
         setCel(coleta.clienteCel ? coleta.clienteCel : "")
         setTel(coleta.clienteTel ? coleta.clienteTel : "")
         setDataColeta(coleta.dataDeColeta ? DateConvert.getIsoDateTime(coleta.dataDeColeta.toString()) : "")
       }
-    }catch(err){
+    } catch (err) {
       alert(err)
     }
-  } 
+  }
 
-  const consultaLocal  = async ( endereco : Endereco ) => {
-    const geometry =  await GoogleGeocodingService.buscarLocalizacao(endereco)
-     const local : local = {
-      latitude:  parseFloat(geometry.location.lat),
+  const consultaLocal = async (endereco: Endereco) => {
+    const geometry = await GoogleGeocodingService.buscarLocalizacao(endereco)
+    const local: local = {
+      latitude: parseFloat(geometry.location.lat),
       longitude: parseFloat(geometry.location.lng),
       tipo: geometry.location_type
-     }   
-      return local
+    }
+    return local
   }
-  
-const consultaLocalidadeExata = (local: local) => {
-   if (local.tipo="ROOFTOP")
-    return true
-   else
-    return false
-} 
+
+  const consultaLocalidadeExata = (local: local) => {
+    if (local.tipo = "ROOFTOP")
+      return true
+    else
+      return false
+  }
 
   const jogaMensagemErro = (status: boolean) => {
     if (!status) {
-        return (
-            <div className=" bg-input-color w-[60%] flex flex-row justify-between p-4 rounded-lg">
-                <p className=""> Favor Preencha todos os campos no formulário de endereço!</p>
-                <button onClick={() => {setMensagemErro(undefined)}} className="w-[1.5rem] h-[1.5rem] flex justify-center items-center text-[1.5rem] text-red-600">X</button>
-            </div>
-        )
+      return (
+        <div className=" bg-input-color w-[60%] flex flex-row justify-between p-4 rounded-lg">
+          <p className=""> Favor Preencha todos os campos no formulário de endereço!</p>
+          <button onClick={() => { setMensagemErro(undefined) }} className="w-[1.5rem] h-[1.5rem] flex justify-center items-center text-[1.5rem] text-red-600">X</button>
+        </div>
+      )
     } else {
-        return (
-            <div className=" bg-input-color w-full flex flex-col p-4 rounded-lg">
-                <p className=""> Favor adicione material na coleta! </p>
-                <button onClick={() => {setMensagemErro(undefined)}} className="w-[1.5rem] h-[1.5rem] flex justify-center items-center text-[1.5rem] text-red-600">X</button>
-            </div>
-        )
+      return (
+        <div className=" bg-input-color w-full flex flex-col p-4 rounded-lg">
+          <p className=""> Favor adicione material na coleta! </p>
+          <button onClick={() => { setMensagemErro(undefined) }} className="w-[1.5rem] h-[1.5rem] flex justify-center items-center text-[1.5rem] text-red-600">X</button>
+        </div>
+      )
     }
-}
+  }
 
   const validarCampos = () => {
-    if ( nome == undefined || nome == "" || nome == null) {
+
+    if (nome == undefined || nome == "" || nome == null) {
       setErrorNome(true)
       return false
     }
 
-    if ( cel == undefined || cel == "" || cel == null)  {
+    if (cel == undefined || cel == "" || cel == null) {
       setErrorCel(true)
       return false
     }
 
-    if ( tel == undefined || tel == "" || tel == null)  {
-      setErrorTel(true)
+    if (listaMateriais == undefined || listaMateriais == "" || listaMateriais == null) {
+      window.alert("Favor cadastrar material!")
       return false
     }
 
-    if ( listaMateriais == undefined || listaMateriais == "" || listaMateriais == null)  {
-      jogaMensagemErro(true)   
+
+    if (errorEndereco) {
+      window.alert("Favor Preencher os campos obrigatórios no endereço!")
       return false
     }
 
-    if (dataColeta == undefined || dataColeta == null ) {  
-      jogaMensagemErro(true)   
+    if (dataColeta == undefined || dataColeta == null || dataColeta == "") {
+      window.alert("Favor Preencher os campos de data e hora!")
       return false
     }
-    
+
     return true
   }
 
+
   async function CriarAgendamentoColeta(): Promise<void> {
     try {
-      
+
       if (enderecoDto !== undefined) {
         const endereco = await enderecoService.salvarEndereco(enderecoDto);
-        const local = await consultaLocal(enderecoDto)       
-        var coletaDto: Coleta = {            
+        const local = await consultaLocal(enderecoDto)
+        var coletaDto: Coleta = {
           enderecoId: endereco.successes[0].message,
           clienteNome: nome,
           clienteCel: cel,
@@ -149,7 +150,7 @@ const consultaLocalidadeExata = (local: local) => {
           dataCadastro: new Date(Date.now()),
           dataDeColeta: new Date(dataColeta),
           listaItensColeta: listaMateriais,
-          status: false
+          status: true
         };
         const coleta = await coletaService.salvarColeta(coletaDto);
         window.alert("A coleta foi salva com sucesso!!")
@@ -161,12 +162,13 @@ const consultaLocalidadeExata = (local: local) => {
 
   async function AlterarAgendamentoColeta(): Promise<void> {
     try {
-      
+
       if (enderecoDto !== undefined) {
         const endereco = await enderecoService.updateEndereco(enderecoDto);
-        const local = await consultaLocal(enderecoDto)       
+        const local = await consultaLocal(enderecoDto)
         var coletaDto: Coleta = {
-          id: coletaUpdate?.id,                   
+          id: coletaUpdate?.id,
+          enderecoId: coletaUpdate?.enderecoId,
           clienteNome: nome,
           clienteCel: cel,
           clienteTel: tel,
@@ -174,20 +176,35 @@ const consultaLocalidadeExata = (local: local) => {
           lon: local.longitude,
           localidadeExata: consultaLocalidadeExata(local),
           dataDeColeta: new Date(dataColeta),
-          listaItensColeta: listaMateriais,     
+          listaItensColeta: listaMateriais,
         };
         const col = await coletaService.updateColeta(coletaDto);
         window.alert("A coleta foi salva com sucesso!!")
       }
     } catch (e: any) {
-      console.log(e);
+      window.alert(e)
+    }
+  }
+
+  const deletarAgendamento = async () => {
+    try {
+      var confirmar: boolean = window.confirm("Você realmente gostária de deletar essa coleta?")
+      if (confirmar) {
+        if (coletaUpdate !== undefined) {
+          var newColeta: Coleta = coletaUpdate;
+          newColeta.delete = true
+          coletaService.updateColeta(newColeta)
+        }
+      }
+    } catch (err) {
+
     }
   }
 
   return (
     <>
       <div className="App">
-       { mensagemErro }
+        {mensagemErro}
         <div className="content">
           <h2 className="mt-[30px] text-[#53735B] text-[1.75rem]">
             Novo agendamento de coleta
@@ -197,48 +214,47 @@ const consultaLocalidadeExata = (local: local) => {
           </div>
 
           <Form>
-            <div  className="w-[80%] justify-between p-8 items-center lg:min-h-fit flex bg-light-backgroud  flex-row lg:min-w-max ">
+            <div className="w-[80%] justify-between p-8 items-center lg:min-h-fit flex bg-light-backgroud  flex-row lg:min-w-max ">
               <div className="w-[40%]">
-                <Input 
+                <Input
                   title="Nome Cliente"
-                  error = {errorNome}
-                  errorMessage = "Digite o nome do cliente"
+                  error={errorNome}
+                  errorMessage="Digite o nome do cliente"
                   titleColor="dark"
-                  requiredField             
+                  requiredField
                   value={nome}
-                  onChange={ (evt) => {
+                  onChange={(evt) => {
                     setErrorNome(false)
                     setNome(evt.target.value)
-                  }}               
-                  />
+                  }}
+                />
               </div>
               <div>
-                <Input 
+                <Input
                   title="Telefone Celular"
-                  error = {errorCel}
-                  mask = "(99) 99999-9999"
-                  errorMessage = "Digite o telefone celular"
+                  error={errorCel}
+                  mask="(99) 99999-9999"
+                  errorMessage="Digite o telefone celular"
                   titleColor="dark"
-                  requiredField 
+                  requiredField
                   value={cel}
-                  onChange={ (evt) => {
+                  onChange={(evt) => {
                     setErrorCel(false)
-                    setCel(evt.target.value)}} 
-                  />
+                    setCel(evt.target.value)
+                  }}
+                />
               </div>
               <div>
-                <Input 
+                <Input
                   title="Telefone Fixo"
-                  error = {errorTel}
                   mask="9999-9999"
-                  errorMessage = "Digite o telefone Fixo"
+                  errorMessage="Digite o telefone Fixo"
                   titleColor="dark"
-                  requiredField  
                   value={tel}
-                  onChange={ (evt) => {
-                    setErrorTel(false)
-                    setTel(evt.target.value)}}                    
-                  />
+                  onChange={(evt) => {
+                    setTel(evt.target.value)
+                  }}
+                />
               </div>
             </div>
 
@@ -246,35 +262,75 @@ const consultaLocalidadeExata = (local: local) => {
               <p className="text-[#666666] text-m my-1">Endereço do cliente</p>
             </div>
 
-           <FormAddEndereco
-            salvarEndereco = { (newEndereco) => { setEnderecoDto(newEndereco) }}
-            endereco={enderecoDto ?? {} }
-            errorEndereco = {errorEndereco}
-            />
-                 
-           <FormVerificaData
-              setDataColetaFinal ={ (coleta) =>{ setDataColeta(coleta)}}
-              dataColeta={dataColeta}          
+            <FormAddEndereco
+              salvarEndereco={(newEndereco) => { setEnderecoDto(newEndereco) }}
+              endereco={enderecoDto ?? {}}
+              setErrorEndereco={(e) => setErrorEndereco(e)}
+
             />
 
-            <FormAddMateriais 
-              listaMateriais = {listaMateriais}
-              salvarMateriaislista = { (materiais) => setListaMateriais(materiais)}             
-            /> 
-                     
-            <Button2
-              type="button"
-              label="Criar agendamento"
-              className="w-[40%] mt-[15px] mb-5"
-              onClick={() => {
-               if(validarCampos()){ 
-                if(!isUpdate)            
-                  CriarAgendamentoColeta()
-                else
-                  AlterarAgendamentoColeta()            
-               }               
-              }}
+            <FormVerificaData
+              setDataColetaFinal={(coleta) => { setDataColeta(coleta) }}
+              dataColeta={dataColeta}
+
             />
+
+            <FormAddMateriais
+              listaMateriais={listaMateriais}
+              salvarMateriaislista={(materiais) => setListaMateriais(materiais)}
+            />
+
+            <div className="flex w-full justify-center">
+              <div className="flex w-fit">
+                {
+                  isUpdate === true &&
+                  <>
+                    <div className="w-[14rem] me-10">
+                      <Button
+                        type="button"
+                        color="info"
+                        label="Cancelar"
+                        className="w-full mt-[15px] mb-5"
+                        onClick={() => {
+
+                        }}
+                      />
+                    </div>
+                    <div className="w-[14rem] me-40">
+                      <Button
+                        type="button"
+                        label="Excluir agendamento"
+                        color="danger"
+
+                        className="w-full mt-[15px] mb-5"
+                        onClick={() => {
+                          if (isUpdate) {
+                            deletarAgendamento()
+                          }
+                        }}
+                      />
+                    </div>
+                  </>
+                }
+
+                <div className="w-[16rem] me-2">
+                  <Button2
+                    type="button"
+                    label="Enviar agendamento"
+                    className="w-full mt-[15px] mb-5"
+                    onClick={() => {
+
+                      if (validarCampos()) {
+                        if (!isUpdate)
+                          CriarAgendamentoColeta()
+                        else
+                          AlterarAgendamentoColeta()
+                      }
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
           </Form>
         </div>
       </div>

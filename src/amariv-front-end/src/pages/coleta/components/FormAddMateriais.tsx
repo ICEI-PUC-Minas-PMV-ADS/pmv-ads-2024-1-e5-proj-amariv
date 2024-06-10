@@ -47,6 +47,7 @@ export function FormAddMateriais({listaMateriais, salvarMateriaislista}: FormAdd
         <p className="">Peso: {material.peso}</p>
         <div className="flex gap-2 mt-4">
           <PrimaryButton color="red" title="Excluir" onClick={() => {
+
             let copia = [...materiaisAdicionados]
             copia.splice(index, 1)
             setMateriaisAdicionados(copia)
@@ -67,7 +68,7 @@ export function FormAddMateriais({listaMateriais, salvarMateriaislista}: FormAdd
                 numeroItensIncluidos += 1;
               }              
             }
-            
+            salvarMateriaislista(novaListaMateriais);
           }} />
         </div>
       </div>

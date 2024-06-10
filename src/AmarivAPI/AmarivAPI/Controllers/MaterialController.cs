@@ -3,6 +3,7 @@
 using AmarivAPI.Data.Dtos.MaterialDtos;
 using AmarivAPI.Services;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -79,7 +80,5 @@ namespace AmarivAPI.Controllers
             else
                 return Ok(result);
         }
-
-
     }
 }

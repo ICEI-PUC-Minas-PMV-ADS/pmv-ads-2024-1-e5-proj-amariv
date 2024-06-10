@@ -1,6 +1,7 @@
 ﻿using AmarivAPI.Data.Dtos.TokenDto;
 using AmarivAPI.Data.Dtos.UsuarioDtos;
 using AmarivAPI.Data.Requests;
+using AmarivAPI.DTOs.FuncionarioDtos;
 using AmarivAPI.Services;
 using AmarivAPI.Utils;
 using FluentResults;
@@ -81,6 +82,17 @@ namespace AmarivAPI.Controllers
         public async Task<IActionResult> CadastraCliente(ExternalTokenDTO token)
         {
             Result resultado = await _usuarioService.Google(token);
+            if (resultado.IsFailed)
+            {
+                return StatusCode(500);
+            }
+            return Ok(resultado.Successes);
+        }
+
+        [HttpPost("/CadastrarFuncionario")]
+        public async Task<IActionResult> CadastrarFuncionarioCarlos(CreateFuncionarioDto dto)
+        {
+            Result resultado = await _usuarioService.CadastrarFuncionarioCarlos(dto);
             if (resultado.IsFailed)
             {
                 return StatusCode(500);

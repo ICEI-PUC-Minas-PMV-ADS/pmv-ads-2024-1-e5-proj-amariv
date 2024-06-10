@@ -6,14 +6,12 @@ import Filter from '../../components/Filter';
 import { Material } from '../../models/Material';
 import { materialService } from '../../services/MaterialService';
 
-
 const MaterialPage: React.FC = () => {
   const [materials, setMaterials] = useState<Material[]>([]);
   const [materialInfo, setMaterialInfo] = useState<Material>({
     id: 0,
     descricao: "",
     tipo: "",
-    peso: "",
   });
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredMaterialType, setFilteredMaterialType] = useState("Todos");
@@ -27,13 +25,6 @@ const MaterialPage: React.FC = () => {
     "Papel",
     "Papelão",
     "Vidro",
-  ];
-
-  const weightOptions = [
-    "Selecione",
-    "Leve",
-    "Médio",
-    "Pesado",
   ];
 
   useEffect(() => {
@@ -68,7 +59,7 @@ const MaterialPage: React.FC = () => {
         await materialService.saveMaterial(materialInfo);
       }
 
-      setMaterialInfo({ id: 0, descricao: "", tipo: "", peso: "" });
+      setMaterialInfo({ id: 0, descricao: "", tipo: "" });
       setShowModal(false);
       const updatedMaterials = await materialService.fetchMaterials();
       setMaterials(updatedMaterials);
@@ -160,17 +151,10 @@ const MaterialPage: React.FC = () => {
                   onChange: (value) => setMaterialInfo({ ...materialInfo, tipo: value }),
                   options: materialOptions,
                 },
-                {
-                  type: 'select',
-                  label: 'Peso',
-                  value: materialInfo.peso,
-                  onChange: (value) => setMaterialInfo({ ...materialInfo, peso: value }),
-                  options: weightOptions,
-                },
               ]}
               onSave={handleAddMaterial}
               onCancel={() => {
-                setMaterialInfo({ id: 0, descricao: "", tipo: "", peso: "" });
+                setMaterialInfo({ id: 0, descricao: "", tipo: "" });
                 setShowModal(false);
               }}
             />

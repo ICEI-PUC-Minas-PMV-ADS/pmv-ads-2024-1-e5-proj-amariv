@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\AmarivAPI",
+    "\\src\\AmarivAPI\\AmarivAPI",
+    "\\src\\AmarivAPI\\AmarivAPI\\Data",
+    "\\src\\AmarivAPI\\AmarivAPI\\Data\\Dtos",
+    "\\src\\AmarivAPI\\AmarivAPI\\Data\\Dtos\\FuncionariosDtos"
+  ],
+  "SelectedNode": "\\src\\AmarivAPI\\AmarivAPI\\Data\\Dtos\\FuncionariosDtos\\FuncionarioResponseDto.cs",
+  "PreviewInSolutionExplorer": false
+}

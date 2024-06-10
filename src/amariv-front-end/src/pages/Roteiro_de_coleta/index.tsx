@@ -14,6 +14,7 @@ import { RoteiroDeColetaDto } from "../../models/RoteiroDeColetaDtos/RoteiroDeCo
 import { NextRoutesViewer } from "./components/NextRoutesViewer";
 import { ReadColetaDto } from "../../models/ColetaDtos/ReadColetaDto";
 import CustomModal from "../../components/CustomModal";
+import { TOKEN_KEY } from "../../Constants";
 
 /**
  * RoteiroDeColetaPageProps
@@ -26,7 +27,7 @@ export type RoteiroDeColetaPageProps = {};
  */
 
 const RoteiroDeColetaPageImpl = () => {
-  const token = '';
+  const token = window.localStorage.getItem(TOKEN_KEY) ?? "";
   const state = RoteiroDeColetaContext.usePageState();
   const ctrl = RoteiroDeColetaContext.usePageController();
 
@@ -429,6 +430,8 @@ const RoteiroDeColetaPageImpl = () => {
     return `${ro.funcionario?.nome} (${dtArr[2]}/${dtArr[1]}/${dtArr[0]})`;
   }, [state.availableRoteiroDeColetas, roteiroDeColetaId]);
 
+  console.log(funcionarioId);
+
   /**
    * Layout
    */
@@ -524,7 +527,7 @@ const RoteiroDeColetaPageImpl = () => {
         value={roteiroDeColetaId} />
 
       <div className="w-full min-h-full bg-[#F4FAF6]">
-        <div className="ms-[20rem] me-[4rem] flex">
+        <div className="ms-[4rem] me-[4rem] flex">
           <div className="flex flex-col w-[90%]">
 
             {/*

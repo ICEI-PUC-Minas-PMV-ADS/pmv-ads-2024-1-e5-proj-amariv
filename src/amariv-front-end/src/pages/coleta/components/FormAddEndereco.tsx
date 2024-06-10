@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Input from "../../../components/re_components/Inputs/Input"
 import { ViaCepService } from "../../../services/ViaCepService"
 import { Endereco } from "../../../types/Endereco"
@@ -6,18 +6,35 @@ import { Endereco } from "../../../types/Endereco"
 export type FormAddEnderecoProps = {
     endereco: Endereco,
     salvarEndereco: (e: Endereco) => void
-    errorEndereco: Boolean
+    setErrorEndereco: (x: boolean) => void
 }
 
-export const FormAddEndereco = ({ endereco, salvarEndereco, errorEndereco }: FormAddEnderecoProps) => {
+export const FormAddEndereco = ({ endereco, salvarEndereco, setErrorEndereco }: FormAddEnderecoProps) => {
     const cepRegex = /^[0-9]{8}$/
     const [loading, setLoading] = useState(false)
     const [loadingCep, setLoadingCep] = useState(false)
-    const [errorCep, setErrorCep] = useState(false)
-    const [errorLogradouro, setErrorLogradouro] = useState(false)
-    const [errorNumero, setErrorNumero] = useState(false)
-    const [errorBairro, setErrorBairro] = useState(false)
-    const [errorCidade, setErrorCidade] = useState(false)
+    const [errorCep, setErrorCep] = useState((endereco.cep && endereco.cep.length > 0 ? false : true))
+    const [errorLogradouro, setErrorLogradouro] = useState(endereco.logradouro && endereco.logradouro.length > 0 ? false : true)
+    const [errorNumero, setErrorNumero] = useState(endereco.numero && endereco.numero.length > 0 ? false : true)
+    const [errorBairro, setErrorBairro] = useState(endereco.bairro && endereco.bairro.length > 0 ? false : true)
+    const [errorCidade, setErrorCidade] = useState(endereco.cidade && endereco.cidade.length > 0 ? false : true)
+
+    useEffect(() =>{
+        if (endereco) {
+            setErrorCep(endereco.cep && endereco.cep.length > 0 ? false : true);
+            setErrorLogradouro(endereco.logradouro && endereco.logradouro.length > 0 ? false : true);
+            setErrorNumero(endereco.numero && endereco.numero.length > 0 ? false : true);
+            setErrorBairro(endereco.bairro && endereco.bairro.length > 0 ? false : true);
+            setErrorCidade(endereco.cidade && endereco.cidade.length > 0 ? false : true);
+        }
+    },[endereco])
+
+    useEffect(() =>{
+        if( errorLogradouro || errorCep || errorLogradouro || errorNumero || errorBairro|| errorCidade)
+         setErrorEndereco(true)
+        else
+         setErrorEndereco(false)    
+    },[errorLogradouro, errorCep,errorLogradouro,errorNumero,errorBairro,errorCidade])
 
 
     return (
@@ -33,13 +50,14 @@ export const FormAddEndereco = ({ endereco, salvarEndereco, errorEndereco }: For
                     rightLoading={loadingCep}
                     errorMessage="Digite um CEP válido"
                     onChange={v => {
-                        setErrorCep(false)
+                        setErrorCep(v.target.value.length === 0)
                         let copiaForm = { ...endereco }
                         copiaForm.cep = v.target.value.replace(/\D/g, '')
                         salvarEndereco(copiaForm)
                     }}
                     onChangeDebounce={async (value) => {
-                        if (cepRegex.test(value) && value != "") {
+                        if (cepRegex.test(value) && value !== "") {
+                            setErrorCep(false)
                             setLoadingCep(true)
                             let result = await ViaCepService.buscarEndereco(value)
 
@@ -52,7 +70,7 @@ export const FormAddEndereco = ({ endereco, salvarEndereco, errorEndereco }: For
                             }
                             setLoadingCep(false)
                         }
-                        else if (!cepRegex.test(value) && value != "") {
+                        else if (!cepRegex.test(value) && value === "") {
                             setErrorCep(true)
                         }
                     }}
@@ -68,7 +86,7 @@ export const FormAddEndereco = ({ endereco, salvarEndereco, errorEndereco }: For
                         requiredField
                         value={endereco.logradouro}
                         onChange={v => {
-                            setErrorLogradouro(false)
+                            setErrorLogradouro(v.target.value.length === 0);
                             let copiaForm = { ...endereco }
                             copiaForm.logradouro = v.target.value
                             salvarEndereco(copiaForm)
@@ -83,7 +101,7 @@ export const FormAddEndereco = ({ endereco, salvarEndereco, errorEndereco }: For
                         type="number"
                         value={endereco.numero}
                         onChange={v => {
-                            setErrorNumero(false)
+                            setErrorNumero(v.target.value.length === 0)
                             let copiaForm = { ...endereco }
                             copiaForm.numero = v.target.value.replace(/\D/g, '')
                             salvarEndereco(copiaForm)
@@ -100,7 +118,7 @@ export const FormAddEndereco = ({ endereco, salvarEndereco, errorEndereco }: For
                         requiredField
                         value={endereco.bairro}
                         onChange={v => {
-                            setErrorBairro(false)
+                            setErrorBairro(v.target.value.length === 0)
                             let copiaForm = { ...endereco }
                             copiaForm.bairro = v.target.value
                             salvarEndereco(copiaForm)
@@ -115,7 +133,7 @@ export const FormAddEndereco = ({ endereco, salvarEndereco, errorEndereco }: For
                         requiredField
                         value={endereco.cidade}
                         onChange={v => {
-                            setErrorCidade(false)
+                            setErrorCidade(v.target.value.length === 0)
                             let copiaForm = { ...endereco }
                             copiaForm.cidade = v.target.value
                             salvarEndereco(copiaForm)
@@ -127,6 +145,7 @@ export const FormAddEndereco = ({ endereco, salvarEndereco, errorEndereco }: For
                     <Input
                         title="Referência"
                         titleColor="dark"
+                        value={endereco.referencia}
                         onChange={v => {
                             let copiaForm = { ...endereco }
                             copiaForm.referencia = v.target.value

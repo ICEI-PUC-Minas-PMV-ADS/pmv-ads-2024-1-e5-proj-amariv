@@ -5,6 +5,7 @@ using AmarivAPI.Services;
 using AmarivAPI.DTOs.FuncionarioDtos;
 using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AmarivAPI.Controllers
 {
@@ -23,6 +24,7 @@ namespace AmarivAPI.Controllers
 
         // Retorna todos os funcionários
         [HttpGet]
+        [Authorize(Roles = "admin")]
         public IActionResult GetAll()
         {
             var funcionarios = _funcionarioService.GetAll();
@@ -32,7 +34,8 @@ namespace AmarivAPI.Controllers
 
         // Retorna um funcionário com base no ID
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        [Authorize(Roles = "admin")]
+        public IActionResult GetById(string id)
         {
             var funcionario = _funcionarioService.GetById(id);
             if (funcionario == null)
@@ -45,11 +48,12 @@ namespace AmarivAPI.Controllers
 
         // Cria um novo funcionário
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public IActionResult Create(FuncionarioDto funcionarioDto)
         {
             try
             {
-                var funcionario = _mapper.Map<Funcionario>(funcionarioDto);
+                var funcionario = _mapper.Map<Usuario>(funcionarioDto);
                 _funcionarioService.Create(funcionario);
                 var funcionarioResponseDto = _mapper.Map<FuncionarioResponseDto>(funcionario);
                 return Ok(funcionarioResponseDto);
@@ -62,7 +66,8 @@ namespace AmarivAPI.Controllers
 
         // Atualiza as informações de um funcionário
         [HttpPut("{id}")]
-        public IActionResult Update(int id, FuncionarioUpdateDto funcionarioDto)
+        [Authorize(Roles = "admin")]
+        public IActionResult Update(string id, FuncionarioUpdateDto funcionarioDto)
         {
             var funcionario = _funcionarioService.GetById(id);
             if (funcionario == null)
@@ -86,7 +91,8 @@ namespace AmarivAPI.Controllers
 
         // Exclui um funcionário com base no ID
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        [Authorize(Roles = "admin")]
+        public IActionResult Delete(string id)
         {
             var funcionario = _funcionarioService.GetById(id);
             if (funcionario == null)

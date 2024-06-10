@@ -3,6 +3,7 @@ export interface EnderecoDto {
   logradouro: string,
   numero: string,
   bairro: string,
+  cidade: string,
   cep: string,
   referencia: string,
 }

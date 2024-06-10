@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface FuncionarioInfo {
-  id: number;
+  id: string;
   nome: string;
   email: string;
   sexo: string;

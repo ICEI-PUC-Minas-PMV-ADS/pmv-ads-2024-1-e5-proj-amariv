@@ -2,6 +2,7 @@
 using AmarivAPI.Data.Dtos.RoteiroDeColetasDtos;
 using AmarivAPI.Models;
 using AmarivAPI.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AmarivAPI.Controllers
@@ -25,6 +26,8 @@ namespace AmarivAPI.Controllers
 
         [HttpGet]
         [Route("/GetValidRoteiroDeColetas")]
+        [Authorize(Roles = "admin")]
+
         public IActionResult GetValidRoteiroDeColetas()
         {
             return Ok(_roteiroService.GetValidRoteiroDeColetas());
@@ -32,6 +35,8 @@ namespace AmarivAPI.Controllers
 
         [HttpGet]
         [Route("/GetStartPosition")]
+        [Authorize(Roles = "admin")]
+
         public IActionResult GetStartPosition()
         {
             return Ok(new
@@ -43,6 +48,8 @@ namespace AmarivAPI.Controllers
 
         [HttpPost]
         [Route("/SaveRoteiroDeColeta")]
+        [Authorize(Roles = "admin")]
+
         public IActionResult SaveRoteiroDeColeta(SaveRoteiroDeColetaDto dto)
         {
             try
@@ -113,6 +120,8 @@ namespace AmarivAPI.Controllers
 
         [HttpPost]
         [Route("/CreateRoteiroDeColeta")]
+        [Authorize(Roles = "admin")]
+
         public IActionResult CreateRoteiroDeColeta(CriarRoteiroDeColetaDto dto)
         {
             try
@@ -154,6 +163,8 @@ namespace AmarivAPI.Controllers
 
         [HttpGet]
         [Route("/GetColetasByDate")]
+        [Authorize(Roles = "admin")]
+
         public IActionResult GetColetasByDate(int roteiroDeColetaId)
         {
             try
@@ -195,6 +206,8 @@ namespace AmarivAPI.Controllers
 
         [HttpPost]
         [Route("/OrdenaRoteiroDeColeta")]
+        [Authorize(Roles = "admin")]
+
         public object OrdenaRoteiroDeColeta(OrdenaRoteiroDeColetasDto dto)
         {
             return _roteiroService.OrdenaRoteiroDeColeta(dto);
@@ -202,6 +215,7 @@ namespace AmarivAPI.Controllers
 
         [HttpPost]
         [Route("/AddRouteToRoteiroDeColeta")]
+
         public object AddRouteToRoteiroDeColeta(AddRouteToRoteiroDeColetaDto dto)
         {
             try
@@ -271,6 +285,8 @@ namespace AmarivAPI.Controllers
 
         [HttpPost]
         [Route("/RemoveRouteToRoteiroDeColeta")]
+        [Authorize(Roles = "admin")]
+
         public object RemoveRouteToRoteiroDeColeta(AddRouteToRoteiroDeColetaDto dto)
         {
             try
@@ -320,6 +336,8 @@ namespace AmarivAPI.Controllers
 
         [HttpPost]
         [Route("CancelarColeta")]
+        [Authorize(Roles = "admin")]
+
         public IActionResult CancelarColeta(CancelarColetaDto dto) {
             try
             {

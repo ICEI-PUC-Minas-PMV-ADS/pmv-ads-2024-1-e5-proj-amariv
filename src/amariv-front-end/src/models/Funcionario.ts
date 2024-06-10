@@ -1,6 +1,6 @@
 export class Funcionario {
     constructor(
-      public id: number,
+      public id: string,
       public nome: string,
       public email: string,
       public sexo: string,
