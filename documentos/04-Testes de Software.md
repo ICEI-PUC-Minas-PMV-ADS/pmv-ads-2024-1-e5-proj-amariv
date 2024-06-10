@@ -46,6 +46,7 @@ O plano de testes foi desenvolvido utilizando uma metodologia que abrange todos 
 <br>**Estado:** Passou. 
 <br>**Descrição:** Uma vez logado no sistema, o administrador deverá, na barra de navegação lateral, selecionar a guia “Funcionários”. Na tela “Funcionários”, deverá acionar o botão “Adicionar funcionário”. Uma vez acionado o botão, surgirá na tela um formulário de cadastro de funcionário. Após preencher o formulário com as informações do novo funcionário, há as opções de “salvar” e “cancelar”. Selecionando qualquer das duas opções o formulário será fechado, se optou por salvar, surgirá um card na tela de funcionários com o novo funcionário cadastrado; se optou por cancelar, a operação será cancelada e as informações do formulário são apagadas.
 <br>**Imagens do teste:** 
+ ![Imagem](/documentos/img/testes/1.jpg) 
 
 
 <br>**Teste 02:** Cadastro de funcionários. 
@@ -54,6 +55,9 @@ O plano de testes foi desenvolvido utilizando uma metodologia que abrange todos 
 <br>**Estado:** Passou. 
 <br>**Descrição:** Na tela “Funcionários”, no card de um funcionário, ao selecionar a opção “Editar”, é aberto um formulário editável com as informações do funcionário. Após realizar as informações, basta selecionar o botão “salvar” para atualizar as informações. O card com as informações do funcionário será atualizada. 
 <br>**Imagens do teste:** 
+ ![Imagem](/documentos/img/testes/2-1.jpg)
+
+ ![Imagem](/documentos/img/testes/2-2.jpg)
 
 
 <br>**Teste 03:** Exclusão de funcionário. 
@@ -62,6 +66,9 @@ O plano de testes foi desenvolvido utilizando uma metodologia que abrange todos 
 <br>**Estado:** Passou. 
 <br>**Descrição:** Na página “Funcionários”, basta selecionar a opção “Excluir” no card do funcionário que se deseja remover. Uma vez ativada, o funcionário é removido da base o card com suas informações é excluído.
 <br>**Imagens do teste:** 
+![Imagem](/documentos/img/testes/3-1.jpg)
+
+![Imagem](/documentos/img/testes/3-2.jpg)
 
 
 <br>**Teste 04:** Cadastro/login de cliente com conta Google. 
@@ -70,6 +77,7 @@ O plano de testes foi desenvolvido utilizando uma metodologia que abrange todos 
 <br>**Estado:** Passou. 
 <br>**Descrição:** Na página inicial, há a opção de usar sua conta Google. Ao selecionar essa opção é carregado no sistema as informações necessárias a partir do disponível na plataforma do Google.
 <br>**Imagens do teste:** 
+![Imagem](/documentos/img/testes/4.jpg)
 
 <br>**Teste 05:** Cadastro de cliente no sistema. 
 <br>**Requisito:** RF-05.
@@ -77,6 +85,7 @@ O plano de testes foi desenvolvido utilizando uma metodologia que abrange todos 
 <br>**Estado:** Passou. 
 <br>**Descrição:** Na página inicial, após selecionar a opção “Cadastre-se”, é aberto um formulário no qual o cliente poderá inserir suas informações para realizar seu cadastro na plataforma, tais como: nome, e-mail e senha. 
 <br>**Imagens do teste:** 
+![Imagem](/documentos/img/testes/5.jpg)
 
 
 <br>**Teste 06:** Login. 
@@ -85,7 +94,7 @@ O plano de testes foi desenvolvido utilizando uma metodologia que abrange todos 
 <br>**Estado:** Passou. 
 <br>**Descrição:** Na página inicial, basta inserir o e-mail e senha informados no cadastro, acionar o botão “Entrar” que, no caso de as informações estarem corretas, o usuário será redirecionado para o ambiente interno da plataforma. 
 <br>**Imagens do teste:**
-
+![Imagem](/documentos/img/testes/6.jpg)
 
 <br>**Teste 07:** Cadastro de coleta de material reciclável. 
 <br>**Requisito:** RF-07.
@@ -93,25 +102,37 @@ O plano de testes foi desenvolvido utilizando uma metodologia que abrange todos 
 <br>**Estado:** Passou. 
 <br>**Descrição:** Na página de coleta, o usuário deverá preencher seus dados pessoais, e os dados do endereço em que a coleta será realizada. Em seguida, deverá selecionar a data/hora que lhe é mais conveniente para receber a equipe de coleta, informando nos campos próprios. Após isto, deverá selecionar o botão “verificar disponibilidade”, em que lhe será informado se a data/hora escolhida poderá ser atendida pela AMARIV. Logo abaixo, o usuário deverá informar quais os materiais ele tem disponível para coleta, informando o tipo de material e o peso. Finalizando o cadastro de materiais, basta selecionar a opção “Enviar agendamento”.  
 <br>**Imagens do teste:**
+![Imagem](/documentos/img/testes/7.jpg)
 
 <br>**Teste 08:** Cadastro de coleta de material sem necessidade de login. 
 <br>**Requisito:** RF-08.
 <br>**Critérios:** O usuário deverá ser capaz de registrar um pedido de coleta de material reciclável sem a necessidade de cadastrar-se na plataforma ou realizar login. 
 <br>**Estado:** Passou. 
 <br>**Descrição:** Na página inicial, na parte superior da barra lateral, há a opção de criar um agendamento sem a necessidade de cadastro ou login. Ao selecionar essa opção, o usuário será redirecionado para um ambiente similar ao ambiente do Teste 07, no qual ele deverá informar os dados necessários à coleta: nome, endereço, data/hora e materiais. 
+<br>**Imagens do teste:**
+![Imagem](/documentos/img/testes/8.jpg)
+
+![Imagem](/documentos/img/testes/8-1.jpg)
+
+![Imagem](/documentos/img/testes/8-2.jpg)
 
 <br>**Teste 09:** Aprovação/cancelamento de coleta.
 <br>**Requisito:** RF-09.
 <br>**Critérios:** O Administrador deverá ser capaz de aprovar ou rejeitar um pedido de coleta. 
 <br>**Estado:** Passou. 
 <br>**Descrição:** Na página de coletas o Administrador poderá, no card de cada coleta, recusá-la ou aceitá-la, bastando clicar nos botões “Recusar” ou “Aceitar”. 
+<br>**Imagens do teste:**
+![Imagem](/documentos/img/testes/9-1.jpg)
 
+![Imagem](/documentos/img/testes/9-2.jpg)
 
 <br>**Teste 10:** Cadastro/alteração de coleta pelo Administrador.
 <br>**Requisito:** RF-10.
 <br>**Critérios:** O administrador deverá ser capaz de registrar um pedido de coleta, ou mesmo alterar um pedido de coleta cadastrado no sistema. 
 <br>**Estado:** Passou. 
 <br>**Descrição:** Nos casos de pedidos feitos por telefone, ou presencialmente na sede da AMARIV, o Administrador poderá, na página “Coletas”, realizar a inserção das informações e cadastro do pedido de coleta, da maneira descrita no Teste 07. Bem como, após cadastro, poderá excluir o pedido de coleta feito. 
+<br>**Imagens do teste:**
+![Imagem](/documentos/img/testes/10.jpg)
 
 
 <br>**Teste 11:** Criação de rota de coletas. 
@@ -119,6 +140,8 @@ O plano de testes foi desenvolvido utilizando uma metodologia que abrange todos 
 <br>**Critérios:** O Administrador deverá de capaz de criar uma rota de coleta de materiais, a partir dos pedidos de coleta cadastrados no sistema. 
 <br>**Estado:** Passou. 
 <br>**Descrição:** Para criar uma rota de coleta de materiais, basta o Administrador informar o funcionário responsável pelas coletas do dia, a quantidade máxima de coletas aprovada para o dia e o dia da coleta. Em seguida, poderá selecionar as coletas cadastradas para o dia selecionado. 
+<br>**Imagens do teste:**
+![Imagem](/documentos/img/testes/11.jpg)
 
 
 <br>**Teste 12:** Visualização de rota de coleta.  
@@ -126,6 +149,8 @@ O plano de testes foi desenvolvido utilizando uma metodologia que abrange todos 
 <br>**Critérios:** Os usuários Administrador e Funcionário deverão ser capazes de visualizar a rota de coleta cadastrada. 
 <br>**Estado:** Passou. 
 <br>**Descrição:** Na página de rotas, poderá ser vista a rota prevista para o dia, com o itinerário aprovado previamente. Há o campo de rota atual, no qual o funcionário pode ver qual o próximo ponto de coleta, bem como o botão “Finalizar” para informar que aquela coleta foi realizada e que deverá seguir para o próximo ponto. Logo abaixo estarão dispostos os próximos pontos de coleta da rota. 
+<br>**Imagens do teste:**
+![Imagem](/documentos/img/testes/12.jpg)
 
 
 <br>**Teste 13:** Alteração de rota.   
@@ -133,19 +158,28 @@ O plano de testes foi desenvolvido utilizando uma metodologia que abrange todos 
 <br>**Critérios:** O usuário Funcionário deverá ser capaz de alterar a rota de coleta cadastrada.
 <br>**Estado:** Passou. 
 <br>**Descrição:** No mesmo ambiente do Teste 12, o funcionário poderá reordenar as coletas previstas para a rota, bastando, para isso, mover para cima ou para baixo na lista para reorganizar a ordem das coletas. 
-
+<br>**Imagens do teste:**
+![Imagem](/documentos/img/testes/13-1.jpg)
+![Imagem](/documentos/img/testes/13-2.jpg)
 
 <br>**Teste 14:** Alteração do status da coleta.  
 <br>**Requisito:** RF-14.
 <br>**Critérios:** O usuário Funcionário deverá ser capaz de alterar o status de um pedido de coleta. 
 <br>**Estado:** Passou. 
 <br>**Descrição:** Ao selecionar uma coleta cadastrada, será possível alterar seu estado, mudando-a de posição na rota, marcar como realizada ou cancelar. 
+<br>**Imagens do teste:**
+![Imagem](/documentos/img/testes/14.jpg)
+
+![Imagem](/documentos/img/testes/14-1.jpg)
+
 
 <br>**Teste 15:** Limitação da quantidade de coletas. 
 <br>**Requisito:** RF-15.
 <br>**Critérios:** O Administrador deverá ser capaz de limitar a quantidade de coletas que poderão ser atendidas em um dia específico. 
 <br>**Estado:** Passou. 
 <br>**Descrição:** Na página de criação de rotas de coleta, basta informar a quantidade máxima desejada de coletas no campo “Limite”, na guia “Detalhes do roteiro”.  
+<br>**Imagens do teste:**
+![Imagem](/documentos/img/testes/15.jpg)
 
 
 <br>**Teste 16:** Visualização do histórico de coletas. 
@@ -153,6 +187,8 @@ O plano de testes foi desenvolvido utilizando uma metodologia que abrange todos 
 <br>**Critérios:** O Administrador deverá ser capaz de visualizar o histórico de coletas realizadas. 
 <br>**Estado:** Passou. 
 <br>**Descrição:** Na página de coletas, estarão disponíveis os cards com as coletas cadastradas, constando ainda suas respectivas informações, como data, status, nome do cliente, horário programado, materiais cadastrados etc. 
+<br>**Imagens do teste:**
+![Imagem](/documentos/img/testes/16.jpg)
 
 
 <br>**Teste 17:** Filtro do histórico de coletas. 
@@ -160,6 +196,10 @@ O plano de testes foi desenvolvido utilizando uma metodologia que abrange todos 
 <br>**Critérios:** O Administrador deverá ser capaz de filtrar o histórico de coletas por data, material, status ou funcionário.
 <br>**Estado:** Passou. 
 <br>**Descrição:** Na mesma página de coletas, demonstrada no Teste 16, na seção “Filtro”, basta selecionar o parâmetro desejado, como por exemplo: nome do funcionário responsável, material, status e período. Basta selecionar o campo desejado e inserir a informação que deseja utilizar como filtro que as informações serão atualizadas automaticamente. 
+<br>**Imagens do teste:**
+![Imagem](/documentos/img/testes/18-1.jpg)
+
+![Imagem](/documentos/img/testes/9-1.jpg)
 
 
 <br>**Teste 18:** Cadastro de materiais.  
@@ -167,17 +207,39 @@ O plano de testes foi desenvolvido utilizando uma metodologia que abrange todos 
 <br>**Critérios:** O usuário Administrador e Funcionário deverão ser capazes de cadastrar novos materiais que poderão ser entregues pelo usuário cliente. Esses materiais são os que serão aceitos pela equipe de coleta.
 <br>**Estado:** Passou. 
 <br>**Descrição:** Na página de materiais, basta acionar o botão “Adicionar material”, no canto superior direito, que surgirá na tela um formulário para cadastro de material. No formulário, deverão ser inseridas as informações relativas à descrição e tipo de material. Após salvar, o novo material ficará disponível em um card na tela. De igual forma, também é possível excluir ou editar um material cadastrado.
+<br>**Imagens do teste:**
+
+![Imagem](/documentos/img/testes/18.jpg)
+
+![Imagem](/documentos/img/testes/18-1.jpg)
+
+![Imagem](/documentos/img/testes/18-2.jpg)
 
 <br>**Teste 19:** Cadastro de materiais em coleta 
 <br>**Requisito:** RF-19.
 <br>**Critérios:** O usuário cliente deverá ser capaz de cadastrar os materiais que serão por ele entregues no pedido de coleta. 
 <br>**Estado:** Passou. 
 <br>**Descrição:** Na página de cadastro de coleta, após inserir suas informações pessoais, data e hora da coleta, o usuário poderá inserir as informações dos materiais que serão coletados. Para tanto, deverá selecionar o botão “Adicionar material”, que abrirá um pequeno formulário em que o usuário poderá selecionar, dentre os materiais cadastrados pelo administrador e/ou funcionário como aptos à coleta, bem como o peso dos materiais a serem coletados. Após salvar as informações, elas ficarão disponíveis em um card específico para aquele material. Serão criados tantos cards quanto a quantidade de materiais diferentes fora informada pelo usuário. 
+<br>**Imagens do teste:**
+
+![Imagem](/documentos/img/testes/19.jpg)
+
+![Imagem](/documentos/img/testes/19-1.jpg)
+
+![Imagem](/documentos/img/testes/19-2.jpg)
+
+![Imagem](/documentos/img/testes/19-3.jpg)
+
 
 <br>**Teste 20:** Recuperação de senha. 
 <br>**Requisito:** RF-20.
 <br>**Critérios:** O usuário deverá ser capaz de solicitar a recuperação de senha.
 <br>**Estado:** Passou. 
 <br>**Descrição:** Na página inicial, próximo ao formulário de login, há a opção de “esqueci minha senha”, que ao ser selecionado redicionará o usuário ao ambiente de recuperação. Neste ambiente, o usuário informa o e-mail utilizado no seu cadastro, aciona o botão “enviar” que fará com que o sistema envie para o e-mail um protocolo para a recuperação de senha. 
+<br>**Imagens do teste:**
+
+![Imagem](/documentos/img/testes/20.jpg)
+
+![Imagem](/documentos/img/testes/20-1.jpg)
 
 
