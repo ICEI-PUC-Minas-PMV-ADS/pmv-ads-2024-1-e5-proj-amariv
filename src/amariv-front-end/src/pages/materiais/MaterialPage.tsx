@@ -86,7 +86,7 @@ const MaterialPage: React.FC = () => {
 
   return (
     <div className="App">
-      <div className="content">
+      <div className="content content px-10 py-10">
         <div className="title">
           <h2 className="mt-[30px] text-[#53735B] text-[1.75rem] float-left">
             Materiais

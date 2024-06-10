@@ -26,7 +26,7 @@ const FuncionariosPage = () => {
   const [filteredCargo, setFilteredCargo] = useState("Todos");
   const [editingIndex, setEditingIndex] = useState<string | null>(null);
 
-  const cargoOptions = ["Todos", "Motorista", "Reciclagem", "Administrador", "Outro"];
+  const cargoOptions = ["Todos", "Motorista", "Reciclagem", "Outro"];
 
   useEffect(() => {
     fetchFuncionarios().then(data => {
@@ -80,7 +80,7 @@ const FuncionariosPage = () => {
   };
 
   return (
-    <div className="App">
+    <div className="App content px-20 py-8">
       <div className="content">
         <div className="title">
           <h2 className="mt-[30px] text-[#53735B] text-[1.75rem] float-left">Funcionários</h2>
