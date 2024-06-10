@@ -12,13 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AmarivAPI.Migrations
 {
     [DbContext(typeof(AmarivContext))]
-<<<<<<<< HEAD:src/AmarivAPI/AmarivAPI/Migrations/20240608212624_start.Designer.cs
-    [Migration("20240608212624_start")]
+    [Migration("20240610020648_start")]
     partial class start
-========
-    [Migration("20240609135049_lastmigration")]
-    partial class lastmigration
->>>>>>>> Correcoes_vitor:src/AmarivAPI/AmarivAPI/Migrations/20240609135049_lastmigration.Designer.cs
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -342,26 +337,16 @@ namespace AmarivAPI.Migrations
                         {
                             Id = "adm",
                             AccessFailedCount = 0,
-<<<<<<<< HEAD:src/AmarivAPI/AmarivAPI/Migrations/20240608212624_start.Designer.cs
-                            ConcurrencyStamp = "f8e9bfce-d1a7-4f3a-976c-40435c284eb7",
-========
-                            ConcurrencyStamp = "e3b5f554-0fdc-4a02-b9b9-f924538ab4f7",
->>>>>>>> Correcoes_vitor:src/AmarivAPI/AmarivAPI/Migrations/20240609135049_lastmigration.Designer.cs
+                            ConcurrencyStamp = "4c38254a-934d-4393-b947-2c3a8601ee16",
                             Email = "amarivadm@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             Nome = "Administrador",
                             NormalizedEmail = "AMARIVADM@GMAIL.COM",
                             NormalizedUserName = "AMARIVADM@GMAIL.COM",
-<<<<<<<< HEAD:src/AmarivAPI/AmarivAPI/Migrations/20240608212624_start.Designer.cs
-                            PasswordHash = "AQAAAAIAAYagAAAAEHKeOTJr81z2fIyLZTo2xOvM5ZVqSnVdIYw2Wxons7Z4ssuL9h59874GLF57QVvTFw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEId71DxTujhsKabXXzkCyiKFYRDOkpEZ7liV8zs418LhwH4raiU40XyCLwHOmQzx8A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "90f6a09d-8e6b-4589-b4d9-00a407d36299",
-========
-                            PasswordHash = "AQAAAAIAAYagAAAAEC8d93Sf1kK1BrVgLrSVo7W3nqlRh2iCuIDAOrva5PcVeRhov7PR1FrRUZZrfK0tnQ==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "5636a529-5229-46d1-92f8-d073a91cd387",
->>>>>>>> Correcoes_vitor:src/AmarivAPI/AmarivAPI/Migrations/20240609135049_lastmigration.Designer.cs
+                            SecurityStamp = "7299e1b8-6d1d-4861-b3ae-cc2c80ce364b",
                             TwoFactorEnabled = false,
                             UserName = "amarivadm@gmail.com"
                         });

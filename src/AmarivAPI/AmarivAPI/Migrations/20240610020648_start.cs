@@ -9,11 +9,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AmarivAPI.Migrations
 {
     /// <inheritdoc />
-<<<<<<<< HEAD:src/AmarivAPI/AmarivAPI/Migrations/20240608212624_start.cs
     public partial class start : Migration
-========
-    public partial class lastmigration : Migration
->>>>>>>> Correcoes_vitor:src/AmarivAPI/AmarivAPI/Migrations/20240609135049_lastmigration.cs
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -372,13 +368,8 @@ namespace AmarivAPI.Migrations
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
-<<<<<<<< HEAD:src/AmarivAPI/AmarivAPI/Migrations/20240608212624_start.cs
-                columns: new[] { "Id", "AccessFailedCount", "Celular", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "Nome", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "Telefone", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "adm", 0, null, "f8e9bfce-d1a7-4f3a-976c-40435c284eb7", "amarivadm@gmail.com", true, false, null, "Administrador", "AMARIVADM@GMAIL.COM", "AMARIVADM@GMAIL.COM", "AQAAAAIAAYagAAAAEHKeOTJr81z2fIyLZTo2xOvM5ZVqSnVdIYw2Wxons7Z4ssuL9h59874GLF57QVvTFw==", null, false, "90f6a09d-8e6b-4589-b4d9-00a407d36299", null, false, "amarivadm@gmail.com" });
-========
                 columns: new[] { "Id", "AccessFailedCount", "Cargo", "Celular", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "Nome", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "Sexo", "SuportaPeso", "Telefone", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "adm", 0, null, null, "e3b5f554-0fdc-4a02-b9b9-f924538ab4f7", "amarivadm@gmail.com", true, false, null, "Administrador", "AMARIVADM@GMAIL.COM", "AMARIVADM@GMAIL.COM", "AQAAAAIAAYagAAAAEC8d93Sf1kK1BrVgLrSVo7W3nqlRh2iCuIDAOrva5PcVeRhov7PR1FrRUZZrfK0tnQ==", null, false, "5636a529-5229-46d1-92f8-d073a91cd387", null, null, null, false, "amarivadm@gmail.com" });
->>>>>>>> Correcoes_vitor:src/AmarivAPI/AmarivAPI/Migrations/20240609135049_lastmigration.cs
+                values: new object[] { "adm", 0, null, null, "4c38254a-934d-4393-b947-2c3a8601ee16", "amarivadm@gmail.com", true, false, null, "Administrador", "AMARIVADM@GMAIL.COM", "AMARIVADM@GMAIL.COM", "AQAAAAIAAYagAAAAEId71DxTujhsKabXXzkCyiKFYRDOkpEZ7liV8zs418LhwH4raiU40XyCLwHOmQzx8A==", null, false, "7299e1b8-6d1d-4861-b3ae-cc2c80ce364b", null, null, null, false, "amarivadm@gmail.com" });
 
             migrationBuilder.InsertData(
                 table: "Materiais",
