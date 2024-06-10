@@ -118,7 +118,7 @@ export function LoginPage() {
             </div>
           </div>
         </div>
-        <div className="w-full h-full" style={{ backgroundImage: `url(${BackgroundLogin})`, backgroundRepeat: 'no-repeat' }}></div>
+        <div className="w-full h-auto" style={{ backgroundImage: `url(${BackgroundLogin})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}></div>
       </div>
     </>
   );
