@@ -1,9 +1,12 @@
-﻿using AmarivAPI.Data.Dtos.UsuarioDtos;
+﻿using AmarivAPI.Data.Dtos.TokenDto;
+using AmarivAPI.Data.Dtos.UsuarioDtos;
 using AmarivAPI.Data.Requests;
 using AmarivAPI.DTOs.FuncionarioDtos;
 using AmarivAPI.Services;
+using AmarivAPI.Utils;
 using FluentResults;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AmarivAPI.Controllers
@@ -42,7 +45,7 @@ namespace AmarivAPI.Controllers
             return Ok(resultado.Successes);
         }
 
-        [HttpPost("/solicita-confirmacao")]
+        [HttpPost("/solicitaconfirmacao")]
         public async Task<IActionResult> SolicitaConfirmacao(SolicitaConfirmacaoRequest request)
         {
             Result resultado = await _usuarioService.SolicitaConfirmacao(request);
@@ -53,7 +56,7 @@ namespace AmarivAPI.Controllers
             return Ok(resultado.Successes);
         }
 
-        [HttpPost("/confirma-email")]
+        [HttpPost("/confirmaemail")]
         public IActionResult ConfirmaEmail(ConfirmaEmailRequest request)
         {
             Result resultado = _usuarioService.ConfirmaEmail(request);
@@ -73,6 +76,17 @@ namespace AmarivAPI.Controllers
                 return Ok();
             }
             return StatusCode(StatusCodes.Status302Found);
+        }
+
+        [HttpPost("/googlelogin")]
+        public async Task<IActionResult> CadastraCliente(ExternalTokenDTO token)
+        {
+            Result resultado = await _usuarioService.Google(token);
+            if (resultado.IsFailed)
+            {
+                return StatusCode(500);
+            }
+            return Ok(resultado.Successes);
         }
 
         [HttpPost("/CadastrarFuncionario")]

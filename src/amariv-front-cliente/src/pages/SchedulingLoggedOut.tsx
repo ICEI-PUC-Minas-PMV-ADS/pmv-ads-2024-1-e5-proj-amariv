@@ -11,7 +11,6 @@ import { CreateColetaForm } from "../types/CreateColetaForm";
 import dayjs from "dayjs";
 import DatePicker from "../components/DatePicker";
 import SelectInput from "../components/Inputs/SelectInput";
-import dataUtils from "../utils/dataUtils";
 import { tv } from "tailwind-variants";
 import AddMaterial from "../components/AddMaterial";
 import { Alert } from "@mui/material";
@@ -20,6 +19,8 @@ import { EnderecoService } from "../services/EnderecoService";
 import { GoogleService } from "../services/GoogleService";
 import { Endereco } from "../types/Endereco";
 import { ColetaService } from "../services/ColetaService";
+import SelectHours from "../components/SelectHours";
+import { DateConvert } from "../utils/DateConvert";
 
 function SchedulingLoggedOut() {
   const cepRegex = /^[0-9]{8}$/
@@ -36,9 +37,12 @@ function SchedulingLoggedOut() {
 
   const [modalMaterialOpen, setModalMaterialOpen] = useState(false)
   const [modalDataOpen, setModalDataOpen] = useState(false)
+  const [modalHorariosOpen, setModalHorariosOpen] = useState(false)
   const [loading, setLoading] = useState(false)
 
+  const [horarioSelecionado, setHorarioSelecionado] = useState("Selecionar")
   const [materiaisAdicionados, setMateriaisAdicionados] = useState<any[]>([])
+  const [horariosDisponiveis, sethorariosDisponiveis] = useState<string[]>([])
 
   const [form, setForm] = useState<CreateColetaForm>({
     enderecoId: 0,
@@ -64,6 +68,8 @@ function SchedulingLoggedOut() {
   const [telefoneError, setTelefoneError] = useState(false)
   const [nomeError, setNomeError] = useState(false)
   const [serverError, setServerError] = useState(false)
+  const [errorHorario, setErrorHorario] = useState(false)
+  const [errorCoordinates, setErrorCoordinates] = useState(false)
 
   const validarCampos = () => {
     if (form.clienteNome == null || form.clienteNome == "" || form.clienteNome == undefined) {
@@ -166,31 +172,48 @@ function SchedulingLoggedOut() {
 
   const handleSave = async () => {
     setLoading(true)
-    await EnderecoService.cadastrarEndereco(formEndereco).then(async (r) => {
-      let copyForm = { ...form }
-      copyForm.enderecoId = r.data.successes[0].message
-      let copyEnderecoForm = { ...formEndereco }
-      copyEnderecoForm.id = r.data.successes[0].message
 
-      let location = await GoogleService.buscarLatitudeLongitude(copyEnderecoForm as Endereco)
-      if (location != "erro") {
-        copyForm.lat = location.lat
-        copyForm.lon = location.lng
-      }
-      let materiaisString: string = ""
-      materiaisAdicionados.forEach(x => {
-        materiaisString = materiaisString + `${x.idMaterial}:${x.peso};`
+    let copyForm = { ...form }
+    let copyEnderecoForm = { ...formEndereco }
+
+    let google = await GoogleService.buscarLatitudeLongitude(copyEnderecoForm as Endereco)
+    if (google != "erro" && google.geometry.location_type != "APPROXIMATE") {
+      copyForm.lat = google.geometry.location.lat
+      copyForm.lon = google.geometry.location.lng
+      copyForm.LocalidadeExata = true
+
+      await EnderecoService.cadastrarEndereco(formEndereco).then(async (r) => {
+        copyEnderecoForm.id = r.data.successes[0].message
+        copyForm.enderecoId = r.data.successes[0].message
+
+        let materiaisString: string = ""
+        materiaisAdicionados.forEach(x => {
+          materiaisString = materiaisString + `${x.idMaterial}:${x.peso};`
+        })
+        copyForm.listaItensColeta = materiaisString
+        setForm(copyForm)
+        setFormEndereco(copyEnderecoForm)
+        await ColetaService.cadastrarColeta(copyForm).then(async (x) => {
+          await appContext.resetUnavailableDates()
+          appContext.useAlert("Agendamento de coleta realizado com sucesso! Para mais detalhes sobre seu agendamento entre em contato com a AMARIV pelo telefone (27)3317-3366.", () => { navigate("/") })
+        }).catch(x => setServerError(true))
+
+      }).catch(e => {
+        setServerError(true)
       })
-      copyForm.listaItensColeta = materiaisString
-      setForm(copyForm)
-      setFormEndereco(copyEnderecoForm)
-      await ColetaService.cadastrarColeta(copyForm).then(async (x) => {
-        await appContext.resetUnavailableDates()
-        appContext.useAlert("Agendamento de coleta realizado com sucesso! Para mais detalhes sobre seu agendamento entre em contato com a AMARIV pelo telefone (27)3317-3366.", () => { navigate("/") })
-      }).catch(x => setServerError(true))
+    }
+    else {
+      setErrorCoordinates(true)
+    }
+    setLoading(false)
+  }
 
-    }).catch(e => {
-      setServerError(true)
+  const buscarHorarios = async (date: string) => {
+    setLoading(true)
+    console.log(date)
+    await ColetaService.horariosDisponiveis(date).then((r) => {
+      console.log(r.data)
+      sethorariosDisponiveis(r.data)
     })
     setLoading(false)
   }
@@ -199,15 +222,31 @@ function SchedulingLoggedOut() {
   return (
     <>
       <LoadingScreen open={loading} />
+      <SelectHours
+        value={horarioSelecionado}
+        isOpen={modalHorariosOpen}
+        availableHours={horariosDisponiveis}
+        onClose={() => setModalHorariosOpen(false)}
+        onConfirm={(d) => {
+          let copyForm = { ...form }
+          copyForm.dataDeColeta = d
+          setForm(copyForm)
+          setModalDataOpen(false)
+          setHorarioSelecionado(d)
+          setModalHorariosOpen(false)
+        }}
+      />
       <DatePicker
         unavailableDates={appContext.unavailableDates}
-        value={dayjs(form.dataDeColeta)}
+        value={form.dataDeColeta == "Selecionar" ? dayjs(new Date(form.dataDeColeta).toUTCString()) : dayjs(form.dataDeColeta)}
         isOpen={modalDataOpen}
-        onAccept={(d) => {
+        onAccept={async (d) => {
           let copyForm = { ...form }
           if (d) {
+            await buscarHorarios(d.toISOString())
             copyForm.dataDeColeta = d.toISOString()
             setForm(copyForm)
+            setHorarioSelecionado("Selecionar")
           }
           setModalDataOpen(false)
         }
@@ -271,6 +310,7 @@ function SchedulingLoggedOut() {
               rightLoading={loadingCep}
               errorMessage="Digite um CEP válido"
               onChange={v => {
+                setErrorCoordinates(false)
                 setErrorCep(false)
                 let copiaForm = { ...formEndereco }
                 copiaForm.cep = v.target.value.replace(/\D/g, '')
@@ -303,6 +343,7 @@ function SchedulingLoggedOut() {
               requiredField
               value={formEndereco.logradouro}
               onChange={v => {
+                setErrorCoordinates(false)
                 setErrorLogradouro(false)
                 let copiaForm = { ...formEndereco }
                 copiaForm.logradouro = v.target.value
@@ -317,6 +358,7 @@ function SchedulingLoggedOut() {
               value={formEndereco.numero}
               onChange={v => {
                 setErrorNumero(false)
+                setErrorCoordinates(false)
                 let copiaForm = { ...formEndereco }
                 copiaForm.numero = v.target.value.replace(/\D/g, '')
                 setFormEndereco(copiaForm)
@@ -330,6 +372,7 @@ function SchedulingLoggedOut() {
               value={formEndereco.bairro}
               onChange={v => {
                 setErrorBairro(false)
+                setErrorCoordinates(false)
                 let copiaForm = { ...formEndereco }
                 copiaForm.bairro = v.target.value
                 setFormEndereco(copiaForm)
@@ -342,6 +385,7 @@ function SchedulingLoggedOut() {
               requiredField
               value={formEndereco.cidade}
               onChange={v => {
+                setErrorCoordinates(false)
                 setErrorCidade(false)
                 let copiaForm = { ...formEndereco }
                 copiaForm.cidade = v.target.value
@@ -351,6 +395,7 @@ function SchedulingLoggedOut() {
               title="Referência"
               titleColor="dark"
               onChange={v => {
+                setErrorCoordinates(false)
                 let copiaForm = { ...formEndereco }
                 copiaForm.referencia = v.target.value
                 setFormEndereco(copiaForm)
@@ -364,8 +409,22 @@ function SchedulingLoggedOut() {
                 setModalDataOpen(true)
               }}
               calendarIcon
-              value={form.dataDeColeta == "Selecionar" ? "Selecionar" : dataUtils.converterData(form.dataDeColeta)}
+              value={form.dataDeColeta == "Selecionar" ? "Selecionar" : DateConvert.getLocalDate(form.dataDeColeta)}
               title="Data da coleta" />
+            {
+              form.dataDeColeta != "Selecionar" &&
+              <SelectInput
+                errorMessage="É necessário fornecer um horário para a coleta"
+                error={errorHorario}
+                rightIcon="IconClock"
+                onClickSelectableInput={() => {
+                  setErrorHorario(false)
+                  setModalHorariosOpen(true)
+                }}
+                calendarIcon
+                value={horarioSelecionado == "Selecionar" ? "Selecionar" : DateConvert.getLocalHour(horarioSelecionado)}
+                title="Horário da coleta" />
+            }
             <p className="text-3xl font-bold text-primary-green mb-2 mt-6">Materiais da coleta</p>
           </div>
           <div className="w-full items-center justify-center flex py-6 max-w-[420px] px-3 flex-col">
@@ -404,9 +463,15 @@ function SchedulingLoggedOut() {
               <Alert severity="error">Erro ao comunicar com o servidor. Tente novamente mais tarde.</Alert>
             </div>
           }
+          {
+            errorCoordinates &&
+            <div className="w-full mt-4 px-6 max-w-[420px]">
+              <Alert severity="error">Não foi possível agendar a coleta para o endereço selecionado, pois não foi localizado pelo GPS. Por favor, escolha outro endereço ou agende por telefone ligando para (27) 3317-3366.</Alert>
+            </div>
+          }
           <div className="w-full flex items-center justify-center">
             <div className="w-2/3 mt-6 max-w-[250px] mb-16">
-              <PrimaryButton title="Agendar coleta" leftIcon="IconCheck" onClick={() => {
+              <PrimaryButton title="Agendar coleta" leftIcon="IconCheck" onClick={async () => {
                 if (validarCampos()) {
                   handleSave()
                 }

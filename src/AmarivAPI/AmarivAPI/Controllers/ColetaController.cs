@@ -114,7 +114,7 @@ namespace AmarivAPI.Controllers
 
         [HttpPost]
         [Route("/cancelarcoleta")]
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin,cliente")]
         public IActionResult CancelarColeta(int idColeta)
         {
             var result = _coletaService.CancelarColeta(idColeta);
@@ -131,6 +131,28 @@ namespace AmarivAPI.Controllers
         {
             var result = _coletaService.ConsultaDisponibilidadeColeta(data);
             return Json(result);
+        }
+
+        [HttpGet]
+        [Route("/horariosdisponiveis")]
+        public IActionResult RecuperaHorarioDisponiveis(DateTime date)
+        {
+            var result = _coletaService.VerificaHorariosDisponiveis(date);
+            if (result != null)
+                return Json(result);
+            else
+                return NotFound();
+        }
+
+        [HttpGet]
+        [Route("/datasindisponiveis")]
+        public IActionResult RecuperaDatasIndisponiveis()
+        {
+            var result = _coletaService.DatasIndisponiveisAPartirDeHoje();
+            if (result != null)
+                return Json(result);
+            else
+                return NotFound();
         }
     }
 }

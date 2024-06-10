@@ -27,7 +27,7 @@ function UpdateUsuario({ isOpen, onClose }: props) {
 
   const [form, setForm] = useState<UpdateUsuarioForm>({
     nome: authContext.user?.nome as string,
-    celular: authContext.user?.celular as string,
+    celular: authContext.user?.celular ? authContext.user?.celular : "",
     telefone: authContext.user?.telefone ? authContext.user?.telefone : ""
   })
   const [snackBarOpen, setSnackBarOpen] = useState(false)

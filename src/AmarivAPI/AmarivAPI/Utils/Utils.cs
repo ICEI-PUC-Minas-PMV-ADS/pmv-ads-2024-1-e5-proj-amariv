@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace AmarivAPI
+namespace AmarivAPI.Utils
 {
     public class Utils
     {

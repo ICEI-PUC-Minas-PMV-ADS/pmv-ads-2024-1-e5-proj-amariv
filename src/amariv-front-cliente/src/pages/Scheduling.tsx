@@ -1,27 +1,26 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import TopBar from "../components/TopBar";
-import Input from "../components/Inputs/Input";
 import PrimaryButton from "../components/PrimaryButton";
 import img from "../assets/sem-dados.png"
 import { tv } from "tailwind-variants";
 import DynamicIcon from "../components/DynamicIcon";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { AppContext } from "../contexts/AuthContext/AppContext";
 import CreateEndereco from "../components/CreateEndereco";
 import AddMaterial from "../components/AddMaterial";
 import UpdateUsuario from "../components/UpdateUsuario";
-import { UpdateUsuarioForm } from "../types/UpdateUsuarioForm";
 import { CreateColetaForm } from "../types/CreateColetaForm";
 import { Endereco } from "../types/Endereco";
 import SelectInput from "../components/Inputs/SelectInput";
 import DatePicker from "../components/DatePicker";
-import dataUtils from "../utils/dataUtils";
 import dayjs from "dayjs";
-import { Alert, Snackbar } from "@mui/material";
+import { Alert } from "@mui/material";
 import { GoogleService } from "../services/GoogleService";
 import LoadingScreen from "../components/LoadingScreen";
 import { ColetaService } from "../services/ColetaService";
+import SelectHours from "../components/SelectHours";
+import { DateConvert } from "../utils/DateConvert";
 
 function Scheduling() {
   const location = useLocation()
@@ -34,12 +33,18 @@ function Scheduling() {
   const [modalUsuarioOpen, setModalUsuarioOpen] = useState(false)
   const [modalMaterialOpen, setModalMaterialOpen] = useState(false)
   const [modalDataOpen, setModalDataOpen] = useState(false)
+  const [modalHorariosOpen, setModalHorariosOpen] = useState(false)
 
   const [materiaisAdicionados, setMateriaisAdicionados] = useState<any[]>([])
+  const [horariosDisponiveis, sethorariosDisponiveis] = useState<string[]>([])
+  const [horarioSelecionado, setHorarioSelecionado] = useState("Selecionar")
 
   const [errorData, setErrorData] = useState(false)
+  const [errorHorario, setErrorHorario] = useState(false)
   const [errorMaterial, setErrorMaterial] = useState(false)
   const [errorEndereco, setErrorEndereco] = useState(false)
+  const [errorCelular, setErrorCelular] = useState(false)
+  const [errorCoordinates, setErrorCoordinates] = useState(false)
 
   const [form, setForm] = useState<CreateColetaForm>({
     userId: appContext.user?.id as string,
@@ -57,12 +62,21 @@ function Scheduling() {
 
 
   const validarCampos = () => {
+    if (appContext.user?.celular == "" || appContext.user?.celular == null || appContext.user?.celular == undefined) {
+      setErrorCelular(true)
+      return false
+    }
+
     if (form.enderecoId == 0) {
       setErrorEndereco(true)
       return false
     }
     if (form.dataDeColeta == "Selecionar") {
       setErrorData(true)
+      return false
+    }
+    if (horarioSelecionado == "Selecionar") {
+      setErrorHorario(true)
       return false
     }
     if (materiaisAdicionados.length == 0) {
@@ -75,9 +89,9 @@ function Scheduling() {
 
   const ItemMaterial = (material: any, index: number) => {
     return (
-      <div 
-      key={index}
-      className=" bg-input-color w-full flex flex-col p-4 rounded-lg">
+      <div
+        key={index}
+        className=" bg-input-color w-full flex flex-col p-4 rounded-lg">
         <p className="">Material: {appContext.materiais.find(x => x.id == material.idMaterial)?.descricao}</p>
         <p className="">Peso: {material.peso}</p>
         <div className="flex gap-2 mt-4">
@@ -118,7 +132,8 @@ function Scheduling() {
       slots: {
         fundo: "px-4 py-2 text-sm flex items-center gap-4 cursor-pointer",
         enderecoContainer: "w-full max-h-64 border-[1px] border-solid rounded-md bg-input-color overflow-y-scroll",
-        materialContainer: " bg-light-green border-[1px] rounded-xl w-full items-center justify-center flex py-6 max-w-[420px]"
+        materialContainer: " bg-light-green border-[1px] rounded-xl w-full items-center justify-center flex py-6 max-w-[420px]",
+        dadosContainer: ""
       },
       variants: {
         bordaAtiva: {
@@ -144,6 +159,14 @@ function Scheduling() {
           false: {
             materialContainer: "md:border-dark-green"
           }
+        },
+        erroCelular: {
+          true: {
+            dadosContainer: "border-[1px] rounded-xl border-red-500 p-4"
+          },
+          false: {
+            dadosContainer: ""
+          }
         }
 
       }
@@ -153,42 +176,72 @@ function Scheduling() {
   const handleSave = async () => {
     setLoading(true)
     let endereco = appContext.enderecos.find(x => x.id == form.enderecoId)
-    let location = await GoogleService.buscarLatitudeLongitude(endereco as Endereco)
+    let google = await GoogleService.buscarLatitudeLongitude(endereco as Endereco)
     let copyForm = { ...form }
-    if (location != "erro") {
-      copyForm.lat = location.lat
-      copyForm.lon = location.lng
+
+    if (google != "erro" && google.geometry.location_type != "APPROXIMATE") {
+      copyForm.lat = google.geometry.location.lat
+      copyForm.lon = google.geometry.location.lng
+      copyForm.LocalidadeExata = true
+
+      let materiaisString: string = ""
+      materiaisAdicionados.forEach(x => {
+        materiaisString = materiaisString + `${x.idMaterial}:${x.peso};`
+      })
+      copyForm.listaItensColeta = materiaisString
+      setForm(copyForm)
+      await ColetaService.cadastrarColeta(copyForm).then(async (x) => {
+        await appContext.resetColetasFinalizado()
+        await appContext.resetColetasAberto()
+        await appContext.resetUnavailableDates()
+        appContext.setMessageSnackBar("Agendamento de coleta realizado com sucesso!")
+        appContext.setSnackBarOpen(true)
+        navigate("/")
+      }).catch(x => setServerError(true))
     }
-    let materiaisString: string = ""
-    materiaisAdicionados.forEach(x => {
-      materiaisString = materiaisString + `${x.idMaterial}:${x.peso};`
-    })
-    copyForm.listaItensColeta = materiaisString
-    setForm(copyForm)
-    await ColetaService.cadastrarColeta(copyForm).then(async (x) => {
-      await appContext.resetColetasFinalizado()
-      await appContext.resetColetasAberto()
-      await appContext.resetUnavailableDates()
-      appContext.setMessageSnackBar("Agendamento de coleta realizado com sucesso!")
-      appContext.setSnackBarOpen(true)
-      navigate("/")
-    }).catch(x => setServerError(true))
+    else {
+      setErrorCoordinates(true)
+    }
+
     setLoading(false)
   }
 
+  const buscarHorarios = async (date: string) => {
+    setLoading(true)
+    await ColetaService.horariosDisponiveis(date).then((r) => {
+      sethorariosDisponiveis(r.data)
+    })
+    setLoading(false)
+  }
 
   return (
     <>
       <LoadingScreen open={loading} />
+      <SelectHours
+        value={horarioSelecionado}
+        isOpen={modalHorariosOpen}
+        availableHours={horariosDisponiveis}
+        onClose={() => setModalHorariosOpen(false)}
+        onConfirm={(d) => {
+          let copyForm = { ...form }
+          copyForm.dataDeColeta = d
+          setForm(copyForm)
+          setModalDataOpen(false)
+          setHorarioSelecionado(d)
+          setModalHorariosOpen(false)
+        }}
+      />
       <DatePicker
-      unavailableDates={appContext.unavailableDates}
-        value={dayjs(form.dataDeColeta)}
+        unavailableDates={appContext.unavailableDates}
+        value={form.dataDeColeta == "Selecionar" ? dayjs(new Date(form.dataDeColeta).toUTCString()) : dayjs(form.dataDeColeta)}
         isOpen={modalDataOpen}
-        onAccept={(d) => {
+        onAccept={async (d) => {
           let copyForm = { ...form }
           if (d) {
+            await buscarHorarios(d.toISOString())
             copyForm.dataDeColeta = d.toISOString()
             setForm(copyForm)
+            setHorarioSelecionado("Selecionar")
           }
           setModalDataOpen(false)
         }
@@ -224,17 +277,25 @@ function Scheduling() {
           <div className="w-full min-h-screen flex bg-light-backgroud lg:bg-light-green items-center flex-col lg:w-[550px] lg:rounded-2xl lg:mt-4 mb-20">
             <div className="w-full flex flex-col gap-2 max-w-[420px] px-6">
               <p className="text-3xl font-bold text-primary-green mb-2 mt-8">Seus dados</p>
-              <div>
+              <div className={style().dadosContainer({ erroCelular: errorCelular })}>
                 <p>Nome: {appContext.user?.nome}</p>
-                <p>Celular: {appContext.user?.celular}</p>
+                <p>Celular: {appContext.user?.celular ? appContext.user?.celular : "Não informado"}</p>
                 {
                   appContext.user?.telefone &&
                   <p>Telefone: {appContext.user?.telefone}</p>
                 }
               </div>
+              {
+                errorCelular &&
+                <p className="text-sm text-red-500">*É necessário fornecer um número de celular. Clique no botão "Editar dados" para registrar um novo.</p>
+              }
               <div className="w-1/2 self-end mt-2">
-                <PrimaryButton color="secondary" title="Editar dados" onClick={() => setModalUsuarioOpen(true)} />
+                <PrimaryButton color="secondary" title="Editar dados" onClick={() => {
+                  setErrorCelular(false)
+                  setModalUsuarioOpen(true)
+                }} />
               </div>
+
               <p className="text-3xl font-bold text-primary-green mb-2 mt-6">Endereço</p>
               <div className={style().enderecoContainer({ errorEndereco: errorEndereco })}>
                 {
@@ -251,10 +312,14 @@ function Scheduling() {
               </div>
               {
                 errorEndereco &&
-                <p className="text-sm text-red-500">*É necessário fornecer um endereço. Clique no botão "Novo Endereço" para registrar um novo</p>
+                <p className="text-sm text-red-500">*É necessário fornecer um endereço. Clique no botão "Novo Endereço" para registrar um novo.</p>
               }
               <div className="w-1/2 self-end mt-2">
-                <PrimaryButton color="secondary" title="Novo endereço" onClick={() => setModalEnderecoOpen(true)} />
+                <PrimaryButton color="secondary" title="Novo endereço" onClick={() => {
+                  setErrorCoordinates(false)
+                  setErrorEndereco(false)
+                  setModalEnderecoOpen(true)
+                }} />
               </div>
               <p className="text-3xl font-bold text-primary-green mb-2 mt-6">Sobre a coleta</p>
               <SelectInput
@@ -265,8 +330,23 @@ function Scheduling() {
                   setModalDataOpen(true)
                 }}
                 calendarIcon
-                value={form.dataDeColeta == "Selecionar" ? "Selecionar" : dataUtils.converterData(form.dataDeColeta)}
+                value={form.dataDeColeta == "Selecionar" ? "Selecionar" : DateConvert.getLocalDate(form.dataDeColeta)}
                 title="Data da coleta" />
+              {
+                form.dataDeColeta != "Selecionar" &&
+                <SelectInput
+                  errorMessage="É necessário fornecer um horário para a coleta"
+                  error={errorHorario}
+                  rightIcon="IconClock"
+                  onClickSelectableInput={() => {
+                    setErrorHorario(false)
+                    setModalHorariosOpen(true)
+                  }}
+                  calendarIcon
+                  value={horarioSelecionado == "Selecionar" ? "Selecionar" : DateConvert.getLocalHour(horarioSelecionado)}
+                  title="Horário da coleta" />
+              }
+
               <p className="text-3xl font-bold text-primary-green mb-2 mt-6">Materiais da coleta</p>
             </div>
             <div className="w-full items-center justify-center flex py-6 max-w-[420px] px-3 flex-col">
@@ -296,7 +376,7 @@ function Scheduling() {
               </div>
               {
                 errorMaterial &&
-                <p className="text-sm text-red-500 mt-2">*É necessário informar pelo menos um material para a coleta. Clique no botão "Adicionar material" para registrar um novo</p>
+                <p className="text-sm text-red-500 mt-2">*É necessário informar pelo menos um material para a coleta. Clique no botão "Adicionar material" para registrar um novo.</p>
               }
             </div>
             {
@@ -305,7 +385,12 @@ function Scheduling() {
                 <Alert severity="error">Erro ao comunicar com o servidor. Tente novamente mais tarde.</Alert>
               </div>
             }
-
+            {
+              errorCoordinates &&
+              <div className="w-full mt-4 px-6 max-w-[420px]">
+                <Alert severity="error">Não foi possível agendar a coleta para o endereço selecionado, pois não foi localizado pelo GPS. Por favor, escolha outro endereço ou agende por telefone ligando para (27) 3317-3366.</Alert>
+              </div>
+            }
             <div className="w-full flex items-center justify-center">
               <div className="w-2/3 mt-6 max-w-[250px] mb-16">
                 <PrimaryButton title="Agendar coleta" leftIcon="IconCheck" onClick={() => {

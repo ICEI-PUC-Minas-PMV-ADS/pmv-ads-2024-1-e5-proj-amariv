@@ -19,7 +19,7 @@ function Landing() {
             }} />
           </div>
         </div>
-        <div className="flex flex-col items-center w-full lg:flex-row lg:h-[90vh] justify-center lg:gap-32 pb-20">
+        <div className="flex flex-col items-center w-full lg:flex-row h-[90vh] justify-center lg:gap-32 pb-20">
           <div className="flex flex-col items-center mt-4 lg:items-start">
             <h1 className="text-3xl font-bold lg:text-7xl">Bem vindo</h1>
             <p className="text-md font-light text-center lg:text-left mt-2 lg:text-2xl">à Associação de Catadores de Materiais Recicláveis da Ilha de Vitoria.</p>
@@ -27,10 +27,18 @@ function Landing() {
           <img src={img} className="w-[90%] md:w-[35%] rounded-lg mt-4" />
         </div>
         <div className="mt-6 w-full lg:flex lg:flex-row lg:gap-32 lg:justify-center">
-          <img src={location} className="w-[40%] rounded-lg mt-4 hidden lg:block cursor-pointer" onClick={() => {
+          <div className="block md:hidden">
+            <h1 className="text-2xl font-bold lg:text-right lg:text-5xl">Venha nos visitar</h1>
+            <div className=" flex gap-4 mt-2">
+              <DynamicIcon iconName="IconMapPin" className="mt-2" size={35} />
+              <a className="text-md font-semibold mt-2 cursor-pointer lg:text-right lg:text-2xl" target="_blank" href="https://maps.app.goo.gl/oqYUefcgvfxKDgXM9">
+                R. Ouro Preto, 95 - Maria Ortiz, Vitória - ES <DynamicIcon iconName="IconLink" className="inline-flex" size={20} /></a>
+            </div>
+          </div>
+          <img src={location} className="md:w-[40%] rounded-lg mt-4 lg:block cursor-pointer" onClick={() => {
             window.open("https://maps.app.goo.gl/oqYUefcgvfxKDgXM9", "_blank")
           }} />
-          <div>
+          <div className="hidden md:block">
             <h1 className="text-2xl font-bold lg:text-right lg:text-5xl">Venha nos visitar</h1>
             <div className=" flex gap-4 mt-2">
               <DynamicIcon iconName="IconMapPin" className="mt-2" size={35} />
@@ -39,8 +47,8 @@ function Landing() {
             </div>
           </div>
         </div>
-        <div className="mt-6 w-full lg:mt-52 lg:mb-36">
-          <h1 className="text-2xl font-bold lg:text-5xl lg:text-center">Agende uma coleta</h1>
+        <div className=" my-16 w-full lg:mt-52 lg:mb-36">
+          <h1 className="text-2xl font-bold lg:text-5xl text-center">Agende uma coleta</h1>
           <div className="flex w-full justify-center mt-4 lg:mt-8">
             <div className="w-2/3 max-w-[250px]">
               <PrimaryButton title="Agendar coleta" onClick={() => {

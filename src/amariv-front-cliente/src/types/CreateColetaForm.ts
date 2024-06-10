@@ -10,4 +10,5 @@ export type CreateColetaForm = {
   lat: number,
   lon: number,
   status: boolean
+  LocalidadeExata?: boolean
 }

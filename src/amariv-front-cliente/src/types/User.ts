@@ -1,6 +1,8 @@
 export type User = {
   id: string,
   nome: string,
-  celular: string,
-  telefone: string | null
+  celular: string | null,
+  telefone: string | null,
+  emailConfirmed: boolean
+  email: string
 }

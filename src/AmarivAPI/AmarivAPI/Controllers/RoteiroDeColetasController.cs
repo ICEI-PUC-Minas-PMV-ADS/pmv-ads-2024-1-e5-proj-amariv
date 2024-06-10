@@ -109,17 +109,9 @@ namespace AmarivAPI.Controllers
                 return NotFound();
         }
 
-        [HttpGet]
-        [Route("/datasindisponiveis")]
-        [Authorize(Roles = "admin")]
-        public IActionResult RecuperaDatasIndisponiveis()
-        {
-            var result = _roteiroService.DatasIndisponiveisAPartirDeHoje();
-            if (result != null)
-                return Json(result);
-            else
-                return NotFound();
-        }
+        
+
+        
 
     }
 }
