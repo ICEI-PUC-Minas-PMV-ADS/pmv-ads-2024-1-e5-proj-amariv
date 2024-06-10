@@ -14,6 +14,7 @@ import { RoteiroDeColetaDto } from "../../models/RoteiroDeColetaDtos/RoteiroDeCo
 import { NextRoutesViewer } from "./components/NextRoutesViewer";
 import { ReadColetaDto } from "../../models/ColetaDtos/ReadColetaDto";
 import CustomModal from "../../components/CustomModal";
+import { TOKEN_KEY } from "../../Constants";
 
 /**
  * RoteiroDeColetaPageProps
@@ -26,7 +27,7 @@ export type RoteiroDeColetaPageProps = {};
  */
 
 const RoteiroDeColetaPageImpl = () => {
-  const token = '';
+  const token = window.localStorage.getItem(TOKEN_KEY) ?? "";
   const state = RoteiroDeColetaContext.usePageState();
   const ctrl = RoteiroDeColetaContext.usePageController();
 

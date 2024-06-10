@@ -2,13 +2,14 @@ import React from "react";
 import { PageComponent } from "../../framework/component";
 import { ListaDeColetasPendentesContext } from "./context";
 import { ColetaViewerList } from "./components/ColetaViewerList";
+import { TOKEN_KEY } from "../../Constants";
 
 /**
  * ListaDeColetasPendentesPage 
  */
 
 const ListaDeColetasPendentesPageImpl = () => {
-  const token = '';
+  const token = window.localStorage.getItem(TOKEN_KEY) ?? "";
   const state = ListaDeColetasPendentesContext.usePageState();
   const ctrl = ListaDeColetasPendentesContext.usePageController();
 
