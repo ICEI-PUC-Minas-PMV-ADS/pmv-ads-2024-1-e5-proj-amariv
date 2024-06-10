@@ -46,6 +46,7 @@ function Scheduling() {
   const [errorMaterial, setErrorMaterial] = useState(false)
   const [errorEndereco, setErrorEndereco] = useState(false)
   const [errorCelular, setErrorCelular] = useState(false)
+  const [errorCoordinates, setErrorCoordinates] = useState(false)
 
   const [form, setForm] = useState<CreateColetaForm>({
     userId: appContext.user?.id as string,
@@ -177,26 +178,33 @@ function Scheduling() {
   const handleSave = async () => {
     setLoading(true)
     let endereco = appContext.enderecos.find(x => x.id == form.enderecoId)
-    let location = await GoogleService.buscarLatitudeLongitude(endereco as Endereco)
+    let google = await GoogleService.buscarLatitudeLongitude(endereco as Endereco)
     let copyForm = { ...form }
-    if (location != "erro") {
-      copyForm.lat = location.lat
-      copyForm.lon = location.lng
+
+    if (google != "erro" && google.geometry.location_type != "APPROXIMATE") {
+      copyForm.lat = google.geometry.location.lat
+      copyForm.lon = google.geometry.location.lng
+      copyForm.LocalidadeExata = true
+
+      let materiaisString: string = ""
+      materiaisAdicionados.forEach(x => {
+        materiaisString = materiaisString + `${x.idMaterial}:${x.peso};`
+      })
+      copyForm.listaItensColeta = materiaisString
+      setForm(copyForm)
+      await ColetaService.cadastrarColeta(copyForm).then(async (x) => {
+        await appContext.resetColetasFinalizado()
+        await appContext.resetColetasAberto()
+        await appContext.resetUnavailableDates()
+        appContext.setMessageSnackBar("Agendamento de coleta realizado com sucesso!")
+        appContext.setSnackBarOpen(true)
+        navigate("/")
+      }).catch(x => setServerError(true))
     }
-    let materiaisString: string = ""
-    materiaisAdicionados.forEach(x => {
-      materiaisString = materiaisString + `${x.idMaterial}:${x.peso};`
-    })
-    copyForm.listaItensColeta = materiaisString
-    setForm(copyForm)
-    await ColetaService.cadastrarColeta(copyForm).then(async (x) => {
-      await appContext.resetColetasFinalizado()
-      await appContext.resetColetasAberto()
-      await appContext.resetUnavailableDates()
-      appContext.setMessageSnackBar("Agendamento de coleta realizado com sucesso!")
-      appContext.setSnackBarOpen(true)
-      navigate("/")
-    }).catch(x => setServerError(true))
+    else {
+      setErrorCoordinates(true)
+    }
+
     setLoading(false)
   }
 
@@ -310,6 +318,7 @@ function Scheduling() {
               }
               <div className="w-1/2 self-end mt-2">
                 <PrimaryButton color="secondary" title="Novo endereço" onClick={() => {
+                  setErrorCoordinates(false)
                   setErrorEndereco(false)
                   setModalEnderecoOpen(true)
                 }} />
@@ -378,7 +387,12 @@ function Scheduling() {
                 <Alert severity="error">Erro ao comunicar com o servidor. Tente novamente mais tarde.</Alert>
               </div>
             }
-
+            {
+              errorCoordinates &&
+              <div className="w-full mt-4 px-6 max-w-[420px]">
+                <Alert severity="error">Não foi possível agendar a coleta para o endereço selecionado, pois não foi localizado pelo GPS. Por favor, escolha outro endereço ou agende por telefone ligando para (27) 3317-3366.</Alert>
+              </div>
+            }
             <div className="w-full flex items-center justify-center">
               <div className="w-2/3 mt-6 max-w-[250px] mb-16">
                 <PrimaryButton title="Agendar coleta" leftIcon="IconCheck" onClick={() => {

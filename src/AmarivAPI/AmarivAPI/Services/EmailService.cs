@@ -1,5 +1,6 @@
 ﻿using MailKit.Net.Smtp;
 using MimeKit;
+using System.Web;
 
 namespace AmarivAPI.Services
 {
@@ -16,7 +17,8 @@ namespace AmarivAPI.Services
         {
             List<MailboxAddress> destinatario = [];
             destinatario.AddRange(destinatarios.Select(d => new MailboxAddress(d, d)));
-            string conteudo = $"Olá, bem vindo a Amariv!\n\rCodigo de ativacao: {codigo} \n\rId de usuario: {usuarioId}";
+            var encodedCode = HttpUtility.UrlEncode(codigo);
+            string conteudo = $"Olá, bem vindo a Amariv!\n\rAcesse o link abaixo para confirmar seu email: \n\r http://localhost:3000/confirmaremail/{usuarioId}/{encodedCode}";
 
             var mensagemDeEmail = new MimeMessage();
 
@@ -33,8 +35,9 @@ namespace AmarivAPI.Services
 
         public void EnviarEmailRecuperacao(string destinatarioEmail, string assunto, string codigo)
         {
+            var encodedCode = HttpUtility.UrlEncode(codigo);
             MailboxAddress destinatario = new MailboxAddress(destinatarioEmail, destinatarioEmail);
-            string conteudo = $"Recuperacao de senha\n\rEmail: {destinatarioEmail} \n\rCodigo: {codigo}";
+            string conteudo = $"Recuperacao de senha\n\rAcesse o link abaixo para recuperar senha: \n\r http://localhost:3000/recuperarsenha/{destinatarioEmail}/{encodedCode}";
 
             var mensagemDeEmail = new MimeMessage();
             mensagemDeEmail.From.Add(new MailboxAddress("Amariv", _configuration.GetValue<string>("EmailSettings:From")));

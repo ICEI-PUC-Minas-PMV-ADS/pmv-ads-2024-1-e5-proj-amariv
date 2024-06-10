@@ -8,7 +8,7 @@ import { useContext, useState } from "react";
 import DynamicIcon from "../components/DynamicIcon";
 import { AppContext } from "../contexts/AuthContext/AppContext";
 import LoadingScreen from "../components/LoadingScreen";
-import { Alert, CircularProgress } from "@mui/material";
+import { Alert } from "@mui/material";
 import { UserService } from "../services/UserService";
 
 function SignIn() {

@@ -52,7 +52,7 @@ namespace AmarivAPI.Controllers
             return Ok(user);
         }
 
-        [HttpPost("/solicita-recuperacao")]
+        [HttpPost("/solicitarecuperacao")]
         public IActionResult SolicitaRecuperacao(SolicitaRecuperacaoRequest request)
         {
             Result resultado = _usuarioService.SolicitaRecuperacao(request);
@@ -63,7 +63,7 @@ namespace AmarivAPI.Controllers
             return Ok(resultado.Successes); 
         }
 
-        [HttpPost("/recupera-senha")]
+        [HttpPost("/recuperasenha")]
         public IActionResult RecuperaSenha(RecuperaSenhaRequest request)
         {
             Result resultado = _usuarioService.RecuperaSenha(request);

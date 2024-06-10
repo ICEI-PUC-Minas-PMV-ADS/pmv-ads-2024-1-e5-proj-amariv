@@ -7,7 +7,7 @@ import { initializeApp } from "firebase/app";
 type result = {
   geometry: {
     location: {
-      lat: number
+      lat: number,
       lng: number
     },
     location_type: string
@@ -34,9 +34,11 @@ export const GoogleService = {
   buscarLatitudeLongitude: async (endereco: Endereco): Promise<result | "erro"> => {
     let searchString = (endereco.numero + endereco.logradouro + endereco.bairro + endereco.cidade).replaceAll(" ", "+")
     let url = `https://maps.googleapis.com/maps/api/geocode/json?address=${searchString}&key=${GoogleService.key}`
+
     let result = await axios.get(url).then(r => {
       if (r.data.results) {
-        return r.data.results[0].geometry
+        console.log(r.data)
+        return r.data.results[0]
       }
       return "erro"
     }).catch(

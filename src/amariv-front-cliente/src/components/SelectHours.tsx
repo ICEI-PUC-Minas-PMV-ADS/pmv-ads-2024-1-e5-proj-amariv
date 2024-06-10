@@ -1,5 +1,5 @@
 import TopBar from "./TopBar";
-import { Chip, Modal } from "@mui/material";
+import { Modal } from "@mui/material";
 import { tv } from "tailwind-variants";
 import { DateConvert } from "../utils/DateConvert";
 
@@ -15,7 +15,7 @@ function SelectHours({ isOpen, onClose, onConfirm, availableHours, value }: prop
 
   const style = tv({
     slots: {
-      fundo: "w-[80px] h-10 rounded-full flex items-center justify-center",
+      fundo: "w-[80px] h-10 rounded-full flex items-center justify-center cursor-pointer",
 
     },
     variants: {

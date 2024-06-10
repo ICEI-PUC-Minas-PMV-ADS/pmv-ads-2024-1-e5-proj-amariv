@@ -275,15 +275,34 @@ export const AppProvider = ({ children }: { children: JSX.Element }) => {
     })
   }
 
-  const useAlert = (message: string, onClose: () => void) => {
+  const useAlert = (message: string, onClose?: () => void) => {
     setDialogTitle("")
     setDialogMessage(message)
     setDialogAlert(true)
     setDialogOnClose((() => () => {
-      onClose()
+      if (onClose)
+        onClose()
       setDialogOpen(false)
     }))
     setDialogOpen(true)
+  }
+
+  const enviarConfirmacaoEmail = async () => {
+    setInfosLoaded(false)
+
+    await UserService.enviaConfirmacao({ email: user?.email as string }).then(x => {
+      setDialogTitle("");
+      setDialogMessage(`Solicitação de confirmação de e-mail enviada com sucesso para "${user?.email}".`);
+      setDialogAlert(true);
+      setDialogOpen(true)
+    }).catch((x) => {
+      setDialogTitle("");
+      setDialogMessage(`Houve algum erro ao solicitar a confirmação de e-mail. Tente novamente mais tarde.`);
+      setDialogAlert(true);
+      setDialogOpen(true)
+    })
+
+    setInfosLoaded(true);
   }
 
   return (
@@ -304,7 +323,7 @@ export const AppProvider = ({ children }: { children: JSX.Element }) => {
         message={messageSnackBar}
       />
       <LoadingScreen open={!infosLoaded} />
-      <AppContext.Provider value={{ user, login, logout, signup, enderecos, atualizarEnderecos, materiais, updateUsuario, setSnackBarOpen, setMessageSnackBar, coletasAberto, fetchMoreColetasAberto, resetColetasAberto, totalPagesColetasAberto, pageNumberColetasAberto, coletasFinalizado, fetchMoreColetasFinalizado, resetColetasFinalizado, totalPagesColetasFinalizado, pageNumberColetasFinalizado, cancelarColeta, useAlert, unavailableDates, resetUnavailableDates, loginGoogle }}>
+      <AppContext.Provider value={{ user, login, logout, signup, enderecos, atualizarEnderecos, materiais, updateUsuario, setSnackBarOpen, setMessageSnackBar, coletasAberto, fetchMoreColetasAberto, resetColetasAberto, totalPagesColetasAberto, pageNumberColetasAberto, coletasFinalizado, fetchMoreColetasFinalizado, resetColetasFinalizado, totalPagesColetasFinalizado, pageNumberColetasFinalizado, cancelarColeta, useAlert, unavailableDates, resetUnavailableDates, loginGoogle, enviarConfirmacaoEmail }}>
         {children}
       </AppContext.Provider>
     </>

@@ -223,8 +223,6 @@ namespace AmarivAPI.Services
                     if (resultado.Succeeded)
                     {
                         var identityUser = RecuperaUsuarioPorEmail(email);
-                        var code = await _userManager.GenerateEmailConfirmationTokenAsync(identityUser);
-                        _emailService.EnviarEmailConfirmacao(new[] { identityUser.Email }, "Confirme seu email", identityUser.Id, code);
                         Token token = _tokenService.CreateToken(identityUser, _signInManager.UserManager.GetRolesAsync(identityUser).Result.FirstOrDefault());
                         return Result.Ok().WithSuccess(token.Value);
                     }

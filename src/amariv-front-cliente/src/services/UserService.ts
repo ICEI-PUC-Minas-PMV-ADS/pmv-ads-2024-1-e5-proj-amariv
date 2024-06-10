@@ -31,6 +31,7 @@ export const UserService = {
         'Authorization': `Bearer ${token}`
       }
     })
+    console.log(response.data)
     return response.data;
   },
 
@@ -61,4 +62,53 @@ export const UserService = {
     });
     return response;
   },
+
+  enviaRecuperaSenha: async (form: { email: string }) => {
+    const json = JSON.stringify(form)
+    const response = await useApi.post("/solicitarecuperacao", json, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    });
+    return response;
+  },
+
+  recuperaSenha: async (form: {
+    email: string,
+    codigoRecuperacao: string,
+    password: string,
+    rePassword: string
+  }) => {
+    const json = JSON.stringify(form)
+    const response = await useApi.post("/recuperasenha", json, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    });
+    return response;
+  },
+
+  enviaConfirmacao: async (form: { email: string }) => {
+    const json = JSON.stringify(form)
+    const response = await useApi.post("/solicitaconfirmacao", json, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    });
+    return response;
+  },
+
+  confirmarEmail: async (form: {
+    usuarioId: string,
+    codigoAtivacao: string
+  }) => {
+    const json = JSON.stringify(form)
+    const response = await useApi.post("/confirmaemail", json, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    });
+    return response;
+  },
+
 }

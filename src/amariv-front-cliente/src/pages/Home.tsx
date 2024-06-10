@@ -57,6 +57,20 @@ function Home() {
                   </div>
                 }
               </div>
+              {
+                appContext.user?.emailConfirmed == false &&
+                <div
+                  className="w-full rounded-lg p-4 flex flex-col text-black max-w-[400px] border-2 border-black min-h-[148px]">
+                  <div>
+                    <p>Você ainda não confirmou o seu endereço de email.</p>
+                  </div>
+                  <div className="w-full flex justify-end">
+                    <div className="w-1/2 mt-3">
+                      <PrimaryButton title="Confimar email" leftIcon="IconMail" onClick={() => { appContext.enviarConfirmacaoEmail() }} />
+                    </div>
+                  </div>
+                </div>
+              }
             </div>
           </div>
           <div className="w-full flex justify-center mt-2 md:hidden">

@@ -93,6 +93,13 @@ function Login() {
                 setPassword(v.target.value)
               }} />
           </div>
+          <div className="w-full ml-6 my-6">
+            <p onClick={() => {
+              navigate("/solicitarecuperacao")
+            }}
+              className=" cursor-pointer text-left font-semilight text-white text-md">Esqueci minha senha</p>
+          </div>
+
           {
             invalidFields &&
             <div className="w-full mt-4 px-2">

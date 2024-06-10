@@ -69,6 +69,7 @@ function SchedulingLoggedOut() {
   const [nomeError, setNomeError] = useState(false)
   const [serverError, setServerError] = useState(false)
   const [errorHorario, setErrorHorario] = useState(false)
+  const [errorCoordinates, setErrorCoordinates] = useState(false)
 
   const validarCampos = () => {
     if (form.clienteNome == null || form.clienteNome == "" || form.clienteNome == undefined) {
@@ -171,33 +172,39 @@ function SchedulingLoggedOut() {
 
   const handleSave = async () => {
     setLoading(true)
-    await EnderecoService.cadastrarEndereco(formEndereco).then(async (r) => {
-      let copyForm = { ...form }
-      copyForm.enderecoId = r.data.successes[0].message
-      let copyEnderecoForm = { ...formEndereco }
-      copyEnderecoForm.id = r.data.successes[0].message
 
-      let google = await GoogleService.buscarLatitudeLongitude(copyEnderecoForm as Endereco)
-      if (google != "erro") {
-        copyForm.lat = google.geometry.location.lat
-        copyForm.lon = google.geometry.location.lng
-        copyForm.LocalidadeExata = google.geometry.location_type == "APPROXIMATE" ? false : true
-      }
-      let materiaisString: string = ""
-      materiaisAdicionados.forEach(x => {
-        materiaisString = materiaisString + `${x.idMaterial}:${x.peso};`
+    let copyForm = { ...form }
+    let copyEnderecoForm = { ...formEndereco }
+
+    let google = await GoogleService.buscarLatitudeLongitude(copyEnderecoForm as Endereco)
+    if (google != "erro" && google.geometry.location_type != "APPROXIMATE") {
+      copyForm.lat = google.geometry.location.lat
+      copyForm.lon = google.geometry.location.lng
+      copyForm.LocalidadeExata = true
+
+      await EnderecoService.cadastrarEndereco(formEndereco).then(async (r) => {
+        copyEnderecoForm.id = r.data.successes[0].message
+        copyForm.enderecoId = r.data.successes[0].message
+
+        let materiaisString: string = ""
+        materiaisAdicionados.forEach(x => {
+          materiaisString = materiaisString + `${x.idMaterial}:${x.peso};`
+        })
+        copyForm.listaItensColeta = materiaisString
+        setForm(copyForm)
+        setFormEndereco(copyEnderecoForm)
+        await ColetaService.cadastrarColeta(copyForm).then(async (x) => {
+          await appContext.resetUnavailableDates()
+          appContext.useAlert("Agendamento de coleta realizado com sucesso! Para mais detalhes sobre seu agendamento entre em contato com a AMARIV pelo telefone (27)3317-3366.", () => { navigate("/") })
+        }).catch(x => setServerError(true))
+
+      }).catch(e => {
+        setServerError(true)
       })
-      copyForm.listaItensColeta = materiaisString
-      setForm(copyForm)
-      setFormEndereco(copyEnderecoForm)
-      await ColetaService.cadastrarColeta(copyForm).then(async (x) => {
-        await appContext.resetUnavailableDates()
-        appContext.useAlert("Agendamento de coleta realizado com sucesso! Para mais detalhes sobre seu agendamento entre em contato com a AMARIV pelo telefone (27)3317-3366.", () => { navigate("/") })
-      }).catch(x => setServerError(true))
-
-    }).catch(e => {
-      setServerError(true)
-    })
+    }
+    else {
+      setErrorCoordinates(true)
+    }
     setLoading(false)
   }
 
@@ -303,6 +310,7 @@ function SchedulingLoggedOut() {
               rightLoading={loadingCep}
               errorMessage="Digite um CEP válido"
               onChange={v => {
+                setErrorCoordinates(false)
                 setErrorCep(false)
                 let copiaForm = { ...formEndereco }
                 copiaForm.cep = v.target.value.replace(/\D/g, '')
@@ -335,6 +343,7 @@ function SchedulingLoggedOut() {
               requiredField
               value={formEndereco.logradouro}
               onChange={v => {
+                setErrorCoordinates(false)
                 setErrorLogradouro(false)
                 let copiaForm = { ...formEndereco }
                 copiaForm.logradouro = v.target.value
@@ -349,6 +358,7 @@ function SchedulingLoggedOut() {
               value={formEndereco.numero}
               onChange={v => {
                 setErrorNumero(false)
+                setErrorCoordinates(false)
                 let copiaForm = { ...formEndereco }
                 copiaForm.numero = v.target.value.replace(/\D/g, '')
                 setFormEndereco(copiaForm)
@@ -362,6 +372,7 @@ function SchedulingLoggedOut() {
               value={formEndereco.bairro}
               onChange={v => {
                 setErrorBairro(false)
+                setErrorCoordinates(false)
                 let copiaForm = { ...formEndereco }
                 copiaForm.bairro = v.target.value
                 setFormEndereco(copiaForm)
@@ -374,6 +385,7 @@ function SchedulingLoggedOut() {
               requiredField
               value={formEndereco.cidade}
               onChange={v => {
+                setErrorCoordinates(false)
                 setErrorCidade(false)
                 let copiaForm = { ...formEndereco }
                 copiaForm.cidade = v.target.value
@@ -383,6 +395,7 @@ function SchedulingLoggedOut() {
               title="Referência"
               titleColor="dark"
               onChange={v => {
+                setErrorCoordinates(false)
                 let copiaForm = { ...formEndereco }
                 copiaForm.referencia = v.target.value
                 setFormEndereco(copiaForm)
@@ -448,6 +461,12 @@ function SchedulingLoggedOut() {
             serverError &&
             <div className="w-full mt-4 px-6 max-w-[420px]">
               <Alert severity="error">Erro ao comunicar com o servidor. Tente novamente mais tarde.</Alert>
+            </div>
+          }
+          {
+            errorCoordinates &&
+            <div className="w-full mt-4 px-6 max-w-[420px]">
+              <Alert severity="error">Não foi possível agendar a coleta para o endereço selecionado, pois não foi localizado pelo GPS. Por favor, escolha outro endereço ou agende por telefone ligando para (27) 3317-3366.</Alert>
             </div>
           }
           <div className="w-full flex items-center justify-center">

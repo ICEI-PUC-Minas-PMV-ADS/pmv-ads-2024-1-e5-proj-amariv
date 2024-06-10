@@ -44,7 +44,7 @@ namespace AmarivAPI.Controllers
             return Ok(resultado.Successes);
         }
 
-        [HttpPost("/solicita-confirmacao")]
+        [HttpPost("/solicitaconfirmacao")]
         public async Task<IActionResult> SolicitaConfirmacao(SolicitaConfirmacaoRequest request)
         {
             Result resultado = await _usuarioService.SolicitaConfirmacao(request);
@@ -55,7 +55,7 @@ namespace AmarivAPI.Controllers
             return Ok(resultado.Successes);
         }
 
-        [HttpPost("/confirma-email")]
+        [HttpPost("/confirmaemail")]
         public IActionResult ConfirmaEmail(ConfirmaEmailRequest request)
         {
             Result resultado = _usuarioService.ConfirmaEmail(request);
