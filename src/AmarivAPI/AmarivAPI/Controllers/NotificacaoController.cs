@@ -1,6 +1,7 @@
 ﻿using AmarivAPI.Data.Dtos.NotificacaoDtos;
 using AmarivAPI.Data.Requests;
 using AmarivAPI.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -22,6 +23,7 @@ namespace AmarivAPI.Controllers
         //  Recebe um objeto CreateNotificacaoDto e chama o método CreateNotification do serviço NotificacaoService para criar uma nova notificação. Retorna um objeto NotificacaoDto em caso de sucesso ou um BadRequest em caso de falha.
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult<NotificacaoDto>> CreateNotification(CreateNotificacaoDto createDto)
         {
             var result = await _notificacaoService.CreateNotification(createDto);   
@@ -31,6 +33,7 @@ namespace AmarivAPI.Controllers
         // Recebe um userId como parâmetro e chama o método GetNotificationsByUserId do serviço NotificacaoService para obter a lista de notificações daquele usuário. Retorna uma lista de NotificacaoDto em caso de sucesso ou um BadRequest em caso de falha.
 
         [HttpGet]
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult<NotificacaoDto>> GetNotificationsByUserId(string userId)
         {
             var result = await _notificacaoService.GetNotificationsByUserId(userId);
@@ -40,6 +43,7 @@ namespace AmarivAPI.Controllers
         //  Recebe um id e um objeto UpdateNotificacaoDto como parâmetros e chama o método UpdateNotification do serviço NotificacaoService para atualizar uma notificação existente. Retorna um Ok em caso de sucesso ou um BadRequest em caso de falha.
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> UpdateNotification(int id, UpdateNotificacaoDto updateDto)
         {
             var result = await _notificacaoService.UpdateNotification(id, updateDto);
@@ -49,6 +53,7 @@ namespace AmarivAPI.Controllers
         // Recebe um id como parâmetro e chama o método DeleteNotification do serviço NotificacaoService para remover uma notificação. Retorna um Ok em caso de sucesso ou um BadRequest em caso de falha.
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> DeleteNotification(int id)
         {
             var result = await _notificacaoService.DeleteNotification(id);

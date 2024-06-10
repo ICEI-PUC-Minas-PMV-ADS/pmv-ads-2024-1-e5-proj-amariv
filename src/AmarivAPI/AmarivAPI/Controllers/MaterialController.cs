@@ -3,6 +3,7 @@
 using AmarivAPI.Data.Dtos.MaterialDtos;
 using AmarivAPI.Services;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,6 +24,7 @@ namespace AmarivAPI.Controllers
 
         [HttpGet]
         [Route("/RecuperaMaterial")]
+        [Authorize(Roles = "admin")]
         public IActionResult RecuperaMaterial( int id)
         {         
             var result = _materialService.RecuperaMaterial(id);
@@ -34,6 +36,7 @@ namespace AmarivAPI.Controllers
 
         [HttpGet]
         [Route("/RecuperaMateriais")]
+        [Authorize(Roles = "admin")]
         public IActionResult RecuperaMateriais()
         {
             var result = _materialService.RecuperarTodosMateriais();
@@ -46,6 +49,7 @@ namespace AmarivAPI.Controllers
         
         [HttpPost]
         [Route("/SalvarMaterial")]
+        [Authorize(Roles = "admin")]
         public IActionResult SalvarMaterial([FromBody] CreateMaterialDto materialDto)
         {
             var  result = _materialService.SalvarMaterial(materialDto);
@@ -58,6 +62,7 @@ namespace AmarivAPI.Controllers
 
         [HttpPost]
         [Route("/UpdateMaterial")]
+        [Authorize(Roles = "admin")]
         public IActionResult UpdateMaterial([FromBody] CreateMaterialDto materialDto, int id)
         {
             var result = _materialService.UpdateMaterial(materialDto, id);
@@ -71,6 +76,7 @@ namespace AmarivAPI.Controllers
 
         [HttpDelete]
         [Route("/DeletarMaterial")]
+        [Authorize(Roles = "admin")]
         public IActionResult DeletarMaterial(int id)
         {
             var result = _materialService.DeletaMaterial(id);
