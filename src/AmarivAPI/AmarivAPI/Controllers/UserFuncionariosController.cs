@@ -1,4 +1,5 @@
 ﻿using AmarivAPI.EmployeeAPI.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AmarivAPI.Controllers
@@ -15,6 +16,7 @@ namespace AmarivAPI.Controllers
 
         [Route("GetFuncionarios")]
         [HttpGet]
+        [Authorize(Roles = "admin")]
         async public Task<IActionResult> GetFuncionarios()
         {
             var funcionarios = await _userService.GetFuncionarios();

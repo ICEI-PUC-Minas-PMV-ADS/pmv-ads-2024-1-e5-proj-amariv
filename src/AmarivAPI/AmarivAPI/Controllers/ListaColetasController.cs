@@ -1,5 +1,6 @@
 ﻿using AmarivAPI.Models;
 using AmarivAPI.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AmarivAPI.Controllers
@@ -16,6 +17,7 @@ namespace AmarivAPI.Controllers
 
         [Route("coletas")]
         [HttpGet]
+        [Authorize(Roles = "admin")]
         public IActionResult GetAll()
         {
             try
@@ -33,6 +35,7 @@ namespace AmarivAPI.Controllers
 
         [HttpGet]
         [Route("coletas/AprovarColeta")]
+        [Authorize(Roles = "admin")]
         public IActionResult AprovarColeta(int Id)
         {
             try
@@ -50,6 +53,7 @@ namespace AmarivAPI.Controllers
 
         [HttpGet]
         [Route("coletas/RecusarColeta")]
+        [Authorize(Roles = "admin")]
         public IActionResult RecusarColeta(int Id)
         {
             try

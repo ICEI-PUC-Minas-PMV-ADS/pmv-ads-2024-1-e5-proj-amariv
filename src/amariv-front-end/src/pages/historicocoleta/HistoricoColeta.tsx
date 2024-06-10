@@ -3,6 +3,7 @@ import FilterHistorico from '../../components/FilterHistorico';
 import HistoricoCard from '../../components/HistoricoCard';
 import { User } from '../../models/User';
 import { DateConvert } from '../../utils/DateConvert';
+import { useApi } from '../../hooks/useApi';
 
 interface HistoricoColetaProps {
   title: string;
@@ -24,8 +25,6 @@ interface Coleta {
   funcionario: User;
 }
 
-
-
 const HistoricoColeta: React.FC<HistoricoColetaProps> = ({ title }) => {
   const [coletas, setColetas] = useState<Coleta[]>([]);
   const [filteredColetas, setFilteredColetas] = useState<Coleta[]>([]);
@@ -36,9 +35,9 @@ const HistoricoColeta: React.FC<HistoricoColetaProps> = ({ title }) => {
   const [startDateFilter, setStartDateFilter] = React.useState("");
   const [endDateFilter, setEndDateFilter] = React.useState("");
 
-  useEffect(() => {
-    fetch('http://localhost:5100/RecuperaTodasColetas')
-      .then((response) => response.json())
+  React.useEffect(() => {
+    useApi.get('RecuperaTodasColetas')
+      .then((response) => response.data)
       .then((data) => {
         setColetas(data);
         setFilteredColetas(data ?? []); // Definindo coletas filtradas inicialmente iguais a todas as coletas
