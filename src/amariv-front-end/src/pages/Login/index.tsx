@@ -83,13 +83,15 @@ export function LoginPage() {
       <div className="w-screen h-screen flex flex-row">
         <div className="w-[50rem] px-4 bg-[#53735B] flex justify-center items-center">
           <div className="w-[30rem] p-[5rem] flex flex-col items-center">
-            <img src={AmarivLogo} alt="Amariv logo" className="logo" />
-            <div className="message">ACESSO RESTRITO</div>
+            <img src={AmarivLogo} alt="Amariv logo" className="w-[13rem] h-[9rem]" />
+            <div className="text-[1.25rem] text-[#FBFFF3] pb-[1.25rem]">
+              ACESSO RESTRITO
+            </div>
 
-            <div className="flex flex-col items-center">
-              <div>Entrar</div>
+            <div className="flex flex-col items-center w-full">
+              <div className="text-[1.5rem] text-[#FFFFFF] w-full font-bold">Entrar</div>
 
-              <Form onSubmit={handleLogin}>
+              <Form className="w-full" onSubmit={handleLogin}>
                 <div className="w-full">
                   <Input
                     type="email"
@@ -113,7 +115,9 @@ export function LoginPage() {
                     onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
-                <Button type="submit" label="Login" className="button" />
+                <div className="w-full px-[5rem]">
+                  <Button type="submit" label="Login" className="button" />
+                </div>
               </Form>
             </div>
           </div>

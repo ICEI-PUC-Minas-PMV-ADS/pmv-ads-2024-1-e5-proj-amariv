@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 import amarivLogo from '../assets/images/amarivlogo.png';
+import { Link } from 'react-router-dom';
+
+/**
+ * SideBar
+ */
 
 const Sidebar: React.FC = () => {
   return (
     <div
-      className={`w-[20rem] bg-[#53735B] text-white h-screen p-8 pr-28 flex flex-col`}
-      style={{ transition: 'width 0.5s' }}
-    >
+      className={`w-[20rem] min-h-full bg-[#53735B] text-white p-8 pr-28 flex flex-col`}>
       <div className="flex items-start mb-36 justify-start w-full">
         <img
           src={amarivLogo}
