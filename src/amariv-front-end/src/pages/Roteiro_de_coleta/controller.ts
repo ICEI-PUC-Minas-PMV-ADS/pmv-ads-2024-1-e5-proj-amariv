@@ -45,7 +45,13 @@ export class RoteiroDeColetaController extends PageBaseController<RoteiroDeColet
     coletaId: number,
   ) {
     try {
-      const body = { coletaId, roteiroDeColetaId };
+      const roteiroDeColetaDateResponse = await useApi.get(`GetRoteiroDeColetaDate?roteiroDeColetaId=${roteiroDeColetaId}`);
+      const roteiroDeColetaDate = await roteiroDeColetaDateResponse.data;
+      const [y, m, d] = roteiroDeColetaDate.split('T')[0].split('-');
+      const startDate = new Date(y, m - 1, d, 0, 0, 0).toISOString();
+      const endDate = new Date(y, m - 1, d, 23, 59, 59).toISOString();
+
+      const body = { coletaId, roteiroDeColetaId, startDate, endDate };
       const response = await useApi.post(`CancelarColeta`, body, {
         headers: {
           'Content-Type': 'application/json',
@@ -85,7 +91,13 @@ export class RoteiroDeColetaController extends PageBaseController<RoteiroDeColet
     coletaId: number,
   ) {
     try {
-      const body = { roteiroDeColetaId, coletaId };
+      const roteiroDeColetaDateResponse = await useApi.get(`GetRoteiroDeColetaDate?roteiroDeColetaId=${roteiroDeColetaId}`);
+      const roteiroDeColetaDate = await roteiroDeColetaDateResponse.data;
+      const [y, m, d] = roteiroDeColetaDate.split('T')[0].split('-');
+      const startDate = new Date(y, m - 1, d, 0, 0, 0).toISOString();
+      const endDate = new Date(y, m - 1, d, 23, 59, 59).toISOString();
+
+      const body = { roteiroDeColetaId, coletaId, startDate, endDate };
       const response = await useApi.post(`RemoveRouteToRoteiroDeColeta`, body, {
         headers: {
           'Content-Type': 'application/json',
@@ -127,7 +139,13 @@ export class RoteiroDeColetaController extends PageBaseController<RoteiroDeColet
     coletaId: number
   ) {
     try {
-      const body = { roteiroDeColetaId, coletaId };
+      const roteiroDeColetaDateResponse = await useApi.get(`GetRoteiroDeColetaDate?roteiroDeColetaId=${roteiroDeColetaId}`);
+      const roteiroDeColetaDate = await roteiroDeColetaDateResponse.data;
+      const [y, m, d] = roteiroDeColetaDate.split('T')[0].split('-');
+      const startDate = new Date(y, m - 1, d, 0, 0, 0).toISOString();
+      const endDate = new Date(y, m - 1, d, 23, 59, 59).toISOString();
+
+      const body = { roteiroDeColetaId, coletaId, startDate, endDate };
       const response = await useApi.post(`AddRouteToRoteiroDeColeta`, body, {
         headers: {
           'Content-Type': 'application/json',
@@ -321,12 +339,11 @@ export class RoteiroDeColetaController extends PageBaseController<RoteiroDeColet
     dataRoteiro: string,
   ) {
     try {
-      const dtArr = dataRoteiro.split('-');
-      const year = parseInt(dtArr[0]);
-      const month = parseInt(dtArr[1]) - 1;
-      const day = parseInt(dtArr[2]);
-      const dt = new Date(year, month, day, 0, 0, 0);
-      const body = { roteiroDeColetaId, funcionarioId, maxNumColeta, dataRoteiro: dt.toISOString() };
+      const [y, m, d] = dataRoteiro.split('-') as any;
+      const startDate = new Date(y, m - 1, d, 0, 0, 0).toISOString();
+      const endDate = new Date(y, m - 1, d, 23, 59, 59).toISOString();
+
+      const body = { roteiroDeColetaId, funcionarioId, maxNumColeta, startDate, endDate };
       const response = await useApi.post(`SaveRoteiroDeColeta`, body, {
         headers: {
           'Content-Type': 'application/json',
@@ -373,8 +390,9 @@ export class RoteiroDeColetaController extends PageBaseController<RoteiroDeColet
       const year = parseInt(dtArr[0]);
       const month = parseInt(dtArr[1]) - 1;
       const day = parseInt(dtArr[2]);
-      const dt = new Date(year, month, day, 0, 0, 0);
-      const body = { funcionarioId, maxNumColeta, dataRoteiro: dt.toISOString() };
+      const startDate = new Date(year, month, day, 0, 0, 0).toISOString();
+      const endDate = new Date(year, month, day, 23, 59, 59).toISOString();
+      const body = { funcionarioId, maxNumColeta, startDate, endDate };
       const response = await useApi.post(`CreateRoteiroDeColeta`, body, {
         headers: {
           'Content-Type': 'application/json',
@@ -451,7 +469,14 @@ export class RoteiroDeColetaController extends PageBaseController<RoteiroDeColet
     roteiroDeColetaId: number,
   ): Promise<void> {
     try {
-      const response = await useApi.get(`GetColetasByDate?roteiroDeColetaId=${roteiroDeColetaId}`, {
+      const roteiroDeColetaDateResponse = await useApi.get(`GetRoteiroDeColetaDate?roteiroDeColetaId=${roteiroDeColetaId}`);
+      const roteiroDeColetaDate = await roteiroDeColetaDateResponse.data;
+      const [y, m, d] = roteiroDeColetaDate.split('T')[0].split('-');
+      const startDate = new Date(y, m - 1, d, 0, 0, 0).toISOString();
+      const endDate = new Date(y, m - 1, d, 23, 59, 59).toISOString();
+
+      const body = { roteiroDeColetaId, startDate, endDate };
+      const response = await useApi.post(`GetColetasByDate`, body, {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',

@@ -349,13 +349,13 @@ namespace AmarivAPI.Services
             );
         }
 
-        public List<object>  GetColetasByDateWithoutRoteiroDeColeta(DateTime date)
+        public List<object>  GetColetasByDateWithoutRoteiroDeColeta(DateTime startDate, DateTime endDate)
         {
             return ToJson(_context.Coletas
                 .Include(x => x.Usuario)
                 .Include(x => x.Endereco)
                 .Where(x =>
-                    x.DataDeColeta.Date == date.Date &&
+                    x.DataDeColeta >= startDate && x.DataDeColeta <= endDate &&
                     x.RoteiroColetaId == null &&
                     x.Status == true
                 ).ToList()

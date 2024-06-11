@@ -29,6 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="EmployeeAPI\Utils\" />
     <Folder Include="Migrations\" />
   </ItemGroup>
 

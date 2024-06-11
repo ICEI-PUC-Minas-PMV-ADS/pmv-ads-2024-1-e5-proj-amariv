@@ -45,14 +45,7 @@ export const enderecoService = {
   },
 
   buscarEndereco: async (id: number) => {
-    const token = localStorage.getItem('authToken')
-    const response = await useApi.get(`/RecuperaEndereco?id=${id}`, {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      },
-    })
+    const response = await useApi.get(`/RecuperaEndereco?id=${id}`);
     return response.data;
   }
-
-
 }

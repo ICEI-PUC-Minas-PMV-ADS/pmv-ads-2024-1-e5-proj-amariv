@@ -67,7 +67,7 @@ const RoteiroDeColetaPageImpl = () => {
 
   React.useEffect(() => {
     ctrl?.initialize(token);
-  }, [ctrl]);
+  }, [ctrl, token]);
 
   React.useEffect(() => {
     try {
@@ -77,7 +77,7 @@ const RoteiroDeColetaPageImpl = () => {
     } catch (e: any) {
       alert(e.message);
     }
-  }, [ctrl, state.startPosition, roteiroDeColetaId]);
+  }, [ctrl, token, roteiroDeColetaId, state.startPosition]);
 
   React.useEffect(() => {
     try {
@@ -412,7 +412,7 @@ const RoteiroDeColetaPageImpl = () => {
       setIsPending(false);
       alert(e.message);
     }
-  }, [ctrl, isPending, roteiroDeColetaId, state.startPosition]);
+  }, [ctrl, token, isPending, roteiroDeColetaId, state.startPosition]);
 
   /**
    * Aux function
@@ -430,15 +430,12 @@ const RoteiroDeColetaPageImpl = () => {
     return `${ro.funcionario?.nome} (${dtArr[2]}/${dtArr[1]}/${dtArr[0]})`;
   }, [state.availableRoteiroDeColetas, roteiroDeColetaId]);
 
-  console.log(funcionarioId);
-
   /**
    * Layout
    */
 
   return (
     <>
-
       {/*
         Rotas do roteiro
       */}

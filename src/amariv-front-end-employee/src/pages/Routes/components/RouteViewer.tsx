@@ -1,4 +1,5 @@
 import React from "react";
+import moment from "moment";
 import { isDesktop } from "react-device-detect";
 import { RoutesContext } from "../context";
 
@@ -60,6 +61,17 @@ export function RouteViewer({ canEdit, onFinishGathering }: RouteViewerProps) {
   }, [currentGathering, canEdit]);
 
   /**
+   * Aux functions
+   */
+
+  const formatDate = (dataHoraColeta: string | undefined) => {
+    if (dataHoraColeta) {
+      return moment.utc(dataHoraColeta).local().format('HH:mm');
+    }
+    return "";
+  };
+
+  /**
    * Layout
    */
 
@@ -67,6 +79,9 @@ export function RouteViewer({ canEdit, onFinishGathering }: RouteViewerProps) {
     <>
       <div className="w-full bg-[#53735B] rounded">
         <div className="w-full p-3">
+          <p className="text-md text-white font-bold border-b border-[#ffffff40] pb-4">
+            <strong>Hora estimada:</strong> {formatDate(currentGathering?.dataDeColeta)}
+          </p>
           <p className="text-lg text-white font-bold">
             {currentGathering?.usuario?.nome ?? currentGathering?.clienteNome}
           </p>

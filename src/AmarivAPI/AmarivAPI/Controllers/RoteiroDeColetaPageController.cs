@@ -54,14 +54,14 @@ namespace AmarivAPI.Controllers
         {
             try
             {
-                if (dto.DataRoteiro.Date < DateTime.Now.Date)
+                if (dto.StartDate.Date < DateTime.Now.Date)
                 {
                     return BadRequest(new
                     {
                         message = "Não é possivel agendar uma coleta para uma data que passou!"
                     });
                 }
-                if (_roteiroPageService.HasRoteiroDeColetaByDate(dto.RoteiroDeColetaId, dto.DataRoteiro))
+                if (_roteiroPageService.HasRoteiroDeColetaByDate(dto.RoteiroDeColetaId, dto.StartDate, dto.EndDate))
                 {
                     return BadRequest(new
                     {
@@ -79,7 +79,7 @@ namespace AmarivAPI.Controllers
                 }
 
                 var cols = _coletaService.GetColetasByRoteiroDeColeta(dto.RoteiroDeColetaId);
-                if (roCo.DataRoteiro.Date != dto.DataRoteiro.Date)
+                if (roCo.DataRoteiro.Date != dto.StartDate.Date)
                 {
                     if (cols.Count > 0)
                     {
@@ -96,11 +96,10 @@ namespace AmarivAPI.Controllers
                         message = "O Roteiro de coleta não pode ser alterado, pois, o numero maximo de coletas sera excedido!",
                     });
                 }
-
                 var roteiroDeColeta = _roteiroService.SaveRoteiroDeColeta(dto);
 
                 var coletasPorRoteiro = _coletaService.GetColetasByRoteiroDeColeta(roteiroDeColeta.Id);
-                var coletasPorData = _coletaService.GetColetasByDateWithoutRoteiroDeColeta(roteiroDeColeta.DataRoteiro);
+                var coletasPorData = _coletaService.GetColetasByDateWithoutRoteiroDeColeta(dto.StartDate, dto.EndDate);
 
                 return Ok(new
                 {
@@ -126,14 +125,14 @@ namespace AmarivAPI.Controllers
         {
             try
             {
-                if (dto.DataRoteiro.Date < DateTime.Now.Date)
+                if (dto.StartDate.Date < DateTime.Now.Date)
                 {
                     return BadRequest(new
                     {
                         message = "Não é possivel agendar uma coleta para uma data que passou!"
                     });
                 }
-                if (_roteiroService.GetRoteiroDeColetaByDate(dto.DataRoteiro))
+                if (_roteiroService.GetRoteiroDeColetaByDate(dto.StartDate, dto.EndDate))
                 {
                     return BadRequest(new
                     {
@@ -143,7 +142,7 @@ namespace AmarivAPI.Controllers
                 var roteiroDeColeta = _roteiroService.CreateRoteiroDeColeta(dto);
 
                 var coletasPorRoteiro = _coletaService.GetColetasByRoteiroDeColeta(roteiroDeColeta.Id);
-                var coletasPorData = _coletaService.GetColetasByDateWithoutRoteiroDeColeta(roteiroDeColeta.DataRoteiro);
+                var coletasPorData = _coletaService.GetColetasByDateWithoutRoteiroDeColeta(dto.StartDate, dto.EndDate);
 
                 return Ok(new
                 {
@@ -162,14 +161,31 @@ namespace AmarivAPI.Controllers
         }
 
         [HttpGet]
-        [Route("/GetColetasByDate")]
+        [Route("/GetRoteiroDeColetaDate")]
         [Authorize(Roles = "admin")]
 
         public IActionResult GetColetasByDate(int roteiroDeColetaId)
         {
+            var roteiroDeColeta = _roteiroService.RecuperaRoteiroDeColetas(roteiroDeColetaId);
+            if (roteiroDeColeta == null)
+            {
+                return NotFound(new
+                {
+                    message = "O Roteiro de coleta solicitado não foi localizado!",
+                });
+            }
+            return Ok(roteiroDeColeta.DataRoteiro.Value.Date);
+        }
+
+        [HttpPost]
+        [Route("/GetColetasByDate")]
+        [Authorize(Roles = "admin")]
+
+        public IActionResult GetColetasByDate(GetColetasByDateDto dto)
+        {
             try
             {
-                var roteiroDeColeta = _roteiroService.RecuperaRoteiroDeColetas(roteiroDeColetaId);
+                var roteiroDeColeta = _roteiroService.RecuperaRoteiroDeColetas(dto.RoteiroDeColetaId);
                 if (roteiroDeColeta == null)
                 {
                     return NotFound(new
@@ -184,9 +200,8 @@ namespace AmarivAPI.Controllers
                         message = "O Roteiro de coleta solicitado não possui todas as informações necessarias!",
                     });
                 }
-
-                var coletasPorRoteiro = _coletaService.GetColetasByRoteiroDeColeta(roteiroDeColetaId);
-                var coletasPorData = _coletaService.GetColetasByDateWithoutRoteiroDeColeta(roteiroDeColeta.DataRoteiro.Value);
+                var coletasPorRoteiro = _coletaService.GetColetasByRoteiroDeColeta(dto.RoteiroDeColetaId);
+                var coletasPorData = _coletaService.GetColetasByDateWithoutRoteiroDeColeta(dto.StartDate, dto.EndDate);
 
                 return Ok(new
                 {
@@ -271,7 +286,7 @@ namespace AmarivAPI.Controllers
                 {
                     roteiroDeColeta = _roteiroService.RecuperaRoteiroDeColetas(dto.RoteiroDeColetaId),
                     coletasRoteiro = _coletaService.GetColetasByRoteiroDeColeta(dto.RoteiroDeColetaId),
-                    coletasAprovadas = _coletaService.GetColetasByDateWithoutRoteiroDeColeta(roteiroDeColeta.DataRoteiro),
+                    coletasAprovadas = _coletaService.GetColetasByDateWithoutRoteiroDeColeta(dto.StartDate, dto.EndDate),
                 });
             }
             catch (Exception)
@@ -322,7 +337,7 @@ namespace AmarivAPI.Controllers
                 {
                     roteiroDeColeta = _roteiroService.RecuperaRoteiroDeColetas(dto.RoteiroDeColetaId),
                     coletasRoteiro = _coletaService.GetColetasByRoteiroDeColeta(dto.RoteiroDeColetaId),
-                    coletasAprovadas = _coletaService.GetColetasByDateWithoutRoteiroDeColeta(roteiroDeColeta.DataRoteiro),
+                    coletasAprovadas = _coletaService.GetColetasByDateWithoutRoteiroDeColeta(dto.StartDate, dto.EndDate),
                 });
             }
             catch (Exception)
@@ -356,7 +371,7 @@ namespace AmarivAPI.Controllers
                 {
                     roteiroDeColeta = _roteiroService.RecuperaRoteiroDeColetas(dto.RoteiroDeColetaId),
                     coletasRoteiro = _coletaService.GetColetasByRoteiroDeColeta(dto.RoteiroDeColetaId),
-                    coletasAprovadas = _coletaService.GetColetasByDateWithoutRoteiroDeColeta(roteiroDeColeta.DataRoteiro),
+                    coletasAprovadas = _coletaService.GetColetasByDateWithoutRoteiroDeColeta(dto.StartDate, dto.EndDate),
                 });
             }
             catch (Exception e)
