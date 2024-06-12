@@ -39,28 +39,32 @@ namespace AmarivAPI.Data
                 Data_criacao = new DateTime(),
                 Id = 1,
                 Descricao = "Metal",
-                Tipo = "Metal"
-        };
+                Tipo = "Metal",
+                Delete = false
+            };
             Material plastico = new Material
             {
                 Data_criacao = new DateTime(),
                 Id = 2,
                 Descricao = "Plástico",
-                Tipo = "Plástico"
+                Tipo = "Plástico",
+                Delete = false
             };
             Material papel = new Material
             {
                 Data_criacao = new DateTime(),
                 Id = 3,
                 Descricao = "Papel",
-                Tipo = "Papel"
+                Tipo = "Papel",
+                Delete = false
             };
             Material vidro = new Material
             {
                 Data_criacao = new DateTime(),
                 Id = 4,
                 Descricao = "Vidro",
-                Tipo = "Vidro"
+                Tipo = "Vidro",
+                Delete = false
             };
 
             builder.Entity<Usuario>().HasData(admin);

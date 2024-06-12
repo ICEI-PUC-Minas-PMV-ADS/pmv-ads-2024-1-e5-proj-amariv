@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import DynamicIcon from './re_components/DynamicIcon';
 
 interface FuncionarioInfo {
   id: string;
@@ -29,6 +30,69 @@ const FuncionarioModal: React.FC<FuncionarioModalProps> = ({
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFuncionarioInfo({ ...funcionarioInfo, suportaPeso: event.target.checked });
   };
+
+  const [passwordEspecial, setPasswordEspecial] = useState(false)
+  const [passwordLenght, setPasswordLenght] = useState(false)
+  const [passwordNumber, setPasswordNumber] = useState(false)
+  const [passwordUppercase, setPasswordUppercase] = useState(false)
+  const [passwordLowercase, setPasswordLowercase] = useState(false)
+
+  const checkPasswordLenght = (senha: string) => {
+    if (senha.length < 6) {
+      setPasswordLenght(false)
+      return false
+    }
+    setPasswordLenght(true)
+    return true
+  }
+
+  const checkPasswordEspecial = (senha: string) => {
+    const caracteresEspeciais = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/;
+    if (!caracteresEspeciais.test(senha)) {
+      setPasswordEspecial(false)
+      return false;
+    }
+    setPasswordEspecial(true)
+    return true
+  }
+
+  const checkPasswordNumber = (senha: string) => {
+    const numeros = /[0-9]/;
+    if (!numeros.test(senha)) {
+      setPasswordNumber(false)
+      return false;
+    }
+    setPasswordNumber(true)
+    return true
+  }
+
+  const checkPasswordUpperCase = (senha: string) => {
+    const maiusculas = /[A-Z]/;
+    if (!maiusculas.test(senha)) {
+      setPasswordUppercase(false)
+      return false;
+    }
+    setPasswordUppercase(true)
+    return true
+  }
+
+  const checkPasswordLowercase = (senha: string) => {
+    const minusculas = /[a-z]/;
+    if (!minusculas.test(senha)) {
+      setPasswordLowercase(false)
+      return false;
+    }
+    setPasswordLowercase(true)
+    return true
+  }
+
+  function verificarSenha(senha: string) {
+    checkPasswordEspecial(senha)
+    checkPasswordNumber(senha)
+    checkPasswordLenght(senha)
+    checkPasswordLowercase(senha)
+    checkPasswordUpperCase(senha)
+  }
 
   return (
     <div className="bg-[#e8f4eb] rounded-[5px] p-4 pr-16 pl-16">
@@ -98,9 +162,40 @@ const FuncionarioModal: React.FC<FuncionarioModalProps> = ({
             type="password"
             id="senha"
             value={funcionarioInfo.senha}
-            onChange={(e) => setFuncionarioInfo({ ...funcionarioInfo, senha: e.target.value })}
-            className="w-full py-2 px-3 rounded border border-gray-300 focus:outline-none focus:border-blue-500"
+            onChange={(e) => {
+              verificarSenha(e.target.value)
+              setFuncionarioInfo({ ...funcionarioInfo, senha: e.target.value })
+            }}
+            className="w-full py-2 px-3 rounded border mb-2 border-gray-300 focus:outline-none focus:border-blue-500"
           />
+          {
+            funcionarioInfo.senha.length != 0 &&
+            <div className="text-[10px] ml-2 mb-2">
+              <div >
+                <p className="font-bold">A senha deve conter:</p>
+              </div>
+              <div className="flex flex-row gap-1 items-center">
+                <DynamicIcon iconName={passwordLenght ? "IconCheck" : "IconX"} size={10} className={passwordLenght ? "text-green-600" : "text-red-500"} />
+                <p>Pelo menos 6 caracteres</p>
+              </div>
+              <div className="flex flex-row gap-1 items-center">
+                <DynamicIcon iconName={passwordEspecial ? "IconCheck" : "IconX"} size={10} className={passwordEspecial ? "text-green-600" : "text-red-500"} />
+                <p>Pelo menos um caractere especial</p>
+              </div>
+              <div className="flex flex-row gap-1 items-center">
+                <DynamicIcon iconName={passwordNumber ? "IconCheck" : "IconX"} size={10} className={passwordNumber ? "text-green-600" : "text-red-500"} />
+                <p>Pelo menos um número</p>
+              </div>
+              <div className="flex flex-row gap-1 items-center">
+                <DynamicIcon iconName={passwordLowercase ? "IconCheck" : "IconX"} size={10} className={passwordLowercase ? "text-green-600" : "text-red-500"} />
+                <p>Pelo menos uma letra minúscula</p>
+              </div>
+              <div className="flex flex-row gap-1 items-center">
+                <DynamicIcon iconName={passwordUppercase ? "IconCheck" : "IconX"} size={10} className={passwordUppercase ? "text-green-600" : "text-red-500"} />
+                <p>Pelo menos uma letra maiúscula</p>
+              </div>
+            </div>
+          }
         </div>
         <div className="mb-3">
           <label htmlFor="suportaPeso" className="text-sm text-gray-600 mr-2">Suporta Peso:</label>
