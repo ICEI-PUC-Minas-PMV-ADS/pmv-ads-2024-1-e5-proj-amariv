@@ -18,6 +18,8 @@ namespace AmarivAPI.Models
         [AllowNull]
         public string Tipo { get; set; }
 
+        public bool Delete { get; set; } = false;
+
         public DateTime Data_criacao { get; set; }
     }
 }

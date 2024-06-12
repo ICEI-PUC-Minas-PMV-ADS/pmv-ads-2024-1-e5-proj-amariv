@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AmarivAPI.Migrations
 {
     [DbContext(typeof(AmarivContext))]
-    [Migration("20240610020648_start")]
+    [Migration("20240612005837_start")]
     partial class start
     {
         /// <inheritdoc />
@@ -145,6 +145,9 @@ namespace AmarivAPI.Migrations
                     b.Property<DateTime>("Data_criacao")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<bool>("Delete")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<string>("Descricao")
                         .IsRequired()
                         .HasMaxLength(250)
@@ -162,6 +165,7 @@ namespace AmarivAPI.Migrations
                         {
                             Id = 1,
                             Data_criacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Delete = false,
                             Descricao = "Metal",
                             Tipo = "Metal"
                         },
@@ -169,6 +173,7 @@ namespace AmarivAPI.Migrations
                         {
                             Id = 2,
                             Data_criacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Delete = false,
                             Descricao = "Plástico",
                             Tipo = "Plástico"
                         },
@@ -176,6 +181,7 @@ namespace AmarivAPI.Migrations
                         {
                             Id = 3,
                             Data_criacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Delete = false,
                             Descricao = "Papel",
                             Tipo = "Papel"
                         },
@@ -183,6 +189,7 @@ namespace AmarivAPI.Migrations
                         {
                             Id = 4,
                             Data_criacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Delete = false,
                             Descricao = "Vidro",
                             Tipo = "Vidro"
                         });
@@ -337,16 +344,16 @@ namespace AmarivAPI.Migrations
                         {
                             Id = "adm",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4c38254a-934d-4393-b947-2c3a8601ee16",
+                            ConcurrencyStamp = "971ed034-4075-4020-ac8d-a7b1c866e809",
                             Email = "amarivadm@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             Nome = "Administrador",
                             NormalizedEmail = "AMARIVADM@GMAIL.COM",
                             NormalizedUserName = "AMARIVADM@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEId71DxTujhsKabXXzkCyiKFYRDOkpEZ7liV8zs418LhwH4raiU40XyCLwHOmQzx8A==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEFW01z2XcDR5KjRn1Xngj5Z//hdGpE+S3t+dTZM14Qm9iY4yddW9iIF7VwyNsL9m/A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7299e1b8-6d1d-4861-b3ae-cc2c80ce364b",
+                            SecurityStamp = "c3916345-8f91-4c82-8897-600523858246",
                             TwoFactorEnabled = false,
                             UserName = "amarivadm@gmail.com"
                         });

@@ -76,7 +76,7 @@ namespace AmarivAPI.Controllers
         {
             var result = _materialService.DeletaMaterial(id);
             if (result.IsFailed)
-                return StatusCode(500);
+                return BadRequest(result);
             else
                 return Ok(result);
         }
