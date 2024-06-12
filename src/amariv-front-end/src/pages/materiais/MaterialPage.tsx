@@ -85,7 +85,7 @@ const MaterialPage: React.FC = () => {
   };
 
   return (
-    <div className="App">
+    <div className="w-full p-8">
       <div className="content">
         <div className="title">
           <h2 className="mt-[30px] text-[#53735B] text-[1.75rem] float-left">
@@ -102,35 +102,39 @@ const MaterialPage: React.FC = () => {
           />
         </div>
 
-        <Filter
-          title="Filtros"
-          fields={[
-            {
-              type: 'input',
-              label: 'Pesquisar por descrição',
-              value: searchTerm,
-              onChange: setSearchTerm,
-            },
-            {
-              type: 'select',
-              label: 'Pesquisar por tipo',
-              value: filteredMaterialType,
-              onChange: setFilteredMaterialType,
-              options: materialOptions,
-              placeholder: 'Selecione um material...',
-            },
-          ]}
-        />
+        <div className="w-full">
+          <Filter
+            title="Filtros"
+            fields={[
+              {
+                type: 'input',
+                label: 'Pesquisar por descrição',
+                value: searchTerm,
+                onChange: setSearchTerm,
+              },
+              {
+                type: 'select',
+                label: 'Pesquisar por tipo',
+                value: filteredMaterialType,
+                onChange: setFilteredMaterialType,
+                options: materialOptions,
+                placeholder: 'Selecione um material...',
+              },
+            ]}
+          />
+        </div>
 
-        <div className="mt-8 material-cards grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-12">
-          {handleSearch().map((material, index) => (
-            <MaterialCard
-              key={material.id}
-              material={material}
-              onEdit={() => handleEditMaterial(index)}
-              onDelete={() => handleDeleteMaterial(material.id)}
-            />
-          ))}
+        <div className="mt-8 flex justify-center">
+          <div className="material-cards grid grid-cols-1 sm:grid-cols- md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-12 w-full">
+            {handleSearch().map((material, index) => (
+              <MaterialCard
+                key={material.id}
+                material={material}
+                onEdit={() => handleEditMaterial(index)}
+                onDelete={() => handleDeleteMaterial(material.id)}
+              />
+            ))}
+          </div>
         </div>
 
         {showModal && (

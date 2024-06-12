@@ -86,13 +86,16 @@ Accept: application/json
 
 ###
 
-POST {{AmarivAPI_HostAddress}}/Emp/SignIn
+POST {{AmarivAPI_HostAddress}}/SignIn
 Content-Type: application/json
 Accept: application/json
 
 {
-   "Email": "john@email.com",
-   "Password": "Test@123"
+   "Nome" : "mike",
+   "Email": "mike@email.com",
+   "Password": "Test@123",
+   "RePassword": "Test@123",
+   "Celular": "27997228573"
 }
 
 ###

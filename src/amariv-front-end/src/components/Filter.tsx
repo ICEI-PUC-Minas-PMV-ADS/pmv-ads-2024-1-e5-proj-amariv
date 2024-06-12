@@ -15,33 +15,33 @@ interface FilterProps {
 
 const Filter: React.FC<FilterProps> = ({ title, fields, className }) => {
   return (
-    <form className={`w-full flex flex-col items-center rounded-lg ${className}`}>
+    <form className={`w-full flex flex-col items-center rounded-lg bg-[#e8f4eb] ${className}`}>
       <div className="title">
         <p className="text-[#666666] text-m my-1">{title}</p>
       </div>
-      <div className="dados-cliente">
+      <div className="dados-cliente flex flex-wrap justify-center">
         {fields.map((field, index) => (
-          <div key={index}>
+          <div key={index} className="flex flex-col mx-4 my-4">
             {field.type === 'input' && (
-              <div className="flex flex-col w-full my-4">
-                <label className="mb-2 ml-2 text-[#666666] text-sm">{field.label}</label>
+              <>
+                <label className="mb-2 text-[#666666] text-sm">{field.label}</label>
                 <input
                   type="text"
                   value={field.value}
                   onChange={(e) => field.onChange(e.target.value)}
                   required
-                  className="py-2 px-4 rounded-[30px] bg-[#FBFFF3] border border-[#004646] focus:outline-none focus:ring focus:border-[#004646]"
+                  className="w-48 sm:w-64 py-2 px-4 rounded-[30px] bg-white border border-[#004646] focus:outline-none focus:ring focus:border-[#004646]"
                 />
-              </div>
+              </>
             )}
             {field.type === 'select' && (
-              <div className="flex flex-col w-full my-4">
-                <label className="mb-2 ml-2 text-[#666666] text-sm">{field.label}</label>
+              <>
+                <label className="mb-2 text-[#666666] text-sm">{field.label}</label>
                 <select
                   value={field.value}
                   onChange={(e) => field.onChange(e.target.value)}
                   required
-                  className="w-full py-2 px-4 rounded-[30px] bg-[#FBFFF3] border border-[#004646] focus:outline-none focus:ring focus:border-[#004646]"
+                  className="w-48 sm:w-64 py-2 px-4 rounded-[30px] bg-white border border-[#004646] focus:outline-none focus:ring focus:border-[#004646]"
                 >
                   {field.placeholder && (
                     <option value="" disabled hidden>
@@ -54,7 +54,7 @@ const Filter: React.FC<FilterProps> = ({ title, fields, className }) => {
                     </option>
                   ))}
                 </select>
-              </div>
+              </>
             )}
           </div>
         ))}

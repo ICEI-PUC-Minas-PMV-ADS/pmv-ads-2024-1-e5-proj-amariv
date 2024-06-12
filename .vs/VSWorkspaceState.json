@@ -5,9 +5,8 @@
     "\\src\\AmarivAPI",
     "\\src\\AmarivAPI\\AmarivAPI",
     "\\src\\AmarivAPI\\AmarivAPI\\Data",
-    "\\src\\AmarivAPI\\AmarivAPI\\Data\\Dtos",
-    "\\src\\AmarivAPI\\AmarivAPI\\Data\\Dtos\\FuncionariosDtos"
+    "\\src\\AmarivAPI\\AmarivAPI\\Data\\Dtos"
   ],
-  "SelectedNode": "\\src\\AmarivAPI\\AmarivAPI\\Data\\Dtos\\FuncionariosDtos\\FuncionarioResponseDto.cs",
+  "SelectedNode": "\\src\\AmarivAPI\\AmarivAPI.sln",
   "PreviewInSolutionExplorer": false
 }

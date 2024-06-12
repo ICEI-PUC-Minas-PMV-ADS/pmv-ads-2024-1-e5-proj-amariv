@@ -80,7 +80,7 @@ const FuncionariosPage = () => {
   };
 
   return (
-    <div className="App">
+    <div className="w-full p-8">
       <div className="content">
         <div className="title">
           <h2 className="mt-[30px] text-[#53735B] text-[1.75rem] float-left">Funcionários</h2>
@@ -122,7 +122,7 @@ const FuncionariosPage = () => {
         />
 
         {funcionarios.length > 0 ? (
-          <div className="mt-8 material-cards grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-12">
+          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-12">
             {handleSearch().map(funcionario => (
               <FuncionarioCard
                 key={funcionario.id}
