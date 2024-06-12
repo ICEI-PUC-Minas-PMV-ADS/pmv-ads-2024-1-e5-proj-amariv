@@ -59,7 +59,7 @@ const HistoricoColeta: React.FC<HistoricoColetaProps> = ({ title }) => {
     }
     if (statusFilter.length > 0) {
       if (statusFilter === '0') {
-        filteredContent = filteredContent.filter((x) => x.status === true && x.cancelada === false && x.isSuccess === false && x.delete === false);
+        filteredContent = filteredContent.filter((x) => x.cancelada === false && x.isSuccess === false && x.delete === false);
       } else if (statusFilter === '1') {
         filteredContent = filteredContent.filter((x) => x.status === true && x.cancelada === false && x.isSuccess === true && x.delete === false);
       } else if (statusFilter === '2') {
