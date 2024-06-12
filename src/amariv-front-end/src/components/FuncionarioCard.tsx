@@ -38,21 +38,21 @@ const FuncionarioCard: React.FC<FuncionarioCardProps> = ({ funcionario, onEdit, 
         )}
         <div className="flex flex-wrap gap-2">
           <button
-            className="bg-[#53735B] hover:bg-[#435a48] text-white font-semibold py-1 px-2 rounded sm:py-1 sm:px-2 md:py-1 md:px-2 xl:py-2 xl:px-3"
+            className="bg-[#53735B] hover:bg-[#53735B] text-white font-semibold py-1 px-2 rounded mr-2 sm:py-1 sm:px-2 md:py-2 md:px-4"
             onClick={onEdit}
             aria-label="Editar funcionário"
           >
             Editar
           </button>
           <button
-            className="bg-[#53735B] hover:bg-[#435a48] text-white font-semibold py-1 px-2 rounded sm:py-1 sm:px-2 md:py-1 md:px-2 xl:py-2 xl:px-3"
+            className="bg-[#53735B] hover:bg-[#53735B] text-white font-semibold py-1 px-2 rounded mr-2 sm:py-1 sm:px-2 md:py-2 md:px-4"
             onClick={toggleDetails}
             aria-label={showDetails ? 'Ocultar detalhes' : 'Mostrar detalhes'}
           >
             {showDetails ? 'Ocultar' : 'Detalhes'}
           </button>
           <button
-            className="bg-[#E36C6C] hover:bg-[#d45555] text-white font-semibold py-1 px-2 rounded sm:py-1 sm:px-2 md:py-1 md:px-2 xl:py-2 xl:px-3"
+            className="bg-[#E36C6C] hover:bg-[#E36C6C] text-white font-semibold py-1 px-2 rounded sm:py-1 sm:px-2 md:py-2 md:px-4"
             onClick={() => onDelete(funcionario.id)}
             aria-label="Excluir funcionário"
           >
