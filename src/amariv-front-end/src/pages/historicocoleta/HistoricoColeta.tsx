@@ -59,7 +59,7 @@ const HistoricoColeta: React.FC<HistoricoColetaProps> = ({ title }) => {
     }
     if (statusFilter.length > 0) {
       if (statusFilter === '0') {
-        filteredContent = filteredContent.filter((x) => x.status === true && x.cancelada === false && x.isSuccess === false && x.delete === false);
+        filteredContent = filteredContent.filter((x) => x.cancelada === false && x.isSuccess === false && x.delete === false);
       } else if (statusFilter === '1') {
         filteredContent = filteredContent.filter((x) => x.status === true && x.cancelada === false && x.isSuccess === true && x.delete === false);
       } else if (statusFilter === '2') {
@@ -119,7 +119,7 @@ const HistoricoColeta: React.FC<HistoricoColetaProps> = ({ title }) => {
         <FilterHistorico onFilterChange={handleFilterChange} />
       </div>
 
-      <div className="flex-grow mt-4 overflow-y-auto ">
+      <div className="flex-grow mt-4 overflow-y-auto flex flex-col items-center">
         <div className="
           grid gap-4 col-span-1
           min-[960px]:grid-cols-2

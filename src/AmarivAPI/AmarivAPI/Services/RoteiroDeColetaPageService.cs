@@ -60,8 +60,8 @@ namespace AmarivAPI.Services
             {
                 throw new Exception("");
             }
-            coleta.Status = false;
-            
+            coleta.Cancelada = true;
+
             _context.Coletas.Entry(coleta).CurrentValues.SetValues(coleta);
             _context.SaveChanges();
         }

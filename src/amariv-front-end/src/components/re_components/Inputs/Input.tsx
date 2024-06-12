@@ -34,6 +34,9 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   mask?: string
   onChangeDebounce?: (value: string) => void
   rightLoading?: boolean
+  optionsSelectableInput?: { label: string, value: string }[]
+  optionsSelectableInputOpen?: boolean
+  onClickOptionSelectable?: (value: string) => void
 }
 
 const input = tv({
@@ -72,9 +75,9 @@ const input = tv({
       },
 
       disabled: {
-        background: "bg-[#3f5745] border-[#3f5745]",
-        text: "text-[#668d70]",
-        icon: "text-[#668d70]"
+        background: "bg-[#d6d6d6] border-[#d6d6d6]",
+        text: "text-black",
+        icon: "text-black"
       },
 
       red: {
@@ -84,7 +87,7 @@ const input = tv({
   }
 })
 
-const Input: React.FC<InputProps> = ({ title, leftIcon, rightIcon, onClickLeftIcon, onClickRightIcon, error, errorMessage, internalSelectable, valueInternalSelectable, onClickInternalSelectable, selectableInput = false, color = "primary", value, internalTitle = false, selectableInputIconOpen = false, disabled = false, requiredField = false, externalCheckbox = false, onClickExternalCheckbox, titleExternalCheckbox, valueExternalCheckbox = false, onClickSelectableInput, titleColor = "light", mask = "", onChangeDebounce, rightLoading = false, ...props }) => {
+const Input: React.FC<InputProps> = ({ title, leftIcon, rightIcon, onClickLeftIcon, onClickRightIcon, error, errorMessage, internalSelectable, valueInternalSelectable, onClickInternalSelectable, selectableInput = false, color = "primary", value, internalTitle = false, selectableInputIconOpen = false, disabled = false, requiredField = false, externalCheckbox = false, onClickExternalCheckbox, titleExternalCheckbox, valueExternalCheckbox = false, onClickSelectableInput, titleColor = "light", mask = "", onChangeDebounce, rightLoading = false, optionsSelectableInput, optionsSelectableInputOpen = false, onClickOptionSelectable, ...props }) => {
 
   const debounceChange = useDebounce(onChangeDebounce, 500)
 
@@ -224,6 +227,24 @@ const Input: React.FC<InputProps> = ({ title, leftIcon, rightIcon, onClickLeftIc
           }
         </div>
       </div>
+      {
+        (optionsSelectableInput && optionsSelectableInput.length > 0 && optionsSelectableInputOpen == true) &&
+        <div className="absolute z-10 bg-white rounded-md shadow-lg"
+        >
+          {optionsSelectableInput.map((option, index) => (
+            <div
+              key={index}
+              onClick={() => {
+                if (onClickOptionSelectable)
+                  onClickOptionSelectable(option.value)
+              }}
+              className="cursor-pointer py-2 px-4 hover:bg-gray-100"
+            >
+              {option.label}
+            </div>
+          ))}
+        </div>
+      }
       {
         error == true && errorMessage != null &&
         <p className=" font-light text-red-500 text-[12px] ml-2">{errorMessage}</p>

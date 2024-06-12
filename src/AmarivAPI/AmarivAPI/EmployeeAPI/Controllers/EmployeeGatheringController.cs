@@ -34,7 +34,7 @@ namespace AmarivAPI.EmployeeAPI.Controllers
                             message = "Coleta não localizado!",
                         });
                     }
-                    if (DateTime.Now.Date != gathering.DataDeColeta.Date)
+                    if (gathering.DataDeColeta.Date < dto.StartDate && gathering.DataDeColeta.Date > dto.EndDate)
                     {
                         return NotFound(new
                         {
