@@ -359,7 +359,7 @@ export function ColetaPage() {
                 <div className="w-[16rem] me-2">
                   <Button2
                     type="button"
-                    label="Enviar agendamento"
+                    label={isUpdate === true ? "Atualizar agendamento": "Criar agendamento"}
                     className="w-full mt-[15px] mb-5"
                     onClick={() => {
 
