@@ -1,6 +1,5 @@
 import React from "react";
 import IcHandle from './../assets/ic_handle.svg';
-import moment from "moment";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { ReadColetaDto } from "../../../models/ColetaDtos/ReadColetaDto";
@@ -21,7 +20,7 @@ export type NextRouteItemProps = {
  * NextRouteItem
  */
 
-export function NextRouteItem({ route, position, onClickItem }: NextRouteItemProps) {
+export function NextRouteItem({ route, onClickItem }: NextRouteItemProps) {
   const {
     attributes,
     listeners,
@@ -47,6 +46,8 @@ export function NextRouteItem({ route, position, onClickItem }: NextRouteItemPro
     return "";
   }, []);
 
+  console.log(route);
+
   /**
    * Layout
    */
@@ -67,22 +68,29 @@ export function NextRouteItem({ route, position, onClickItem }: NextRouteItemPro
           <div className="text-2xl px-4 font-bold">
             {route.posicaoLista !== null ? `${route.posicaoLista}º` : '--'}
           </div>
-          <div className="flex flex-row flex-1">
+          <div className="w-full flex flex-row flex-1">
 
-            <div className="flex flex-col flex-1">
-              <div className="h-[2rem] flex items-end">
-                <p className="text-sm line-clamp-2">
+            <div className="w-full flex flex-col flex-1">
+              <div className="w-full h-[2rem] flex items-end">
+                <p className="w-full text-sm line-clamp-1 flex flex-row">
+                  <strong>{route.clienteNome}&nbsp;</strong>
+                  {(route.isSuccess === true) && <span className="text-green-600">(coletada)</span>}
+                  {(route.cancelada === true) && <span className="text-red-600">(cancelada)</span>}
+                </p>
+              </div>
+              <div className="w-full h-[2rem] flex items-end">
+                <p className="w-full text-sm line-clamp-2">
                   {route.endereco.logradouro}
                 </p>
               </div>
-              <div className="h-[3rem] flex items-start">
-                <p className="line-clamp-2">
+              <div className="w-full h-[3rem] flex items-start">
+                <p className="w-full line-clamp-2">
                   <strong>Materiais:</strong> {route.listaItensColeta}
                 </p>
               </div>
             </div>
 
-            <div className="flex flex-col flex-1 items-center justify-center">
+            <div className="w-full flex flex-col flex-1 items-center justify-center">
               <p className="line-clamp-1">
                 <strong>Horário de coleta</strong>
               </p>

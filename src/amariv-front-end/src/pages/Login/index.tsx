@@ -1,11 +1,10 @@
 import { useState, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import { AppContext, useAppContext } from "../../AppContext";
+import { useAppContext } from "../../AppContext";
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
 import { Form } from "../../components/Form";
 import { AuthUtils } from "../../utils/AuthUtils";
-import { User } from "../../models/User";
 import AmarivLogo from "../../assets/images/amariv_logo.png";
 import BackgroundLogin from "../../assets/images/background-login.png";
 import React from "react";
@@ -27,7 +26,7 @@ export function LoginPage() {
     if (state.token) {
       navigate('/', { replace: true });
     }
-  }, [state]);
+  }, [state, navigate]);
 
   const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -51,14 +50,6 @@ export function LoginPage() {
 
         // Extrai os dados do usuário da resposta JSON
         const responseData = await response.json();
-
-        // Cria um objeto user do tipo User com as informações do usuário
-        const user: User = {
-          id: responseData.id,
-          nome: responseData.nome,
-          email: responseData.email,
-          telefone: responseData.telefone || undefined,
-        };
 
         // Chama a função login do AuthUtils passando o contexto da aplicação e o objeto user PODE GERAR UM ERRO!!!
         AuthUtils.login({ state, dispatch }, responseData[0].message);

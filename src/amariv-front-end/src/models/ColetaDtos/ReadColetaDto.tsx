@@ -14,6 +14,8 @@ export interface ReadColetaDto {
   clienteCel?: string,
   clienteTel?: string,
   status?: boolean,
+  cancelada?: boolean,
+  isSuccess?: boolean,
   delete?: boolean,
   lat?: number,
   lon?: number,

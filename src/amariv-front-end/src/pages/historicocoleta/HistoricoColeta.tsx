@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import FilterHistorico from '../../components/FilterHistorico';
 import HistoricoCard from '../../components/HistoricoCard';
-import { User } from '../../models/User';
 import { DateConvert } from '../../utils/DateConvert';
 import { useApi } from '../../hooks/useApi';
+import { RoteiroDeColetaDto } from '../../models/RoteiroDeColetaDtos/RoteiroDeColetaDto';
 
 interface HistoricoColetaProps {
   title: string;
@@ -22,7 +22,7 @@ interface Coleta {
   isSuccess: boolean;
   delete: boolean;
   cancelada: boolean;
-  funcionario: User;
+  roteiroDeColetas?: RoteiroDeColetaDto;
 }
 
 const HistoricoColeta: React.FC<HistoricoColetaProps> = ({ title }) => {
@@ -47,7 +47,12 @@ const HistoricoColeta: React.FC<HistoricoColetaProps> = ({ title }) => {
   useEffect(() => {
     let filteredContent: Coleta[] = coletas;
     if (fucionarioFilter.length > 0) {
-      filteredContent = filteredContent.filter((x) => x.funcionario.nome.toLowerCase().includes(fucionarioFilter.toLowerCase()));
+      filteredContent = filteredContent.filter((x) => {
+        if (x.roteiroDeColetas?.funcionario?.nome) {
+          return x.roteiroDeColetas.funcionario.nome.toLowerCase().includes(fucionarioFilter.toLowerCase());
+        }
+        return false;
+      });
     }
     if (materialFilter.length > 0) {
       filteredContent = filteredContent.filter((x) => x.listaItensColeta.toLowerCase().includes(materialFilter.toLowerCase()));

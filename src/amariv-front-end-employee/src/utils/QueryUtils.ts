@@ -16,8 +16,8 @@ export class QueryUtils {
     return gatheringItineraty.coletas.filter((gathering: Gathering): boolean => {
       const isActive = gathering.status === true;
       const isNotDeleted = gathering.delete === false;
-      const isCanceled = gathering.cancelada === false;
-      const isFinished = gathering.isSuccess === false;
+      const isCanceled = gathering.cancelada === true;
+      const isFinished = gathering.isSuccess === true;
       return isActive && isNotDeleted && (isCanceled || isFinished);
     });
   }
