@@ -504,7 +504,7 @@ export class RoteiroDeColetaController extends PageBaseController<RoteiroDeColet
       this.dispatch({ type: 'set_coletas', payload: data });
     } catch (e: any) {
       const { message } = e.response.data;
-      console.log(message);
+      throw new Error(message);
     }
   }
 
