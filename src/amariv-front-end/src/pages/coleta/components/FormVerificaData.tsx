@@ -78,18 +78,18 @@ export const FormVerificaData = ({setDataColetaFinal, dataColeta }: FormVerifica
 
     return (
         <>
-            <h4 className="text-[#666666] text-m my-1"> Verificação de disponibilidade da coleta </h4>        
+            <h4 className="text-[#666666] text-lg my-1"> Verificação de disponibilidade da coleta </h4>        
             {
                 mensagem  
             }
-            <div className="w-[80%] min-h-screen lg:min-h-fit flex bg-light-backgroud items-center justify-center flex-row lg:min-w-80% ">
+            <div className="w-[80%] min-h-screen lg:min-h-fit flex rounded-lg bg-[#E8F4EB] items-center justify-center flex-row lg:min-w-80% ">
                           
                 <div>
                     <InputDate
                         label="Data da coleta"
                         type="date"
                         required
-                        value={dataColetaDia}
+                        value={dataColetaDia}                  
                         onChange={(evt) => setDataColetaDia(evt.target.value)}
                     />
                 </div>

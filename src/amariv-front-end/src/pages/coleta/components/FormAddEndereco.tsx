@@ -39,7 +39,7 @@ export const FormAddEndereco = ({ endereco, salvarEndereco, setErrorEndereco }: 
 
     return (
 
-        <div className="w-[80%] justify-center items-center lg:min-h-fit flex bg-light-backgroud  flex-col lg:min-w-max ">
+        <div className="w-[80%] justify-center items-center lg:min-h-fit flex rounded-lg bg-[#E8F4EB] flex-col lg:min-w-max ">
             <div className="w-full flex flex-row gap-4 px-10 mt-5 mb-4">
                 <Input title="CEP"
                     titleColor="dark"
