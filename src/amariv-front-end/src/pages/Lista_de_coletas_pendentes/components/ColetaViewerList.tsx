@@ -18,9 +18,9 @@ export const ColetaViewerList = ({ coletas, onAprovarColeta, onRecusarColeta }: 
   return (
     <div className="
       grid w-full grid-cols-1 mx-auto gap-y-4
-      min-[1000px]:grid-cols-2 min-[1000px]:gap-x-2
-      min-[1300px]:grid-cols-3
-      min-[1550px]:grid-cols-4
+      min-[1090px]:grid-cols-2 min-[1000px]:gap-x-2
+      min-[1430px]:grid-cols-3
+      min-[1800px]:grid-cols-4
     ">
       {
         coletas.map((coleta) => <ColetaViewerItem

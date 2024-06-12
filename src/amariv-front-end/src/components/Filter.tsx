@@ -19,7 +19,7 @@ const Filter: React.FC<FilterProps> = ({ title, fields, className }) => {
       <div className="title">
         <p className="text-[#666666] text-m my-1">{title}</p>
       </div>
-      <div className="dados-cliente">
+      <div className="w-[60%] flex-row">
         {fields.map((field, index) => (
           <div key={index}>
             {field.type === 'input' && (
