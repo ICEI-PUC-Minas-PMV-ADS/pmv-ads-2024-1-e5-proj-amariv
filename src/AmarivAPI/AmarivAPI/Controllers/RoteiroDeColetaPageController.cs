@@ -350,7 +350,7 @@ namespace AmarivAPI.Controllers
         }
 
         [HttpPost]
-        [Route("CancelarColeta")]
+        [Route("/RoteiroCancelarColeta")]
         [Authorize(Roles = "admin")]
 
         public IActionResult CancelarColeta(CancelarColetaDto dto) {

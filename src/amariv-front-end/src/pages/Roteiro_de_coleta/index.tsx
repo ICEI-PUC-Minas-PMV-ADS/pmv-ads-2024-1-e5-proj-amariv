@@ -503,7 +503,7 @@ const RoteiroDeColetaPageImpl = () => {
             onClick={() => handleEditarColeta(selectedAvailableRoute)} />
           <div className="h-[.4rem]"></div>
           <Button
-            label="Cancelar coleta do roteiro"
+            label="Cancelar coleta"
             className="w-[20rem]"
             fontSize="medium"
             onClick={() => handleCancelarColeta(selectedAvailableRoute)} />

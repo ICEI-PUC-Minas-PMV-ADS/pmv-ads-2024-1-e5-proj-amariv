@@ -51,6 +51,23 @@ namespace AmarivAPI.EmployeeAPI.Controllers
             return Ok(result);
         }
 
+        [HttpGet]
+        [Route("/Emp/GetRoteiroDeColetaDate")]
+        [Authorize(Roles = "funcionario")]
+
+        public IActionResult GetColetasByDate(int roteiroDeColetaId)
+        {
+            var roteiroDeColeta = _context.RoteiroDeColetas.Where(x => x.Id == roteiroDeColetaId).FirstOrDefault();
+            if (roteiroDeColeta == null)
+            {
+                return NotFound(new
+                {
+                    message = "O Roteiro de coleta solicitado não foi localizado!",
+                });
+            }
+            return Ok(roteiroDeColeta.DataRoteiro.Date);
+        }
+
         [HttpPost()]
         [Route("/Emp/ChangeGatheringOrder")]        
         [Authorize(Roles = "funcionario")]

@@ -52,7 +52,7 @@ export class RoteiroDeColetaController extends PageBaseController<RoteiroDeColet
       const endDate = new Date(y, m - 1, d, 23, 59, 59).toISOString();
 
       const body = { coletaId, roteiroDeColetaId, startDate, endDate };
-      const response = await useApi.post(`CancelarColeta`, body, {
+      const response = await useApi.post(`RoteiroCancelarColeta`, body, {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',

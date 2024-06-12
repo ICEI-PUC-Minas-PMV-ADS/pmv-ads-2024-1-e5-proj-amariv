@@ -65,7 +65,7 @@ export function RoutesDesktopPage() {
           setIsSuccess(null);
           setGatheringId(null);
 
-          const pendentGatherings = QueryUtils.getPendentGatheringsFromItinerary(gatheringItinerary);
+          const pendentGatherings = QueryUtils.getPendentGatheringsFromItinerary(updatedGatheringItinerary);
           const sortedPendentGatherings = QueryUtils.sortGatheringByPosition(pendentGatherings);
 
           if (sortedPendentGatherings.length > 0) {
