@@ -79,10 +79,10 @@ export function FormAddMateriais({listaMateriais, salvarMateriaislista}: FormAdd
   return (
     <>
       <div className="title">
-        <h4 className="text-[#666666] text-m my-1">Materiais da coleta</h4>
+        <h4 className="text-[#666666] text-lg my-1">Materiais da coleta</h4>
       </div>
 
-      <div className="dados-cliente" >
+      <div className="w-full p-9 px-20 border rounded-lg bg-[#E8F4EB] md:flex md:flex-wrap md:gap-10">
         <div className="p-5 grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 w-full gap-2 lg:max-w-[1220px] md:max-w-[810px]">
           {
             materiaisAdicionados.length == 0 &&
@@ -120,12 +120,15 @@ export function FormAddMateriais({listaMateriais, salvarMateriaislista}: FormAdd
         }} />
      
         </div>
-        <Button2
+        <div className="w-full text-right">
+           <Button2
           type="button"
           label="Adicionar material"
           onClick={ () => { setModalMaterialOpen(true) }}
           className="w-[30%] mt-[15px] mb-3"
         />
+        </div>
+       
       </div>
 
     </>

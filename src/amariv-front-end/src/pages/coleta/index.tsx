@@ -10,7 +10,7 @@ import { FormVerificaData } from "./components/FormVerificaData";
 import { GoogleGeocodingService } from "../../services/GoogleGeocodingService";
 import { Endereco } from "../../types/Endereco";
 import { Coleta } from "../../types/Coleta";
-import { useSearchParams } from "react-router-dom";
+import { createSearchParams, useNavigate, useSearchParams } from "react-router-dom";
 import { DateConvert } from "../../utils/DateConvert";
 import { Button } from "../../components/Button";
 
@@ -22,6 +22,7 @@ export interface local {
 }
 
 export function ColetaPage() {
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [errorNome, setErrorNome] = useState(false)
   const [errorCel, setErrorCel] = useState(false)
@@ -35,9 +36,12 @@ export function ColetaPage() {
   const [mensagemErro, setMensagemErro] = useState()
   const [coletaUpdate, setColetaUpdate] = useState<Coleta>()
   const [isUpdate, setIsUpdate] = useState<boolean>(false)
+  const [selectedAvailableRoute, setselectedAvailableRoute] = useState<any>()
+
 
   useEffect(() => {
     const idColeta = searchParams.get("id");
+    setselectedAvailableRoute({ id : searchParams.get("roteiroDeColetaId") ? searchParams.get("roteiroDeColetaId") : "" });
 
     if (idColeta != null) {
       CarregaColetaCadastrada(Number.parseInt(idColeta))
@@ -152,8 +156,9 @@ export function ColetaPage() {
           listaItensColeta: listaMateriais,
           status: true
         };
-        const coleta = await coletaService.salvarColeta(coletaDto);
+        await coletaService.salvarColeta(coletaDto);
         window.alert("A coleta foi salva com sucesso!!")
+        navigate('/roteiro_de_coleta')
       }
     } catch (e: any) {
       console.log(e);
@@ -174,12 +179,23 @@ export function ColetaPage() {
           clienteTel: tel,
           lat: local.latitude,
           lon: local.longitude,
+          status: true,
           localidadeExata: consultaLocalidadeExata(local),
           dataDeColeta: new Date(dataColeta),
           listaItensColeta: listaMateriais,
         };
         const col = await coletaService.updateColeta(coletaDto);
         window.alert("A coleta foi salva com sucesso!!")
+        if (selectedAvailableRoute) {
+          navigate({
+            pathname: '/roteiro_de_coleta',
+            search: createSearchParams({
+              id: selectedAvailableRoute.id.toString(),
+            }).toString(),
+          });
+        } else {
+          navigate("/roteiro_de_coleta")
+        }
       }
     } catch (e: any) {
       window.alert(e)
@@ -190,31 +206,46 @@ export function ColetaPage() {
     try {
       var confirmar: boolean = window.confirm("Você realmente gostária de deletar essa coleta?")
       if (confirmar) {
-        if (coletaUpdate !== undefined) {
+        if (coletaUpdate !== undefined) {                  
           var newColeta: Coleta = coletaUpdate;
-          newColeta.delete = true
-          coletaService.updateColeta(newColeta)
+          newColeta.delete = true       
+          setColetaUpdate(newColeta)
+          await coletaService.updateColeta(coletaUpdate)
+          window.alert("A coleta foi deletada com sucesso!")
+          if (selectedAvailableRoute) {
+            navigate({
+              pathname: '/roteiro_de_coleta',
+              search: createSearchParams({
+                id: selectedAvailableRoute.id.toString(),
+              }).toString(),
+            });
+          } else {
+            navigate("/roteiro_de_coleta")
+          }
+           
         }
       }
     } catch (err) {
-
+        console.log(err)
     }
   }
 
+  
   return (
     <>
-      <div className="App">
+      <div className="container mx-auto p-4 flex flex-col min-h-screen ml-[4rem]">
         {mensagemErro}
-        <div className="content">
+        <div className="flex-none text-left">
           <h2 className="mt-[30px] text-[#53735B] text-[1.75rem]">
             Novo agendamento de coleta
           </h2>
-          <div className="title">
-            <p className="text-[#666666] text-sm my-1">Dados do cliente</p>
-          </div>
-
+          
           <Form>
-            <div className="w-[80%] justify-between p-8 items-center lg:min-h-fit flex bg-light-backgroud  flex-row lg:min-w-max ">
+          <div className="flex-none text-left">
+            <h4 className="text-[#666666] text-lg">Dados do cliente</h4>
+          </div>
+            <div className="w-[80%] justify-between p-8 items-center lg:min-h-fit flex rounded-lg bg-[#E8F4EB] flex-row lg:min-w-max ">
+              
               <div className="w-[40%]">
                 <Input
                   title="Nome Cliente"
@@ -259,16 +290,17 @@ export function ColetaPage() {
             </div>
 
             <div className="title">
-              <p className="text-[#666666] text-m my-1">Endereço do cliente</p>
+              <p className="text-[#666666] text-lg my-1">Endereço do cliente</p>
             </div>
+            
+        
+              <FormAddEndereco
+                salvarEndereco={(newEndereco) => { setEnderecoDto(newEndereco) }}
+                endereco={enderecoDto ?? {}}
+                setErrorEndereco={(e) => setErrorEndereco(e)}
 
-            <FormAddEndereco
-              salvarEndereco={(newEndereco) => { setEnderecoDto(newEndereco) }}
-              endereco={enderecoDto ?? {}}
-              setErrorEndereco={(e) => setErrorEndereco(e)}
-
-            />
-
+              />
+          
             <FormVerificaData
               setDataColetaFinal={(coleta) => { setDataColeta(coleta) }}
               dataColeta={dataColeta}
@@ -293,7 +325,18 @@ export function ColetaPage() {
                         className="w-full mt-[15px] mb-5"
                         onClick={() => {
 
+                          if (selectedAvailableRoute) {
+                            navigate({
+                              pathname: '/roteiro_de_coleta',
+                              search: createSearchParams({
+                                id: selectedAvailableRoute.id.toString(),
+                              }).toString(),
+                            });
+                          } else {
+                            navigate("/roteiro_de_coleta")
+                          }
                         }}
+
                       />
                     </div>
                     <div className="w-[14rem] me-40">

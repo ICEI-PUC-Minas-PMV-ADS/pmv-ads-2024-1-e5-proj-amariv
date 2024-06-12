@@ -8,8 +8,8 @@ export const coletaService = {
         return response.data
     },
 
-    updateColeta: async (col: Coleta) => {
-        const jsonBody = JSON.stringify({ ...col, dataDeColeta: col.dataDeColeta?.toISOString() });
+    updateColeta: async (col: Coleta) => {          
+        const jsonBody = JSON.stringify({ ...col, dataDeColeta: new Date (col.dataDeColeta!).toISOString() });
         const response = await useApi.post(`/UpdateColeta?id=${col.id}`, jsonBody);
         return response.data
     },
