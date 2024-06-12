@@ -86,10 +86,19 @@ namespace AmarivAPI.EmployeeAPI.Controllers
                 }
                 using (var t = _context.Database.BeginTransaction())
                 {
+                    var currentPosition = 1;
+                    var todasAsColetas = _context.Coletas.Where(x => x.RoteiroColetaId == gatheringItinerary.Id &&
+                        x.Delete == false
+                    ).ToList();
+
+                    for (int i = 0; i < todasAsColetas.Count; i++)
+                    {
+                        todasAsColetas[i].PosicaoLista = null;
+                    }
                     for (int i = 0; i < affectedRoutesList.Count; i++)
                     {
                         var coletaId = affectedRoutesList.ElementAt(i);
-                        var coleta = coletas.Where(x => x.Id == coletaId).FirstOrDefault();
+                        var coleta = todasAsColetas.Where(x => x.Id == coletaId).FirstOrDefault();
                         if (coleta == null)
                         {
                             return BadRequest(new
@@ -113,9 +122,21 @@ namespace AmarivAPI.EmployeeAPI.Controllers
                             throw new Exception();
                         }
                         coleta.PosicaoLista = newPosicaoLista + 1;
+                        currentPosition = newPosicaoLista + 1;
 
                         _context.Coletas.Entry(coleta).CurrentValues.SetValues(coleta);
                         _context.SaveChanges();
+                    }
+                    for (int i = 0; i < todasAsColetas.Count; i++)
+                    {
+                        if (todasAsColetas[i].PosicaoLista == null)
+                        {
+                            currentPosition += 1;
+                            todasAsColetas[i].PosicaoLista = currentPosition;
+
+                            _context.Coletas.Entry(todasAsColetas[i]).CurrentValues.SetValues(todasAsColetas[i]);
+                            _context.SaveChanges();
+                        }
                     }
                     t.Commit();
                 }
