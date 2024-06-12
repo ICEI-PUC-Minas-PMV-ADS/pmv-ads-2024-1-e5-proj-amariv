@@ -18,7 +18,7 @@ export type ColetaViewerItemProps = {
 export const ColetaViewerItem = ({ coleta, onAprovarColeta, onRecusarColeta }: ColetaViewerItemProps) => {
   return (
     <div className="w-full flex justify-center">
-      <div className="w-full min-w-[18rem] h-[16rem] bg-[#E8F4EB] border-[#bfcec3] border p-4 rounded">
+      <div className="w-[20rem] h-[16rem] bg-[#E8F4EB] border-[#bfcec3] border p-4 rounded">
         <div className="w-full h-full flex flex-col">
           <div className="flex flex-col flex-1">
             <div><strong>Cliente:</strong> {coleta.clienteNome}</div>
@@ -29,12 +29,12 @@ export const ColetaViewerItem = ({ coleta, onAprovarColeta, onRecusarColeta }: C
           <div className="w-full flex flex-row items-center gap-x-2 px-4">
             <Button
               fontSize="medium"
-              className="bg-[#E36C6C] text-[#F4FAF6]"
+              className="w-[8rem] bg-[#E36C6C] text-[#F4FAF6]"
               label="Recusar"
               onClick={() => onRecusarColeta(coleta.id!)} />
             <Button
               fontSize="medium"
-              className="rounded-lg text-[#F4FAF6]"
+              className="w-[8rem] rounded-lg text-[#F4FAF6]"
               color="secondary"
               label="Aceitar"
               onClick={() => onAprovarColeta(coleta.id!)} />

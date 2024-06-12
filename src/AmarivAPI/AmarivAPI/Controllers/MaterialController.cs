@@ -13,8 +13,6 @@ namespace AmarivAPI.Controllers
     [Route("[controller]")]
     public class MaterialController : Controller
     {
-
-
         private MaterialService _materialService;
 
         public MaterialController(MaterialService materialService)

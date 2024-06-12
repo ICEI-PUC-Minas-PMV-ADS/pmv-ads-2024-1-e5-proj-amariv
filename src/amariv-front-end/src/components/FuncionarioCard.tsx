@@ -24,7 +24,7 @@ const FuncionarioCard: React.FC<FuncionarioCardProps> = ({ funcionario, onEdit, 
   };
 
   return (
-    <div className="bg-[#e8f4eb] rounded-[5px] p-3 pr-8 pl-8 mb-3 w-full md:w-full lg:w-full">
+    <div className="bg-[#e8f4eb] rounded-[5px] p-3 pr-8 pl-8 mb-3 w-[19rem]">
       <h3 className="text-base font-semibold text-gray-800 mb-1">{funcionario.nome}</h3>
       <p className="text-sm text-gray-600 mb-1">{funcionario.email}</p>
       <p className="text-sm text-gray-600 mb-1">Cargo: {funcionario.cargo}</p>

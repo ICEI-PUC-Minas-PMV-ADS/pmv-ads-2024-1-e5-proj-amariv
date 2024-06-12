@@ -80,10 +80,13 @@ const FuncionariosPage = () => {
   };
 
   return (
-    <div className="App">
-      <div className="content">
-        <div className="title">
-          <h2 className="mt-[30px] text-[#53735B] text-[1.75rem] float-left">Funcionários</h2>
+    <div className="container mx-auto p-4 flex flex-col min-h-screen">
+      <div className="w-full">
+        <div className="mr-4">
+          <h2 className="text-3xl font-bold mt-[30px] mr-4 text-[#666666] text-[1.75rem] float-left mb-[30px]">
+            Funcionários
+          </h2>
+
           <Button2
             type="button"
             label="Adicionar funcionário"
@@ -91,7 +94,7 @@ const FuncionariosPage = () => {
               setEditingIndex(null);
               setShowFuncionarioModal(true);
             }}
-            className="w-[200px] mt-[15px] float-right"
+            className="w-[200px] mt-[15px] float-right mb-[30px]"
           />
         </div>
 
@@ -100,7 +103,9 @@ const FuncionariosPage = () => {
             <div className="absolute inset-0 bg-gray-900 opacity-50"></div>
             <div className="relative rounded-lg shadow-lg w-full max-w-md">
               <FuncionarioModal
-                title={editingIndex ? "Editar Funcionário" : "Adicionar Funcionário"}
+                title={
+                  editingIndex ? "Editar Funcionário" : "Adicionar Funcionário"
+                }
                 funcionarioInfo={funcionarioInfo}
                 setFuncionarioInfo={setFuncionarioInfo}
                 onSave={handleAddFuncionario}
@@ -112,31 +117,52 @@ const FuncionariosPage = () => {
             </div>
           </div>
         )}
-
-        <Filter
-          title="Filtros"
-          fields={[
-            { type: 'input', label: 'Pesquisar por nome', value: searchTerm, onChange: setSearchTerm },
-            { type: 'select', label: 'Filtrar por cargo', value: filteredCargo, onChange: setFilteredCargo, options: cargoOptions },
-          ]}
-        />
-
-        {funcionarios.length > 0 ? (
-          <div className="mt-8 material-cards grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-12">
-            {handleSearch().map(funcionario => (
-              <FuncionarioCard
-                key={funcionario.id}
-                funcionario={funcionario}
-                onEdit={() => handleEditFuncionario(funcionario)}
-                onDelete={() => handleDeleteFuncionario(funcionario.id)}
+        <div className="Filtros">
+          <div className="flex flex-row w-full p-9 px-20 border rounded-lg bg-[#E8F4EB] md:flex md:flex-wrap md:gap-10">
+            <div className="flex flex-row w-full">
+              <Filter
+                title="Filtros"
+                fields={[
+                  {
+                    type: "input",
+                    label: "Pesquisar por nome",
+                    value: searchTerm,
+                    onChange: setSearchTerm,
+                  },
+                  {
+                    type: "select",
+                    label: "Filtrar por cargo",
+                    value: filteredCargo,
+                    onChange: setFilteredCargo,
+                    options: cargoOptions,
+                  },
+                ]}
               />
-            ))}
+            </div>
           </div>
-        ) : (
-          <div className="mt-8 text-center">
-            <p>Nenhum funcionário encontrado.</p>
+
+          <div className='w-full flex flex-col items-center'>
+            {funcionarios.length > 0 ? (
+              <div className="
+                mt-8 material-cards grid grid-cols-1 gap-4
+                min-[920px]:grid-cols-2
+                min-[1260px]:grid-cols-3
+                min-[1600px]:grid-cols-4
+              ">
+                {handleSearch().map((funcionario) => (
+                  <FuncionarioCard
+                    key={funcionario.id}
+                    funcionario={funcionario}
+                    onEdit={() => handleEditFuncionario(funcionario)}
+                    onDelete={() => handleDeleteFuncionario(funcionario.id)}
+                  />
+                ))}
+              </div>
+            ) : (
+              <p>Nenhum funcionário encontrado.</p>
+            )}
           </div>
-        )}
+        </div>
       </div>
     </div>
   );

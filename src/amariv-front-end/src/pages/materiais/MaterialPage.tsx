@@ -85,7 +85,7 @@ const MaterialPage: React.FC = () => {
   };
 
   return (
-    <div className="App">
+    <div className="w-full p-4">
       <div className="content">
         <div className="title">
           <h2 className="mt-[30px] text-[#53735B] text-[1.75rem] float-left">
@@ -122,7 +122,13 @@ const MaterialPage: React.FC = () => {
           ]}
         />
 
-        <div className="mt-8 material-cards grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-12">
+        <div className="
+          mt-8 material-cards grid gap-6
+          grid-cols-1
+          min-[770px]:grid-cols-2
+          min-[1050px]:grid-cols-3
+          min-[1360px]:grid-cols-4
+        ">
           {handleSearch().map((material, index) => (
             <MaterialCard
               key={material.id}

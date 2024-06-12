@@ -120,7 +120,12 @@ const HistoricoColeta: React.FC<HistoricoColetaProps> = ({ title }) => {
       </div>
 
       <div className="flex-grow mt-4 overflow-y-auto ">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="
+          grid gap-4 col-span-1
+          min-[960px]:grid-cols-2
+          min-[1300px]:grid-cols-3
+          min-[1600px]:grid-cols-4
+        ">
           {filteredColetas.map((coleta) => (
             <HistoricoCard key={coleta.id} coleta={coleta} />
           ))}

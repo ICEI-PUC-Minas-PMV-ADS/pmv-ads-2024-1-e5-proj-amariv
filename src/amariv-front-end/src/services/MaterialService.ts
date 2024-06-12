@@ -65,7 +65,7 @@ export const materialService = {
   },
 
   getAll: async () => {
-    let result = await useApi.get("/recuperaMateriais")
+    let result = await useApi.get("RecuperaMateriais")
     return result.data
   }
 
