@@ -15,7 +15,7 @@ const initialFuncionarioInfo: Funcionario = {
   telefone: "",
   cargo: "",
   senha: "",
-  suportaPeso: false,
+  suportaPeso: true,
 };
 
 const FuncionariosPage = () => {
@@ -41,9 +41,7 @@ const FuncionariosPage = () => {
     setShowFuncionarioModal(true);
   };
 
-  const handleAddFuncionario = (event: React.FormEvent) => {
-    event.preventDefault();
-
+  const handleAddFuncionario = () => {
     if (editingIndex !== null) {
       updateFuncionario(editingIndex, FuncionarioMapper.mapFuncionarioToApi(funcionarioInfo)).then(() => {
         fetchFuncionarios().then(data => {
