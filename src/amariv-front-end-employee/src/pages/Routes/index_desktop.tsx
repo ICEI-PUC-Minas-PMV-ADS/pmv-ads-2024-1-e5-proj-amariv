@@ -10,6 +10,7 @@ import { Gathering } from "src/models/Gathering";
 import { GatheringItineraryService } from "src/services/GatheringItineraryService";
 import { RoutesContext } from "./context";
 import { useNotification } from "src/components/NotificationProvider";
+import { QueryUtils } from "src/utils/QueryUtils";
 
 /**
  * Routes page desktop
@@ -34,16 +35,16 @@ export function RoutesDesktopPage() {
 
   React.useEffect(() => {
     if (gatheringItinerary && routeItems === null) {
-      const filteredGatherings = gatheringItinerary.coletas.filter((i) =>
-        i.status === true && i.delete === false && i.isSuccess === false && i.cancelada === false);
-      const sortedAndFilteredGatherings = filteredGatherings.sort((a, b) => a.posicaoLista - b.posicaoLista);
-      if (sortedAndFilteredGatherings.length > 0) {
-        ctrl.setCurrentRoute(sortedAndFilteredGatherings[0]);
+      const pendentGatherings = QueryUtils.getPendentGatheringsFromItinerary(gatheringItinerary);
+      const sortedPendentGatherings = QueryUtils.sortGatheringByPosition(pendentGatherings);
+
+      if (sortedPendentGatherings.length > 0) {
+        ctrl.setCurrentRoute(sortedPendentGatherings[0]);
       } else {
         ctrl.setCurrentRoute(null);
       }
-      setRouteItems(sortedAndFilteredGatherings);
-      setLastRouteItems(sortedAndFilteredGatherings);
+      setRouteItems(sortedPendentGatherings);
+      setLastRouteItems(sortedPendentGatherings);
     }
   }, [gatheringItinerary, routeItems, ctrl]);
 
@@ -64,15 +65,15 @@ export function RoutesDesktopPage() {
           setIsSuccess(null);
           setGatheringId(null);
 
-          const filteredGatherings = updatedGatheringItinerary.coletas.filter((i) =>
-            i.status === true && i.delete === false && i.isSuccess === false && i.cancelada === false);
-          const sortedAndFilteredGatherings = filteredGatherings.sort((a, b) => a.posicaoLista - b.posicaoLista);
-          if (sortedAndFilteredGatherings.length > 0) {
-            ctrl.setCurrentRoute(sortedAndFilteredGatherings[0]);
+          const pendentGatherings = QueryUtils.getPendentGatheringsFromItinerary(gatheringItinerary);
+          const sortedPendentGatherings = QueryUtils.sortGatheringByPosition(pendentGatherings);
+
+          if (sortedPendentGatherings.length > 0) {
+            ctrl.setCurrentRoute(sortedPendentGatherings[0]);
           } else {
             ctrl.setCurrentRoute(null);
           }
-          setRouteItems(sortedAndFilteredGatherings);
+          setRouteItems(sortedPendentGatherings);
         }
       } catch (e: any) {
         console.log(e);

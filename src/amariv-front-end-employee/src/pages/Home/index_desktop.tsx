@@ -9,6 +9,7 @@ import { DefaultMap } from "src/components/DefaultMap";
 import { AppContext } from "src/AppContext";
 import { useNotification } from "src/components/NotificationProvider";
 import { Gathering } from "src/models/Gathering";
+import { QueryUtils } from "src/utils/QueryUtils";
 
 /**
  * Home page desktop
@@ -45,10 +46,8 @@ export function HomeDesktopPage() {
 
   React.useEffect(() => {
     if (gatheringItinerary && routeItems === null) {
-      const filteredGatherings = gatheringItinerary.coletas.filter((i) =>
-        i.status === true && i.delete === false && i.isSuccess === false && i.cancelada === false);
-      const sortedAndFilteredGatherings = filteredGatherings.sort((a, b) => a.posicaoLista - b.posicaoLista);
-      setRouteItems(sortedAndFilteredGatherings);
+      const pendentGatherings = QueryUtils.getPendentGatheringsFromItinerary(gatheringItinerary);
+      setRouteItems(QueryUtils.sortGatheringByPosition(pendentGatherings));
     }
   }, [gatheringItinerary, routeItems, ctrl]);
 

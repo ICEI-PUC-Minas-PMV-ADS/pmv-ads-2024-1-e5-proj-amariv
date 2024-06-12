@@ -1,11 +1,10 @@
 import { useState, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import { AppContext, useAppContext } from "../../AppContext";
+import { useAppContext } from "../../AppContext";
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
 import { Form } from "../../components/Form";
 import { AuthUtils } from "../../utils/AuthUtils";
-import { User } from "../../models/User";
 import AmarivLogo from "../../assets/images/amariv_logo.png";
 import BackgroundLogin from "../../assets/images/background-login.png";
 import React from "react";
@@ -27,7 +26,7 @@ export function LoginPage() {
     if (state.token) {
       navigate('/', { replace: true });
     }
-  }, [state]);
+  }, [state, navigate]);
 
   const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -52,14 +51,6 @@ export function LoginPage() {
         // Extrai os dados do usuário da resposta JSON
         const responseData = await response.json();
 
-        // Cria um objeto user do tipo User com as informações do usuário
-        const user: User = {
-          id: responseData.id,
-          nome: responseData.nome,
-          email: responseData.email,
-          telefone: responseData.telefone || undefined,
-        };
-
         // Chama a função login do AuthUtils passando o contexto da aplicação e o objeto user PODE GERAR UM ERRO!!!
         AuthUtils.login({ state, dispatch }, responseData[0].message);
 
@@ -83,13 +74,15 @@ export function LoginPage() {
       <div className="w-screen h-screen flex flex-row">
         <div className="w-[50rem] px-4 bg-[#53735B] flex justify-center items-center">
           <div className="w-[30rem] p-[5rem] flex flex-col items-center">
-            <img src={AmarivLogo} alt="Amariv logo" className="logo" />
-            <div className="message">ACESSO RESTRITO</div>
+            <img src={AmarivLogo} alt="Amariv logo" className="w-[13rem] h-[9rem]" />
+            <div className="text-[1.25rem] text-[#FBFFF3] pb-[1.25rem]">
+              ACESSO RESTRITO
+            </div>
 
-            <div className="flex flex-col items-center">
-              <div>Entrar</div>
+            <div className="flex flex-col items-center w-full">
+              <div className="text-[1.5rem] text-[#FFFFFF] w-full font-bold">Entrar</div>
 
-              <Form onSubmit={handleLogin}>
+              <Form className="w-full" onSubmit={handleLogin}>
                 <div className="w-full">
                   <Input
                     type="email"
@@ -113,7 +106,9 @@ export function LoginPage() {
                     onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
-                <Button type="submit" label="Login" className="button" />
+                <div className="w-full px-[5rem]">
+                  <Button type="submit" label="Login" className="button" />
+                </div>
               </Form>
             </div>
           </div>

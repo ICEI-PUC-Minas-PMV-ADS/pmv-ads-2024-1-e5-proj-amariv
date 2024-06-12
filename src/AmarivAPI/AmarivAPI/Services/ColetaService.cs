@@ -185,7 +185,7 @@ namespace AmarivAPI.Services
             return ToJson(_context.Coletas
                 .Include(x => x.RoteiroDeColetas)
                 .Include(x => x.RoteiroDeColetas.Funcionario)
-                .Where(x => x.Delete == false)
+                .Where(x => x.Delete == false)                
                 .ToList()
             );
         }
@@ -344,20 +344,26 @@ namespace AmarivAPI.Services
                 _context.Coletas
                     .Include(x => x.Usuario)
                     .Include(x => x.Endereco)
-                    .Where(x => x.RoteiroColetaId == roteiroDeColetaId)
+                    .Where(x => x.RoteiroColetaId == roteiroDeColetaId &&
+                        x.Delete == false &&
+                        x.Status == true
+                    )
                     .ToList()
             );
         }
 
-        public List<object>  GetColetasByDateWithoutRoteiroDeColeta(DateTime date)
+        public List<object>  GetColetasByDateWithoutRoteiroDeColeta(DateTime startDate, DateTime endDate)
         {
             return ToJson(_context.Coletas
                 .Include(x => x.Usuario)
                 .Include(x => x.Endereco)
-                .Where(x =>
-                    x.DataDeColeta.Date == date.Date &&
+                .Where(x =>                    
+                    x.DataDeColeta >= startDate && x.DataDeColeta <= endDate &&
                     x.RoteiroColetaId == null &&
-                    x.Status == true
+                    x.Delete == false &&
+                    x.Status == true &&
+                    x.IsSuccess == false &&
+                    x.Cancelada == false
                 ).ToList()
             );
         }

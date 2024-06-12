@@ -6,5 +6,7 @@ namespace AmarivAPI.Data.Dtos.RoteiroDeColetasDtos
     {
         public int RoteiroDeColetaId { get; set; }
         public int ColetaId { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
     }
 }

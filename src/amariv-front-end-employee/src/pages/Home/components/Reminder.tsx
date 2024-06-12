@@ -1,5 +1,6 @@
 import React from "react";
 import { GatheringItinerary } from "src/models/GatheringItinerary";
+import { QueryUtils } from "src/utils/QueryUtils";
 
 /**
  * ReminderProps
@@ -16,16 +17,19 @@ export type ReminderProps = {
  */
 
 export const Reminder = ({ duration, gatheringItinerary }: ReminderProps) => {
-  const gatheringCount = React.useRef(gatheringItinerary?.coletas.reduce((prevValue, item) => {
-    return prevValue + (item.status === false ? 1 : 0);
-  }, 0));
 
   /**
    * Aux functions.
    */
-  const getGatheringDesc = React.useCallback((gatheringCount: number): string => {
-    return gatheringCount + " " + (gatheringCount > 1 ? "coletas" : "coleta");
-  }, []);
+  const getGatheringDesc = React.useCallback((): string => {
+    if (gatheringItinerary) {
+      const gatheringCount = QueryUtils.getPendentGatheringsFromItinerary(gatheringItinerary).length;
+      if (gatheringCount) {
+        return gatheringCount + " " + (gatheringCount > 1 ? "coletas" : "coleta");
+      }
+    }
+    return "0";
+  }, [gatheringItinerary]);
 
   /**
    * Layout
@@ -42,7 +46,7 @@ export const Reminder = ({ duration, gatheringItinerary }: ReminderProps) => {
             </span>
           </div>
           <p className="my-2 text-[.85rem]">
-            Existem {getGatheringDesc(gatheringCount?.current ?? 0)} disponíveis para serem realizadas.
+            Existem {getGatheringDesc()} disponíveis para serem realizadas.
           </p>
           <p className="text-[.85rem]">
             <strong>Tempo estimado: {Math.ceil(duration * 1.6)}min</strong>

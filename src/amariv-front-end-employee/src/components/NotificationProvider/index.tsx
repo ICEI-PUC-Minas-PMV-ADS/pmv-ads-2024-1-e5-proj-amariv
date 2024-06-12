@@ -39,8 +39,8 @@ export const NotificationContainer = (props: NotificationContainerProps) => {
           <div
             className={`
               notification-container ${props.anim} relative w-[20rem]
-              h-[4rem] flex justify-center items-center bg-[#CADDA8]
-              flex flex-col rounded-xl shadow-xl p-2`}>
+              h-[4rem] flex flex-col justify-center items-center bg-[#CADDA8]
+              rounded-xl shadow-xl p-2`}>
 
             <p className='w-full text-xs text-center'><strong>{props.message?.title ?? ""}</strong></p>
             <p className='w-full text-xs text-center flex-1'>

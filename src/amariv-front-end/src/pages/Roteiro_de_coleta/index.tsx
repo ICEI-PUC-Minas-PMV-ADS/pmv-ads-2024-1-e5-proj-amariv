@@ -9,7 +9,7 @@ import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
 import { FuncionarioDto } from "../../models/FuncionarioDtos/FuncionarioDto";
 import { InputDate } from "../../components/InputDate";
-import { useSearchParams } from "react-router-dom";
+import { createSearchParams, useNavigate, useSearchParams } from "react-router-dom";
 import { RoteiroDeColetaDto } from "../../models/RoteiroDeColetaDtos/RoteiroDeColetaDto";
 import { NextRoutesViewer } from "./components/NextRoutesViewer";
 import { ReadColetaDto } from "../../models/ColetaDtos/ReadColetaDto";
@@ -30,6 +30,8 @@ const RoteiroDeColetaPageImpl = () => {
   const token = window.localStorage.getItem(TOKEN_KEY) ?? "";
   const state = RoteiroDeColetaContext.usePageState();
   const ctrl = RoteiroDeColetaContext.usePageController();
+
+  const navigate = useNavigate();
 
   const [isPending, setIsPending] = React.useState<boolean>(false);
 
@@ -67,7 +69,7 @@ const RoteiroDeColetaPageImpl = () => {
 
   React.useEffect(() => {
     ctrl?.initialize(token);
-  }, [ctrl]);
+  }, [ctrl, token]);
 
   React.useEffect(() => {
     try {
@@ -77,7 +79,7 @@ const RoteiroDeColetaPageImpl = () => {
     } catch (e: any) {
       alert(e.message);
     }
-  }, [ctrl, state.startPosition, roteiroDeColetaId]);
+  }, [ctrl, token, roteiroDeColetaId, state.startPosition]);
 
   React.useEffect(() => {
     try {
@@ -337,22 +339,29 @@ const RoteiroDeColetaPageImpl = () => {
   const handleRemoveRouteToRoteiroDeColeta = React.useCallback(async (route: ReadColetaDto | null) => {
     try {
       if (!isPending && route && route.id && roteiroDeColetaId && state.startPosition) {
-        setIsPending(true);
+        if (route.isSuccess === false && route.cancelada === false) {
+          setIsPending(true);
 
-        const response = await ctrl?.removeRouteToRoteiroDeColeta(
-          token,
-          state.startPosition,
-          roteiroDeColetaId,
-          route.id,
-        );
+          const response = await ctrl?.removeRouteToRoteiroDeColeta(
+            token,
+            state.startPosition,
+            roteiroDeColetaId,
+            route.id,
+          );
 
-        window.localStorage.removeItem('optimizeFlag');
+          window.localStorage.removeItem('optimizeFlag');
 
-        setCanOptimizeRoute(window.localStorage.getItem('optimizeFlag') === null);
-        setLastRouteItems(response);
-        setSelectedRoteiroRoute(null);
-        setModalRoteiroRouteOpen(false);
-        setIsPending(false);
+          setCanOptimizeRoute(window.localStorage.getItem('optimizeFlag') === null);
+          setLastRouteItems(response);
+          setSelectedRoteiroRoute(null);
+          setModalRoteiroRouteOpen(false);
+          setIsPending(false);
+        } else {
+          if (window.confirm('Não é possivel remover do roteiro uma coleta ja realizada!')) {
+            setSelectedRoteiroRoute(null);
+            setModalRoteiroRouteOpen(false);
+          }
+        }
       }
     } catch (e: any) {
       setIsPending(false);
@@ -412,7 +421,20 @@ const RoteiroDeColetaPageImpl = () => {
       setIsPending(false);
       alert(e.message);
     }
-  }, [ctrl, isPending, roteiroDeColetaId, state.startPosition]);
+  }, [ctrl, token, isPending, roteiroDeColetaId, state.startPosition]);
+
+  const handleEditarColeta = React.useCallback((selectedAvailableRoute: ReadColetaDto | null): void => {
+    console.log(roteiroDeColetaId);
+    if (roteiroDeColetaId && selectedAvailableRoute?.id) {
+      navigate({
+        pathname: '/coleta',
+        search: createSearchParams({
+          id: selectedAvailableRoute.id.toString(),
+          roteiroDeColetaId: roteiroDeColetaId.toString(),
+        }).toString(),
+      });
+    }
+  }, [roteiroDeColetaId, navigate]);
 
   /**
    * Aux function
@@ -430,7 +452,6 @@ const RoteiroDeColetaPageImpl = () => {
     return `${ro.funcionario?.nome} (${dtArr[2]}/${dtArr[1]}/${dtArr[0]})`;
   }, [state.availableRoteiroDeColetas, roteiroDeColetaId]);
 
-  console.log(funcionarioId);
 
   /**
    * Layout
@@ -438,7 +459,6 @@ const RoteiroDeColetaPageImpl = () => {
 
   return (
     <>
-
       {/*
         Rotas do roteiro
       */}
@@ -477,7 +497,7 @@ const RoteiroDeColetaPageImpl = () => {
             label="Reagendar coleta do roteiro"
             className="w-[20rem]"
             fontSize="medium"
-            onClick={() => { }} />
+            onClick={() => handleEditarColeta(selectedAvailableRoute)} />
           <div className="h-[.4rem]"></div>
           <Button
             label="Cancelar coleta do roteiro"

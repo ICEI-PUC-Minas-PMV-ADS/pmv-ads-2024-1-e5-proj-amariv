@@ -30,10 +30,10 @@ namespace AmarivAPI.Services
                 .ToList();
         }
 
-        public bool GetRoteiroDeColetaByDate(DateTime dataRoteiro)
+        public bool GetRoteiroDeColetaByDate(DateTime startDate, DateTime endDate)
         {
             return _context.RoteiroDeColetas
-                .Where(x => x.DataRoteiro.Date == dataRoteiro.Date)
+                .Where(x => x.DataRoteiro >= startDate && x.DataRoteiro <= endDate)
                 .Any();
         }
 
@@ -53,7 +53,7 @@ namespace AmarivAPI.Services
                 }
 
                 ro.NumeroMaxColetas = dto.MaxNumColeta;
-                ro.DataRoteiro = dto.DataRoteiro;
+                ro.DataRoteiro = dto.StartDate.Date;
                 ro.FuncionarioId = dto.FuncionarioId;
 
                 _context.RoteiroDeColetas.Entry(ro).CurrentValues.SetValues(ro);
@@ -81,7 +81,7 @@ namespace AmarivAPI.Services
                 ro.Status = true;
                 ro.NumeroDeColetas = 0;
                 ro.NumeroMaxColetas = dto.MaxNumColeta;
-                ro.DataRoteiro = dto.DataRoteiro;
+                ro.DataRoteiro = dto.StartDate.Date;
 
                 _context.RoteiroDeColetas.Add(ro);
                 _context.SaveChanges();
@@ -373,6 +373,7 @@ namespace AmarivAPI.Services
                         Status = coleta.Status,
                         Delete = coleta.Delete,
                         Cancelada = coleta.Cancelada,
+                        isSuccess = coleta.IsSuccess,
                         LocalidadeExata = coleta.LocalidadeExata,
                         Lat = coleta.Lat,
                         Lon = coleta.Lon,
@@ -394,6 +395,7 @@ namespace AmarivAPI.Services
                         Status = coleta.Status,
                         Delete = coleta.Delete,
                         Cancelada = coleta.Cancelada,
+                        isSuccess = coleta.IsSuccess,
                         LocalidadeExata = coleta.LocalidadeExata,
                         Lat = coleta.Lat,
                         Lon = coleta.Lon,
