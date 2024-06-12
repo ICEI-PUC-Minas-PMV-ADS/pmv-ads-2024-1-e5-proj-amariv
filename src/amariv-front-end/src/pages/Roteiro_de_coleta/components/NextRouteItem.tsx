@@ -46,8 +46,6 @@ export function NextRouteItem({ route, onClickItem }: NextRouteItemProps) {
     return "";
   }, []);
 
-  console.log(route);
-
   /**
    * Layout
    */

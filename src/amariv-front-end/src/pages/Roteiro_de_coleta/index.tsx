@@ -72,12 +72,13 @@ const RoteiroDeColetaPageImpl = () => {
   }, [ctrl, token]);
 
   React.useEffect(() => {
-    try {
-      if (ctrl && state.startPosition && roteiroDeColetaId) {
-        ctrl.getColetasByDate(token, state.startPosition, roteiroDeColetaId);
-      }
-    } catch (e: any) {
-      alert(e.message);
+    if (ctrl && state.startPosition && roteiroDeColetaId) {
+      ctrl.getColetasByDate(token, state.startPosition, roteiroDeColetaId)
+        .catch(({ message }) => {
+          setRoteiroDeColetaId(null);
+          setSearchParams({});
+          alert(message);
+        });
     }
   }, [ctrl, token, roteiroDeColetaId, state.startPosition]);
 
@@ -228,6 +229,8 @@ const RoteiroDeColetaPageImpl = () => {
         setSelectedAvailableRoute(null);
         setModalAvailableRouteOpen(false);
         setIsPending(false);
+
+        alert('Roteiro de coleta criado com sucesso!');
       }
     } catch (e: any) {
       setIsPending(false);

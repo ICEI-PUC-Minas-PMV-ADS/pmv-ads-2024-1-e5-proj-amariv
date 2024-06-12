@@ -92,6 +92,7 @@ namespace AmarivAPI.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Tipo = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    Delete = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     Data_criacao = table.Column<DateTime>(type: "datetime(6)", nullable: false)
                 },
                 constraints: table =>
@@ -369,17 +370,17 @@ namespace AmarivAPI.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Cargo", "Celular", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "Nome", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "Sexo", "SuportaPeso", "Telefone", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "adm", 0, null, null, "4c38254a-934d-4393-b947-2c3a8601ee16", "amarivadm@gmail.com", true, false, null, "Administrador", "AMARIVADM@GMAIL.COM", "AMARIVADM@GMAIL.COM", "AQAAAAIAAYagAAAAEId71DxTujhsKabXXzkCyiKFYRDOkpEZ7liV8zs418LhwH4raiU40XyCLwHOmQzx8A==", null, false, "7299e1b8-6d1d-4861-b3ae-cc2c80ce364b", null, null, null, false, "amarivadm@gmail.com" });
+                values: new object[] { "adm", 0, null, null, "971ed034-4075-4020-ac8d-a7b1c866e809", "amarivadm@gmail.com", true, false, null, "Administrador", "AMARIVADM@GMAIL.COM", "AMARIVADM@GMAIL.COM", "AQAAAAIAAYagAAAAEFW01z2XcDR5KjRn1Xngj5Z//hdGpE+S3t+dTZM14Qm9iY4yddW9iIF7VwyNsL9m/A==", null, false, "c3916345-8f91-4c82-8897-600523858246", null, null, null, false, "amarivadm@gmail.com" });
 
             migrationBuilder.InsertData(
                 table: "Materiais",
-                columns: new[] { "Id", "Data_criacao", "Descricao", "Tipo" },
+                columns: new[] { "Id", "Data_criacao", "Delete", "Descricao", "Tipo" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Metal", "Metal" },
-                    { 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Plástico", "Plástico" },
-                    { 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Papel", "Papel" },
-                    { 4, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Vidro", "Vidro" }
+                    { 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, "Metal", "Metal" },
+                    { 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, "Plástico", "Plástico" },
+                    { 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, "Papel", "Papel" },
+                    { 4, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, "Vidro", "Vidro" }
                 });
 
             migrationBuilder.InsertData(
