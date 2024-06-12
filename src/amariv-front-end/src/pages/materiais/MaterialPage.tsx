@@ -122,21 +122,23 @@ const MaterialPage: React.FC = () => {
           ]}
         />
 
-        <div className="
-          mt-8 material-cards grid gap-6
-          grid-cols-1
-          min-[770px]:grid-cols-2
-          min-[1050px]:grid-cols-3
-          min-[1360px]:grid-cols-4
-        ">
-          {handleSearch().map((material, index) => (
-            <MaterialCard
-              key={material.id}
-              material={material}
-              onEdit={() => handleEditMaterial(index)}
-              onDelete={() => handleDeleteMaterial(material.id)}
-            />
-          ))}
+        <div className='flex flex-col items-center'>
+          <div className="
+            mt-8 material-cards grid gap-6
+            grid-cols-1
+            min-[770px]:grid-cols-2
+            min-[1050px]:grid-cols-3
+            min-[1360px]:grid-cols-4
+          ">
+            {handleSearch().map((material, index) => (
+              <MaterialCard
+                key={material.id}
+                material={material}
+                onEdit={() => handleEditMaterial(index)}
+                onDelete={() => handleDeleteMaterial(material.id)}
+              />
+            ))}
+          </div>
         </div>
 
         {showModal && (

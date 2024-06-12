@@ -119,7 +119,7 @@ const HistoricoColeta: React.FC<HistoricoColetaProps> = ({ title }) => {
         <FilterHistorico onFilterChange={handleFilterChange} />
       </div>
 
-      <div className="flex-grow mt-4 overflow-y-auto ">
+      <div className="flex-grow mt-4 overflow-y-auto flex flex-col items-center">
         <div className="
           grid gap-4 col-span-1
           min-[960px]:grid-cols-2

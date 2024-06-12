@@ -1,12 +1,20 @@
 import React from 'react';
 import amarivLogo from '../assets/images/amarivlogo.png';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 /**
  * SideBar
  */
 
 const Sidebar: React.FC = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = React.useCallback(() => {
+    if (window.confirm('Você deseja realmente fazer logout?')) {
+      navigate('/logout');
+    }
+  }, [navigate]);
+
   return (
     <div
       className={`w-[20rem] min-h-full bg-[#53735B] text-white p-8 pr-28 flex flex-col`}>
@@ -56,9 +64,9 @@ const Sidebar: React.FC = () => {
             </Link>
           </li>
           <li>
-            <Link to="/logout" className="hover:bg-gray-700 rounded p-2 block">
+            <a href='#' className='hover:bg-gray-700 rounded p-2 block' onClick={handleLogout}>
               Logout
-            </Link>
+            </a>
           </li>
         </ul>
       </nav>
