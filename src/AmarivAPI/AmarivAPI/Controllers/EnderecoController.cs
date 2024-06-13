@@ -26,7 +26,7 @@ namespace AmarivAPI.Controllers
 
         [HttpGet("/enderecosusuario")]
         [Authorize]
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin,cliente")]
         public IActionResult RecuperaEnderecosUsuario()
         {
             string userId = User.FindFirst("id").Value;
@@ -36,7 +36,7 @@ namespace AmarivAPI.Controllers
 
         [HttpGet]
         [Route("/RecuperaEndereco")]
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin,cliente")]
         public IActionResult RecuperaEndereco( int id)
         {         
             var result = _enderecoService.RecuperaEndereco(id);
@@ -49,7 +49,7 @@ namespace AmarivAPI.Controllers
        
         [HttpPost]
         [Route("/SalvarEndereco")]
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin,cliente")]
         public IActionResult SalvarEndereco([FromBody] CreateEnderecoDto enderecoDto)
         {
             var  result = _enderecoService.SalvarEndereco(enderecoDto);

@@ -21,7 +21,7 @@ namespace AmarivAPI.Controllers
 
         [Authorize]
         [HttpGet("/coletasAberto")]
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin,cliente")]
         public ActionResult ColetasAberto(int page = 1, int pageSize = 15) {
             string userId = User.FindFirst("id").Value;
             var coletas = _coletaService.ColetasAberto(userId, page, pageSize);
@@ -30,7 +30,7 @@ namespace AmarivAPI.Controllers
 
         [Authorize]
         [HttpGet("/coletasFinalizado")]
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin,cliente")]
         public ActionResult ColetasFinalizado(int page = 1, int pageSize = 15)
         {
             string userId = User.FindFirst("id").Value;
@@ -40,7 +40,7 @@ namespace AmarivAPI.Controllers
 
         [HttpGet]
         [Route("/RecuperaColeta")]
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin,cliente")]
         public IActionResult RecuperaColeta(int id)
         {
             var result = _coletaService.RecuperaColeta(id);
@@ -64,7 +64,7 @@ namespace AmarivAPI.Controllers
 
         [HttpPost]
         [Route("/SalvarColeta")]
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin,cliente")]
         public IActionResult SalvarColeta([FromBody] CreateColetaDto coletaDto)
         {
             var result = _coletaService.SalvarColeta(coletaDto);

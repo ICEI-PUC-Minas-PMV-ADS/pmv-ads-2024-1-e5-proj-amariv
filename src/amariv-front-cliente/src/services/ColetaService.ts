@@ -12,26 +12,20 @@ export const ColetaService = {
     return response;
   },
   coletasAberto: async (page: number) => {
-    const token = localStorage.getItem('authToken')
-    const response = await useApi.get(`/coletasaberto?page=${page}`, {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      },
-    })
+    const response = await useApi.get(`/coletasaberto?page=${page}`)
     return response;
   },
   coletasFinalizado: async (page: number) => {
-    const token = localStorage.getItem('authToken')
-    const response = await useApi.get(`/coletasfinalizado?page=${page}`, {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      },
-    })
+    const response = await useApi.get(`/coletasfinalizado?page=${page}`)
     return response;
   },
 
   cancelarColeta: async (idColeta: number) => {
-    const response = await useApi.post(`/cancelarcoletausuario?idColeta=${idColeta}`)
+    const response = await useApi.post(`/cancelarcoleta?idColeta=${idColeta}`, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    })
     return response;
   },
 

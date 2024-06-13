@@ -179,7 +179,7 @@ function Scheduling() {
     let google = await GoogleService.buscarLatitudeLongitude(endereco as Endereco)
     let copyForm = { ...form }
 
-    if (google != "erro" && google.geometry.location_type != "APPROXIMATE") {
+    if (google != "erro") {
       copyForm.lat = google.geometry.location.lat
       copyForm.lon = google.geometry.location.lng
       copyForm.LocalidadeExata = true

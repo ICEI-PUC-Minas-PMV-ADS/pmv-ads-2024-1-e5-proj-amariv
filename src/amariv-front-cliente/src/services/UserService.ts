@@ -25,22 +25,12 @@ export const UserService = {
   }, // NÃO USAR ESSA FUNÇÃO DIRETAMENTE, USE O AUTHCONTEXT
 
   getUser: async () => {
-    const token = localStorage.getItem('authToken')
-    const response = await useApi.get("/user", {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    })
+    const response = await useApi.get("/user")
     return response.data;
   },
 
   logout: async () => {
-    const token = localStorage.getItem('authToken')
-    const response = await useApi.post("/logout", {}, {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    })
+    const response = await useApi.post("/logout", {})
     return response;
   },
 
@@ -51,11 +41,9 @@ export const UserService = {
   },
 
   updateUsuario: async (form: UpdateUsuarioForm) => {
-    const token = localStorage.getItem('authToken')
     const json = JSON.stringify(form)
     const response = await useApi.post("/atualizarusuario", json, {
       headers: {
-        'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
       },
     });

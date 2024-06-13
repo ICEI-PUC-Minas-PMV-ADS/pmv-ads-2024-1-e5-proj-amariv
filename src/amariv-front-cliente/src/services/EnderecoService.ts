@@ -12,12 +12,7 @@ export const EnderecoService = {
     return response;
   },
   buscarEnderecos: async () => {
-    const token = localStorage.getItem('authToken')
-    const response = await useApi.get("/enderecosusuario", {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      },
-    })
+    const response = await useApi.get("/enderecosusuario")
     return response;
   }
 }
