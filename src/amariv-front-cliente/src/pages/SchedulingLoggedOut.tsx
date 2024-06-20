@@ -54,7 +54,7 @@ function SchedulingLoggedOut() {
     listaItensColeta: "",
     lat: 0,
     lon: 0,
-    status: true
+    status: false
   })
   const [loadingCep, setLoadingCep] = useState(false)
   const [errorCep, setErrorCep] = useState(false)

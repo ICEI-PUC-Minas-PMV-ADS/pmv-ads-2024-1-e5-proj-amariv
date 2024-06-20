@@ -57,7 +57,7 @@ function Scheduling() {
     listaItensColeta: "",
     lat: 0,
     lon: 0,
-    status: true
+    status: false
   })
 
 

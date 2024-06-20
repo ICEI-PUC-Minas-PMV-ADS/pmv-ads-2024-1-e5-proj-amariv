@@ -35,7 +35,7 @@ builder.Services.AddControllers()
     });
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("AmarivConnection");
+var connectionString = "server=localhost;database=amariv;user=root;password=@AmarivAmariv2024";
 
 builder.Services.AddDbContext<AmarivContext>(opts =>
     opts.UseLazyLoadingProxies().UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));

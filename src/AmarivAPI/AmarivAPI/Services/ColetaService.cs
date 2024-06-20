@@ -220,8 +220,8 @@ namespace AmarivAPI.Services
 
         public List<DateTime> VerificaHorariosDisponiveis(DateTime data)
         {
-            DateTime inicioDoDia = data.ToLocalTime().Date;
-            DateTime fimDoDia = inicioDoDia.AddDays(1).AddTicks(-1);
+            DateTime inicioDoDia = data.Date.AddHours(9);
+            DateTime fimDoDia = inicioDoDia.AddHours(7.5).AddTicks(1);
             List<Coleta> coletasNoDia = _context.Coletas
                 .Where(c => c.DataDeColeta >= inicioDoDia && c.DataDeColeta <= fimDoDia && c.Cancelada == false && c.IsSuccess == false)
                 .ToList();
@@ -234,7 +234,7 @@ namespace AmarivAPI.Services
 
             while (horarioAtual < fimDoDia)
             {
-                bool horarioOcupado = coletasNoDia.Any(c => c.DataDeColeta.ToLocalTime() == horarioAtual);
+                bool horarioOcupado = coletasNoDia.Any(c => c.DataDeColeta == horarioAtual);
 
                 if (!horarioOcupado)
                 {

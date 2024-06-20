@@ -24,8 +24,12 @@ export const UserService = {
     return response;
   }, // NÃO USAR ESSA FUNÇÃO DIRETAMENTE, USE O AUTHCONTEXT
 
-  getUser: async () => {
-    const response = await useApi.get("/user")
+  getUser: async (token?: string) => {
+    const response = await useApi.get("/user", {
+      headers: {
+        'Authorization': `Bearer ${token ? token : localStorage.getItem('authToken')}`
+      }
+    })
     return response.data;
   },
 

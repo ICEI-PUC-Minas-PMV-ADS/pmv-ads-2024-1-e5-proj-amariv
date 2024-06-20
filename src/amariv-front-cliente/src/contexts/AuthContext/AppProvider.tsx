@@ -107,8 +107,8 @@ export const AppProvider = ({ children }: { children: JSX.Element }) => {
     }
   }
 
-  const resetColetasAberto = async () => {
-    await ColetaService.coletasAberto(1).then(r => {
+  const resetColetasAberto = async (token?: string) => {
+    await ColetaService.coletasAberto(1, token).then(r => {
       let result: Pagination<Coleta> = r.data
       setColetasAberto(result.items)
       setTotalPagesColetasAberto(result.pageCount)
@@ -135,8 +135,8 @@ export const AppProvider = ({ children }: { children: JSX.Element }) => {
     })
   }
 
-  const resetColetasFinalizado = async () => {
-    await ColetaService.coletasFinalizado(1).then(r => {
+  const resetColetasFinalizado = async (token?: string) => {
+    await ColetaService.coletasFinalizado(1, token).then(r => {
       let result: Pagination<Coleta> = r.data
       setColetasFinalizado(result.items)
       setTotalPagesColetasFinalizado(result.pageCount)
@@ -147,13 +147,13 @@ export const AppProvider = ({ children }: { children: JSX.Element }) => {
   const login = async (form: LoginForm): Promise<boolean> => {
     const result = await UserService.login(form).then(async (e) => {
       localStorage.setItem('authToken', e.data[0].message)
-      const userData = await UserService.getUser()
+      const userData = await UserService.getUser(e.data[0].message)
       if (userData) {
-        await EnderecoService.buscarEnderecos().then(e => {
+        await EnderecoService.buscarEnderecos(e.data[0].message).then(e => {
           setEnderecos(e.data)
         })
-        await resetColetasAberto()
-        await resetColetasFinalizado()
+        await resetColetasAberto(e.data[0].message)
+        await resetColetasFinalizado(e.data[0].message)
       }
       setUser(userData)
       return true
@@ -177,13 +177,13 @@ export const AppProvider = ({ children }: { children: JSX.Element }) => {
       else {
         const resultLogin = await GoogleService.loginGoogle(x).then(async (e) => {
           localStorage.setItem('authToken', e.data[0].message)
-          const userData = await UserService.getUser()
+          const userData = await UserService.getUser(e.data[0].message)
           if (userData) {
-            await EnderecoService.buscarEnderecos().then(e => {
+            await EnderecoService.buscarEnderecos(e.data[0].message).then(e => {
               setEnderecos(e.data)
             })
-            await resetColetasAberto()
-            await resetColetasFinalizado()
+            await resetColetasAberto(e.data[0].message)
+            await resetColetasFinalizado(e.data[0].message)
           }
           setUser(userData)
           return true
@@ -208,20 +208,19 @@ export const AppProvider = ({ children }: { children: JSX.Element }) => {
   }
 
   const logout = async () => {
-    const data = await UserService.logout()
-    if (data.status == 200) {
-      setUser(null)
-      localStorage.removeItem('authToken')
-      setEnderecos([])
-      return true
-    }
-    return false
+    await UserService.logout()
+    setUser(null)
+    localStorage.removeItem('authToken')
+    setEnderecos([])
+    setColetasAberto([])
+    setColetasFinalizado([])
+    return true
   }
 
   const signup = async (form: RegisterForm) => {
     const result = await UserService.signup(form).then(async (e) => {
       localStorage.setItem('authToken', e.data[0].message)
-      const userData = await UserService.getUser()
+      const userData = await UserService.getUser(e.data[0].message)
       setUser(userData)
       return true
     }).catch(e => {

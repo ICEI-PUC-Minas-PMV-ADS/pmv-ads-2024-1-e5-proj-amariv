@@ -21,7 +21,7 @@ function Home() {
         <TopBar title="AMARIV" backButton={false} />
         <div>
         </div>
-        <div className="w-full flex flex-col gap-2 px-6 items-center md:items-start mt-8 mb-2">
+        <div className="w-full flex flex-col gap-2 px-6 items-center md:items-start mt-8 mb-20">
           <div className="w-full flex justify-between mb-6 items-center">
             <p className="text-2xl font-bold text-black">Lembrete</p>
             <div className="w-3/4 max-w-[235px] hidden md:block">
@@ -66,7 +66,7 @@ function Home() {
                   </div>
                   <div className="w-full flex justify-end">
                     <div className="w-1/2 mt-3">
-                      <PrimaryButton title="Confimar email" leftIcon="IconMail" onClick={() => { appContext.enviarConfirmacaoEmail() }} />
+                      <PrimaryButton title="Confimar" leftIcon="IconMail" onClick={() => { appContext.enviarConfirmacaoEmail() }} />
                     </div>
                   </div>
                 </div>
