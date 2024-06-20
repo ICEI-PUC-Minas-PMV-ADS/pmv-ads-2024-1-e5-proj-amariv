@@ -62,11 +62,11 @@ Segue abaixa a tabela com as tecnologia utilizadas.
 
 |Função						         | Ferramenta                                                           |
 |---------------------|----------------------------------------------------------------------|
-|IDE						            | Visual Studio Code(Frontend), Eclipse PHP(Backend)	                  |
+|IDE						            | Visual Studio Code(Frontend), Visual Studio 2022(Backend)	           |
 |Linguagem Frontend			| Typescript											                                                |
-|Linguagem Backend			 | PHP													                                                     |
+|Linguagem Backend			 | C#													                                                     |
 |Framework Frontend			| React													                                                   |
-|Framework Backend			 | Laravel												                                                  |
+|Framework Backend			 | ASP.NET												                                                  |
 |Banco de dados				   | MySQL													                                                   |
 
 Para o desenvolvimento do sistema usaremos a arquitetura MVC para a backend e para o frontend iremos usar uma arquitetura baseada na arquitetura flux.
