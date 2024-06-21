@@ -4,10 +4,12 @@
 /src/AmarivAPI/AmarivAPI/obj/
 
 # Front end admin
+/src/amariv-front-end/build/
 /src/amariv-front-end/node_modules/
 /src/amariv-front-end/.env
 
 # Front end employee
+/src/amariv-front-end-employee/build/
 /src/amariv-front-end-employee/node_modules/
 /src/amariv-front-end-employee/.env
 
