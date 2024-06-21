@@ -220,7 +220,7 @@ namespace AmarivAPI.Services
 
         public List<DateTime> VerificaHorariosDisponiveis(DateTime data)
         {
-            DateTime inicioDoDia = data.Date.AddHours(9);
+            DateTime inicioDoDia = data.Date.AddHours(12);
             DateTime fimDoDia = inicioDoDia.AddHours(7.5).AddTicks(1);
             List<Coleta> coletasNoDia = _context.Coletas
                 .Where(c => c.DataDeColeta >= inicioDoDia && c.DataDeColeta <= fimDoDia && c.Cancelada == false && c.IsSuccess == false)
@@ -244,7 +244,7 @@ namespace AmarivAPI.Services
                 horarioAtual = horarioAtual.Add(intervaloEntreColetas);
             }
 
-            return horariosDisponiveis.Order().Select(x=>x.ToUniversalTime()).ToList();
+            return horariosDisponiveis.Order().ToList();
         }
 
         public PaginationDto<ReadColetaDto> ColetasAberto(string userId, int page = 1, int pageSize = 25)

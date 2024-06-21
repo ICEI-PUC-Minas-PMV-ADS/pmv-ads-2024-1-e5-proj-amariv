@@ -4,7 +4,7 @@ import axios from 'axios'
 
 export const useApi = axios.create(
   {
-    baseURL: "http://localhost:5000",
+    baseURL: "https://api.amariv.com",
     headers: {
       'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
       "Content-type": "application/json; chatset=utf-8",
