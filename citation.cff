@@ -1,0 +1,25 @@
+message: Please cite this software using these metadata.
+title: Projeto AMARIV
+authors:
+  - family-names: Favilla Lobo
+    given-names: Carlos Eduardo
+  - family-names: Silveira e Silva Ildefonso
+    given-names: Gabriel Vinícius
+  - family-names: Gomes Pinto
+    given-names: Henrique Alexandre
+  - family-names: Pinheiro Torres
+    given-names: João Lucas
+  - family-names: Gomes Pinto
+    given-names: Vitor Alexandre
+  - name-suffix: Professor
+    affiliation: PUC Minas
+    family-names: Oliveira Caetano
+    given-names: João Carlos
+keywords:
+  - Reciclagem
+  - Lixo
+  - Gestão
+
+repository-code: https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e5-proj-amariv
+version: 1.0.0
+date-released: 2023-10-31
