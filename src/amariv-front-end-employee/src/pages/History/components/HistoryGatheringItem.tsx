@@ -1,3 +1,4 @@
+import moment from "moment";
 import React from "react";
 import { Gathering } from "src/models/Gathering";
 
@@ -16,6 +17,13 @@ export type HistoryGatheringItemProps = {
 export function HistoryGatheringItem({ gathering }: HistoryGatheringItemProps) {
 
   /**
+   * Aux function
+   */
+  const formatDate = (date: string): string => {
+    return moment.utc(date).local().format("HH:mm - DD/MM/YYYY");
+  };
+
+  /**
    * Layout
    */
 
@@ -31,7 +39,7 @@ export function HistoryGatheringItem({ gathering }: HistoryGatheringItemProps) {
       <p>
         <strong>Materiais:</strong> {gathering.listaItensColeta}
       </p>
-      <p><strong>Concluída em: {gathering.dataDeColeta}</strong></p>
+      <p><strong>Concluída em: {formatDate(gathering.dataDeColeta)}</strong></p>
     </div>
   );
 }

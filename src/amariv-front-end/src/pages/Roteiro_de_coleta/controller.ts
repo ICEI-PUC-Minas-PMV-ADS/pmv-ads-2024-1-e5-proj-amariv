@@ -223,11 +223,18 @@ export class RoteiroDeColetaController extends PageBaseController<RoteiroDeColet
       }
 
       if (dadosDasRotas) {
-        gMapData.polyline.push(new google.maps.Polyline({
-          map,
-          path: google.maps.geometry.encoding.decodePath(dadosDasRotas.routes[0].polyline.encodedPolyline),
-          strokeColor: 'green',
-        }));
+        if (coletasRoteiro && coletasRoteiro.length > 0) {
+          gMapData.polyline.push(new google.maps.Polyline({
+            map,
+            path: google.maps.geometry.encoding.decodePath(dadosDasRotas.routes[0].polyline.encodedPolyline),
+            strokeColor: 'green',
+          }));
+        } else {
+          new google.maps.Polyline({
+            map,
+            strokeColor: 'green',
+          });
+        }
       }
     }
   }

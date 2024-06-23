@@ -1,7 +1,6 @@
 import { UserService } from "src/services/UserService";
 import { PageBaseController } from "../../framework/controller";
 import { GatheringItinerary } from "src/models/GatheringItinerary";
-import { GoogRoutesService } from "src/services/GoogRoutesService";
 import { GatheringItineraryService } from "src/services/GatheringItineraryService";
 import { loader } from "src/AppMap";
 
@@ -68,13 +67,13 @@ export class HomeController extends PageBaseController<HomeState, HomeAction> {
     map: google.maps.Map,
     startPosition: { lat: number; lon: number; },
   ) {
-    const { PinElement, AdvancedMarkerElement } = await loader.importLibrary("marker");
+    /*const { PinElement, AdvancedMarkerElement } = await loader.importLibrary("marker");
     const pin = new PinElement({ background: 'blue', glyphColor: 'white' });
     new AdvancedMarkerElement({
       map,
       content: pin.element,
       position: { lat: startPosition.lat, lng: startPosition.lon },
-    });
+    });*/
   }
 
   private async generateCurrentRoute(
@@ -93,20 +92,19 @@ export class HomeController extends PageBaseController<HomeState, HomeAction> {
       position: { lat: targetPosition.lat, lng: targetPosition.lon },
     });
 
-    const r = await GoogRoutesService.computeRoutes({
+    /*const r = await GoogRoutesService.computeRoutes({
       origin: startPosition,
       destination: targetPosition,
     });
-
-    const d = r.routes[0].duration as string;
-    const normalizedDuration = d.substring(0, d.length - 1);
-
     new google.maps.Polyline({
       map,
       path: google.maps.geometry.encoding.decodePath(r.routes[0].polyline.encodedPolyline),
       strokeColor: 'green',
     });
-    return parseInt(normalizedDuration) / 60;
+    const d = r.routes[0].duration as string;
+    const normalizedDuration = d.substring(0, d.length - 1);
+    */
+    return 1;
   }
 
   doReducer(prevState: HomeState, action: HomeAction): HomeState {

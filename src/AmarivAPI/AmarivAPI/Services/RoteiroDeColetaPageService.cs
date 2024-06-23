@@ -18,6 +18,12 @@ namespace AmarivAPI.Services
         {
             return _context.Coletas.Where(x => x.Id == Id).FirstOrDefault();
         }
+        public bool HasRoteiroDeColetaByDate(DateTime startDate, DateTime endDate)
+        {
+            return _context.RoteiroDeColetas
+                .Where(x => x.DataRoteiro >= startDate && x.DataRoteiro <= endDate)
+                .Any();
+        }
 
         public bool HasRoteiroDeColetaByDate(int roteiroDeColetaId, DateTime startDate, DateTime endDate)
         {
