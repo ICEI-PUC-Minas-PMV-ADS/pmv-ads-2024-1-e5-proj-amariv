@@ -53,7 +53,7 @@ namespace AmarivAPI.Services
                 }
 
                 ro.NumeroMaxColetas = dto.MaxNumColeta;
-                ro.DataRoteiro = dto.StartDate.Date;
+                ro.DataRoteiro = dto.StartDate;
                 ro.FuncionarioId = dto.FuncionarioId;
 
                 _context.RoteiroDeColetas.Entry(ro).CurrentValues.SetValues(ro);
@@ -81,7 +81,7 @@ namespace AmarivAPI.Services
                 ro.Status = true;
                 ro.NumeroDeColetas = 0;
                 ro.NumeroMaxColetas = dto.MaxNumColeta;
-                ro.DataRoteiro = dto.StartDate.Date;
+                ro.DataRoteiro = dto.StartDate;
 
                 _context.RoteiroDeColetas.Add(ro);
                 _context.SaveChanges();
@@ -95,7 +95,6 @@ namespace AmarivAPI.Services
                 throw new Exception("Falha ao criar roteiro de coleta!");
             }
         }
-
 
         public Result SalvarRoteiroDeColeta(CreateRoteiroDeColetasDto RoteiroDto)
         {

@@ -132,7 +132,7 @@ namespace AmarivAPI.Controllers
                         message = "Não é possivel agendar uma coleta para uma data que passou!"
                     });
                 }
-                if (_roteiroService.GetRoteiroDeColetaByDate(dto.StartDate, dto.EndDate))
+                if (_roteiroPageService.HasRoteiroDeColetaByDate(dto.StartDate, dto.EndDate))
                 {
                     return BadRequest(new
                     {

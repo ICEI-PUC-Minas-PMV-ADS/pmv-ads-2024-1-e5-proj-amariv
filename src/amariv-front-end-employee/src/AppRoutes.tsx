@@ -21,7 +21,7 @@ export const AuthAppRoutes = () => {
         <Route path="/routes" element={<RoutesPage />} />
         <Route path="/history" element={<HistoryPage />} />
         <Route path="/logout" element={<LogoutPage />} />
-        <Route path="/*" element={<div>Erro 404</div>} />
+        <Route path="/*" element={<HomePage />} />
       </Routes>
   );
 };

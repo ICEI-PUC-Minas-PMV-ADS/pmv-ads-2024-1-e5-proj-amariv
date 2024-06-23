@@ -194,6 +194,8 @@ const RoteiroDeColetaPageImpl = () => {
         setSelectedAvailableRoute(null);
         setModalAvailableRouteOpen(false);
         setIsPending(false);
+
+        alert('Roteiro de coleta alterado com sucesso!');
       }
     } catch (e: any) {
       setIsPending(false);
