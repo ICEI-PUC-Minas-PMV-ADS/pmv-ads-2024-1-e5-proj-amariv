@@ -18,7 +18,6 @@ export class GatheringService {
         'Authorization': 'Bearer ' + token,
         'Content-Type': 'application/json; chatset=utf-8',
         'Accept': 'application/json',
-        'ngrok-skip-browser-warning': '69420',
       },
     });
 
@@ -33,7 +32,6 @@ export class GatheringService {
         'Authorization': 'Bearer ' + token,
         'Content-Type': 'application/json; chatset=utf-8',
         'Accept': 'application/json',
-        'ngrok-skip-browser-warning': '69420',
       },
       body: JSON.stringify({
         startDate,

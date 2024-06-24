@@ -8,8 +8,7 @@ import { AuthUtils } from "../../utils/AuthUtils";
 import AmarivLogo from "../../assets/images/amariv_logo.png";
 import BackgroundLogin from "../../assets/images/background-login.png";
 import React from "react";
-
-const API_BASE_URL = 'http://localhost:5100';
+import { useApi } from "../../hooks/useApi";
 
 export function LoginPage() {
   const [email, setEmail] = useState("");
@@ -34,35 +33,20 @@ export function LoginPage() {
     try {
       console.log('Enviando solicitação de login...');
 
-      const response = await fetch(`${API_BASE_URL}/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json"
-        },
-        body: JSON.stringify({ Email: email, Password: password }),
-      });
+      const body = { Email: email, Password: password };
+      const response = await useApi.post(`login`, body);
 
       console.log('Resposta recebida:', response);
 
-      if (response.ok) {
-        console.log('Login bem-sucedido!');
+      console.log('Login bem-sucedido!');
 
-        // Extrai os dados do usuário da resposta JSON
-        const responseData = await response.json();
+      // Extrai os dados do usuário da resposta JSON
+      const responseData = await response.data;
 
-        // Chama a função login do AuthUtils passando o contexto da aplicação e o objeto user PODE GERAR UM ERRO!!!
-        AuthUtils.login({ state, dispatch }, responseData[0].message);
+      // Chama a função login do AuthUtils passando o contexto da aplicação e o objeto user PODE GERAR UM ERRO!!!
+      AuthUtils.login({ state, dispatch }, responseData[0].message);
 
-        navigate("/home");
-      } else {
-        console.log('Login falhou.');
-
-        // Extrai a mensagem de erro da resposta JSON
-        const errorData = await response.json();
-
-        alert(errorData.message || "Usuário ou senha inválidos");
-      }
+      navigate("/home");
     } catch (error) {
       console.error("Erro ao fazer login:", error);
       alert("Ocorreu um erro ao fazer login. Tente novamente mais tarde.");

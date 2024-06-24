@@ -83,6 +83,7 @@ export function RoutesDesktopPage() {
       }
     })();
   }, [ctrl, token, gatheringItinerary, gatheringId, isSuccess, dispatch, notification]);
+
   /**
    * Events
    */

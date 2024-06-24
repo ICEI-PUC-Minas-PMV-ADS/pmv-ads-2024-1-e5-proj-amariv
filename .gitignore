@@ -3,11 +3,18 @@
 /src/AmarivAPI/AmarivAPI/bin/
 /src/AmarivAPI/AmarivAPI/obj/
 
+# Front end cliente
+/src/amariv-front-cliente/build/
+/src/amariv-front-cliente/node_modules/
+/src/amariv-front-cliente/.env
+
 # Front end admin
+/src/amariv-front-end/build/
 /src/amariv-front-end/node_modules/
 /src/amariv-front-end/.env
 
 # Front end employee
+/src/amariv-front-end-employee/build/
 /src/amariv-front-end-employee/node_modules/
 /src/amariv-front-end-employee/.env
 

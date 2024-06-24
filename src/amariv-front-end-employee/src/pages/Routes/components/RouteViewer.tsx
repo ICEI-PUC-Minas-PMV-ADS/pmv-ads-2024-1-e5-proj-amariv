@@ -77,6 +77,13 @@ export function RouteViewer({ canEdit, onFinishGathering }: RouteViewerProps) {
 
   return (
     <>
+      <div className="flex justify-center">
+        {currentGathering?.localidadeExata === false &&
+          <strong className="text-red-500 text-center">
+            Não foi possivel determinar a localidade exata deste endereço.<br />
+            Portanto, sua indicação no mapa pode não refletir o local correto.
+          </strong>}
+      </div>
       <div className="w-full bg-[#53735B] rounded">
         <div className="w-full p-3">
           <p className="text-md text-white font-bold border-b border-[#ffffff40] pb-4">

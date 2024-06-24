@@ -49,7 +49,7 @@ export const Reminder = ({ duration, gatheringItinerary }: ReminderProps) => {
             Existem {getGatheringDesc()} disponíveis para serem realizadas.
           </p>
           <p className="text-[.85rem]">
-            <strong>Tempo estimado: {Math.ceil(duration * 1.6)}min</strong>
+            {/* <strong>Tempo estimado: {Math.ceil(duration * 1.6)}min</strong> */}
           </p>
         </div>}
     </>
