@@ -42,6 +42,7 @@ function Home() {
                       <p>Data da coleta: {DateConvert.getLocalDate(appContext.coletasAberto[0].dataDeColeta)}</p>
                       <p>Horário da coleta: {DateConvert.getLocalHour(appContext.coletasAberto[0].dataDeColeta)}</p>
                       <p>Materiais: {coletaUtils.stringMateriais(appContext.coletasAberto[0].listaItensColeta, appContext.materiais)}</p>
+                      <p className="text-[12px] font-bold mt-2"><span className="text-red-500">* </span>Durante a coleta, o motorista esperará por até 5 minutos. Se não for atendido dentro desse período, a coleta será cancelada.</p>
                     </div>
                     <div className="w-full flex justify-end">
                       <div className="w-1/2 mt-3">
@@ -111,7 +112,7 @@ function Home() {
                       <p>Materiais: {coletaUtils.stringMateriais(coleta.listaItensColeta, appContext.materiais)}</p>
                       {
                         (coleta.status == false && coleta.isSuccess == false) &&
-                        <p className="text-[12px] font-extralight mt-2">*Essa coleta foi cancelada, para mais detalhes entre em contato com a AMARIV pelo telefone (27) 3317-3366</p>
+                        <p className="text-[12px] font-extralight mt-2">*Essa coleta foi cancelada, para mais detalhes entre em contato com a AMARIV pelo telefone (27) 99283-9550</p>
                       }
                     </div>
                   ))

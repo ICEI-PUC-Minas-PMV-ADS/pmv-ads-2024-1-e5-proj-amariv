@@ -195,7 +195,7 @@ function SchedulingLoggedOut() {
         setFormEndereco(copyEnderecoForm)
         await ColetaService.cadastrarColeta(copyForm).then(async (x) => {
           await appContext.resetUnavailableDates()
-          appContext.useAlert("Agendamento de coleta realizado com sucesso! Para mais detalhes sobre seu agendamento entre em contato com a AMARIV pelo telefone (27)3317-3366.", () => { navigate("/") })
+          appContext.useAlert("Agendamento de coleta realizado com sucesso! Para mais detalhes sobre seu agendamento entre em contato com a AMARIV pelo telefone (27)99283-9550.", () => { navigate("/") })
         }).catch(x => setServerError(true))
 
       }).catch(e => {
@@ -466,10 +466,13 @@ function SchedulingLoggedOut() {
           {
             errorCoordinates &&
             <div className="w-full mt-4 px-6 max-w-[420px]">
-              <Alert severity="error">Não foi possível agendar a coleta para o endereço selecionado, pois não foi localizado pelo GPS. Por favor, escolha outro endereço ou agende por telefone ligando para (27) 3317-3366.</Alert>
+              <Alert severity="error">Não foi possível agendar a coleta para o endereço selecionado, pois não foi localizado pelo GPS. Por favor, escolha outro endereço ou agende por telefone ligando para (27) 99283-9550.</Alert>
             </div>
           }
-          <div className="w-full flex items-center justify-center">
+          <div className="w-full flex items-center justify-center flex-col">
+            <div className="max-w-[420px] px-6">
+              <p className="text-[12px] font-bold mt-2"><span className="text-red-500">* </span>Durante a coleta, o motorista esperará por até 5 minutos. Se não for atendido dentro desse período, a coleta será cancelada.</p>
+            </div>
             <div className="w-2/3 mt-6 max-w-[250px] mb-16">
               <PrimaryButton title="Agendar coleta" leftIcon="IconCheck" onClick={async () => {
                 if (validarCampos()) {

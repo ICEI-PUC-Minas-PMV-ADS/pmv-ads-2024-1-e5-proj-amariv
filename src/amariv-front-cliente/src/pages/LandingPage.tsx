@@ -34,16 +34,26 @@ function Landing() {
               <a className="text-md font-semibold mt-2 cursor-pointer lg:text-right lg:text-2xl" target="_blank" href="https://maps.app.goo.gl/oqYUefcgvfxKDgXM9">
                 R. Ouro Preto, 95 - Maria Ortiz, Vitória - ES <DynamicIcon iconName="IconLink" className="inline-flex" size={20} /></a>
             </div>
+            <div className=" flex gap-4 mt-2">
+              <DynamicIcon iconName="IconPhone" className="mt-2" size={35} />
+              <a className="text-md font-semibold mt-2 cursor-pointer lg:text-right lg:text-2xl">
+                (27) 99283-9550</a>
+            </div>
           </div>
           <img src={location} className="md:w-[40%] rounded-lg mt-4 lg:block cursor-pointer" onClick={() => {
             window.open("https://maps.app.goo.gl/oqYUefcgvfxKDgXM9", "_blank")
           }} />
           <div className="hidden md:block">
             <h1 className="text-2xl font-bold lg:text-right lg:text-5xl">Venha nos visitar</h1>
-            <div className=" flex gap-4 mt-2">
+            <div className=" flex gap-4 mt-2  justify-end">
               <DynamicIcon iconName="IconMapPin" className="mt-2" size={35} />
               <a className="text-md font-semibold mt-2 cursor-pointer lg:text-right lg:text-2xl" target="_blank" href="https://maps.app.goo.gl/oqYUefcgvfxKDgXM9">
                 R. Ouro Preto, 95 - Maria Ortiz, Vitória - ES <DynamicIcon iconName="IconLink" className="inline-flex" size={20} /></a>
+            </div>
+            <div className=" flex gap-4 mt-2 justify-end">
+              <DynamicIcon iconName="IconPhone" className="mt-2" size={35} />
+              <a className="text-md font-semibold mt-2 cursor-pointer lg:text-right lg:text-2xl">
+                (27) 99283-9550</a>
             </div>
           </div>
         </div>

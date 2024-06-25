@@ -17,7 +17,7 @@ function DatePicker({ onAccept, isOpen, onClose, value, unavailableDates }: prop
     const dayOfWeek = date.day();
     const dateString = date.format('YYYY-MM-DD');
 
-    return dayOfWeek === 0 || dayOfWeek === 6 || unavailableDates.some((disabledDate) => disabledDate.startsWith(dateString))
+    return dayOfWeek === 0 || dayOfWeek === 6 || dayOfWeek === 2 || dayOfWeek === 4 || unavailableDates.some((disabledDate) => disabledDate.startsWith(dateString))
   }
 
   return (
