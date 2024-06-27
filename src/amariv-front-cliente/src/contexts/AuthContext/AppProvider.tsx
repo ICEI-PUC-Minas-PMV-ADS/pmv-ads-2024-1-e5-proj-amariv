@@ -19,7 +19,6 @@ import { RoteiroColetaService } from '../../services/RoteiroColetaService';
 import { GoogleService } from '../../services/GoogleService';
 
 export const AppProvider = ({ children }: { children: JSX.Element }) => {
-
   const [user, setUser] = useState<User | null>(null)
   const [enderecos, setEnderecos] = useState<Endereco[]>([])
   const [infosLoaded, setInfosLoaded] = useState(false)

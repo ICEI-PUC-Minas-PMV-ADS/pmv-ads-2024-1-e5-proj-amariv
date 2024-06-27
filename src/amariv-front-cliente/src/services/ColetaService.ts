@@ -31,7 +31,9 @@ export const ColetaService = {
   cancelarColeta: async (idColeta: number) => {
     const response = await useApi.post(`/cancelarcoleta?idColeta=${idColeta}`, {
       headers: {
-        'Content-Type': 'application/json'
+        'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
       },
     })
     return response;

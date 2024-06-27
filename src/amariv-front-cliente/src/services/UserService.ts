@@ -27,14 +27,21 @@ export const UserService = {
   getUser: async (token?: string) => {
     const response = await useApi.get("/user", {
       headers: {
-        'Authorization': `Bearer ${token ? token : localStorage.getItem('authToken')}`
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
       }
     })
     return response.data;
   },
 
   logout: async () => {
-    const response = await useApi.post("/logout", {})
+    const response = await useApi.post("/logout", {}, {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      }
+    })
     return response;
   },
 
@@ -48,7 +55,9 @@ export const UserService = {
     const json = JSON.stringify(form)
     const response = await useApi.post("/atualizarusuario", json, {
       headers: {
-        'Content-Type': 'application/json'
+        'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
       },
     });
     return response;
@@ -58,7 +67,9 @@ export const UserService = {
     const json = JSON.stringify(form)
     const response = await useApi.post("/solicitarecuperacao", json, {
       headers: {
-        'Content-Type': 'application/json'
+        'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
       },
     });
     return response;
@@ -73,7 +84,9 @@ export const UserService = {
     const json = JSON.stringify(form)
     const response = await useApi.post("/recuperasenha", json, {
       headers: {
-        'Content-Type': 'application/json'
+        'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
       },
     });
     return response;
@@ -83,7 +96,9 @@ export const UserService = {
     const json = JSON.stringify(form)
     const response = await useApi.post("/solicitaconfirmacao", json, {
       headers: {
-        'Content-Type': 'application/json'
+        'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
       },
     });
     return response;
@@ -96,7 +111,9 @@ export const UserService = {
     const json = JSON.stringify(form)
     const response = await useApi.post("/confirmaemail", json, {
       headers: {
-        'Content-Type': 'application/json'
+        'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
       },
     });
     return response;

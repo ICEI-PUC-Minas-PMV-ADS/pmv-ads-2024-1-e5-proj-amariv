@@ -20,8 +20,10 @@ export const materialService = {
   },
 
   recuperaMateriais: async () => {
+    const token = localStorage.getItem('authToken');
     const response = await useApi.get("/RecuperaMateriais", {
       headers: {
+        "Authorization": `Bearer ${token}`,
         "Content-type": "application/json; chatset=utf-8"
       }
     });
@@ -29,7 +31,13 @@ export const materialService = {
   },
 
   fetchMaterials: (): Promise<Material[]> => {
-    return useApi.get(`RecuperaMateriais`)
+    const token = localStorage.getItem('authToken');
+    return useApi.get(`RecuperaMateriais`, {
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Content-type": "application/json; chatset=utf-8"
+      }
+    })
       .then(response => response.data)
       .catch(error => {
         console.error("Erro ao recuperar materiais:", error);
@@ -38,7 +46,13 @@ export const materialService = {
   },
 
   updateMaterial: (id: number, materialInfo: Material): Promise<void> => {
-    return useApi.post(`UpdateMaterial?id=${id}`, materialInfo)
+    const token = localStorage.getItem('authToken');
+    return useApi.post(`UpdateMaterial?id=${id}`, materialInfo, {
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Content-type": "application/json; chatset=utf-8"
+      }
+    })
       .then(() => console.log("Material atualizado com sucesso!"))
       .catch(error => {
         console.error("Erro ao atualizar material:", error);
@@ -47,7 +61,13 @@ export const materialService = {
   },
 
   saveMaterial: (materialInfo: Material): Promise<void> => {
-    return useApi.post(`SalvarMaterial`, materialInfo)
+    const token = localStorage.getItem('authToken');
+    return useApi.post(`SalvarMaterial`, materialInfo, {
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Content-type": "application/json; chatset=utf-8"
+      }
+    })
       .then(() => console.log("Material adicionado com sucesso!"))
       .catch(error => {
         console.error("Erro ao adicionar material:", error);
@@ -56,7 +76,13 @@ export const materialService = {
   },
 
   deleteMaterial: (id: number): Promise<void> => {
-    return useApi.delete(`DeletarMaterial?id=${id}`)
+    const token = localStorage.getItem('authToken');
+    return useApi.delete(`DeletarMaterial?id=${id}`, {
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Content-type": "application/json; chatset=utf-8"
+      }
+    })
       .then(() => console.log("Material excluído com sucesso!"))
       .catch(error => {
         console.error("Erro ao excluir material:", error);
@@ -65,7 +91,13 @@ export const materialService = {
   },
 
   getAll: async () => {
-    let result = await useApi.get("RecuperaMateriais")
+    const token = localStorage.getItem('authToken');
+    let result = await useApi.get("RecuperaMateriais", {
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Content-type": "application/json; chatset=utf-8"
+      }
+    });
     return result.data
   }
 

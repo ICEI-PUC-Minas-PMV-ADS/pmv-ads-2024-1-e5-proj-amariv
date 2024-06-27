@@ -28,7 +28,8 @@ export const UserService = {
     const token = localStorage.getItem('authToken')
     const response = await useApi.get("/user", {
       headers: {
-        'Authorization': `Bearer ${token}`
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
       }
     })
     return response.data;
@@ -38,7 +39,8 @@ export const UserService = {
     const token = localStorage.getItem('authToken')
     const response = await useApi.post("/logout", {}, {
       headers: {
-        'Authorization': `Bearer ${token}`
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
       }
     })
     return response;
@@ -51,12 +53,12 @@ export const UserService = {
   },
 
   updateUsuario: async (form: UpdateUsuarioForm) => {
-    const token = localStorage.getItem('authToken')
+    const token = localStorage.getItem('authToken');
     const json = JSON.stringify(form)
     const response = await useApi.post("/atualizarusuario", json, {
       headers: {
         'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
     });
     return response;

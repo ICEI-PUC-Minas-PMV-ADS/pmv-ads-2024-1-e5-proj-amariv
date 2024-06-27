@@ -6,7 +6,9 @@ export const EnderecoService = {
     const json = JSON.stringify(form)
     const response = await useApi.post("/salvarendereco", json, {
       headers: {
-        'Content-Type': 'application/json'
+        'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
       },
     });
     return response;
@@ -14,9 +16,11 @@ export const EnderecoService = {
   buscarEnderecos: async (token?: string) => {
     const response = await useApi.get("/enderecosusuario", {
       headers: {
-        'Authorization': `Bearer ${token ? token : localStorage.getItem('authToken')}`
-      }
-    })
+        'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+    });
     return response;
   }
 }
