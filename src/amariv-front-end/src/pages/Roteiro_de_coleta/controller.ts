@@ -45,7 +45,15 @@ export class RoteiroDeColetaController extends PageBaseController<RoteiroDeColet
     coletaId: number,
   ) {
     try {
-      const roteiroDeColetaDateResponse = await useApi.get(`GetRoteiroDeColetaDate?roteiroDeColetaId=${roteiroDeColetaId}`);
+      const roteiroDeColetaDateResponse = await useApi.get(
+        `GetRoteiroDeColetaDate?roteiroDeColetaId=${roteiroDeColetaId}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        }
+      }
+      );
       const roteiroDeColetaDate = await roteiroDeColetaDateResponse.data;
       const [y, m, d] = roteiroDeColetaDate.split('T')[0].split('-');
       const startDate = new Date(y, m - 1, d, 0, 0, 0).toISOString();
@@ -91,7 +99,14 @@ export class RoteiroDeColetaController extends PageBaseController<RoteiroDeColet
     coletaId: number,
   ) {
     try {
-      const roteiroDeColetaDateResponse = await useApi.get(`GetRoteiroDeColetaDate?roteiroDeColetaId=${roteiroDeColetaId}`);
+      const roteiroDeColetaDateResponse = await useApi.get(
+        `GetRoteiroDeColetaDate?roteiroDeColetaId=${roteiroDeColetaId}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        }
+      });
       const roteiroDeColetaDate = await roteiroDeColetaDateResponse.data;
       const [y, m, d] = roteiroDeColetaDate.split('T')[0].split('-');
       const startDate = new Date(y, m - 1, d, 0, 0, 0).toISOString();
@@ -139,7 +154,14 @@ export class RoteiroDeColetaController extends PageBaseController<RoteiroDeColet
     coletaId: number
   ) {
     try {
-      const roteiroDeColetaDateResponse = await useApi.get(`GetRoteiroDeColetaDate?roteiroDeColetaId=${roteiroDeColetaId}`);
+      const roteiroDeColetaDateResponse = await useApi.get(
+        `GetRoteiroDeColetaDate?roteiroDeColetaId=${roteiroDeColetaId}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        }
+      });
       const roteiroDeColetaDate = await roteiroDeColetaDateResponse.data;
       const [y, m, d] = roteiroDeColetaDate.split('T')[0].split('-');
       const startDate = new Date(y, m - 1, d, 0, 0, 0).toISOString();
@@ -212,6 +234,7 @@ export class RoteiroDeColetaController extends PageBaseController<RoteiroDeColet
           const pinBackground = new PinElement({
             glyphColor: 'white',
             glyph: coleta.posicaoLista!.toString(),
+            background: (coleta.isSuccess === false && coleta.cancelada === false) ? "#ea4335" : "#751810",
           });
 
           gMapData.marks.push(new AdvancedMarkerElement({
@@ -476,7 +499,14 @@ export class RoteiroDeColetaController extends PageBaseController<RoteiroDeColet
     roteiroDeColetaId: number,
   ): Promise<void> {
     try {
-      const roteiroDeColetaDateResponse = await useApi.get(`GetRoteiroDeColetaDate?roteiroDeColetaId=${roteiroDeColetaId}`);
+      const roteiroDeColetaDateResponse = await useApi.get(
+        `GetRoteiroDeColetaDate?roteiroDeColetaId=${roteiroDeColetaId}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        }
+      });
       const roteiroDeColetaDate = await roteiroDeColetaDateResponse.data;
       const [y, m, d] = roteiroDeColetaDate.split('T')[0].split('-');
       const startDate = new Date(y, m - 1, d, 0, 0, 0).toISOString();
